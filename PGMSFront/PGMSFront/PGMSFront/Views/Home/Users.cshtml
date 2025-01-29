@@ -1,0 +1,544 @@
+﻿@model PGMSFront.Models.CommonModel
+@{
+    ViewBag.Title = "Users";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .table > tbody > tr > td {
+        padding: 2px 8px !important;
+        cursor: pointer !important;
+    }
+
+    .card {
+        margin-bottom: 0px !important;
+        margin-top: 25px !important;
+    }
+
+    .bootstrap-select {
+        margin-top: 16px !important;
+    }
+
+    .main-panel > .content {
+        margin-top: 0 !important;
+    }
+
+    #AddMoreTR {
+        background: lightblue;
+    }
+</style>
+<input type="hidden" id="CompanyDepartmentId" value="@Session["CompanyDepartmentId"]" />
+<div class="content">
+    @using (Html.BeginForm(new { @class = "form-horizontal" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="container-fluid">
+            <div class="row">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">
+                            <label class="card-title"> Users Count : </label> <label class="card-title" id="lblWSCount"></label>
+                            <button type="button" class="btn btn-fill btn-rose btn-sm pull-right" onclick="AddMore()" id="btnAdd">Add More</button>
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead class=" text-primary">
+                                            <tr>
+                                                <th width="12%">Department</th>
+                                                <th width="15%">User Type</th>
+                                                <th width="12%">User Name</th>
+                                                <th width="12%">Login Id</th>
+                                                <th width="8%">Password</th>
+                                                <th width="9%">Phone No.</th>
+                                                <th width="9%">Mobile No.</th>
+                                                <th width="10%">Email</th>
+                                                <th width="5%">IsActive</th>
+                                                <th width="8%" class="text-center">Action</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbodyWS">
+                                            <tr id="AddMoreTR" style="display: none;">
+                                                <td>
+                                                    <select class="form-control" id="CustomerDepartmentId">
+                                                        <option value="0">-Select-</option>
+                                                        @foreach (var itm in ViewBag.Department)
+                                                        {
+                                                            <option value='@itm.Value'>@itm.Text</option>
+                                                        }
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select class="form-control" id="userType">
+                                                        <option value="0">-Select-</option>
+                                                    </select>
+                                                </td>
+                                                <td><input id="UserName" type="text" style="text-align: left" onkeypress='return CheckIsAlphaNumeric(event,this);' class="form-control" value=""></td>
+                                                <td><input id="LoginId" type="text" onchange="CheckLoginIdAvailability()" style="text-align: left" onkeypress='return CheckIsAlphaNumeric(event,this);' class="form-control" value=""></td>
+                                                <td><input id="PassWord" type="password" style="text-align: left" class="form-control" value=""></td>
+                                                <td><input id="PhoneNo" type="text" maxlength="15" style="text-align: left" onkeypress='return CheckIsNumeric(event,this);' class="form-control" value=""></td>
+                                                <td><input id="MobileNo" type="text" maxlength="10" style="text-align: left" onkeypress='return CheckIsNumeric(event,this);' class="form-control" value=""></td>
+                                                <td><input id="EmailId" type="text" style="text-align: left" class="form-control" value=""></td>
+                                                <td style="text-align: center"><input id="Active" type="checkbox" checked></td>
+                                                <td class='td-actions text-center'>
+                                                    <button type='button' rel='tooltip' id="btnSave" onclick="return UserSave()" class='btn btn-info' data-original-title='' title=''><i class='material-icons'>save</i></button>
+                                                    <button type='button' rel='tooltip' class='btn btn-danger' data-original-title='' title='' onclick="AddMoreCancel()"><i class='material-icons'>close</i></button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <label id="msg" style="color: red; padding: 5px; border-radius: 5px; text-align: center"></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @Html.HiddenFor(m => m.UserId, new { id = "UserId", style = "width:0px;" })
+                @Html.HiddenFor(m => m.UserTypePropId, new { id = "UserTypePropId", style = "width:0px;" })
+                @Html.HiddenFor(m => m.ZZCompanyId, new { id = "ZZCompanyId", style = "width:0px;" })
+                @Html.HiddenFor(m => m.WorkFlowId, new { id = "WorkFlowId", style = "width:0px;" })
+                @Html.HiddenFor(m => m.StatusPropId, new { id = "StatusPropId", style = "width:0px;" })
+                @Html.HiddenFor(m => m.StateId, new { id = "StateId", style = "width:0px;" })
+
+            </div>
+        </div>
+    }
+</div>
+<script>
+    var UserId = 0;
+    var UserList = '';
+    var varLoginIdAvailability = 0;
+
+    function AddMore() {
+        debugger;
+        UserId = 0;
+        $("#msg").html('** Add your details in the blue row and click on <i class="material-icons">save</i> icon **');
+        $("#AddMoreTR").find("button[id='btnSave']").each(function () {
+            $(this).show();
+        });
+        $("#AddMoreTR").find("select[id='CustomerDepartmentId']").each(function () {
+            $(this).val(0);
+        });
+        $("#AddMoreTR").find("select[id='userType']").each(function () {
+            $(this).val(0);
+        });
+        $("#AddMoreTR").find("input[type='text'][id='UserName']").each(function () {
+            $(this).val("");
+        });
+        $("#AddMoreTR").find("input[type='text'][id='LoginId']").each(function () {
+            $(this).val("");
+        });
+        $("#AddMoreTR").find("input[type='password'][id='PassWord']").each(function () {
+            $(this).val("");
+        });
+        $("#AddMoreTR").find("input[type='text'][id='PhoneNo']").each(function () {
+            $(this).val("");
+        });
+        $("#AddMoreTR").find("input[type='text'][id='MobileNo']").each(function () {
+            $(this).val("");
+        });
+        $("#AddMoreTR").find("input[type='text'][id='EmailId']").each(function () {
+            $(this).val("");
+        });
+        $("#AddMoreTR").find("input[type='checkbox'][id='Active']").each(function () {
+            $(this).val("");
+        });
+        $("#AddMoreTR").show();
+        MaskControls();
+        varLoginIdAvailability = 1;
+        $("#CustomerDepartmentId").focus();
+
+    }
+    function AddMoreCancel() {
+        $("#AddMoreTR").hide();
+        $("#msg").html('');
+    }
+
+    ///////////////////////////// Load Vehicle Info  //////////////////////////////////////////////////////
+    function LoadUserInfo() {
+        try {
+            varLoginIdAvailability = 0;
+            LoaderShow();
+            var data = {};
+            var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+            $.ajax({
+                url: '@Url.Action("LoadUserInfo", "Home")',
+                type: 'POST',
+                dataType: 'json',
+                async: true,
+                data: dataWithAntiforgeryToken,
+                success: function (data) {
+                    LoaderHide();
+                    if (data.StatusId != "99" && data.StatusId != "-99") {
+                        debugger
+                        UserList = data.UserList;
+                        if ($("#UserTypePropId").val() == 167) {
+                            UserList = UserList.filter((ele) => ele.CustomerDepartmentId === parseInt($("#CompanyDepartmentId").val()));
+                        }
+                        BindWSData(UserList);
+                    }
+                    else {
+                       // alert(data.Status);
+                    }
+                },
+                error: function (xhr) {
+
+                    LoaderHide();
+                    alert(xhr.responseText);
+                }
+            });
+        }
+        catch (e) {
+
+            LoaderHide();
+            alert(e.message);
+            //  return false;
+        }
+    }
+
+    //////////////////////// Vehicle Edit ////////////////////////////////////////////////////////////
+    function UserEdit(varUserId) {
+        try {
+            varLoginIdAvailability = 0;
+            UserId = 0;
+            $("#msg").html('** Edit your details in the blue row and click on <i class="material-icons">save</i> icon **');
+            if (UserList.length > 0) {
+                var varWS = jQuery.grep(UserList, function (obj) {
+                    return obj.UserId == varUserId;
+                });
+
+                UserId = NullHandle(varWS[0].UserId);
+                debugger
+                $("#AddMoreTR").find("button[id='btnSave']").each(function () {
+                    $(this).show();
+                });
+                $("#AddMoreTR").find("select[id='CustomerDepartmentId']").each(function () {
+                    $(this).val(NullHandle(varWS[0].CustomerDepartmentId));
+                });
+                $("#AddMoreTR").find("select[id='userType']").each(function () {
+                    $(this).val(NullHandle(varWS[0].UserTypePropId));
+                });
+                $("#AddMoreTR").find("input[type='text'][id='UserName']").each(function () {
+                    $(this).val(NullHandle(varWS[0].UserName));
+                });
+                $("#AddMoreTR").find("input[type='text'][id='LoginId']").each(function () {
+                    $(this).val(NullHandle(varWS[0].LoginId));
+                    $(this).attr('disabled', true);
+                });
+                $("#AddMoreTR").find("input[type='password'][id='PassWord']").each(function () {
+                    $(this).val("xxxxxxxx");
+                    $(this).attr('disabled', true);
+                });
+                $("#AddMoreTR").find("input[type='text'][id='PhoneNo']").each(function () {
+                    $(this).val(NullHandle(varWS[0].PhoneNo));
+                });
+                $("#AddMoreTR").find("input[type='text'][id='MobileNo']").each(function () {
+                    $(this).val(NullHandle(varWS[0].MobileNo));
+                });
+                $("#AddMoreTR").find("input[type='text'][id='EmailId']").each(function () {
+                    $(this).val(NullHandle(varWS[0].EmailId));
+                });
+                if (NullHandle(varWS[0].Active) === true) {
+                    $('#Active').prop('checked', true);
+                } else {
+                    $('#Active').prop('checked', false);
+                }
+                
+                $("#AddMoreTR").show();
+                MaskControls();
+                $("#CustomerDepartmentId").focus();
+            }
+        }
+        catch (e) {
+
+        }
+    }
+
+     ///////////////////////////// Check LoginId  //////////////////////////////////////////////////////
+    function CheckLoginIdAvailability() {
+        try {
+            if (varLoginIdAvailability == 1) {
+                if ($("#LoginId").val().trim() == "") {
+                    alert("Please enter your Login Id");
+                }
+                else {
+                    LoaderShow();
+                    var data = { 'strLoginId': $("#LoginId").val().trim() };
+                    var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+                    $.ajax({
+                        url: '@Url.Action("CheckLoginIdAvailability", "Front")',
+                        type: 'POST',
+                        dataType: 'json',
+                        async: true,
+                        data: dataWithAntiforgeryToken,
+                        success: function (data) {
+                            LoaderHide();
+                            if (data.StatusId != "99" && data.StatusId != "-99") {
+
+                            }
+                            else {
+                                $("#LoginId").val("");
+                                $("#LoginId").focus();
+                                alert(data.Status);
+                            }
+                        },
+                        error: function (xhr) {
+
+                            LoaderHide();
+                            alert(xhr.responseText);
+                        }
+                    });
+                }
+            }
+        }
+        catch (e) {
+
+            LoaderHide();
+            alert(e.message);
+            }
+
+    }
+
+
+    ///////////////////////////// Vehicle Save  //////////////////////////////////////////////////////
+    function UserSave() {
+        try {
+            varLoginIdAvailability = 0;
+            var model = {};
+            var strMSG = '';
+            var varWS = jQuery.grep(UserList, function (obj) {
+                return obj.UserId == UserId;
+            });
+            var btnSave = "";
+
+            if (parseInt(UserId) > 0 && varWS != undefined && varWS.length > 0) {
+                model = varWS[0];
+            }
+            else {
+                model.UserId = -1;
+                model.Active = 0;
+                model.EmailVerify = 0;
+            }
+
+            $("#AddMoreTR").find("button[id='btnSave']").each(function () {
+                btnSave = $(this);
+            });
+            $("#AddMoreTR").find("select[id='CustomerDepartmentId']").each(function () {
+                model.CustomerDepartmentId = $(this).val();
+                if (parseInt($(this).val()) <=0) {
+                    strMSG = strMSG + 'Select Department \n</br>'
+                }
+            });
+            $("#AddMoreTR").find("select[id='userType']").each(function () {
+                model.UserTypePropId = $(this).val();
+                if (parseInt($(this).val()) <=0) {
+                    strMSG = strMSG + 'Select User Type \n</br>'
+                }
+            });
+
+            $("#AddMoreTR").find("input[type='text'][id='UserName']").each(function () {
+                model.UserName = $(this).val().trim();
+                if ($(this).val().trim() == "") {
+                    strMSG = strMSG + 'User Name \n</br>'
+                }
+            });
+            $("#AddMoreTR").find("input[type='text'][id='LoginId']").each(function () {
+                model.LoginId = $(this).val().trim();
+                if ($(this).val().trim() == "") {
+                    strMSG = strMSG + 'Login Id \n</br>'
+                }
+            });
+            $("#AddMoreTR").find("input[type='password'][id='PassWord']").each(function () {
+                model.PassWord = $(this).val().trim();
+                if ($(this).val().trim() == "") {
+                    strMSG = strMSG + 'Password \n</br>'
+                }
+            });
+            $("#AddMoreTR").find("input[type='text'][id='PhoneNo']").each(function () {
+                model.PhoneNo = $(this).val().trim();
+            });
+            $("#AddMoreTR").find("input[type='text'][id='MobileNo']").each(function () {
+                model.MobileNo = $(this).val().trim();
+                if ($(this).val().trim() == "") {
+                    strMSG = strMSG + 'Mobile No. \n</br>'
+                }
+            });
+            $("#AddMoreTR").find("input[type='text'][id='EmailId']").each(function () {
+                model.EmailId = $(this).val().trim();
+                if ($(this).val().trim() == "") {
+                    strMSG = strMSG + 'EMail \n</br>'
+                }
+            });
+
+            if ($("#Active").is(":checked")) {
+                model.Active = true;
+            } else {
+                model.Active = false;
+            }
+            debugger
+            if (strMSG != '') {
+                alert("Please enter data for Mandatory fields  \n</br>" + strMSG);
+                return false;
+            }
+            else {
+
+                btnSave.hide();
+                LoaderShow();
+                var data = {'model': model};
+                var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+                $.ajax({
+                    url: '@Url.Action("UserSave", "Home")',
+                    type: 'POST',
+                    dataType: 'json',
+                    async: true,
+                    data: dataWithAntiforgeryToken,
+                    //contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+
+                        LoaderHide();
+                        if (data.StatusId != "99" && data.StatusId != "-99") {
+                            $("#msg").html('');
+                            UserList = data.UserList;
+                            BindWSData(data.UserList);
+
+                        }
+                        else {
+                            $("#LoginId").focus();
+                        }
+                        btnSave.show();
+                        alert(data.Status);
+                    },
+                    error: function (xhr) {
+
+                        btnSave.show();
+                        LoaderHide();
+                        alert(xhr.responseText);
+                    }
+                });
+            }
+        }
+        catch (e) {
+            LoaderHide();
+            btnSave.show();
+            alert(e.message);
+            return false;
+        }
+    }
+
+    ///////////////////////////// Bind Info  //////////////////////////////////////////////////////
+    function BindWSData(data) {
+        try {
+            varLoginIdAvailability = 0;
+            var gridData = "";
+
+            gridData = "<tr id='AddMoreTR' style='display: none;'>" + $("#AddMoreTR").html() + "</tr>";
+
+            $("#lblWSCount").text(NullHandle(data.length));
+
+            $("#tbodyWS").html("");
+
+            for (var i = 0; i < data.length; i++) {
+                gridData = gridData + "<tr >";
+
+                gridData = gridData + "<td>" + NullHandle(data[i].ZZDepartment) + "</td>";
+                gridData = gridData + "<td>" + NullHandle(data[i].ZZUserType) + "</td>";
+                gridData = gridData + "<td>" + NullHandle(data[i].UserName) + "</td>";
+                gridData = gridData + "<td>" + NullHandle(data[i].LoginId) + "</td>";
+                gridData = gridData + "<td>**************</td>";
+                gridData = gridData + "<td>" + NullHandle(data[i].PhoneNo) + "</td>";
+                gridData = gridData + "<td>" + NullHandle(data[i].MobileNo) + "</td>";
+                gridData = gridData + "<td>" + NullHandle(data[i].EmailId) + "</td>";
+                if(NullHandle(data[i].Active) === true)
+                    gridData = gridData + "<td style='text-align: center'><input type='checkbox' id='Active' checked disabled></td>";
+                else
+                    gridData = gridData + "<td style='text-align: center'><input type='checkbox' id='Active' disabled></td>";
+                gridData = gridData + "<td class='td-actions text-center'>";
+                gridData = gridData + "<button type='button' rel='tooltip' class='btn btn-info' title='Edit User : " + NullHandle(data[i].LoginId) + "' onclick='return UserEdit(" + NullHandle(data[i].UserId) + ")' > <i class='material-icons'>edit</i></button>&nbsp;";
+                //gridData = gridData + "<button type='button' rel='tooltip' class='btn btn-danger' title='Delete Workshop : " + NullHandle(data[i].ZZServiceName) + "' onclick='return UserDelete(" + NullHandle(data[i].UserId) + ")'><i class='material-icons'>close</i></button>";
+                gridData = gridData + "</td>";
+                gridData = gridData + "</tr>";
+            }
+
+            $("#tbodyWS").html(gridData);
+
+
+        }
+        catch (e) {
+
+        }
+    }
+
+    ///////////////////////////// Masking  //////////////////////////////////////////////////////
+    function MaskControls() {
+        try {
+            (function ($) {
+                $(function () {
+
+                    $("#AddMoreTR").find("input[type='text'][id='EmailId']").each(function () {
+                        $(this).IsEmailOnly();
+                    });
+
+                });
+            })(jQuery);
+        }
+        catch (e) {
+
+        }
+    }
+
+    function userTypeProperty() {
+        var data = { 'intPropertyTypeId': 1 };
+        var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+        $.ajax({
+            url: '@Url.Action("PropertiesGetByPropertyTypeId", "Home")',
+            type: 'POST',
+            dataType: 'json',
+            async: true,
+            data: dataWithAntiforgeryToken,
+            success: function (data) {
+                LoaderHide();
+                if (data.StatusId != "99" && data.StatusId != "-99") {
+                    debugger
+                    var PropertyList = data.PropertyList;
+                    if ($("#UserTypePropId").val() == 81) {
+                        PropertyList = PropertyList.filter((ele) => ele.PropertyId === 81 || ele.PropertyId === 167 || ele.PropertyId === 168);
+                    } else if ($("#UserTypePropId").val() == 167) {
+                        PropertyList = PropertyList.filter((ele) => ele.PropertyId === 167 || ele.PropertyId === 168);
+                    }
+                    bindProperty(PropertyList);
+                }
+                else {
+                    alert(data.Status);
+                }
+            },
+            error: function (xhr) {
+                LoaderHide();
+                alert(xhr.responseText);
+            }
+        });
+    }
+
+    function bindProperty(PropertyList) {
+        $("#userType").html("");
+        var gridData = "<option value='0'>-Select-</option>";
+        for (var i = 0; i < PropertyList.length; i++) {
+            gridData = gridData + "<option value='" + NullHandle(PropertyList[i].PropertyId) + "'>" + NullHandle(PropertyList[i].Property) + "</option>";
+        }
+        $("#userType").html(gridData);
+    }
+
+    $(document).ready(function () {
+        MaskControls();
+        LoadUserInfo();
+        userTypeProperty();
+    });
+
+</script>

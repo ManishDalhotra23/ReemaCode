@@ -1,0 +1,922 @@
+﻿@model PGMSFront.Models.CommonModel
+@{
+    ViewBag.Title = "Doc Upload & Create Password";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="~/Templates/img/favicon.png" type="image/png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>@ViewBag.Title</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <!-- CSS Files -->
+    <link href="~/Templates/assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link href="~/Templates/assets/demo/demo.css" rel="stylesheet" />
+    <link href="~/Templates/assets/fancy/jquery.fancybox-buttons.css" rel="stylesheet" />
+    <link href="~/Templates/assets/fancy/jquery.fancybox-thumbs.css" rel="stylesheet" />
+    <link href="~/Templates/assets/fancy/jquery.fancybox.css" rel="stylesheet" />
+    <link href="~/Templates/assets/DateTimePicker/jquery.datetimepicker.css" rel="stylesheet" />
+    <link href="~/Templates/Alert/jquery-confirm.min.css" rel="stylesheet" />
+    <script src="~/Templates/assets/js/core/jquery.min.js"></script>
+    <script src="~/Templates/assets/js/Load.js"></script>
+
+    <style>
+        .register-page .card-signup {
+            margin-top: 0;
+            margin-bottom: 50px;
+            padding: 10px 0px;
+        }
+
+        .form-control {
+            height: 30px !important;
+        }
+
+        .off-canvas-sidebar .wrapper-full-page .page-header {
+            padding: 5vh 0 !important;
+        }
+
+        .register-page .card-signup .form-check {
+            margin-top: 20px;
+            margin-bottom: 0;
+        }
+
+        .card-signup .form-check {
+            padding-top: 10px;
+        }
+
+        .form-check-label {
+            padding-top: 2px;
+        }
+
+        .select2-container--default .select2-selection--single {
+            background-color: #fff;
+            border: none;
+            border-bottom: 1px solid #aaa;
+            border-radius: 0px;
+        }
+
+        .modal .modal-header .close {
+            color: #FFF;
+        }
+
+        .modal-dialog .modal-header .close {
+            top: 4px;
+        }
+
+        .modal-dialog .modal-header {
+            padding-top: 5px;
+        }
+
+        
+    </style>
+</head>
+
+<body class="off-canvas-sidebar">
+    <div class="Loader" id="divLoading" style="        display: none;">
+        <div id="preloading" class="preloading">
+            <img src="@Url.Content("~/Templates/assets/img/load.gif")" style="        width: 100px;">
+        </div>
+        <div id="overlay"></div>
+    </div>
+    <div class="wrapper wrapper-full-page">
+        <div class="page-header register-page header-filter" filter-color="black" style="        background-image: url('../Templates/Tracks/Natrax Overall Track Pics.jpg')">
+            <div class="container">
+                @using (Html.BeginForm(new { @class = "form-horizontal" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="row">
+                        <div class="col-md-9 ml-auto mr-auto">
+                            <div class="card card-signup" style="        padding: 0px 0px;">
+                                <div class="col-md-6 ml-auto mr-auto" style="        text-align: center;
+        max-width: 56%;">
+                                    <img src="~/Templates/img/logo.png" alt="">
+                                </div>
+                                @if (Model.StatusPropId == 1)
+                                {
+                                    if (Model.DocId == 0)
+                                    {
+                                        <h2 class="card-title text-center" style="        font-size: 20px;
+        margin-bottom: 0px;">
+                                            Thanks for eMail Verification, now please upload mandatory documants and then create password
+                                        </h2>
+                                    }
+                                    else
+                                    {
+                                        <h2 class="card-title text-center" style="        font-size: 20px;
+        margin-bottom: 0px;">
+                                            Reset Password
+                                        </h2>
+                                    }
+
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-12 ml-auto">
+                                                <form>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="form-group bmd-form-group">
+                                                                <label for="exampleEmail" class="bmd-label-floating">User Name</label>
+                                                                <input type="text" style="        color: black" disabled="disabled" value="@Model.UserName" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="form-group bmd-form-group">
+                                                                <label for="exampleEmail" class="bmd-label-floating">Login Id</label>
+                                                                <input type="text" style="        color: black" disabled="disabled" value="@Model.LoginId" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    @if (Model.DocId == 0)
+                                                    {
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="form-group bmd-form-group">
+                                                                    <table class="table">
+                                                                        <tbody id="tbodyWAT">
+                                                                            <tr>
+                                                                                <td width="2%">1.</td>
+                                                                                <td width="80%">Registration or Licence in case of firm, incorporation certificate in case of company *</td>
+                                                                                <td width="18%">
+                                                                                    <a style="        color: #FFF;
+        text-align: center" id="btnCompReg" title="Registration or Licence in case of firm, incorporation certificate in case of company" onclick="OpenDocDialog(1)" class="btn btn-fill btn-rose btn-sm">Upload</a>
+                                                                                    &nbsp;
+                                                                                    <a style="        color: #FFF;
+        text-align: center;
+        display: none" id="btnCompRegView" title="View Registration" onclick="ViewDoc(1)" class="btn btn-fill btn-rose btn-sm">View</a>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td width="2%">2.</td>
+                                                                                <td width="80%">PAN *</td>
+                                                                                <td width="18%">
+                                                                                    <a style="        color: #FFF;
+        text-align: center" id="btnPAN" title="PAN" onclick="OpenDocDialog(2)" class="btn btn-fill btn-rose btn-sm">Upload</a>
+                                                                                    &nbsp;
+                                                                                    <a style="        color: #FFF;
+        text-align: center;
+        display: none" id="btnPANView" title="View PAN" onclick="ViewDoc(2)" class="btn btn-fill btn-rose btn-sm">View</a>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td width="2%">3.</td>
+                                                                                <td width="80%">GST *</td>
+                                                                                <td width="18%">
+                                                                                    <a style="        color: #FFF;
+        text-align: center" id="btnGST" title="GST" onclick="OpenDocDialog(3)" class="btn btn-fill btn-rose btn-sm">Upload</a>
+                                                                                    &nbsp;
+                                                                                    <a style="        color: #FFF;
+        text-align: center;
+        display: none" id="btnGSTView" title="View GST" onclick="ViewDoc(3)" class="btn btn-fill btn-rose btn-sm">View</a>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td width="2%">4.</td>
+                                                                                <td width="80%">TAN*</td>
+                                                                                <td width="18%">
+                                                                                    <a style="        color: #FFF;
+        text-align: center" id="btnTAN" title="TAN" onclick="OpenDocDialog(4)" class="btn btn-fill btn-rose btn-sm">Upload</a>
+                                                                                    &nbsp;
+                                                                                    <a style="        color: #FFF;
+        text-align: center;
+        display: none" id="btnTANView" title="View TAN" onclick="ViewDoc(4)" class="btn btn-fill btn-rose btn-sm">View</a>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="form-group bmd-form-group">
+                                                                <label for="exampleEmail" class="bmd-label-floating">New Password *</label>
+                                                                <input type="password" class="form-control" id="txtPSW">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="form-group bmd-form-group">
+                                                                <label for="examplePass" class="bmd-label-floating">Confirm Password *</label>
+                                                                <input type="password" class="form-control" id="txtConfirmPSW">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="form-group bmd-form-group">
+                                                                @*<label for="examplePass" class="bmd-label-floating"></label>*@
+                                                                <a style="        color: #FFF;
+        text-align: center" id="btnPSW" onclick="CreatePassword()" class="btn btn-primary btn-round">Submit</a>
+                                                                <a style="        text-align: center;
+        display: none" href="@Url.Action("Index", "Home")" id="btnGTLogin" class="btn btn-primary btn-round">Go to Login Page</a>
+                                                                @*<a href="#" class="btn btn-primary btn-round mt-4 pull-right">Cancel</a>*@
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="row" style="        color: black;
+        text-align: center">
+                                        <div class="col-md-12" style="        color: black;
+        text-align: center">
+                                            <div class="form-group bmd-form-group" style="        color: black;
+        text-align: center">
+                                                <label style="        color: black;
+        text-align: center">@Model.Message</label>
+        <br />
+        <a style="        text-align: center" href="@Url.Action("Index", "Home")" class="btn btn-primary btn-round mt-4">Go to Login Page</a>
+        <br />
+        <br />
+        <br />
+        </div>
+        </div>
+        </div>
+    }
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            @Html.HiddenFor(m => m.POURL, new { id = "POURL", style = "width:0px;" })
+            @Html.HiddenFor(m => m.DocId, new { id = "DocId", style = "width:0px;" })
+            @Html.HiddenFor(m => m.PWDenterdStatusId, new { id = "PWDenterdStatusId", style = "width:0px;" })
+
+        </div>
+    </div>
+
+    <div class="modal fade" id="UploadDocModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Upload Documents</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <i class="material-icons">clear</i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="fileinput fileinput-new text-center" data-provides="fileinput" style="width: 100%;">
+                                <div class="fileinput-preview fileinput-exists thumbnail" style="        padding: 10px;"></div>
+                                <div>
+                                    <span class="btn btn-rose btn-round btn-file">
+                                        <span class="fileinput-new">Select Document</span>
+                                        <span class="fileinput-exists">Change</span>
+                                        <input type="file" name="..." id="fileUPLD" />
+                                    </span>
+                                    <a href="#pablo" id="fileInputClear" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                                    <a href="#pablo" id="btnUpload" class="btn btn-danger btn-round" onclick="UploadDoc()"><i class="fa fa-file"></i> Submit</a>
+                                    @*<button type="button" id="btnUpload" class="btn btn-fill btn-rose btn-sm" onclick="UploadDoc()" style="        margin-top: 5px;">Upload</button>*@
+                                    <label id="uploadProgressBill" style="background-color: orangered;color: white;font-size: 12px;"></label>
+                                  @*  <label id="" style="background-color: orangered;color: white;font-size: 12px;">Only pdf and jpg files accepted and file size should be less than 2MB</label>*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <label id="" style="color: red;font-size: 12px;">Note: Only pdf and jpg files accepted and file size should be less than 2MB</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btnDialogClose" class="btn btn-fill btn-danger btn-sm" data-dismiss="modal" style="        margin-left: 5px;
+        margin-top: 5px;">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--   Core JS Files   -->
+
+    <script src="~/Templates/assets/js/core/popper.min.js"></script>
+    <script src="~/Templates/assets/js/core/bootstrap-material-design.min.js"></script>
+    <script src="~/Templates/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+    <!-- Plugin for the momentJs  -->
+    <script src="~/Templates/assets/js/plugins/moment.min.js"></script>
+    <!--  Plugin for Sweet Alert -->
+    <script src="~/Templates/assets/js/plugins/sweetalert2.js"></script>
+    <!-- Forms Validations Plugin -->
+    <script src="~/Templates/assets/js/plugins/jquery.validate.min.js"></script>
+    <!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
+    <script src="~/Templates/assets/js/plugins/jquery.bootstrap-wizard.js"></script>
+    <!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+    <script src="~/Templates/assets/js/plugins/bootstrap-selectpicker.js"></script>
+    <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
+    <script src="~/Templates/assets/js/plugins/bootstrap-datetimepicker.min.js"></script>
+    <!--  DataTables.net Plugin, full documentation here: https://datatables.net/  -->
+    <script src="~/Templates/assets/js/plugins/jquery.dataTables.min.js"></script>
+    <!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
+    <script src="~/Templates/assets/js/plugins/bootstrap-tagsinput.js"></script>
+    <!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
+    <script src="~/Templates/assets/js/plugins/jasny-bootstrap.min.js"></script>
+    <!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
+    <script src="~/Templates/assets/js/plugins/fullcalendar.min.js"></script>
+    <!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
+    <script src="~/Templates/assets/js/plugins/jquery-jvectormap.js"></script>
+    <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+    <script src="~/Templates/assets/js/plugins/nouislider.min.js"></script>
+    <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+    <!-- Library for adding dinamically elements -->
+    <script src="~/Templates/assets/js/plugins/arrive.min.js"></script>
+    <!--  Google Maps Plugin    -->
+    @*<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>*@
+    <!-- Chartist JS -->
+    <script src="~/Templates/assets/js/plugins/chartist.min.js"></script>
+    <!--  Notifications Plugin    -->
+    <script src="~/Templates/assets/js/plugins/bootstrap-notify.js"></script>
+    <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="~/Templates/assets/js/material-dashboard.js?v=2.1.0" type="text/javascript"></script>
+    <!-- Material Dashboard DEMO methods, don't include it in your project! -->
+    <script src="~/Templates/assets/demo/demo.js"></script>
+    <script src="~/Templates/assets/fancy/jquery.fancybox.pack.js"></script>
+    <script src="~/Templates/assets/fancy/jquery.fancybox.js"></script>
+    <script src="~/Templates/assets/fancy/jquery.fancybox-thumbs.js"></script>
+    <script src="~/Templates/assets/fancy/jquery.fancybox-media.js"></script>
+    <script src="~/Templates/assets/fancy/jquery.fancybox-buttons.js"></script>
+    <script src="~/Templates/assets/DateTimePicker/jquery.datetimepicker.js"></script>
+    <script src="~/Templates/assets/DateTimePicker/jquery.maskedinput-1.3.1.min.js"></script>
+    @Scripts.Render("~/bundles/MyScripts")
+    <script>
+        function LoaderShow() {
+            //waitingDialog.show('', {
+            //    dialogSize: 'sm', progressType: 'warning'
+            //});
+            $(".Loader").show();
+        }
+
+        function LoaderHide() {
+            //waitingDialog.hide();
+            $(".Loader").hide();
+        }
+
+
+        //document.onreadystatechange = function () {
+        //    if (document.readyState !== "complete") {
+        //        $(".ntx-loader").show();
+        //    } else {
+        //        $(".ntx-loader").hide();
+        //    }
+        //};
+
+        $(document).ready(function () {
+            $(".select2").select2();
+            $().ready(function () {
+                //$('.datetimepicker').datetimepicker({ theme: 'light', timepicker: false, format: 'd-m-Y', scrollMonth: false, scrollInput: false });
+                ////$('.timepicker').datetimepicker({ theme: 'dark', datepicker: false, format: 'H:i', scrollMonth: false, scrollInput: false, maxDate: new Date() });
+                //$(".datetimepicker").attr("placeholder", "DD-MM-YYYY");
+                //$(".datetimepicker").mask("99-99-9999");
+                //$(".timepicker").mask("99:99");
+                //$(".timepicker").attr("placeholder", "HH:MM");
+                $sidebar = $('.sidebar');
+
+                $sidebar_img_container = $sidebar.find('.sidebar-background');
+
+                $full_page = $('.full-page');
+
+                $sidebar_responsive = $('body > .navbar-collapse');
+
+                window_width = $(window).width();
+
+                fixed_plugin_open = $('.sidebar .sidebar-wrapper .nav li.active a p').html();
+
+                if (window_width > 767 && fixed_plugin_open == 'Dashboard') {
+                    if ($('.fixed-plugin .dropdown').hasClass('show-dropdown')) {
+                        $('.fixed-plugin .dropdown').addClass('open');
+                    }
+
+                }
+
+                $('.fixed-plugin a').click(function (event) {
+                    // Alex if we click on switch, stop propagation of the event, so the dropdown will not be hide, otherwise we set the  section active
+                    if ($(this).hasClass('switch-trigger')) {
+                        if (event.stopPropagation) {
+                            event.stopPropagation();
+                        } else if (window.event) {
+                            window.event.cancelBubble = true;
+                        }
+                    }
+                });
+
+                $('.fixed-plugin .active-color span').click(function () {
+                    $full_page_background = $('.full-page-background');
+
+                    $(this).siblings().removeClass('active');
+                    $(this).addClass('active');
+
+                    var new_color = $(this).data('color');
+
+                    if ($sidebar.length != 0) {
+                        $sidebar.attr('data-color', new_color);
+                    }
+
+                    if ($full_page.length != 0) {
+                        $full_page.attr('filter-color', new_color);
+                    }
+
+                    if ($sidebar_responsive.length != 0) {
+                        $sidebar_responsive.attr('data-color', new_color);
+                    }
+                });
+
+                $('.fixed-plugin .background-color .badge').click(function () {
+                    $(this).siblings().removeClass('active');
+                    $(this).addClass('active');
+
+                    var new_color = $(this).data('background-color');
+
+                    if ($sidebar.length != 0) {
+                        $sidebar.attr('data-background-color', new_color);
+                    }
+                });
+
+                $('.fixed-plugin .img-holder').click(function () {
+                    $full_page_background = $('.full-page-background');
+
+                    $(this).parent('li').siblings().removeClass('active');
+                    $(this).parent('li').addClass('active');
+
+
+                    var new_image = $(this).find("img").attr('src');
+
+                    if ($sidebar_img_container.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
+                        $sidebar_img_container.fadeOut('fast', function () {
+                            $sidebar_img_container.css('background-image', 'url("' + new_image + '")');
+                            $sidebar_img_container.fadeIn('fast');
+                        });
+                    }
+
+                    if ($full_page_background.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
+                        var new_image_full_page = $('.fixed-plugin li.active .img-holder').find('img').data('src');
+
+                        $full_page_background.fadeOut('fast', function () {
+                            $full_page_background.css('background-image', 'url("' + new_image_full_page + '")');
+                            $full_page_background.fadeIn('fast');
+                        });
+                    }
+
+                    if ($('.switch-sidebar-image input:checked').length == 0) {
+                        var new_image = $('.fixed-plugin li.active .img-holder').find("img").attr('src');
+                        var new_image_full_page = $('.fixed-plugin li.active .img-holder').find('img').data('src');
+
+                        $sidebar_img_container.css('background-image', 'url("' + new_image + '")');
+                        $full_page_background.css('background-image', 'url("' + new_image_full_page + '")');
+                    }
+
+                    if ($sidebar_responsive.length != 0) {
+                        $sidebar_responsive.css('background-image', 'url("' + new_image + '")');
+                    }
+                });
+
+                $('.switch-sidebar-image input').change(function () {
+                    $full_page_background = $('.full-page-background');
+
+                    $input = $(this);
+
+                    if ($input.is(':checked')) {
+                        if ($sidebar_img_container.length != 0) {
+                            $sidebar_img_container.fadeIn('fast');
+                            $sidebar.attr('data-image', '#');
+                        }
+
+                        if ($full_page_background.length != 0) {
+                            $full_page_background.fadeIn('fast');
+                            $full_page.attr('data-image', '#');
+                        }
+
+                        background_image = true;
+                    } else {
+                        if ($sidebar_img_container.length != 0) {
+                            $sidebar.removeAttr('data-image');
+                            $sidebar_img_container.fadeOut('fast');
+                        }
+
+                        if ($full_page_background.length != 0) {
+                            $full_page.removeAttr('data-image', '#');
+                            $full_page_background.fadeOut('fast');
+                        }
+
+                        background_image = false;
+                    }
+                });
+
+                $('.switch-sidebar-mini input').change(function () {
+                    $body = $('body');
+
+                    $input = $(this);
+
+                    if (md.misc.sidebar_mini_active == true) {
+                        $('body').removeClass('sidebar-mini');
+                        md.misc.sidebar_mini_active = false;
+
+                        $('.sidebar .side bar-wrapper, .main-panel').perfectScrollbar();
+
+                    } else {
+
+                        $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar('destroy');
+
+                        setTimeout(function () {
+                            $('body').addClass('sidebar-mini');
+
+                            md.misc.sidebar_mini_active = true;
+                        }, 300);
+                    }
+
+                    // we simulate the window Resize so the charts will get updated in realtime.
+                    var simulateWindowResize = setInterval(function () {
+                        window.dispatchEvent(new Event('resize'));
+                    }, 180);
+
+                    // we stop the simulation of Window Resize after the animations are completed
+                    setTimeout(function () {
+                        clearInterval(simulateWindowResize);
+                    }, 1000);
+
+                });
+            });
+        });
+        $('#nav-item').removeAttr('data-toggle');
+    </script>
+</body>
+</html>
+<script>
+    var docType = 0;
+    var DocList = '';
+
+    ///////////////////////////// LoadVerifyeMailInfo  //////////////////////////////////////////////////////
+    function LoadVerifyeMailInfo() {
+        try {
+            LoaderShow();
+            var data = {};
+            var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+            $.ajax({
+                url: '@Url.Action("LoadVerifyeMailInfo", "Home")',
+                type: 'POST',
+                dataType: 'json',
+                async: true,
+                data: dataWithAntiforgeryToken,
+                success: function (data) {
+
+                    LoaderHide();
+                    if (data.StatusId != "99" && data.StatusId != "-99") {
+                        DocList = data.DocList;
+                        ShowHidebuttons();
+                    }
+                    else {
+                       // alert(data.Status);
+                    }
+                },
+                error: function (xhr) {
+
+                    LoaderHide();
+                    alert(xhr.responseText);
+                }
+            });
+        }
+        catch (e) {
+
+            LoaderHide();
+            alert(e.message);
+            //  return false;
+        }
+    }
+
+    ///////////////////////////// Upload Doc  //////////////////////////////////////////////////////
+    function OpenDocDialog(varDocType) {
+        docType = varDocType;
+        $("#fileInputClear").click();
+        $("#UploadDocModal").modal("show");
+    }
+
+    function UploadDoc() {
+        try {
+            var varFileData = $("#fileUPLD").val().trim();
+            if (varFileData == '') {
+                alert("Select File!");
+                return false;
+            }
+            else {
+                var formData = new FormData();
+                var imagefile = document.getElementById('fileUPLD').files[0];
+                var FileType = imagefile.type;
+                var Fileize = imagefile.size;
+                if (FileType == "image/jpeg" || FileType == "application/pdf") {
+                    if ((parseInt(Fileize) / 1024) > 0 && (parseInt(Fileize) / 1024) < 2048) {
+                        LoaderShow();
+                        $("#btnUpload").hide();
+                        $("#uploadProgressBill").show();
+                        formData.append("ImageData", imagefile);
+                        formData.append("DocType", docType);
+
+                        var xhr = new XMLHttpRequest();
+
+                        xhr.open("POST", "../Home/RegDocUpload", true);
+                        xhr.upload.addEventListener("progress", function (evt) { UploadProgress(evt); }, false);
+                        xhr.addEventListener("load", function (evt) { UploadComplete(evt); }, false);
+                        xhr.addEventListener("error", function (evt) { UploadFailed(evt); }, false);
+                        xhr.addEventListener("abort", function (evt) { UploadCanceled(evt); }, false);
+                        xhr.send(formData);
+                    }
+                    else {
+                        alert("File size between 1 KB to 2 MB can be accepted!");
+                        return false;
+                    }
+                }
+                else {
+                    alert("Only (JPEG, PDF) file format can be accepted!");
+                    return false;
+                }
+            }
+        }
+        catch (e) {
+            $("#btnUpload").show();
+            alert(e.message);
+            return false;
+        }
+    }
+
+    function UploadProgress(evt) {
+        if (evt.lengthComputable) {
+            var percentComplete = Math.round(evt.loaded * 100 / evt.total);
+            $("#uploadProgressBill").text("Uploading Progress : " + percentComplete + "% ");
+        }
+    }
+
+    function UploadComplete(evt) {
+        LoaderHide();
+        $("#btnUpload").show();
+        if (evt.target.status == 200) {
+            var data = JSON.parse(evt.target.response);
+            DocList = data.DocList;
+            $("#btnDialogClose").click();
+            ShowHidebuttons();
+            alert(data.Status);
+            $("#uploadProgressBill").text('');
+        }
+        else {
+            $("#uploadProgressBill").text('');
+            alert("Error Uploading Document");
+        }
+    }
+
+    function UploadFailed(evt) {
+        LoaderHide();
+        $("#btnUpload").show();
+        $("#uploadProgressBill").text('');
+        alert("There was an error attempting to upload the Document!");
+
+    }
+
+    function UploadCanceled(evt) {
+        LoaderHide();
+        $("#btnUpload").show();
+        $("#uploadProgressBill").text('');
+        alert("The upload has been canceled by the user or the browser dropped the connection!");
+    }
+
+    function ShowHidebuttons() {
+        try {
+            $("#btnCompRegView").hide();
+            $("#btnPANView").hide();
+            $("#btnGSTView").hide();
+            $("#btnTANView").hide();
+
+
+
+            for (var i = 0; i < DocList.length; i++) {
+                if (parseInt(DocList[i].ImageSerialNo) == 1) {
+                    $("#btnCompRegView").show();
+                }
+                else if (parseInt(DocList[i].ImageSerialNo) == 2) {
+                    $("#btnPANView").show();
+                }
+                else if (parseInt(DocList[i].ImageSerialNo) == 3) {
+                    $("#btnGSTView").show();
+                } else if (parseInt(DocList[i].ImageSerialNo) == 4) {
+                    $("#btnTANView").show();
+                }
+            }
+        }
+        catch(e)
+        {
+        }
+    }
+
+    ///////////////////////////// View Doc  //////////////////////////////////////////////////////
+    function ViewDoc(varDocType) {
+        try {
+            var strPOViewerUrl = $("#POURL").val();
+            if (DocList.length > 0) {
+                var data = jQuery.grep(DocList, function (obj) {
+                    return obj.ImageSerialNo == varDocType;
+                });
+
+                if (data.length > 0) {
+                    strPOViewerUrl = strPOViewerUrl + data[0].ImageName;
+                    window.open(strPOViewerUrl, '_blank');
+                }
+            }
+        }
+        catch (e) {
+            alert(e.message);
+        }
+        return false;
+    }
+
+
+
+
+    ///////////////////////////// CreatePassword  //////////////////////////////////////////////////////
+    function CreatePassword() {
+        try {
+            debugger;
+            if (@Model.PWDenterdStatusId== 1) {
+
+                var strMSG = '';
+
+                //if (parseInt($("#DocId").val()) == 0) {
+                //    if (DocList == undefined || DocList == "" || DocList.length < 4) {
+                //        alert("Please upload above 4 mandatory documents and then create password");
+                //        strMSG = strMSG + 'Please upload above 4 mandatory documents and then create password \n</br>'
+                //        return;
+                //    }
+                //}
+
+                    var model = {};
+                    $("#btnPSW").hide();
+                    LoaderShow();
+                    var data = { 'model': model };
+                    var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+                    $.ajax({
+                        url: '@Url.Action("UserVerifyStatusUpdate", "Home")',
+                        type: 'POST',
+                        dataType: 'json',
+                        async: true,
+                        data: dataWithAntiforgeryToken,
+                        //contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            LoaderHide();
+                            if (data.StatusId != "99" && data.StatusId != "-99") {
+                                alert(data.Status);
+                                $("#btnPSW").hide();
+                                $("#btnGTLogin").show();
+                            }
+                            else {
+                                $('#txtPSW').val('');
+                                $('#txtConfirmPSW').val('');
+                                $("#btnPSW").show();
+                                alert(data.Status);
+                            }
+                            // $("#btnReg").show();
+
+                        },
+                        error: function (xhr) {
+                            $('#txtPSW').val('');
+                            $('#txtConfirmPSW').val('');
+                            $("#btnPSW").show();
+                            LoaderHide();
+                            alert(xhr.responseText);
+                        }
+                    });
+
+
+            }
+            else {
+
+                var strMSG = '';
+
+                //if (parseInt($("#DocId").val()) == 0) {
+                //    if (DocList == undefined || DocList == "" || DocList.length < 4) {
+                //        alert("Please upload above 4 mandatory documents and then create password");
+                //        strMSG = strMSG + 'Please upload above 4 mandatory documents and then create password \n</br>'
+                //        return;
+                //    }
+                //}
+
+                if ($("#txtPSW").val().trim() == "") {
+                    strMSG = strMSG + 'New Password \n</br>'
+                }
+                if ($("#txtConfirmPSW").val().trim() == "") {
+                    strMSG = strMSG + 'Confirm Password \n</br>'
+                }
+
+                if ($("#txtPSW").val().trim() != "" && $("#txtConfirmPSW").val().trim() != "" && $("#txtPSW").val().trim() != $("#txtConfirmPSW").val().trim()) {
+                    strMSG = strMSG + 'Passwords are not matched \n</br>'
+                }
+
+                if (strMSG != '') {
+                    alert("Please enter data for Mandatory fields  \n</br>" + strMSG);
+                    return false;
+                }
+                else {
+                    var key = CryptoJS.enc.Utf8.parse('A51f7e2h2j58r2d5');
+                    var iv = CryptoJS.enc.Utf8.parse('A51f7e2h2j58r2d5');
+
+                    var encryptedpassword = CryptoJS.AES.encrypt(CryptoJS.enc.Utf8.parse($('#txtPSW').val().trim()), key,
+                        { keySize: 128 / 8, iv: iv, mode: CryptoJS.mode.CBC, padding: CryptoJS.pad.Pkcs7 });
+
+                    $('#txtPSW').val(encryptedpassword);
+                    $('#txtConfirmPSW').val(encryptedpassword);
+                    var model = {};
+                    model.PassWord = $('#txtPSW').val();
+
+                    $("#btnPSW").hide();
+                    LoaderShow();
+                    var data = { 'model': model };
+                    var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+                    $.ajax({
+                        url: '@Url.Action("CreatePasswordVerifyMailPage", "Home")',
+                        type: 'POST',
+                        dataType: 'json',
+                        async: true,
+                        data: dataWithAntiforgeryToken,
+                        //contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            LoaderHide();
+                            if (data.StatusId != "99" && data.StatusId != "-99") {
+                                alert(data.Status);
+                                $("#btnPSW").hide();
+                                $("#btnGTLogin").show();
+                            }
+                            else {
+                                $('#txtPSW').val('');
+                                $('#txtConfirmPSW').val('');
+                                $("#btnPSW").show();
+                                alert(data.Status);
+                            }
+                            // $("#btnReg").show();
+
+                        },
+                        error: function (xhr) {
+                            $('#txtPSW').val('');
+                            $('#txtConfirmPSW').val('');
+                            $("#btnPSW").show();
+                            LoaderHide();
+                            alert(xhr.responseText);
+                        }
+                    });
+
+                }
+            }
+        }
+        catch (e) {
+
+            LoaderHide();
+            $('#txtPSW').val('');
+            $('#txtConfirmPSW').val('');
+            $("#btnPSW").show();
+            alert(e.message);
+            return false;
+        }
+    }
+
+
+
+    ///////////////////////////// Masking  //////////////////////////////////////////////////////
+    function MaskControls() {
+        try {
+            (function ($) {
+                $(function () {
+                    $("#txtCompanyName").attr('onkeypress', 'return CheckIsAlphaNumeric(event,this);');
+                    $("#txtGSTNo").attr('onkeypress', 'return CheckIsAlphaNumeric(event,this);');
+                    $("#txtPANNo").attr('onkeypress', 'return CheckIsAlphaNumeric(event,this);');
+                    $("#txtContactPerson").attr('onkeypress', 'return CheckIsAlphaNumeric(event,this);');
+                    $("#txtEMailId").IsEmailOnly();
+                    $("#txtPincode").attr('onkeypress', 'return CheckIsNumeric(event,this);');
+                    $("#txtMobileNo").attr('onkeypress', 'return CheckIsNumeric(event,this);');
+
+
+                });
+            })(jQuery);
+        }
+        catch (e) {
+
+        }
+    }
+
+    $(document).ready(function () {
+        LoadVerifyeMailInfo();
+    });
+
+</script>

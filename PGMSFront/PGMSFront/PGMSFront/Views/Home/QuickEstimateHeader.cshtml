@@ -1,0 +1,1070 @@
+﻿<style>
+    @@media (min-width: 992px) {
+        .modal-lg {
+            max-width: 1200px;
+        }
+    }
+
+    .bgTitle {
+        background: #e91e63 !important;
+        border-radius: 4px;
+        color: #FFF !important;
+        font-weight: bold;
+    }
+
+    .table thead tr th,
+    .table tfoot tr th {
+        font-size: 14px;
+        border-top: 1px solid #ddd;
+        background: #f2dede;
+        color: #000;
+        border-color: #FFF;
+    }
+
+    .table > tfoot > tr > th {
+        padding: 0 8px !important;
+        cursor: pointer !important;
+    }
+
+    .req {
+        color: red;
+    }
+</style>
+<div class="row">
+    <div class="card">
+        <div class="card-header card-header-rose card-header-icon">
+            @*<div class="card-icon">
+                    <i class="material-icons">assignment</i>
+                </div>*@
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group" style="padding-bottom:0; margin: 0 0 0;">
+                        <label style="margin-bottom: 0;"><strong style="color: #000; font-weight: bold;">Date</strong></label><br />
+                        <span style="color: #000" id="BookingDate">@Model.DocDate</span>
+                    </div>
+                    @*<strong style="color: #000; font-weight: bold;">Date:</strong>&nbsp;<span style="color: #000" id="BookingDate">@Model.DocDate</span>*@
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group" style="padding-bottom:0; margin: 0 0 0;">
+                        <label style="margin-bottom: 0;"><strong style="color: #000; font-weight: bold;">Document Type</strong></label><br />
+                        <span style="color: #000" id="BookingType">@Model.DocType</span>
+                    </div>
+                    @*<strong style="color: #000; font-weight: bold;">Document Type:</strong>&nbsp;<span style="color: #000" id="BookingType">@Model.DocType</span>*@
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group" style="padding-bottom:0; margin: 0 0 0;">
+                        <label style="margin-bottom: 0;"><strong style="color: #000; font-weight: bold;">Estimate No.</strong></label><br />
+                        <span style="color: #000" id="BookingNo">@Model.ZZDocNo</span>
+                    </div>
+                    @*<strong style="color: #000; font-weight: bold;">Booking No.:</strong>&nbsp;<span style="color: #000" id="BookingNo">@Model.ZZDocNo</span>*@
+                </div>
+                @if (Model.RFQId > 0)
+                {
+                    <div class="col-md-1">
+                        <div class="form-group" style="padding-bottom:0; margin: 0 0 0;">
+                            <label style="margin-bottom: 0;"><strong style="color: #000; font-weight: bold;">RFQ No.</strong></label><br />
+                            <span style="color: #000" id="BookingNo">@Model.RFQBookingNo</span>
+                        </div>
+                        @*<strong style="color: #000; font-weight: bold;">RFQ No.:</strong><span style="color: #000" id="BookingNo">&nbsp;@Model.RFQBookingNo</span>*@
+                    </div>
+                }
+                <div class="col-md-3">
+                    @if (Model.DocId > 0 && (Model.WorkFlowId == 218 || Model.WorkFlowId == 221))
+                    {
+                        <input type="button" id="btnViewPI" value="View Estimate" onclick="return ViewSchedules();" class="btn btn-fill btn-rose btn-sm" />
+                    }
+
+                    @if (Model.DocId > 0 && (Model.WorkFlowId == 216 || Model.WorkFlowId == 219))
+                    {
+                        <input type="button" id="btnSubmitRFQ" value="Submit" onclick="return SubmitRFQ();" class="btn btn-fill btn-rose btn-sm" />
+                    }
+
+                    else if (Model.DocId > 0 && (Model.WorkFlowId == 218 || Model.WorkFlowId == 221))
+                    {
+                        @*<input type="button" id="btnViewPI" value="View Quot." onclick="return ViewPI();" class="btn btn-fill btn-rose btn-sm" />
+                            <span> &nbsp;</span>*@
+
+                        if (Model.StatusPropId == 40)
+                        {
+                            <input type="button" id="btnAcceptQuotation" value="Accept Estimate" onclick="return AcceptQuotation(@Model.WorkFlowId);" class="btn btn-fill btn-rose btn-sm" />
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="arrow-steps clearfix">
+                @foreach (var itm in Model.WorkFlowView)
+                {
+                    if (@Model.WorkFlowId == itm.WorkFlowId)
+                    {
+                        <div class="step current"><span>@itm.WorkFlowName</span></div>
+                    }
+                    else
+                    {
+                        <div class="step"><span>@itm.WorkFlowName</span></div>
+                    }
+                }
+
+                @*@if (@Model.WorkFlowId == 6)
+                    {
+                        <div id="WWF6" class="step current"><span>Booking</span></div>
+                    }
+                    else
+                    {
+                        <div id="WWF6" class="step"><span>Booking</span></div>
+                    }
+                    @if (@Model.WorkFlowId == 7)
+                    {
+                        <div id="WWF7" class="step current"><span>PI</span></div>
+                    }
+                    else
+                    {
+                        <div id="WWF7" class="step"><span>PI</span></div>
+                    }
+                    @if (@Model.WorkFlowId == 8)
+                    {
+                        <div id="WWF8" class="step current"><span>Approve</span></div>
+                    }
+                    else
+                    {
+                        <div id="WWF8" class="step"><span>Approve</span></div>
+                    }
+                    @if (@Model.WorkFlowId == 9)
+                    {
+                        <div id="WWF9" class="step current"><span>PO</span></div>
+                    }
+                    else
+                    {
+                        <div id="WWF9" class="step"><span>PO</span></div>
+                    }
+                    @if (@Model.WorkFlowId == 10)
+                    {
+                        <div id="WWF10" class="step current"><span>PO Verification</span></div>
+                    }
+                    else
+                    {
+                        <div id="WWF10" class="step"><span>PO Verification</span></div>
+                    }*@
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="UploadPOModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Upload P.O.</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="material-icons">clear</i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                            <div class="fileinput-preview fileinput-exists thumbnail" style="padding: 10px;"></div>
+                            <div>
+                                <span class="btn btn-rose btn-round btn-file">
+                                    <span class="fileinput-new">Select Document</span>
+                                    <span class="fileinput-exists">Change</span>
+                                    <input type="file" name="..." id="filePOUPLD" />
+                                </span>
+                                <a href="#pablo" id="fileInputClear" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                                <button type="button" id="btnUpload" class="btn btn-fill btn-rose btn-sm" onclick="UploadPO()" style="margin-top: 5px;">Upload P.O.</button>
+                                <label id="uploadProgressBill" style="background-color: orangered;color:white; font-size: 12px;"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <label id="" style="color: red;font-size: 12px;">Note: Only pdf and jpg files accepted and file size should be less than 2MB</label>
+                    </div>
+                </div>
+                <hr style=" margin-top: 0px; margin-bottom: 0px;" />
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="txtPONo" style="color: #000; font-weight: bold;">PO No.&nbsp;<span class="req">*</span></label>
+                            <input type="text" class="form-control" id="txtPONo" placeholder="Enter PO No." />
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="txtPODate" style="color: #000; font-weight: bold;">PO Date&nbsp;<span class="req">*</span></label>
+                            <input type="text" class="form-control datetimepicker" id="txtPODate" />
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="txtPOTotalamount" style="color: #000; font-weight: bold;">PO Total Amount</label>
+                            <input type="text" class="form-control" id="txtPOTotalamount" readonly style="text-align: right" />
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="txtPaymentTerms" style="color: #000; font-weight: bold;">Payment Terms</label>
+                            <textarea class="form-control" id="txtPaymentTerms" maxlength="300" style="height: 50px !important" placeholder="Enter Payment Terms upto 300 characters"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            <label for="txtPaymentTerms" style="color: #000; font-weight: bold;">&nbsp;</label><br />
+                            <button class="btn btn-fill btn-rose btn-sm" onclick="POSave()">Save</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-responsive" style=" overflow-y: auto; max-height: 310px;">
+                            <table class="table table-bordered table-striped">
+                                <thead class="text-primary">
+                                    <tr>
+                                        <th width="14%">Booking Group</th>
+                                        <th width="36%">Billing Item</th>
+                                        @*<th class="text-center">From Date</th>
+                                            <th class="text-center">To Date</th>*@
+                                        <th width="10%">Unit</th>
+                                        @*<th style="text-align: right;">Usage</th>*@
+                                        <th width="10%" style="text-align: right;">Billing Qty.</th>
+                                        <th width="10%" style="text-align: right;">Rate</th>
+                                        <th width="10%" style="text-align: right;">Amount</th>
+                                        <th width="10%">PO Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="gridTbody"></tbody>
+                                <tfoot class="text-primary">
+                                    <tr>
+                                        <th style="text-align: center;" colspan="5">Total</th>
+                                        <th style="text-align: right;" id="totalAmount"></th>
+                                        <th></th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-fill btn-rose btn-sm" style="margin-top: 5px;" onclick="SubmitPO()">Submit PO</button>
+                <button type="button" class="btn btn-fill btn-danger btn-sm" data-dismiss="modal" style="margin-left: 5px; margin-top: 5px;">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="iframeFilePreviewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">File Preview</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="material-icons">clear</i>
+                </button>
+            </div>
+            <div class="modal-body" style="text-align:center">
+                <iframe id="iframeFilePreview" src="" frameborder="0" scrolling="auto" style="width:100%;height:400px;display:none" allowtransparency="false"></iframe>
+                <img id="imgFilePreview" src="" frameborder="0" scrolling="auto" style="width:100%;height:400px;display:none" />
+                @*<object id="aaa" data="" type="application/pdf" width="600" height="500">
+                        <a id="aaaa" href="">test.pdf</a>
+                    </object>*@
+                @*<embed id="aa"  src="" width="600px" height="500px" />*@
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-fill btn-danger btn-sm" data-dismiss="modal" style="margin-left: 5px; margin-top: 5px;">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        // bookingQuotationPIDetailGetByBookingId();
+    });
+    var bookingId = 0;
+    var bookingQuotPIDetId = 0;
+    var vehicleList = [];
+    function bookingQuotationPIDetailGetByBookingId() {
+        try {
+            LoaderShow();
+            var data = {};
+            var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+            $.ajax({
+                url: '@Url.Action("LoadGridData", "Home")',
+                type: 'POST',
+                dataType: 'json',
+                async: true,
+                data: dataWithAntiforgeryToken,
+                success: function (data) {
+                    LoaderHide();
+                    if (data.StatusId != "99" && data.StatusId != "-99") {
+                        debugger;
+                        vehicleList = data.VehicleList;
+                        BindVehicleData(data.VehicleList);
+                    }
+                    else {
+                       // alert(data.Status);
+                    }
+                },
+                error: function (xhr) {
+                    LoaderHide();
+                    alert(xhr.responseText);
+                }
+            });
+        }
+        catch (e) {
+            LoaderHide();
+            alert(e.message);
+        }
+    }
+
+    function BindVehicleData(data) {
+        try {
+            debugger
+            bookingId = data[0].BookingId;
+            bookingQuotPIDetId = data[0].BookingQuotPIDetId;
+            $("#txtPONo").val(data[0].PONumber);
+            let PODate = data[0].PODate;
+            const myArray1 = PODate.split("(");
+            const myArray2 = myArray1[1].split(")");
+            var PODateFinal = setDate(myArray2[0]);
+            $("#txtPODate").val(PODateFinal);
+            $("#txtPaymentTerms").val(data[0].Paymentterm)
+            $("#txtPOTotalamount").val(data[0].POTotalAmount);
+            var gridData = "";
+            $("#gridTbody").html("");
+            var totalAmount = 0;
+            for (var i = 0; i < data.length; i++) {
+                debugger
+                gridData = gridData + "<tr>";
+                gridData = gridData + "<td>" + NullHandle(data[i].ZZBillingGroup) + "</td>";
+                gridData = gridData + "<td>" + NullHandle(data[i].ZZBillingItem) + "</td>";
+                gridData = gridData + "<td>" + NullHandle(data[i].ZZUOM) + "</td>";
+                gridData = gridData + "<td class='text-right'>" + NullHandle(data[i].ZZBillingHrs) + "</td>";
+                gridData = gridData + "<td class='text-right'>" + WithComma(data[i].ZZRate) + "</td>";
+                gridData = gridData + "<td class='text-right'>" + WithComma(data[i].ZZAmount) + "</td>";
+                gridData = gridData + "<td>" + NullHandle(data[i].ZZPOStatusProp) + "</td>";
+                gridData = gridData + "</tr>";
+                totalAmount = totalAmount + NullHandle(data[i].ZZAmount);
+            }
+            $("#txtPOTotalamount").val(NullHandle(totalAmount));
+            $("#totalAmount").text(WithComma(totalAmount));
+            $("#gridTbody").html(gridData);
+        }
+        catch (e) {
+
+        }
+    }
+
+    function POSave() {
+        try {
+            debugger;
+            if (validatePO()) {
+                LoaderShow();
+                var model = {};
+                model.PONumber = $("#txtPONo").val().trim();
+                model.PODate = $("#txtPODate").val().trim();
+                model.ZZPODate = $("#txtPODate").val().trim();
+                model.Paymentterm = $("#txtPaymentTerms").val().trim();
+                model.BookingId = bookingId;
+                model.BookingQuotPIDetId = bookingQuotPIDetId;
+                model.POTotalAmount = $("#txtPOTotalamount").val().trim();
+                var data = {'model': model};
+                var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+                $.ajax({
+                    url: '@Url.Action("POSave", "Home")',
+                    type: 'POST',
+                    dataType: 'json',
+                    async: true,
+                    data: dataWithAntiforgeryToken,
+                    //contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        LoaderHide();
+                        debugger;
+                        if (data.StatusId != "99" && data.StatusId != "-99") {
+                            clear();
+                            vehicleList = [];
+                            vehicleList = data.VehicleList;
+                            BindVehicleData(data.VehicleList);
+                        }
+                        alert(data.Status);
+                    },
+                    error: function (xhr) {
+                        LoaderHide();
+                        alert(xhr.responseText);
+                    }
+                });
+            }
+        }
+        catch (e) {
+            LoaderHide();
+            alert(e.message);
+            return false;
+        }
+    }
+
+    function validatePO() {
+        var strMSG = '';
+        if ($("#txtPONo").val().trim() == "") {
+            strMSG = strMSG + 'PO No. \n</br>'
+        }
+        if ($("#txtPODate").val().trim() == "") {
+            strMSG = strMSG + 'PO Date \n</br>'
+        }
+        if (vehicleList.length === 0) {
+            strMSG = strMSG + 'Line Item \n</br>'
+        }
+        if (strMSG != '') {
+            alert("Please enter data for Mandatory fields  \n</br>" + strMSG);
+            return false;
+        }
+        return true;
+    }
+
+    function WithComma(x) {
+        x = x.toFixed(2);
+        x = x.toString();
+        var lastThree = x.substring(x.length - 6);
+        var otherNumbers = x.substring(0, x.length - 6);
+        if (otherNumbers != '')
+            lastThree = ',' + lastThree;
+        var FinalVal = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
+        return FinalVal;
+    }
+
+    function setDate(timestamp) {
+        var date = new Date(parseInt(timestamp));
+        var month = date.getMonth() + 1;
+        var monthFinal = (month < 10) ? '0' + month.toString() : month.toString();
+        return date.getDate() + "-" + monthFinal + "-" + date.getFullYear();
+    }
+
+    function clear() {
+        $("#txtPONo").val("");
+        $("#txtPODate").val("");
+        $("#txtPaymentTerms").val("")
+        bookingId = 0;
+        bookingQuotPIDetId = 0;
+        $("#txtPOTotalamount").val("");
+        vehicleList = [];
+    }
+
+    function OpenPreviewFileModel() {
+        //$("#iframeFilePreview").attr("src", "");
+        //$("#imgFilePreview").hide();
+        //$("#imgFilePreview").attr("src", "");
+        //$("#iframeFilePreview").hide();
+
+        //var varFileURL = "https://natraxpgmsstorage.blob.core.windows.net/booking/PO_15.jpeg";
+
+        //if (varFileURL.substr(varFileURL.length - 3, 3).toLowerCase() == "pdf") {
+        //    $("#iframeFilePreview").attr("src", varFileURL);
+        //    $("#iframeFilePreview").show();
+        //}
+        //else {
+        //    $("#imgFilePreview").attr("src", varFileURL);
+        //    $("#imgFilePreview").show();
+        //}
+        //$("#aaa").attr("data", "http://pgmsbackoffice.azurewebsites.net/ReportViewer/ReportViewer.aspx?rptName=rptBookingInvoiceIGST&DocId=47&BPId=90");
+       // $("#aaaa").attr("href", "http://pgmsbackoffice.azurewebsites.net/ReportViewer/ReportViewer.aspx?rptName=rptBookingInvoiceIGST&DocId=47&BPId=90");
+        //$("#aa").attr("src", "https://natraxpgmsstorage.blob.core.windows.net/booking/SD_1.pdf");
+       // $("#iframeFilePreviewModal").modal("show");
+    }
+
+    ///////////////////////////// Upload P.0.  //////////////////////////////////////////////////////
+    function OpenPODialog() {
+        $("#fileInputClear").click();
+        $("#UploadPOModal").modal("show");
+        bookingQuotationPIDetailGetByBookingId();
+    }
+
+    function UploadPO() {
+        try {
+            var varFileData = $("#filePOUPLD").val().trim();
+            if (varFileData == '') {
+                alert("Select File!");
+                return false;
+            }
+            else {
+                var formData = new FormData();
+                var imagefile = document.getElementById('filePOUPLD').files[0];
+                var FileType = imagefile.type;
+                var Fileize = imagefile.size;
+                if (FileType == "image/jpeg" || FileType == "application/pdf") {
+                    if ((parseInt(Fileize) / 1024) > 0 && (parseInt(Fileize) / 1024) < 2048) {
+                        LoaderShow();
+                        $("#btnUpload").hide();
+                        $("#uploadProgressBill").show();
+                        formData.append("ImageData", imagefile);
+
+                        var xhr = new XMLHttpRequest();
+
+                        xhr.open("POST", "../Home/POUpload", true);
+                        xhr.upload.addEventListener("progress", function (evt) { UploadPOProgress(evt); }, false);
+                        xhr.addEventListener("load", function (evt) { UploadPOComplete(evt); }, false);
+                        xhr.addEventListener("error", function (evt) { UploadPOFailed(evt); }, false);
+                        xhr.addEventListener("abort", function (evt) { UploadPOCanceled(evt); }, false);
+                        xhr.send(formData);
+                    }
+                    else {
+                        alert("PO file size between 1 KB to 2 MB can be accepted!");
+                        return false;
+                    }
+                }
+                else {
+                    alert("Only (JPEG, PDF) file format can be accepted!");
+                    return false;
+                }
+            }
+        }
+        catch (e) {
+            $("#btnUpload").show();
+            alert(e.message);
+            return false;
+        }
+    }
+
+    function UploadPOProgress(evt) {
+        if (evt.lengthComputable) {
+            var percentComplete = Math.round(evt.loaded * 100 / evt.total);
+            $("#uploadProgressBill").text("Uploading Progress : " + percentComplete + "% ");
+        }
+    }
+
+    function UploadPOComplete(evt) {
+        LoaderHide();
+        $("#btnUpload").show();
+        if (evt.target.status == 200) {
+            var data = JSON.parse(evt.target.response);
+            alert(data.Status);
+            $("#uploadProgressBill").text('');
+        }
+        else {
+            $("#uploadProgressBill").text('');
+            alert("Error Uploading PO");
+        }
+    }
+
+    function UploadPOFailed(evt) {
+        LoaderHide();
+        $("#btnUpload").show();
+        $("#uploadProgressBill").text('');
+        alert("There was an error attempting to upload the PO!");
+
+    }
+
+    function UploadPOCanceled(evt) {
+        LoaderHide();
+        $("#btnUpload").show();
+        $("#uploadProgressBill").text('');
+        alert("The upload has been canceled by the user or the browser dropped the connection!");
+    }
+
+     ///////////////////////////// View P.I.  //////////////////////////////////////////////////////
+    function ViewPI() {
+        try {
+            var strReportName = "";
+            if (parseInt($("#StateId").val()) == 20)//MP
+            {
+                strReportName = "rptBookingInvoiceGST";
+            }
+            else {
+                strReportName = "rptBookingInvoiceIGST";
+            }
+
+            var strReportViewerUrl = $("#ReportURL").val();
+            var strDocId = $("#DocId").val();
+            var strBPId = $("#BPId").val();
+
+            window.open(strReportViewerUrl + "?rptName=" + strReportName + "&DocId=" + strDocId + "&BPId=" + strBPId, '_blank');
+
+            return false;
+        }
+        catch (e) {
+
+            alert(e.message);
+        }
+        return false;
+    }
+
+    /////////////////////////View Print Schedules////////////////////////////
+
+
+    function ViewSchedules() {
+        debugger;
+         try {
+             debugger;
+             var strReportName = "";
+             var strReportViewerUrl = $("#ReportURL").val();
+             var strDocId = $("#DocId").val();
+             var strBPId = $("#BPId").val();
+             if (strDocId != 0 && strDocId != null && strDocId != undefined
+                 && strBPId != 0 && strBPId != null && strBPId != undefined) {
+                     strReportName = "rpEstimates";
+
+                 if (strReportName != "") {
+                     window.open(strReportViewerUrl + "?rptName=" + strReportName + "&DocId=" + strDocId + "&BPId=" + strBPId, '_blank');
+                 }
+             }
+         }
+        catch (e) {
+            alert(e.message);
+        }
+        return false;
+    }
+
+    ///////////////////////////// View P.I.  //////////////////////////////////////////////////////
+    function ViewPIWithQuot() {
+        try {
+            var strReportName = "";
+            if (parseInt($("#StateId").val()) == 20)//MP
+            {
+                strReportName = "rptBookingInvoiceGST";
+            }
+            else {
+                strReportName = "rptBookingInvoiceIGST";
+            }
+
+            var strReportViewerUrl = $("#ReportURL").val();
+            var strDocId = $("#DocId").val();
+            var strBPId = $("#BPId").val();
+
+            LoaderShow();
+            var data = {};
+            var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+
+            $.ajax({
+                url: '@Url.Action("BookingQuotationPI", "Home")',
+                type: 'POST',
+                dataType: 'json',
+                async: true,
+                data: dataWithAntiforgeryToken,
+                success: function (data) {
+
+                    LoaderHide();
+                    if (data.StatusId != "99" && data.StatusId != "-99") {
+                        window.open(strReportViewerUrl + "?rptName=" + strReportName + "&DocId=" + strDocId + "&BPId=" + strBPId, '_blank');
+                    }
+                    else {
+                        alert(data.Status);
+                    }
+                },
+                error: function (xhr) {
+
+                    LoaderHide();
+                    alert(xhr.responseText);
+                }
+            });
+
+        }
+        catch (e) {
+
+            LoaderHide();
+            alert(e.message);
+        }
+        return false;
+
+    }
+
+    ///////////////////////////// View P.O.  //////////////////////////////////////////////////////
+    function ViewPO() {
+        try {
+
+            //$("#iframeFilePreview").attr("src", "");
+            //$("#imgFilePreview").hide();
+            //$("#imgFilePreview").attr("src", "");
+            //$("#iframeFilePreview").hide();
+
+            //var varFileURL = $("#POURL").val();
+
+            //if (varFileURL.substr(varFileURL.length - 3, 3).toLowerCase() == "pdf") {
+            //    $("#iframeFilePreview").attr("src", varFileURL);
+            //    $("#iframeFilePreview").show();
+            //}
+            //else {
+            //    $("#imgFilePreview").attr("src", varFileURL);
+            //    $("#imgFilePreview").show();
+            //}
+
+            //$("#iframeFilePreviewModal").modal("show");
+
+            var strPOViewerUrl = $("#POURL").val();
+            window.open(strPOViewerUrl, '_blank');
+        }
+        catch (e) {
+            alert(e.message);
+        }
+        return false;
+    }
+
+
+    ///////////////////////////// Submit Doc  //////////////////////////////////////////////////////
+    function SubmitDoc() {
+        try {
+            $.confirm({
+                title: 'Confirm Alert!',
+                content: 'Further editing of the Booking will be locked when you "Submit" as it will be forwarded to Natrax for approving your Booking Dates Click "OK" to Confirm and "CANCEL" to continue editing.',
+                icon: 'fa fa-question',
+                closeIcon: true,
+                animation: 'scale',
+                type: 'orange',
+                escapeKey: 'cancel',
+                buttons: {
+                    MyFunction: {
+                        text: 'OK',
+                        action: function () {
+                            LoaderShow();
+                            var data = { 'intQuotFlag':1};
+                            var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+                            $.ajax({
+                                url: '@Url.Action("SubmitDoc", "Home")',
+                                type: 'POST',
+                                dataType: 'json',
+                                async: true,
+                                data: dataWithAntiforgeryToken,
+                                success: function (data) {
+
+                                    LoaderHide();
+
+                                    if (data.StatusId != "99" && data.StatusId != "-99") {
+                                        alert("PI Accepted Successfully");
+                                        BookingList = data.BookingList;
+                                        window.location.href = '@Url.Action("Basic", "Home")';
+                                    }
+                                    else {
+                                        alert(data.Status);
+                                    }
+                                },
+                                error: function (xhr) {
+
+                                    LoaderHide();
+                                    alert(xhr.responseText);
+                                }
+                            });
+
+                        }
+                    },
+                    cancel: function () {
+                    }
+                }
+            });
+
+        }
+        catch (e) {
+
+            LoaderHide();
+            alert(e.message);
+            //  return false;
+        }
+    }
+
+    ///////////////////////////// Accept P.I.  //////////////////////////////////////////////////////
+    function AcceptPI() {
+        try {
+            $.confirm({
+                title: 'Confirm Alert!',
+                content: 'It will be forwarded for upload PO Click "OK" to Confirm',
+                icon: 'fa fa-question',
+                closeIcon: true,
+                animation: 'scale',
+                type: 'orange',
+                escapeKey: 'cancel',
+                buttons: {
+                    MyFunction: {
+                        text: 'OK',
+                        action: function () {
+                            LoaderShow();
+                            var data = { 'intQuotFlag':1};
+                            var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+                            $.ajax({
+                                url: '@Url.Action("SubmitDoc", "Home")',
+                                type: 'POST',
+                                dataType: 'json',
+                                async: true,
+                                data: dataWithAntiforgeryToken,
+                                success: function (data) {
+
+                                    LoaderHide();
+
+                                    if (data.StatusId != "99" && data.StatusId != "-99") {
+                                        alert("PI Accepted Successfully");
+                                        BookingList = data.BookingList;
+                                        window.location.href = '@Url.Action("Basic", "Home")';
+                                    }
+                                    else {
+                                        alert(data.Status);
+                                    }
+                                },
+                                error: function (xhr) {
+
+                                    LoaderHide();
+                                    alert(xhr.responseText);
+                                }
+                            });
+
+                        }
+                    },
+                    cancel: function () {
+                    }
+                }
+            });
+
+        }
+        catch (e) {
+
+            LoaderHide();
+            alert(e.message);
+            //  return false;
+        }
+    }
+
+    ///////////////////////////// Submit RFQ  //////////////////////////////////////////////////////
+    function SubmitRFQ() {
+        try {
+            $.confirm({
+                title: 'Confirm Alert!',
+                content: 'Further editing of the Booking will be locked when you "Submit" to Natrax for preparing the Quotation Click "OK to Confirm and "CANCEL" to continue editing.',
+                icon: 'fa fa-question',
+                closeIcon: true,
+                animation: 'scale',
+                type: 'orange',
+                escapeKey: 'cancel',
+                buttons: {
+                    MyFunction: {
+                        text: 'OK',
+                        action: function () {
+                            LoaderShow();
+                            var data = { 'intQuotFlag':1};
+                            var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+                            $.ajax({
+                                url: '@Url.Action("SubmitEstimateDoc", "Home")',
+                                type: 'POST',
+                                dataType: 'json',
+                                async: true,
+                                data: dataWithAntiforgeryToken,
+                                success: function (data) {
+                                    LoaderHide();
+                                    if (data.StatusId != "99" && data.StatusId != "-99") {
+                                        alert("Submitted Successfully");
+                                        BookingList = data.BookingList;
+                                        window.location.href = '@Url.Action("BasicEstimate", "Home")';
+                                    }
+                                    else {
+                                        alert(data.Status);
+                                    }
+                                },
+                                error: function (xhr) {
+
+                                    LoaderHide();
+                                    alert(xhr.responseText);
+                                }
+                            });
+
+                        }
+                    },
+                    cancel: function () {
+                    }
+                }
+            });
+
+        }
+        catch (e) {
+
+            LoaderHide();
+            alert(e.message);
+            //  return false;
+        }
+    }
+
+    ///////////////////////////// Accept Quotation //////////////////////////////////////////////////////
+    function AcceptQuotation(varWorkFlowId) {
+        try {
+            var varMenuLink = "";
+            //if (parseInt(varWorkFlowId) == 59) {
+            //    varMenuLink = '"ManageBooking<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TrackBookings & RFQ<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Booking(New/In-Progress)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Booking against RFQ - Confidential"';
+            //}
+            //else if (parseInt(varWorkFlowId) == 52) {
+            //    varMenuLink = '"ManageBooking<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TrackBookings & RFQ<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Booking(New/In-Progress)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Booking against RFQ - Regular"';
+            //}
+            //else if (parseInt(varWorkFlowId) == 54) {
+            //    varMenuLink = '"ManageBooking<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LabBookings & RFQ<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Booking(New/In-Progress)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Booking against RFQ - Regular"';
+            //}
+
+            $.confirm({
+                title: 'Confirm Alert!',
+                content: '"Thank you for accepting the Estimate.<br>Please create booking against this Quotation to set the testing dates from Menu -<br><br>'+ varMenuLink,
+                icon: 'fa fa-question',
+                closeIcon: true,
+                animation: 'scale',
+                type: 'orange',
+                escapeKey: 'cancel',
+                buttons: {
+                    MyFunction: {
+                        text: 'OK',
+                        action: function () {
+                            LoaderShow();
+                            var data = { 'intQuotFlag':1};
+                            var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+                            $.ajax({
+                                url: '@Url.Action("SubmitEstimateDoc", "Home")',
+                                type: 'POST',
+                                dataType: 'json',
+                                async: true,
+                                data: dataWithAntiforgeryToken,
+                                success: function (data) {
+
+                                    LoaderHide();
+                                    if (data.StatusId != "99" && data.StatusId != "-99") {
+                                        alert("Estimate Accepted Successfully");
+                                        BookingList = data.BookingList;
+                                        window.location.href = '@Url.Action("BasicEstimate", "Home")';
+                                    }
+                                    else {
+                                        alert(data.Status);
+                                    }
+                                },
+                                error: function (xhr) {
+
+                                    LoaderHide();
+                                    alert(xhr.responseText);
+                                }
+                            });
+
+                        }
+                    },
+                    cancel: function () {
+                    }
+                }
+            });
+
+        }
+        catch (e) {
+
+            LoaderHide();
+            alert(e.message);
+            //  return false;
+        }
+    }
+
+     ///////////////////////////// Submit P.O.  //////////////////////////////////////////////////////
+    function SubmitPO() {
+        try {
+            if (validatePO()) {
+                $.confirm({
+                    title: 'Confirm Alert!',
+                    content: 'Thank you for submitting the P.O. as shown below : Click "OK" if above document is correct else click "CANCEL" and kindly upload the correct document again.',
+                    icon: 'fa fa-question',
+                    closeIcon: true,
+                    animation: 'scale',
+                    type: 'orange',
+                    escapeKey: 'cancel',
+                    buttons: {
+                        MyFunction: {
+                            text: 'OK',
+                            action: function () {
+                                LoaderShow();
+                                var data = { 'intQuotFlag': 5 };
+                                var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+                                $.ajax({
+                                    url: '@Url.Action("SubmitDoc", "Home")',
+                                    type: 'POST',
+                                    dataType: 'json',
+                                    async: true,
+                                    data: dataWithAntiforgeryToken,
+                                    success: function (data) {
+
+                                        LoaderHide();
+                                        if (data.StatusId != "99" && data.StatusId != "-99") {
+                                            alert("PO Submitted Successfully");
+                                            BookingList = data.BookingList;
+                                            window.location.href = '@Url.Action("Basic", "Home")';
+                                        }
+                                        else {
+                                            alert(data.Status);
+                                        }
+                                    },
+                                    error: function (xhr) {
+
+                                        LoaderHide();
+                                        alert(xhr.responseText);
+                                    }
+                                });
+                            }
+                        },
+                        cancel: function () {
+                        }
+                    }
+                });
+            }
+        }
+        catch (e) {
+
+            LoaderHide();
+            alert(e.message);
+            //  return false;
+        }
+    }
+
+     ///////////////////////////// Submit Booking Against RFQ  //////////////////////////////////////////////////////
+    function SubmitAgainstRFQ() {
+        try {
+            $.confirm({
+                title: 'Confirm Alert!',
+                content: 'Further editing of the Booking will be locked when you "Submit" to Natrax for approving your Booking Dates Click "OK to Confirm and "CANCEL" to continue editing.',
+                icon: 'fa fa-question',
+                closeIcon: true,
+                animation: 'scale',
+                type: 'orange',
+                escapeKey: 'cancel',
+                buttons: {
+                    MyFunction: {
+                        text: 'OK',
+                        action: function () {
+                            LoaderShow();
+                            var data = { 'intQuotFlag':1};
+                            var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+                            $.ajax({
+                                url: '@Url.Action("SubmitDoc", "Home")',
+                                type: 'POST',
+                                dataType: 'json',
+                                async: true,
+                                data: dataWithAntiforgeryToken,
+                                success: function (data) {
+
+                                    LoaderHide();
+                                    if (data.StatusId != "99" && data.StatusId != "-99") {
+                                        alert("Booking Against RFQ Submitted Successfully");
+                                        BookingList = data.BookingList;
+                                        window.location.href = '@Url.Action("Basic", "Home")';
+                                    }
+                                    else {
+                                        alert(data.Status);
+                                    }
+                                },
+                                error: function (xhr) {
+
+                                    LoaderHide();
+                                    alert(xhr.responseText);
+                                }
+                            });
+
+                        }
+                    },
+                    cancel: function () {
+                    }
+                }
+            });
+
+        }
+        catch (e) {
+
+            LoaderHide();
+            alert(e.message);
+            //  return false;
+        }
+    }
+
+</script>

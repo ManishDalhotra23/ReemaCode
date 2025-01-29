@@ -1,0 +1,151 @@
+﻿@model PGMSFront.Models.CommonModel
+@{   
+    ViewBag.Title = "Quick Estimate - TRACK";
+    Layout = "~/Views/Shared/_LayoutTrackBookingAndRFQ.cshtml";
+}
+<style>
+    .card {
+        margin-bottom: 0px !important;
+        margin-top: 25px !important;
+    }
+
+    .bootstrap-select {
+        margin-top: 16px !important;
+    }
+    
+</style>
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="card">
+                <div class="card-header card-header-rose card-header-icon">
+                    <div class="card-text">
+                        <h4 class="card-title">Quick    Estimate</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    @using (Html.BeginForm(new { @class = "form-horizontal" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <a href="@Url.Action("NewEstimate", "Home", new { id = UrlParameter.Optional })?dfs,ktgbdas,hdffg.khdfrhdduihdgtymdmpxjidgndlxcmhdgmdpldjn,dlkchgj,d,.dkjdhhdk,dmdhhnd,dkmdndhnndmdmjmd&intBPId=192" class='btn btn-info' style="padding: 7px 20px;">New Estimate</a>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group" style="height: 70px;">
+                                    <label for="exampleEmail" >Department *</label>
+                                    <select class="form-control" id="DepartmentId" style="margin-top: 34px;">
+                                        @foreach (var itm in ViewBag.CompanyDepartment)
+                                        {
+                                            <option value='@itm.Value'>@itm.Text</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group" style="margin: 0 !important;">
+                                    <label for="exampleEmail" >&nbsp;</label><br />
+                                    <button type="button" class="btn btn-fill btn-rose btn-sm" id="btnSubmit" onclick="return LoadBookingInfo()">Get Data</button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <hr />
+                    <div class="table-responsive">
+                        <table class="table table-hover" >
+                            <thead>
+                                <tr>
+                                    <th width="3%">Action</th>
+                                    @*<th width="5%">#</th>*@
+                                    <th width="20%">Department</th>
+                                    <th width="12%">Date</th>
+                                    <th width="15%">Estimate No.</th>
+                                    <th width="30%">Status</th>
+                                    <th width="15%">Project Manager</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbodyBooking"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var BookingList = '';
+    
+    ///////////////////////////// Load Basic Info  //////////////////////////////////////////////////////
+    function LoadBookingInfo() {
+        try {
+            if ($("#DepartmentId").val() != undefined && parseInt($("#DepartmentId").val()) != 0) {
+                LoaderShow();
+                var data = { 'intDepartmentId': $("#DepartmentId").val(), 'intBookingTypeId': 192, 'intStatusPropId': 0 };//6
+                var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+                $.ajax({
+                    url: '@Url.Action("EstimateSearchViewFrontGetByCompanyIdFromDateToDate", "Home")',
+                    type: 'POST',
+                    dataType: 'json',
+                    async: true,
+                    data: dataWithAntiforgeryToken,
+                    success: function (data) {
+                        LoaderHide();
+                        if (data.StatusId != "99" && data.StatusId != "-99") {
+                            BookingList = data.BookingList;
+                            BindGridData(data.BookingList);
+                        }
+                        else {
+                            alert(data.Status);
+                        }
+                    },
+                    error: function (xhr) {
+
+                        LoaderHide();
+                        alert(xhr.responseText);
+                    }
+                });
+            }
+        }
+        catch (e) {
+
+            LoaderHide();
+            alert(e.message);
+            //  return false;
+        }
+    }
+
+    function BindGridData(data) {
+        try {
+            var gridData = "";
+            $("#tbodyBooking").html("");
+            for (var i = 0; i < data.length; i++) {
+                gridData = gridData + "<tr style='cursor:pointer;' onclick='BookingGetByBookingId(" + NullHandle(data[i].EstimateId) + ")'>";
+                gridData = gridData + "<td class='td-actions'>";
+                gridData = gridData + "<button type='button' rel='tooltip' class='btn btn-info' data-original-title='' title='Select Booking No : " + data[i].EstimateId + "' onclick = 'BookingGetByBookingId(" + NullHandle(data[i].EstimateId) + ")'><i class='material-icons'>trending_up</i></button>";
+                gridData = gridData + "</td>";
+                gridData = gridData + "<td>" + NullHandle(data[i].Department) + "</td>";
+                gridData = gridData + "<td>" + NullHandle(data[i].ZZDocDate) + "</td>";
+                gridData = gridData + "<td>" + NullHandle(data[i].ZZDocNo) + "</td>";
+                gridData = gridData + "<td>" + NullHandle(data[i].ZZStatus) + "</td>";
+                gridData = gridData + "<td>" + NullHandle(data[i].ProjectManager) + "</td>";
+                gridData = gridData + "</tr>";
+            }
+            $("#tbodyBooking").html(gridData);
+        }
+        catch (e) {
+
+        }
+    }
+
+    function BookingGetByBookingId(EstimateId) {
+        debugger;
+         var dddd = "@Url.Action("EstimateViewGetByEstimateId", "Home", new { id = UrlParameter.Optional })" + "?" + "dfs,ktgbdas,hdffg.khdfrhdduihdgtymdmpxjidgndlxcmhdgmdpldjn,dlkchgj,d,.dkjdhhdk,dmdhhnd,dkmdndhnndmdmjmd" + "&" + "intEstimateId=" + EstimateId;
+        location.href = "@Url.Action("EstimateViewGetByEstimateId", "Home", new { id = UrlParameter.Optional })" + "?" + "dfs,ktgbdas,hdffg.khdfrhdduihdgtymdmpxjidgndlxcmhdgmdpldjn,dlkchgj,d,.dkjdhhdk,dmdhhnd,dkmdndhnndmdmjmd" + "&" + "intEstimateId=" + EstimateId;
+        //window.location.href = '@Url.Action("EstimateViewGetByEstimateId", "Home")?intBookingId='+BookingId+'';
+    }
+
+    $(document).ready(function () {  
+        LoadBookingInfo();
+        $("#DepartmentId").focus();
+    });
+
+</script>

@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/WCFPGMSFront" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/WCFPGMSFront" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:1410/Service1.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" />
+  <xs:complexType name="returndbmlWorkshopBookingDetailViewFront">
+    <xs:sequence>
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlGeneral" nillable="true" type="q1:dbmlGeneral" />
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlStatus" nillable="true" type="q2:dbmlStatus" />
+      <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlWorkshopBookingDetailViewFront" nillable="true" type="q3:ArrayOfdbmlWorkshopBookingDetailViewFront" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="returndbmlWorkshopBookingDetailViewFront" nillable="true" type="tns:returndbmlWorkshopBookingDetailViewFront" />
+  <xs:complexType name="returndbmlBookingDetailAddOnServicesViewFront">
+    <xs:sequence>
+      <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlBookingDetailAddOnServicesViewFront" nillable="true" type="q4:ArrayOfdbmlBookingDetailAddOnServicesViewFront" />
+      <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlGeneral" nillable="true" type="q5:dbmlGeneral" />
+      <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlStatus" nillable="true" type="q6:dbmlStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="returndbmlBookingDetailAddOnServicesViewFront" nillable="true" type="tns:returndbmlBookingDetailAddOnServicesViewFront" />
+  <xs:complexType name="returndbmlLabBookingDetailViewFront">
+    <xs:sequence>
+      <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlLabBookingDetailViewFront" nillable="true" type="q7:ArrayOfdbmlLabBookingDetailViewFront" />
+      <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlLabServiceDoc" nillable="true" type="q8:ArrayOfdbmlLabServiceDoc" />
+      <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlStatus" nillable="true" type="q9:dbmlStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="returndbmlLabBookingDetailViewFront" nillable="true" type="tns:returndbmlLabBookingDetailViewFront" />
+  <xs:complexType name="returndbmlLablinkVorC">
+    <xs:sequence>
+      <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlLablinkVorC" nillable="true" type="q10:ArrayOfdbmlLablinkVorC" />
+      <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlStatus" nillable="true" type="q11:dbmlStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="returndbmlLablinkVorC" nillable="true" type="tns:returndbmlLablinkVorC" />
+  <xs:complexType name="returndbmlPODetailCheck">
+    <xs:sequence>
+      <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlPODetailUpload" nillable="true" type="q12:ArrayOfdbmlPODetailUpload" />
+      <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlStatus" nillable="true" type="q13:dbmlStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="returndbmlPODetailCheck" nillable="true" type="tns:returndbmlPODetailCheck" />
+  <xs:complexType name="returndbmlTrackGroupMasterWithImageView">
+    <xs:sequence>
+      <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlStatus" nillable="true" type="q14:dbmlStatus" />
+      <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlTrackGroupMasterWithImageView" nillable="true" type="q15:ArrayOfdbmlTrackGroupMasterWithImageView" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="returndbmlTrackGroupMasterWithImageView" nillable="true" type="tns:returndbmlTrackGroupMasterWithImageView" />
+  <xs:complexType name="returndbmlServiceDetailView">
+    <xs:sequence>
+      <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlServiceDocumentView" nillable="true" type="q16:ArrayOfdbmlServiceDocumentView" />
+      <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlServiceImageView" nillable="true" type="q17:ArrayOfdbmlServiceImageView" />
+      <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlServicesViewForFront" nillable="true" type="q18:ArrayOfdbmlServicesViewForFront" />
+      <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlStatus" nillable="true" type="q19:dbmlStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="returndbmlServiceDetailView" nillable="true" type="tns:returndbmlServiceDetailView" />
+  <xs:complexType name="returndbmlServiceImageDescriptionView">
+    <xs:sequence>
+      <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlServiceImageDescriptionView" nillable="true" type="q20:ArrayOfdbmlServiceImageDescriptionView" />
+      <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlStatus" nillable="true" type="q21:dbmlStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="returndbmlServiceImageDescriptionView" nillable="true" type="tns:returndbmlServiceImageDescriptionView" />
+  <xs:complexType name="returndbmlServiceImageDetailView">
+    <xs:sequence>
+      <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlServiceDocumentDetailView" nillable="true" type="q22:ArrayOfdbmlServiceDocumentDetailView" />
+      <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlServiceImageDetailView" nillable="true" type="q23:ArrayOfdbmlServiceImageDetailView" />
+      <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlStatus" nillable="true" type="q24:dbmlStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="returndbmlServiceImageDetailView" nillable="true" type="tns:returndbmlServiceImageDetailView" />
+  <xs:complexType name="returndbmlNewsHotelsTrainingVideoView">
+    <xs:sequence>
+      <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlNewsHotelsTrainingVideoView" nillable="true" type="q25:ArrayOfdbmlNewsHotelsTrainingVideoView" />
+      <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlStatus" nillable="true" type="q26:dbmlStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="returndbmlNewsHotelsTrainingVideoView" nillable="true" type="tns:returndbmlNewsHotelsTrainingVideoView" />
+  <xs:complexType name="returndbmlContact">
+    <xs:sequence>
+      <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlContact" nillable="true" type="q27:ArrayOfdbmlContact" />
+      <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlStatus" nillable="true" type="q28:dbmlStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="returndbmlContact" nillable="true" type="tns:returndbmlContact" />
+  <xs:complexType name="returndbmlStatus">
+    <xs:sequence>
+      <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlStatus" nillable="true" type="q29:dbmlStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="returndbmlStatus" nillable="true" type="tns:returndbmlStatus" />
+  <xs:complexType name="returndbmlEstimate">
+    <xs:sequence>
+      <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlEstimateDetailViewList" nillable="true" type="q30:ArrayOfdbmlEstimateDetailView" />
+      <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlEstimateList" nillable="true" type="q31:ArrayOfdbmlEstimateView" />
+      <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlStatus" nillable="true" type="q32:dbmlStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="returndbmlEstimate" nillable="true" type="tns:returndbmlEstimate" />
+  <xs:complexType name="returndbmlEstimateSearchViewFront">
+    <xs:sequence>
+      <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlEstimateSearchViewFrontList" nillable="true" type="q33:ArrayOfdbmlEstimateSearchViewFront" />
+      <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlStatus" nillable="true" type="q34:dbmlStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="returndbmlEstimateSearchViewFront" nillable="true" type="tns:returndbmlEstimateSearchViewFront" />
+  <xs:complexType name="returndbmlBooking">
+    <xs:sequence>
+      <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlBookingList" nillable="true" type="q35:ArrayOfdbmlBookingView" />
+      <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlBookingSupportDocument" nillable="true" type="q36:ArrayOfdbmlBookingSupportDocument" />
+      <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlStatus" nillable="true" type="q37:dbmlStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="returndbmlBooking" nillable="true" type="tns:returndbmlBooking" />
+  <xs:complexType name="returndbmlDailyServiceCount">
+    <xs:sequence>
+      <xs:element xmlns:q38="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlDailyServiceCountList" nillable="true" type="q38:ArrayOfdbmlDailyServiceCount" />
+      <xs:element xmlns:q39="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlStatus" nillable="true" type="q39:dbmlStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="returndbmlDailyServiceCount" nillable="true" type="tns:returndbmlDailyServiceCount" />
+  <xs:complexType name="returndbmlVehicleLogs">
+    <xs:sequence>
+      <xs:element xmlns:q40="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlStatus" nillable="true" type="q40:dbmlStatus" />
+      <xs:element xmlns:q41="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlVehicleLogsList" nillable="true" type="q41:ArrayOfdbmlVehicleLogs" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="returndbmlVehicleLogs" nillable="true" type="tns:returndbmlVehicleLogs" />
+  <xs:complexType name="returndbmlBookinglookupforCouponPrint">
+    <xs:sequence>
+      <xs:element xmlns:q42="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlBookinglookupforCouponPrint" nillable="true" type="q42:ArrayOfdbmlBookinglookupforCouponPrint" />
+      <xs:element xmlns:q43="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlStatus" nillable="true" type="q43:dbmlStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="returndbmlBookinglookupforCouponPrint" nillable="true" type="tns:returndbmlBookinglookupforCouponPrint" />
+  <xs:complexType name="returndbmlBookedCouponDetail">
+    <xs:sequence>
+      <xs:element xmlns:q44="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlBookedCouponDetail" nillable="true" type="q44:ArrayOfdbmlBookedCouponDetail" />
+      <xs:element xmlns:q45="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlStatus" nillable="true" type="q45:dbmlStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="returndbmlBookedCouponDetail" nillable="true" type="tns:returndbmlBookedCouponDetail" />
+  <xs:complexType name="returndbmlBookingCouponAddLess">
+    <xs:sequence>
+      <xs:element xmlns:q46="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlBookingCouponAddLess" nillable="true" type="q46:ArrayOfdbmlBookingCouponAddLess" />
+      <xs:element xmlns:q47="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlStatus" nillable="true" type="q47:dbmlStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="returndbmlBookingCouponAddLess" nillable="true" type="tns:returndbmlBookingCouponAddLess" />
+  <xs:complexType name="returndbmlLabServiceDoc">
+    <xs:sequence>
+      <xs:element xmlns:q48="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlLabServiceDocs" nillable="true" type="q48:ArrayOfdbmlLabServiceView" />
+      <xs:element xmlns:q49="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlStatus" nillable="true" type="q49:dbmlStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="returndbmlLabServiceDoc" nillable="true" type="tns:returndbmlLabServiceDoc" />
+  <xs:complexType name="returndbmlUser">
+    <xs:sequence>
+      <xs:element xmlns:q50="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlStatus" nillable="true" type="q50:dbmlStatus" />
+      <xs:element xmlns:q51="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlUserView" nillable="true" type="q51:ArrayOfdbmlUserView" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="returndbmlUser" nillable="true" type="tns:returndbmlUser" />
+  <xs:complexType name="returndbmlDashBoardWorkFlowViewFront">
+    <xs:sequence>
+      <xs:element xmlns:q52="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlDashBoardWorkFlowViewFront" nillable="true" type="q52:ArrayOfdbmlDashBoardWorkFlowViewFront" />
+      <xs:element xmlns:q53="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlStatus" nillable="true" type="q53:dbmlStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="returndbmlDashBoardWorkFlowViewFront" nillable="true" type="tns:returndbmlDashBoardWorkFlowViewFront" />
+  <xs:complexType name="returndbmlProperty">
+    <xs:sequence>
+      <xs:element xmlns:q54="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlProperty" nillable="true" type="q54:ArrayOfdbmlProperty" />
+      <xs:element xmlns:q55="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlStatus" nillable="true" type="q55:dbmlStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="returndbmlProperty" nillable="true" type="tns:returndbmlProperty" />
+  <xs:complexType name="returndbmlOptionList">
+    <xs:sequence>
+      <xs:element xmlns:q56="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlOptionList" nillable="true" type="q56:ArrayOfdbmlOptionList" />
+      <xs:element xmlns:q57="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlStatus" nillable="true" type="q57:dbmlStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="returndbmlOptionList" nillable="true" type="tns:returndbmlOptionList" />
+  <xs:complexType name="returndbmlCompanyView">
+    <xs:sequence>
+      <xs:element xmlns:q58="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlCompanyView" nillable="true" type="q58:ArrayOfdbmlCompanyView" />
+      <xs:element xmlns:q59="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlStatus" nillable="true" type="q59:dbmlStatus" />
+      <xs:element xmlns:q60="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlUserView" nillable="true" type="q60:ArrayOfdbmlUserView" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="returndbmlCompanyView" nillable="true" type="tns:returndbmlCompanyView" />
+  <xs:complexType name="returndbmlCompanyDepartment">
+    <xs:sequence>
+      <xs:element xmlns:q61="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlCompanyDepartment" nillable="true" type="q61:ArrayOfdbmlCompanyDepartment" />
+      <xs:element xmlns:q62="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlStatus" nillable="true" type="q62:dbmlStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="returndbmlCompanyDepartment" nillable="true" type="tns:returndbmlCompanyDepartment" />
+  <xs:complexType name="returndbmlState">
+    <xs:sequence>
+      <xs:element xmlns:q63="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlState" nillable="true" type="q63:ArrayOfdbmlState" />
+      <xs:element xmlns:q64="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlStatus" nillable="true" type="q64:dbmlStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="returndbmlState" nillable="true" type="tns:returndbmlState" />
+  <xs:complexType name="returndbmlCountry">
+    <xs:sequence>
+      <xs:element xmlns:q65="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlCountry" nillable="true" type="q65:ArrayOfdbmlCountry" />
+      <xs:element xmlns:q66="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlStatus" nillable="true" type="q66:dbmlStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="returndbmlCountry" nillable="true" type="tns:returndbmlCountry" />
+  <xs:complexType name="returndbmlDistrict">
+    <xs:sequence>
+      <xs:element xmlns:q67="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlDistrict" nillable="true" type="q67:ArrayOfdbmlDistrict" />
+      <xs:element xmlns:q68="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlStatus" nillable="true" type="q68:dbmlStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="returndbmlDistrict" nillable="true" type="tns:returndbmlDistrict" />
+  <xs:complexType name="returndbmlCustomerMasterPhoto">
+    <xs:sequence>
+      <xs:element xmlns:q69="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlCustomerMasterPhoto" nillable="true" type="q69:ArrayOfdbmlCustomerMasterPhoto" />
+      <xs:element xmlns:q70="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlStatus" nillable="true" type="q70:dbmlStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="returndbmlCustomerMasterPhoto" nillable="true" type="tns:returndbmlCustomerMasterPhoto" />
+  <xs:complexType name="returndbmlBookingSearchView">
+    <xs:sequence>
+      <xs:element xmlns:q71="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlBookingSearchView" nillable="true" type="q71:ArrayOfdbmlBookingSearchView" />
+      <xs:element xmlns:q72="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlStatus" nillable="true" type="q72:dbmlStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="returndbmlBookingSearchView" nillable="true" type="tns:returndbmlBookingSearchView" />
+  <xs:complexType name="returnBookingQuotationPIDdetailView">
+    <xs:sequence>
+      <xs:element xmlns:q73="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlBookingQuotationPIDdetailView" nillable="true" type="q73:ArrayOfdbmlBookingQuotationPIDetailView" />
+      <xs:element xmlns:q74="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlStatus" nillable="true" type="q74:dbmlStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="returnBookingQuotationPIDdetailView" nillable="true" type="tns:returnBookingQuotationPIDdetailView" />
+  <xs:complexType name="returndbmlRFQBookingDetail">
+    <xs:sequence>
+      <xs:element xmlns:q75="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlBookingDetailAddOnServicesViewFront" nillable="true" type="q75:ArrayOfdbmlBookingDetailAddOnServicesViewFront" />
+      <xs:element xmlns:q76="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlBookingView" nillable="true" type="q76:ArrayOfdbmlBookingView" />
+      <xs:element xmlns:q77="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlLabBookingDetailViewFront" nillable="true" type="q77:ArrayOfdbmlLabBookingDetailViewFront" />
+      <xs:element xmlns:q78="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlListOfVehicleComponent" nillable="true" type="q78:ArrayOfdbmlListOfVehicleComponent" />
+      <xs:element xmlns:q79="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlStatus" nillable="true" type="q79:dbmlStatus" />
+      <xs:element xmlns:q80="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlTrackBookingDetail" nillable="true" type="q80:ArrayOfdbmlTrackBookingDetail" />
+      <xs:element xmlns:q81="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlTrackBookingTimeDetail" nillable="true" type="q81:ArrayOfdbmlTrackBookingTimeDetail" />
+      <xs:element xmlns:q82="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlTrackBookingTimeSummary" nillable="true" type="q82:ArrayOfdbmlTrackBookingTimeSummary" />
+      <xs:element xmlns:q83="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlWorkshopBookingDetailViewFront" nillable="true" type="q83:ArrayOfdbmlWorkshopBookingDetailViewFront" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="returndbmlRFQBookingDetail" nillable="true" type="tns:returndbmlRFQBookingDetail" />
+  <xs:complexType name="returndbmlServiceDateViewFront">
+    <xs:sequence>
+      <xs:element xmlns:q84="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlServiceDateViewFront" nillable="true" type="q84:ArrayOfdbmlServiceDateViewFront" />
+      <xs:element xmlns:q85="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlStatus" nillable="true" type="q85:dbmlStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="returndbmlServiceDateViewFront" nillable="true" type="tns:returndbmlServiceDateViewFront" />
+  <xs:complexType name="returndbmlDashBoardDocumentViewFront">
+    <xs:sequence>
+      <xs:element xmlns:q86="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlDashBoardDocumentViewFront" nillable="true" type="q86:ArrayOfdbmlDashBoardDocumentViewFront" />
+      <xs:element xmlns:q87="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlStatus" nillable="true" type="q87:dbmlStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="returndbmlDashBoardDocumentViewFront" nillable="true" type="tns:returndbmlDashBoardDocumentViewFront" />
+  <xs:complexType name="returndbmlListOfVehicleComponent">
+    <xs:sequence>
+      <xs:element xmlns:q88="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlListOfVehicleComponent" nillable="true" type="q88:ArrayOfdbmlListOfVehicleComponent" />
+      <xs:element xmlns:q89="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlStatus" nillable="true" type="q89:dbmlStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="returndbmlListOfVehicleComponent" nillable="true" type="tns:returndbmlListOfVehicleComponent" />
+  <xs:complexType name="returndbmlServicesView">
+    <xs:sequence>
+      <xs:element xmlns:q90="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlServicesView" nillable="true" type="q90:ArrayOfdbmlServicesView" />
+      <xs:element xmlns:q91="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlStatus" nillable="true" type="q91:dbmlStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="returndbmlServicesView" nillable="true" type="tns:returndbmlServicesView" />
+  <xs:complexType name="returndbmlTrackBookingDetail">
+    <xs:sequence>
+      <xs:element xmlns:q92="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlStatus" nillable="true" type="q92:dbmlStatus" />
+      <xs:element xmlns:q93="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlTrackBookingDetail" nillable="true" type="q93:ArrayOfdbmlTrackBookingDetail" />
+      <xs:element xmlns:q94="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlTrackBookingTimeDetail" nillable="true" type="q94:ArrayOfdbmlTrackBookingTimeDetail" />
+      <xs:element xmlns:q95="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlTrackBookingTimeSummary" nillable="true" type="q95:ArrayOfdbmlTrackBookingTimeSummary" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="returndbmlTrackBookingDetail" nillable="true" type="tns:returndbmlTrackBookingDetail" />
+  <xs:complexType name="returndbmlBookingStatusTimeSlotView">
+    <xs:sequence>
+      <xs:element xmlns:q96="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlBookingStatusTimeSlotView" nillable="true" type="q96:ArrayOfdbmlBookingStatusTimeSlotView" />
+      <xs:element xmlns:q97="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlStatus" nillable="true" type="q97:dbmlStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="returndbmlBookingStatusTimeSlotView" nillable="true" type="tns:returndbmlBookingStatusTimeSlotView" />
+  <xs:complexType name="returndbmlWorkFlowView">
+    <xs:sequence>
+      <xs:element xmlns:q98="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlStatus" nillable="true" type="q98:dbmlStatus" />
+      <xs:element xmlns:q99="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlWorkFlowView" nillable="true" type="q99:ArrayOfdbmlWorkFlowView" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="returndbmlWorkFlowView" nillable="true" type="tns:returndbmlWorkFlowView" />
+  <xs:complexType name="returndbmlBookingSubmitEmailNotification">
+    <xs:sequence>
+      <xs:element xmlns:q100="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlStatus" nillable="true" type="q100:dbmlStatus" />
+      <xs:element xmlns:q101="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlWorkFlowView" nillable="true" type="q101:ArrayOfdbmlBookingSubmitEmailNotification" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="returndbmlBookingSubmitEmailNotification" nillable="true" type="tns:returndbmlBookingSubmitEmailNotification" />
+  <xs:complexType name="returndbmlWorkFlowActivityTrackView">
+    <xs:sequence>
+      <xs:element xmlns:q102="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlStatus" nillable="true" type="q102:dbmlStatus" />
+      <xs:element xmlns:q103="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" minOccurs="0" name="objdbmlWorkFlowActivityTrackView" nillable="true" type="q103:ArrayOfdbmlWorkFlowActivityTrackView" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="returndbmlWorkFlowActivityTrackView" nillable="true" type="tns:returndbmlWorkFlowActivityTrackView" />
+</xs:schema>

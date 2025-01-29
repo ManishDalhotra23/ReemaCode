@@ -1,0 +1,740 @@
+﻿@model PGMSFront.Models.CommonModel
+@{
+    if (Convert.ToString(Session["SessBookingType"]).ToUpper() == "TRACK")
+    {
+        ViewBag.Title = "Basic Estimate - TRACK";
+        Layout = "~/Views/Shared/_LayoutQuickEstimate.cshtml";
+    }
+    else
+    {
+        ViewBag.Title = "Basic Estimate - LAB";
+        Layout = "~/Views/Shared/_LayoutQuickEstimateLab.cshtml";
+    }
+}
+<style>
+    .card {
+        margin-bottom: 0px !important;
+        margin-top: 25px !important;
+    }
+
+    .bootstrap-select {
+        margin-top: 16px !important;
+    }
+
+    .main-panel > .content {
+        margin-top: 0 !important;
+    }
+
+    .card .card-body {
+        padding: 0px 5px 5px 5px !important;
+    }
+</style>
+
+
+<div class="content">
+    <div class="container-fluid">
+        @Html.Partial("~/Views/Home/QuickEstimateHeader.cshtml")
+
+        @using (Html.BeginForm(new { @class = "form-horizontal" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="row">
+                <div class="card">
+                    <div class="card-body" style="padding-bottom: 0px;">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group" style="height: 70px;">
+                                    <label for="exampleEmail" >Department *</label>
+                                    <select class="form-control" id="DepartmentId" style="margin-top: 34px;">
+                                        @*<option>-Select-</option>*@
+                                        @foreach (var itm in ViewBag.CompanyDepartment)
+                                        {
+                                            <option value='@itm.Value'>@itm.Text</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="exampleEmail" class="">Project *</label>
+                                    <input type="text" class="form-control" id="Project">
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group" style="height: 70px;">
+                                    <label for="exampleEmail" >Created By</label>
+                                    <input type="text" class="form-control" disabled="disabled" id="CreatedBy" value="@Session["UserName"]">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="card">
+                    <div class="card-body" style="padding-bottom: 0px;">
+                        <div class="row">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-4"></div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="checkbox">
+                                        <label><input id="chkFillCP" type="checkbox" onchange="FillCPDetail()" />&nbsp;Copy Project Manager's Details to Contact Person</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="exampleEmail" >Project Manager *</label>
+                                    <input type="text" class="form-control" id="ProjectManager">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleEmail" >Project Manager Email *</label>
+                                    <input type="text" class="form-control" id="PMEmailId">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleEmail" >Project Manager Mobile No. *</label>
+                                    <input type="text" class="form-control" maxlength="10" id="PMMobileNo">
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="exampleEmail" >Contact Person *</label>
+                                    <input type="text" class="form-control" id="ContactPerson" onchange="CheckCopyCPDetails()" value="@Session["UserName"]">
+                                </div>
+                                <div class="form-group" style="margin-top: 8px;">
+                                    <label for="exampleEmail" >Contact Person Email *</label>
+                                    <input type="text" class="form-control" id="EmailId" onchange="CheckCopyCPDetails()" value="@Session["EmailId"]">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleEmail" >Contact Person Mobile No. *</label>
+                                    <input type="text" class="form-control" maxlength="10" id="MobileNo" onchange="CheckCopyCPDetails()" value="@Session["MobileNo"]">
+                                </div>
+                            </div>
+                            <div class="col-md-2"></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label for="exampleEmail" >Remark </label>
+                                    <textarea class="form-control" id="Remark" style="height: 50px !important;"></textarea>
+                                </div>
+                            </div>
+                            @if (ViewBag.WorkflowRemark != null && ViewBag.WorkflowRemark != "")
+                            {
+                                <label>Comment by Natrax : ViewBag.WorkflowRemark.trim()</label>
+                            }
+                            <div class="col-md-2"></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group pull-right">
+                                    @if (Model.StatusPropId == 40 && Model.WorkFlowId == 216 || Model.WorkFlowId == 219)
+                                    {
+                                        <button type="button" class="btn btn-fill btn-rose btn-sm " id="btnSubmit" onclick="return BookingSave()">Save</button>
+                                    }
+                                    <input type="submit" id="btnNext" name="btnPrevNext" value="Next" style="display:none" class="btn btn-fill btn-rose btn-sm" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @Html.HiddenFor(m => m.UserId, new { id = "UserId", style = "width:0px;" })
+            @Html.HiddenFor(m => m.UserTypePropId, new { id = "UserTypePropId", style = "width:0px;" })
+            @Html.HiddenFor(m => m.ZZCompanyId, new { id = "ZZCompanyId", style = "width:0px;" })
+            @Html.HiddenFor(m => m.WorkFlowId, new { id = "WorkFlowId", style = "width:0px;" })
+            @Html.HiddenFor(m => m.StatusPropId, new { id = "StatusPropId", style = "width:0px;" })
+            @Html.HiddenFor(m => m.StateId, new { id = "StateId", style = "width:0px;" })
+            @Html.HiddenFor(m => m.BPId, new { id = "BPId", style = "width:0px;" })
+            @Html.HiddenFor(m => m.DocId, new { id = "DocId", style = "width:0px;" })
+            @Html.HiddenFor(m => m.ReportURL, new { id = "ReportURL", style = "width:0px;" })
+            @Html.HiddenFor(m => m.POURL, new { id = "POURL", style = "width:0px;" })
+            @Html.HiddenFor(m => m.RFQId, new { id = "RFQId", style = "width:0px;" })
+            @Html.HiddenFor(m => m.RFQBPId, new { id = "RFQBPId", style = "width:0px;" })
+        }
+    </div>
+</div>
+<div class="modal fade" id="UpdateServiceDateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Update Service Dates</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="material-icons">clear</i>
+                </button>
+            </div>
+            <div class="modal-body" style="text-align:center">
+                <div class="row">
+                    <div class="table-responsive">
+                        <table style="width:100%">
+                            <tr>
+                                <td style="width:20%"></td>
+                                <td>
+                                    <table border="1">
+                                        <thead class=" text-primary">
+                                            <tr>
+                                                <th style="text-align:center" width="40%">Date</th>
+                                                <th style="text-align:center" width="60%">Service Date</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbodyDates"></tbody>
+                                    </table>
+                                </td>
+                                <td style="width:20%"> </td>
+                            </tr>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="updServicedates" class="btn btn-fill btn-rose btn-sm" style="margin-top: 5px;" onclick="UpdateServiceDates()">Save</button>
+                <button type="button" class="btn btn-fill btn-danger btn-sm" data-dismiss="modal" style="margin-left: 5px; margin-top: 5px;">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+    var BookingList = '';
+
+    function ToDate(strdate) {
+        var parts = strdate.split("-");
+        if (parts.length < 3) {
+            parts = strdate.split("/");
+        }
+        return new Date(parts[2], parts[1] - 1, parts[0])
+    }
+
+    function ToDateDDMMYY(varDate) {
+        var dd = (varDate.getDate() <= 9 ? "0" + varDate.getDate() : varDate.getDate());
+        var mm = (varDate.getMonth() + 1 <= 9 ? "0" + (varDate.getMonth() + 1) : (varDate.getMonth() + 1));
+        var y = varDate.getFullYear();
+        var someFormattedDate = dd + '-' + mm + '-' + y;
+        return someFormattedDate;
+    }
+
+    ///////////////////////////// Set Remaining Dates  //////////////////////////////////////////////////////
+    function SetRemainingDates(varDate) {
+        try {
+            var varDateFirst = $(varDate).val().trim()
+
+            $('#tbodyDates').find('tr').each(function (i, el) {
+                var varDay = 0;
+
+                $(this).find("label[id='lblBookingDay']").each(function () {
+                    varDay = $(this).text();
+                });
+
+                $(this).find("input[type='text'][id='NewDate']").each(function () {
+
+                    if (i > 0) {
+                        var varNewDate = ToDate(varDateFirst);
+                        varNewDate.setDate(varNewDate.getDate() + parseInt(varDay) - 1);
+
+                        $(this).val(ToDateDDMMYY(varNewDate));
+                    }
+
+                });
+
+            });
+
+        }
+        catch (e) {
+            alert(e.message);
+            return false;
+        }
+    }
+
+    ///////////////////////////// Open Service dates Dialog /////////////////////////////////
+    function OpenServiceDatesDialog() {
+
+        try {
+            LoaderShow();
+            var data = {};
+            var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+            $.ajax({
+                url: '@Url.Action("LoadServiceDates", "Home")',
+                type: 'POST',
+                dataType: 'json',
+                async: true,
+                data: dataWithAntiforgeryToken,
+                success: function (data) {
+                    LoaderHide();
+                    if (data.StatusId != "99" && data.StatusId != "-99") {
+                       ///data.ServiceDateList;
+                        $("#UpdateServiceDateModal").modal("show");
+                        $("#tbodyDates").html("");
+
+                        var gridData = "";
+                        var varonBlur = "onblur='SetRemainingDates(this)'";
+
+                        for (var i = 0; i < data.ServiceDateList.length; i++) {
+                            gridData = gridData + "<tr >";
+                            if (i > 0) {
+                                varonBlur = "disabled='disabled";
+                            }
+
+                            gridData = gridData + "<td style='text-align: center'> <label style='color:black'  id='lblBookingDay'>" + NullHandle(data.ServiceDateList[i].ServiceDate) + "</label></td>";
+                            gridData = gridData + "<td style='text-align: center'><input style='text-align: center;color:black' type='text'  class='form-control datetimepicker' value='" + NullHandle(data.ServiceDateList[i].NewDate) + "' id='NewDate'/></td>";
+                            gridData = gridData + "<td style='display:none'><label  id='lblServiceDate'>" + NullHandle(data.ServiceDateList[i].ServiceDate) + "</label></td>";
+                            gridData = gridData + "<td style='display:none'><label  id='lblBookingId'>" + NullHandle(data.ServiceDateList[i].BookingId) + "</label></td>";
+
+                            gridData = gridData + "</tr>";
+                        }
+
+                        $("#tbodyDates").html(gridData);
+
+                        $('#tbodyDates').find('tr').each(function (i, el) {
+                            $(this).find("input[type='text'][id='NewDate']").each(function () {
+                               $('.datetimepicker').datetimepicker({ theme: 'light', timepicker: false, format: 'd-m-Y', scrollMonth: false, scrollInput: false });
+                                if (i == 0) {
+                                    $(this).focus();
+                                }
+                            });
+                        });
+
+
+                    }
+                    else {
+                        alert(data.Status);
+                    }
+                },
+                error: function (xhr) {
+
+                    LoaderHide();
+                    alert(xhr.responseText);
+                }
+            });
+        }
+        catch (e) {
+
+            LoaderHide();
+            alert(e.message);
+            //  return false;
+        }
+    }
+
+    ///////////////////////////// Update Service Dates  //////////////////////////////////////////////////////
+    function UpdateServiceDates() {
+        try {
+            debugger;
+            var model = [];
+            var indx = 0;
+            var strMSG = "";
+            var varEqualDates = 0;
+            $('#tbodyDates').find('tr').each(function (i, el) {
+                ServiceDates = {};
+
+                //$(this).find("label[id='lblBookingDay']").each(function () {
+                //    ServiceDates.BookingDay = $(this).text().trim();
+                //});
+
+                $(this).find("input[type='text'][id='NewDate']").each(function () {
+                    ServiceDates.NewDate = $(this).val().trim();
+                    if ($(this).val().trim() == "") {
+                        strMSG = strMSG + 'Select Date \n</br>';
+                    }
+                });
+
+                $(this).find("label[id='lblServiceDate']").each(function () {
+                    ServiceDates.ServiceDate = $(this).text().trim();
+                });
+
+                $(this).find("label[id='lblBookingId']").each(function () {
+                    ServiceDates.BookingId = $(this).text().trim();
+                });
+
+                var varModelTemp = '';
+                if (model.length > 0) {
+
+                    varModelTemp = jQuery.grep(model, function (obj) {
+                        return ToDate(obj.NewDate).getTime() == ToDate(ServiceDates.NewDate).getTime();
+                    });
+
+                    if (varModelTemp.length > 0) {
+                        varEqualDates = 1;
+                    }
+                    }
+
+
+                if (strMSG == '' && varEqualDates==0) {
+                    model[indx] = new Object(ServiceDates);
+                    indx++;
+                }
+
+            });
+
+            if (strMSG != '') {
+                alert("Please enter data for Mandatory fields  \n</br>" + strMSG);
+                return false;
+            }
+            else if (varEqualDates == 1) {
+                alert("Number of Testing days provided at the time of RFQ is not same as Total Testing Dates selected now. This will affect the Billing Calculation. Either request a fresh quotation or set dates as per the number of testing days mentioned during RFQ");
+                return false;
+
+            }
+            else {
+
+                $("#updServicedates").hide();
+                LoaderShow();
+                //'{model: ' + JSON.stringify(model) + '}'
+                var data = { 'model': model};
+                var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+                $.ajax({
+                    url: '@Url.Action("UpdateServiceDates", "Home")',
+                    type: 'POST',
+                    dataType: 'json',
+                    async: true,
+                    data: dataWithAntiforgeryToken,
+                    //contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+
+                        LoaderHide();
+                        if (data.StatusId != "99" && data.StatusId != "-99") {
+
+                        }
+                        $("#updServicedates").show();
+                        alert(data.Status);
+                    },
+                    error: function (xhr) {
+
+                        $("#updServicedates").show();
+                        LoaderHide();
+                        alert(xhr.responseText);
+                    }
+                });
+            }
+        }
+        catch (e) {
+
+            LoaderHide();
+            $("#updServicedates").show();
+            alert(e.message);
+            return false;
+        }
+    }
+
+    ///////////////////////////// Load Basic Info  //////////////////////////////////////////////////////
+    function LoadBasicInfo() {
+        try {
+            LoaderShow();
+            var data = {};
+            var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+            $.ajax({
+                url: '@Url.Action("LoadQuickBasicInfo","Home")',
+                type: 'POST',
+                dataType: 'json',
+                async: true,
+                data: dataWithAntiforgeryToken,
+                success: function (data) {
+                    LoaderHide();
+                    if (data.StatusId != "99" && data.StatusId != "-99") {
+                        debugger
+                        if (data.BookingList.length > 0) {
+                            BookingList = data.BookingList;
+                            BindBasicData(BookingList[0]);
+                            $("#btnNext").show();
+                        } else {
+                            $("#btnNext").hide();
+                        }
+                    }
+                    else {
+                        //alert(data.Status);
+                    }
+                },
+                error: function (xhr) {
+
+                    LoaderHide();
+                    alert(xhr.responseText);
+                }
+            });
+        }
+        catch (e) {
+
+            LoaderHide();
+            alert(e.message);
+            //  return false;
+        }
+    }
+
+    //////////////////////////////// FillCPDetail ///////////////////////////////////////////////////
+    function FillCPDetail() {
+        try {
+            if ($("#chkFillCP").prop("checked") == true) {
+                $("#ContactPerson").val($("#ProjectManager").val().trim());
+                $("#EmailId").val($("#PMEmailId").val().trim());
+                $("#MobileNo").val($("#PMMobileNo").val().trim());
+            } else {
+                $("#ContactPerson").val("");
+                $("#EmailId").val("");
+                $("#MobileNo").val("");
+            }
+        }
+        catch (e) {
+
+            return false;
+        }
+    }
+
+    function CheckCopyCPDetails() {
+        try {
+            if ($("#ContactPerson").val().trim() == $("#ProjectManager").val().trim()
+                && $("#EmailId").val().trim() == $("#PMEmailId").val().trim()
+                && $("#MobileNo").val().trim() == $("#PMMobileNo").val().trim()) {
+                $("#chkFillCP").prop("checked", true);
+            }
+            else {
+                $("#chkFillCP").prop("checked", false);
+            }
+        }
+        catch (e) {
+
+            return false;
+        }
+    }
+
+    ///////////////////////////// Booking Save  //////////////////////////////////////////////////////
+    function BookingSave() {
+        try {
+            var strMSG = '';
+            //if ($("#BookingDate").val().trim() == "") {
+            //    strMSG = strMSG + 'Booking Date \n</br>'
+            //}
+
+            if ($("#DepartmentId").val().trim() == "") {
+                strMSG = strMSG + 'Department Name \n</br>'
+            }
+            if ($("#Project").val().trim() == "") {
+                strMSG = strMSG + 'Project \n</br>'
+            }
+            if ($("#ProjectManager").val().trim() == "") {
+                strMSG = strMSG + 'Project Manager \n</br>'
+            }
+            if ($("#PMEmailId").val().trim() == "") {
+                strMSG = strMSG + 'Project Manager EMailId \n</br>'
+            }
+            if ($("#PMMobileNo").val().trim() == "") {
+                strMSG = strMSG + 'Project Manager Mobile No. \n</br>'
+            }
+            if ($("#ContactPerson").val().trim() == "") {
+                strMSG = strMSG + 'Contact Person \n</br>'
+            }
+            if ($("#EmailId").val().trim() == "") {
+                strMSG = strMSG + 'Contact Person EmailId \n</br>'
+            }
+            if ($("#MobileNo").val().trim() == "") {
+                strMSG = strMSG + 'Contact Person Mobile No. \n</br>'
+            }
+            if (strMSG != '') {
+                alert("Please enter data for Mandatory fields  \n</br>" + strMSG);
+                return false;
+            }
+            else {
+                debugger    
+                var model = {};
+                if (BookingList.length > 0) {
+                    model = BookingList[0];
+                }
+                else {
+                    model.EstimateId = -1;
+                    model.Prefix = "";
+                }
+
+               // model.ZZBookingDate = $("#BookingDate").val().trim();
+                model.DepartmentId = $("#DepartmentId").val().trim();
+                model.Project = $("#Project").val().trim();
+                model.ProjectManager = $("#ProjectManager").val().trim();
+                model.ContactPerson = $("#ContactPerson").val().trim();
+                model.PMEmailId = $("#PMEmailId").val().trim();
+                model.EmailId = $("#EmailId").val().trim();
+                model.PMMobileNo = $("#PMMobileNo").val().trim();
+                model.MobileNo = $("#MobileNo").val().trim();
+                model.Remark = $("#Remark").val().trim();
+                debugger
+                $("#btnSubmit").hide();
+                LoaderShow();
+                var data = {'model': model};
+                var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+                $.ajax({
+                    url: '@Url.Action("BasicEstimateInsertUpdate","Home")',
+                    type: 'POST',
+                    dataType: 'json',
+                    async: true,
+                    data: dataWithAntiforgeryToken,
+                    //contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        LoaderHide();
+                        debugger
+                        if (data.StatusId != "99" && data.StatusId != "-99") {
+                            if (data.EstimateList.length > 0) {
+                                BookingList = data.EstimateList;
+                                BindBasicData(BookingList[0]);
+                                $("#btnNext").show();
+                            } else {
+                                $("#btnNext").hide();
+                            }
+                        }
+                        $("#btnSubmit").show();
+                        alert(data.Status);
+                    },
+                    error: function (xhr) {
+
+                        $("#btnSubmit").show();
+                        LoaderHide();
+                        alert(xhr.responseText);
+                    }
+                });
+
+            }
+        }
+        catch (e) {
+
+            LoaderHide();
+            $("#btnSubmit").show();
+            alert(e.message);
+            return false;
+        }
+    }
+
+    ///////////////////////////// Bind Basic Info  //////////////////////////////////////////////////////
+    function BindBasicData(data) {
+        try {
+
+            //$("#BookingDate").text(NullHandle(data.ZZBookingDate));
+            //$("#BookingNo").text(NullHandle(data.BookingNo));
+            //$("#BookingType").text(NullHandle(data.ZZBookingType));
+            $("#DepartmentId").val(NullHandle(data.DepartmentId));
+            $("#Project").val(NullHandle(data.Project));
+            $("#ProjectManager").val(NullHandle(data.ProjectManager));
+            $("#ContactPerson").val(NullHandle(data.ContactPerson));
+            $("#PMEmailId").val(NullHandle(data.PMEmailId));
+            $("#EmailId").val(NullHandle(data.EmailId));
+            $("#PMMobileNo").val(NullHandle(data.PMMobileNo));
+            $("#MobileNo").val(NullHandle(data.MobileNo));
+            $("#Remark").val(NullHandle(data.Remark));
+            $("#CreatedBy").val(NullHandle(data.ZZCreatedBy));
+            $("#DocId").val(NullHandle(data.EstimateId));
+
+            if ($("#ContactPerson").val().trim() == $("#ProjectManager").val().trim()
+                && $("#EmailId").val().trim() == $("#PMEmailId").val().trim()
+                && $("#MobileNo").val().trim() == $("#PMMobileNo").val().trim()) {
+                $("#chkFillCP").prop("checked", true);
+            }
+            else {
+                $("#chkFillCP").prop("checked", false);
+            }
+        }
+        catch (e) {
+
+        }
+
+        SetButtonVisibility();
+        DisableControls();
+    }
+
+    ///////////////////////////// Set Button Visibility  //////////////////////////////////////////////////////
+    function SetButtonVisibility() {
+        try {
+            //if (parseInt($("#StatusPropId").val()) == 40 && parseInt($("#RFQId").val()) == 0 && (parseInt($("#WorkFlowId").val()) == 6 || parseInt($("#WorkFlowId").val()) == 57 || parseInt($("#WorkFlowId").val()) == 29 || parseInt($("#WorkFlowId").val()) == 36 || parseInt($("#WorkFlowId").val()) == 38) ) {
+            //    $("#btnSubmit").attr('disabled', false);
+            //}
+            //else {
+            //    $("#btnSubmit").attr('disabled', true);
+            //}
+            if (parseInt($("#StatusPropId").val()) == 40 && (parseInt($("#WorkFlowId").val()) == 216) || (parseInt($("#WorkFlowId").val()) == 219)) {
+                $("#btnSubmit").attr('disabled', false);
+            }
+            else {
+                $("#btnSubmit").attr('disabled', true);
+            }
+        }
+        catch (e) {
+
+        }
+    }
+
+    ///////////////////////////// Disable Controls  //////////////////////////////////////////////////////
+    function DisableControls() {
+        try {
+            var blnStatus = true;
+            if (parseInt($("#StatusPropId").val()) == 40 && (parseInt($("#WorkFlowId").val()) == 216) || (parseInt($("#WorkFlowId").val()) == 219)) {
+                blnStatus = false;
+            }
+            $("#DepartmentId").attr('disabled', blnStatus);
+            $("#Project").attr('disabled', blnStatus);
+            $("#ProjectManager").attr('disabled', blnStatus);
+            $("#ContactPerson").attr('disabled', blnStatus);
+            $("#PMEmailId").attr('disabled', blnStatus);
+            $("#EmailId").attr('disabled', blnStatus);
+            $("#PMMobileNo").attr('disabled', blnStatus);
+            $("#MobileNo").attr('disabled', blnStatus);
+            $("#Remark").attr('disabled', blnStatus);
+        }
+        catch (e) {
+
+        }
+    }
+
+    ///////////////////////////// Masking  //////////////////////////////////////////////////////
+    function MaskControls() {
+        try {
+            (function ($) {
+                $(function () {
+                    $("#Project").attr('onkeypress', 'return CheckIsAlphaNumeric(event,this);');
+                    $("#ProjectManager").attr('onkeypress', 'return CheckIsAlpha(event,this);');
+                    $("#ContactPerson").attr('onkeypress', 'return CheckIsAlpha(event,this);');
+                    $("#PMEmailId").IsEmailOnly();
+                    $("#EmailId").IsEmailOnly();
+                    $("#PMMobileNo").attr('onkeypress', 'return CheckIsNumeric(event,this);');
+                   // $("#PMMobileNo").mask("9999999999");
+                    $("#MobileNo").attr('onkeypress', 'return CheckIsNumeric(event,this);');
+                   // $("#MobileNo").mask("9999999999");
+
+                });
+            })(jQuery);
+        }
+        catch (e) {
+
+        }
+    }
+
+
+    $(document).ready(function () {
+        MaskControls();
+        LoadBasicInfo();
+        $("#DepartmentId").focus();
+    });
+
+    //var focusables = $(":input").not('[type="image"]');
+    //$("input").bind("keydown", function (event) {
+
+    //    var keyCode = event.keyCode ? event.keyCode : event.which ? event.which : event.charCode;
+    //    if (keyCode == 10 || keyCode == 13) {
+    //        event.stopPropagation();
+    //        event.preventDefault();
+    //        var current = focusables.index(this);
+    //        var next = focusables.eq(current + 1).length ? focusables.eq(current + 1) : focusables.eq(0);
+    //        next.focus();
+    //        event.preventDefault();
+    //    }
+    //});
+
+    //$(document).on("keydown", function (e) {
+    //    if (e.which === 8 && !$(e.target).is("input:not([readonly]):not([type=radio]):not([type=checkbox]), textarea:not([readonly]), [contentEditable], [contentEditable=true]")) {
+    //        e.preventDefault();
+    //    }
+    //});
+</script>

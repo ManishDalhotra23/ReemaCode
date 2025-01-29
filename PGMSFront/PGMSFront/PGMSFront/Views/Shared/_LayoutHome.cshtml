@@ -1,0 +1,347 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta http-equiv="Page-Enter" content="Alpha(opacity=100)">
+    <meta http-equiv="Page-Enter" content="blendTrans(Duration=0)">
+    <meta http-equiv="Page-Exit" content="blendTrans(Duration=0)">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="~/Templates/img/favicon.png" type="image/png">
+    <title>PGMS</title>
+    <!-- Bootstrap CSS -->
+
+    <link rel="stylesheet" href="~/Templates/css/bootstrap.css">
+    <link rel="stylesheet" href="~/Templates/vendors/linericon/style.css">
+    <link rel="stylesheet" href="~/Templates/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Templates/vendors/owl-carousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/Templates/vendors/lightbox/simpleLightbox.css">
+    <link rel="stylesheet" href="~/Templates/vendors/nice-select/css/nice-select.css">
+    <link rel="stylesheet" href="~/Templates/vendors/animate-css/animate.css">
+    <!-- main css -->
+    <link rel="stylesheet" href="~/Templates/css/style.css">
+    <link href="~/Templates/Alert/jquery-confirm.min.css" rel="stylesheet" />
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="~/Templates/js/jquery-3.2.1.min.js"></script>
+    <style>
+        /* Scroll bar css */
+        *::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        *::-webkit-scrollbar-track {
+            /*background: rgb(41,41,41);*/
+            /*background: #ECF0F5;*/
+        }
+
+        ::-webkit-scrollbar-thumb {
+            width: 8px;
+            height: 8px;
+            background: #555;
+        }
+        /* Scroll bar css */
+
+        .home_banner_area .login-box {
+            /*background: rgba(255, 255, 255, 0.50);*/
+            background: rgba(255, 255, 255, 0.8);
+            border: none;
+        }
+
+        .ntx-loader {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 99999;
+            background: #fbfbfb;
+        }
+
+        .ntx-loader-box {
+            position: relative;
+        }
+
+        .welcome-txt {
+            background: #555559;
+            opacity: 0.8;
+            padding: 15px 0px 1px 0px;
+            text-align: center;
+        }
+
+        body {
+            font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+        }
+
+        .link {
+            text-decoration: underline;
+            background-color: transparent;
+            color: #9c27b0;
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 1.42857;
+        }
+
+        .textLimit {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 10; /* number of lines to show */
+            -webkit-box-orient: vertical;
+        }
+
+        #fade {
+            display: none;
+            position: fixed;
+            top: 0%;
+            left: 0%;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            z-index: 1001;
+            -moz-opacity: 0.8;
+            opacity: .80;
+            filter: alpha(opacity=80);
+        }
+
+        #light {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            max-width: 600px;
+            max-height: 360px;
+            margin-left: -300px;
+            margin-top: -180px;
+            border: 2px solid #FFF;
+            background: #FFF;
+            z-index: 1051;
+            overflow: visible;
+        }
+
+        #boxclose {
+            float: right;
+            cursor: pointer;
+            color: #fff;
+            border: 1px solid #AEAEAE;
+            border-radius: 3px;
+            background: #222222;
+            font-size: 31px;
+            font-weight: bold;
+            display: inline-block;
+            line-height: 0px;
+            padding: 11px 3px;
+            position: absolute;
+            right: 2px;
+            top: 2px;
+            z-index: 1002;
+            opacity: 0.9;
+        }
+
+        .boxclose:before {
+            content: "×";
+        }
+
+        #fade:hover ~ #boxclose {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="ntx-loader" style="        display: none;">
+        <div class="ntx-loader-box">
+            <img src="~/Templates/img/loader.gif" alt="natrax_loader">
+        </div>
+    </div>
+    <header class="header_area">
+        <div class="header-top">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 col-sm-6 col-4 header-top-left">
+                        <a href="tel:+91-11-49215555">
+                            @*fa fa-mobile*@
+                            <span class="fa fa-mobile"></span>
+                            <span class="text">
+                                <span class="text">+91 9893892310</span>
+                            </span>
+                        </a>
+                        <a href="mailto:info@natrax.in">
+                            <span class="lnr lnr-envelope"></span>
+                            <span class="text">
+                                <span class="text">info@natrax.in</span>
+                            </span>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="main_menu">
+            <div class="search_input" id="search_input_box">
+                <div class="container">
+                    <form class="d-flex justify-content-between" method="" action="">
+                        <input type="text" class="form-control" id="search_input" placeholder="Search Here">
+                        <button type="submit" class="btn"></button>
+                        <span class="lnr lnr-cross" id="close_search" title="Close Search"></span>
+                    </form>
+                </div>
+            </div>
+            @{
+                var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+                var actionName = this.ViewContext.RouteData.Values["action"].ToString();
+                string url = "/" + controllerName + "/" + actionName;
+                string Home = "";
+                string About = "";
+                string Services = "";
+                string AccomodationTransportation = "";
+                string News = "";
+                string Contact = "";
+
+                switch (url)
+                {
+                    case "/Front/About":
+                        About = "active";
+                        break;
+
+                    case "/Front/Services":
+                        Services = "active";
+                        break;
+
+                    case "/Front/AccomodationTransportation":
+                        AccomodationTransportation = "active";
+                        break;
+
+                    case "/Front/News":
+                        News = "class = active";
+                        break;
+
+                    case "/Front/Contact":
+                        Contact = "active";
+                        break;
+
+                    default:
+                        Home = "active";
+                        break;
+                }
+            }
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container-fluid" id="logoSection">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <img src="~/Templates/Tracks/india.png" />
+                    <a class="navbar-brand logo_h" href="@Url.Action("Index", "Home")"><img src="~/Templates/img/logo.png" alt=""></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav menu_nav ml-auto">
+                            <li class="nav-item @Home"><a class="nav-link" href="@Url.Action("Index", "Home")">Home</a></li>
+                            <li class="nav-item @About"><a class="nav-link" href="@Url.Action("About", "Front")">About</a></li>
+                            <li class="nav-item @Services"><a class="nav-link" href="@Url.Action("Services", "Front")">Services</a></li>
+                            @*<li class="nav-item submenu dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                                       aria-expanded="false">Services</a>
+                                </li>*@
+                            <li class="nav-item @AccomodationTransportation"><a class="nav-link" href="@Url.Action("AccomodationTransportation", "Front")">Accommodation & Transportation</a></li>
+                            <li class="nav-item @News"><a class="nav-link" href="@Url.Action("News", "Front")">News</a></li>
+                            <li class="nav-item"><a class="nav-link" href="javascript:void(0)" onclick="lightbox_open();">Registration Help</a></li>
+                            <li class="nav-item @Contact"><a class="nav-link" href="@Url.Action("Contact", "Front")">Contact</a></li>
+                            @*<li class="nav-item">
+                                    <div class="">
+                                        <a class="nav-link blink" href=""><span>Ask For Quotation</span></a>
+                                    </div>
+                                </li>*@
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    @RenderBody()
+    <footer class="footer-area section_gap">
+        <div class="container">
+            <div class="row footer-bottom d-flex justify-content-between">
+                <p class="col-lg-8 col-sm-12 footer-text m-0 text-white">Copyright &copy; 2020 All rights reserved </p>
+                <div class="col-lg-4 col-sm-12 footer-social">
+                    <a href="https://www.facebook.com/Natrax-355052608872706" target="_blank"><i class="fa fa-facebook"></i></a>
+                    <a href="https://www.linkedin.com/company/75512873/admin/" target="_blank"><i class="fa fa-linkedin"></i></a>
+                    <a href="https://twitter.com/Natrax_IND" target="_blank"><i class="fa fa-twitter" target="_blank"></i></a>
+                    <a href="https://www.youtube.com/channel/UCtInd5peVm2nKm7sYOOSEIA" target="_blank"><i class="fa fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <div id="light">
+        <a class="boxclose" id="boxclose" onclick="lightbox_close();"></a>
+        <video id="VisaChipCardVideo" width="600" controls>
+            <source src="https://natraxsa.blob.core.windows.net/video/PGMSRegistrationLoginVideo.mp4" type="video/mp4">
+            <!--Browser does not support <video> tag -->
+        </video>
+    </div>
+    @*<div id="fade" onClick="lightbox_close();"></div>*@
+    <script type="text/javascript">
+        //document.getElementById("myButton").onclick = function () {
+        //    location.href = "http://reil.webappline.com/PGMS/dashboard/examples/dashboard.html";
+        //};
+    </script>
+    <!-- Optional JavaScript -->
+
+    <script src="~/Templates/js/popper.js"></script>
+    <script src="~/Templates/js/bootstrap.min.js"></script>
+    <script src="~/Templates/js/stellar.js"></script>
+    @*<script src="~/Templates/js/countdown.js"></script>*@
+    <script src="~/Templates/vendors/nice-select/js/jquery.nice-select.min.js"></script>
+    <script src="~/Templates/vendors/owl-carousel/owl.carousel.min.js"></script>
+    <script src="~/Templates/js/owl-carousel-thumb.min.js"></script>
+    <script src="~/Templates/js/jquery.ajaxchimp.min.js"></script>
+    <script src="~/Templates/vendors/counter-up/jquery.counterup.js"></script>
+    <script src="~/Templates/js/mail-script.js"></script>
+    <!--gmaps Js-->
+    @*<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>*@
+    <script src="~/Templates/js/gmaps.min.js"></script>
+    <script src="~/Templates/js/theme.js"></script>
+
+    @Scripts.Render("~/bundles/MyScripts")
+    <script type="text/javascript" src="~/MyScripts/Browser.min.js"></script>
+    @*<script src="~/Templates/Alert/jquery-confirm.min.js"></script>*@
+    @*<script type="text/javascript" src="~/MyScripts/aes.js"></script>*@
+    @*<script type="text/javascript" src="~/MyScripts/MyFunctions.js"></script>*@
+    @*<script type="text/javascript" src="~/MyScripts/jquery.alerts.js"></script>*@
+    <script>
+        window.document.onkeydown = function (e) {
+            if (!e) {
+                e = event;
+            }
+            if (e.keyCode == 27) {
+                lightbox_close();
+            }
+        }
+
+        function lightbox_open() {
+            LoaderShow();
+            var lightBoxVideo = document.getElementById("VisaChipCardVideo");
+            window.scrollTo(0, 0);
+            document.getElementById('light').style.display = 'block';
+            document.getElementById('fade').style.display = 'block';
+            lightBoxVideo.play();
+        }
+
+        function lightbox_close() {
+            LoaderHide();
+            var lightBoxVideo = document.getElementById("VisaChipCardVideo");
+            document.getElementById('light').style.display = 'none';
+            document.getElementById('fade').style.display = 'none';
+            lightBoxVideo.pause();
+        }
+    </script>
+</body>
+</html>

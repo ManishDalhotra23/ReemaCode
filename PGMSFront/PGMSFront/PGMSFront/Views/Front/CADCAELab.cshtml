@@ -1,0 +1,152 @@
+﻿@{
+    ViewBag.Title = "CAD CAE Lab";
+}
+<style>
+    .sidebar, #bar, .navbar {
+        display: none;
+    }
+
+    .main-panel {
+        width: 100%;
+    }
+
+        .main-panel > .content {
+            padding: 0px 15px;
+        }
+
+    .head {
+        background: #115a86;
+        color: #FFF;
+        padding: 5px 10px 5px 10px;
+        margin-bottom: 10px;
+        border-radius: 4px;
+        font-weight: bold;
+    }
+</style>
+<input type="hidden" id="strImgPath" value="@System.Configuration.ConfigurationManager.AppSettings["strImgPath"]" />
+<div class="content">
+    <div class="container-fluid">
+        <div class="head">CAD CAE Lab</div>
+        <div class="row" id="Bind">
+            @*<div class="col-md-3">
+                    <div class="card card-product">
+                        <div class="card-header card-header-image">
+                            <a href="#pablo">
+                                <img class="img" src="~/Templates/Tracks/noImage.png">
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                <a href="#pablo">Client Workshop</a>
+                            </h4>
+                            <div class="card-description">
+                                Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs.
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="stats">
+                                <a href="@Url.Action("ClientWorkshopDetail", "Front")" class="card-category" style="cursor: pointer"><i class="material-icons">local_offer</i> View More..</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+        </div>
+    </div>
+</div>
+<script>
+    var List = [];
+    var strImgPath = $("#strImgPath").val();
+    $(document).ready(function () {
+        GetAll();
+    });
+
+    function Bind() {
+        try {
+            var HTMl = "";
+            $("#Track").empty();
+            $.each(List, function (Index, Object) {
+                debugger
+                HTMl += '<div class="col-md-3">';
+                HTMl += '<div class="card card-product">';
+                HTMl += '<div class="card-header card-header-image">';
+                HTMl += '<a href="#pablo">';
+                if (Object.ImageName != null) {
+                    HTMl += '<img class="img" src="'+ strImgPath + Object.ImageName +'">';
+                } else {
+                    HTMl += '<img class="img" src="../Templates/Tracks/noImage.png">';
+                }
+                HTMl += '</a>';
+                HTMl += '</div>';
+                HTMl += '<div class="card-body">';
+                HTMl += '<h4 class="card-title">';
+                HTMl += '<a href="#pablo">' + Object.ServiceName + '</a>';
+                HTMl += '</h4>';
+                HTMl += '</div>';
+                HTMl += '<div class="card-footer">';
+                HTMl += '<div class="stats">';
+                HTMl += '<a href="javascript:void(0)" class="card-category" style="cursor: pointer" onclick="details(' + Object.ServiceId + ')"><i class="material-icons">local_offer</i> View More..</a>';
+                HTMl += '</div>';
+                HTMl += '</div>';
+                HTMl += '</div>';
+                HTMl += '</div>';
+            });
+            $("#Bind").append(HTMl);
+        }catch (e) {
+          alert(e.message);
+      }
+    }
+
+
+    function details(ServiceId) {
+        debugger;
+        sessionStorage.setItem("ServiceId", ServiceId);
+        var url = '../Front/Details/';
+        window.location.href = url;
+    }
+
+    function GetAll() {
+        try {
+            LoaderShow();
+            var data = { 'strGroupCode': 'L4' };
+            var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+            $.ajax({
+                url: '@Url.Action("ServiceImageDescriptionViewGetByGroupCode","Front")',
+                type: 'POST',
+                dataType: 'json',
+                async: true,
+                data: dataWithAntiforgeryToken,
+                success: function (data) {
+                    LoaderHide();
+                    if (data.StatusId != "99" && data.StatusId != "-99") {
+                        List = data.ServiceDetail;
+                         debugger;
+                        Bind();
+                    } else {
+                        alert(data.Status);
+                    }
+                },
+                error: function (xhr) {
+                    LoaderHide();
+                    alert(xhr.responseText);
+                }
+            });
+        }
+        catch (e) {
+            LoaderHide();
+            alert(e.message);
+        }
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+

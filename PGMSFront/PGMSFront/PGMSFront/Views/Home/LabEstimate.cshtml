@@ -1,0 +1,842 @@
+﻿@model PGMSFront.Models.CommonModel
+@{
+    ViewBag.Title = "Lab Booking";
+    Layout = "~/Views/Shared/_LayoutQuickEstimateLab.cshtml";
+}
+
+<style>
+    .table > tbody > tr > td {
+        padding: 2px 8px !important;
+        cursor: pointer !important;
+    }
+
+    .card {
+        margin-bottom: 0px !important;
+        margin-top: 25px !important;
+    }
+
+    .bootstrap-select {
+        margin-top: 16px !important;
+    }
+
+    .main-panel > .content {
+        margin-top: 0 !important;
+    }
+
+    .card .card-body {
+        padding: 0px 5px 5px 5px !important;
+    }
+</style>
+<div class="content">
+    @using (Html.BeginForm(new { @class = "form-horizontal" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="container-fluid">
+            @Html.Partial("~/Views/Home/QuickEstimateHeader.cshtml")
+
+            <div class="row">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">
+                            @if (Model.StatusPropId == 40 && Model.WorkFlowId == 219)
+                            {
+                                <button type="button" class="btn btn-fill btn-rose btn-sm" onclick="AddMore()" id="btnAdd">Add More</button>
+                            }
+                            <span class="pull-right">
+                                <label class="card-title">Lab Count : </label> <label class="card-title" id="lblWSCount"></label>
+                            </span>
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover">
+                                        <thead class=" text-primary">
+                                            <tr>
+                                                <th width="20%">Lab <span style="color: red">*</span></th>
+                                                <th width="20%">Services <span style="color: red">*</span></th>
+                                                @*<th width="10%">VEH/CMPT</th>*@
+                                                @*<th width="10%" style="text-align:center">Date</th>*@
+                                                <th width="7%" style="text-align:right">Usage</th>
+                                                <th width="7%" style="text-align:left">Unit</th>
+                                                @if (Model.WorkFlowId == 221 && Model.StatusPropId == 40)
+                                                {
+                                                    <th width="7%" style="text-align:right">Rate</th>
+                                                    <th width="7%" style="text-align:right">Amount</th>
+                                                }
+                                                else
+                                                {
+                                                    <th width="7%" style="text-align:right; display: none">Rate</th>
+                                                    <th width="7%" style="text-align:right; display: none">Amount</th>
+                                                }
+                                                <th width="22%">Remark</th>
+                                                @if (Model.WorkFlowId == 219 && Model.StatusPropId == 40)
+                                                {
+                                                    <th width="10%" class="text-center">Action</th>
+                                                }
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbodyWS">
+                                            <tr id="AddMoreTR" style="display: none;">
+                                                <td>
+                                                    <select class="form-control" id="LabType" onchange="SetFacility()">
+                                                        <option value="0">-Select-</option>
+                                                        @foreach (var itm in ViewBag.ServiveLookup)
+                                                        {
+                                                            <option value='@itm.Value'>@itm.Text</option>
+                                                        }
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    @*<select class="form-control" id="ServiceType" onchange="SetVehicleComp()"></select>*@
+                                                    <select class="form-control" id="ServiceType" onchange="SetRateUnit()"></select>
+                                                </td>
+                                                @*<td>
+                    <select class="form-control" id="VehicleType"></select>
+                </td>
+                <td><input id="Date" type="text" style="text-align:center" onblur="SetRateUnit()" class="form-control datetimepicker"></td>*@
+                                                <td><input id="Usage" type="text" style="text-align:right" disabled="disabled" onchange="CalculateAmount()" onkeypress='return CheckIsNumeric(event,this);' class="form-control" value="1"></td>
+                                                <td><input id="Unit" disabled="disabled" style="text-align:left" type="text" class="form-control" value=""></td>
+                                                @if (Model.WorkFlowId == 221 && Model.StatusPropId == 40)
+                                                {
+                                                    <td style="text-align:right;"><input id="Rate" disabled="disabled" style="text-align:right;display:none" type="text" class="form-control" value=""></td>
+                                                    <td style="text-align:right;"><input id="Amount" disabled="disabled" type="text" style="text-align:right;display:none" class="form-control" value=""></td>
+                                                }
+                                                else
+                                                {
+                                                    <td style="display: none"><input id="Rate" disabled="disabled" style="text-align:right; display:none" type="text" class="form-control" value=""></td>
+                                                    <td style="display: none"><input id="Amount" disabled="disabled" type="text" style="text-align:right; display:none" class="form-control" value=""></td>
+                                                }
+                                                <td><textarea id="Remark" class="form-control"></textarea></td>
+                                                <td class='td-actions text-center'>
+                                                    <button type='button' rel='tooltip' id="btnSave" onclick="return LabServicesSave()" class='btn btn-info' data-original-title='' title=''><i class='material-icons'>save</i></button>
+                                                    <button type='button' rel='tooltip' class='btn btn-danger' data-original-title='' title='' onclick="AddMoreCancel()"><i class='material-icons'>close</i></button>
+                                                </td>
+                                                <td style='display:none'><input type='hidden' id='hdnUOMPropId' /> </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <table Style="width:100%">
+                            <tr>
+                                <td Style="width:50%;text-align:left">
+                                    <input type="submit" id="btnPrev" name="btnPrevNext" value="Prev" class="btn btn-fill btn-rose btn-sm " />
+                                </td>
+                                <td Style="width:50%;text-align:right">
+                                    <input type="submit" id="btnNext" name="btnPrevNext" value="Next" style="display:none" class="btn btn-fill btn-rose btn-sm " />
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                @Html.HiddenFor(m => m.EstimateDetailId, new { id = "hiddenEstimateDetailId", style = "width:0px;" })
+                @Html.HiddenFor(m => m.UserId, new { id = "UserId", style = "width:0px;" })
+                @Html.HiddenFor(m => m.UserTypePropId, new { id = "UserTypePropId", style = "width:0px;" })
+                @Html.HiddenFor(m => m.ZZCompanyId, new { id = "ZZCompanyId", style = "width:0px;" })
+                @Html.HiddenFor(m => m.WorkFlowId, new { id = "WorkFlowId", style = "width:0px;" })
+                @Html.HiddenFor(m => m.StatusPropId, new { id = "StatusPropId", style = "width:0px;" })
+                @Html.HiddenFor(m => m.StateId, new { id = "StateId", style = "width:0px;" })
+                @Html.HiddenFor(m => m.BPId, new { id = "BPId", style = "width:0px;" })
+                @Html.HiddenFor(m => m.DocId, new { id = "DocId", style = "width:0px;" })
+                @Html.HiddenFor(m => m.ReportURL, new { id = "ReportURL", style = "width:0px;" })
+                @Html.HiddenFor(m => m.POURL, new { id = "POURL", style = "width:0px;" })
+                @Html.HiddenFor(m => m.RFQId, new { id = "RFQId", style = "width:0px;" })
+            </div>
+        </div>
+    }
+</div>
+
+<script>
+    var EstimateDetailId = 0;
+    var BookingList = '';
+    var ServiceList = '';
+    var LablinkVorCList = '';
+    var VehicleCompList = '';
+
+    function AddMore() {
+        EstimateDetailId = 0;
+        $("#AddMoreTR").find("button[id='btnSave']").each(function () {
+            $(this).show();
+        });
+        $("#AddMoreTR").find("select[id='LabType']").each(function () {
+            $(this).val(0);
+        });
+        $("#AddMoreTR").find("select[id='ServiceType']").each(function () {
+            $(this).html("");
+        });
+        //$("#AddMoreTR").find("select[id='VehicleType']").each(function () {
+        //    $(this).html("");
+        //});
+        //$("#AddMoreTR").find("input[type='text'][id='Date']").each(function () {
+        //    $(this).val("");
+        //    $('.datetimepicker').datetimepicker({ theme: 'light', timepicker: false, format: 'd-m-Y', scrollMonth: false, scrollInput: false });
+        //});
+        //$("#AddMoreTR").find("input[type='text'][id='Day']").each(function () {
+        //    $(this).val("");
+        //});
+        $("#AddMoreTR").find("input[type='text'][id='Usage']").each(function () {
+            $(this).val("1");
+        });
+        $("#AddMoreTR").find("input[type='text'][id='Unit']").each(function () {
+            $(this).val("");
+        });
+        $("#AddMoreTR").find("input[type='text'][id='Rate']").each(function () {
+            $(this).val("");
+        });
+        $("#AddMoreTR").find("input[type='text'][id='Amount']").each(function () {
+            $(this).val("");
+        });
+        $("#AddMoreTR").find("textarea[id='Remark']").each(function () {
+            $(this).val("");
+        });
+        $("#AddMoreTR").find("input[type='hidden'][id='hdnUOMPropId']").each(function () {
+            $(this).val("");
+        });
+
+        $("#AddMoreTR").show();
+        MaskControls();
+        $("#LabType").focus();
+
+    }
+    function AddMoreCancel() {
+        $("#AddMoreTR").hide();
+    }
+
+    ///////////////////////////// Load Vehicle Info  //////////////////////////////////////////////////////
+    function LoadLabServicesInfo() {
+        try {
+            LoaderShow();
+            var data = {};
+            var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+            $.ajax({
+                url: '@Url.Action("LoadEstimateInfo", "Home")',
+                type: 'POST',
+                dataType: 'json',
+                async: true,
+                data: dataWithAntiforgeryToken,
+                success: function (data) {
+                    LoaderHide();
+                    if (data.StatusId != "99" && data.StatusId != "-99") {
+                        if (data.BookingList.length > 0) {
+                            BookingList = jQuery.grep(data.BookingList, function (obj) {
+                                return obj.RefBPId == 11;
+                            });
+                            if (BookingList.length > 0) {
+                                BindWSData(BookingList);
+                                $("#btnNext").show();
+                            } else {
+                                $("#btnNext").hide();
+                            }
+                        }
+                    }
+                    else {
+                       // alert(data.Status);
+                    }
+                },
+                error: function (xhr) {
+
+                    LoaderHide();
+                    alert(xhr.responseText);
+                }
+            });
+        }
+        catch (e) {
+
+            LoaderHide();
+            alert(e.message);
+            //  return false;
+        }
+    }
+
+    function LoadLabServicesInfo1() {
+        try {
+            LoaderShow();
+            var data = {};
+            var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+            $.ajax({
+                url: '@Url.Action("LoadLabServicesInfo", "Home")',
+                type: 'POST',
+                dataType: 'json',
+                async: true,
+                data: dataWithAntiforgeryToken,
+                success: function (data) {
+                    LoaderHide();
+                    debugger
+                    //if (data.StatusId != "99" && data.StatusId != "-99") {
+                        LabServicesList = data.LabServicesList;
+                        ServiceList = data.ServiceList;
+                        LablinkVorCList = data.LablinkVorCList;
+                        VehicleCompList = data.VehicleCompList;
+                        //BindWSData(data.LabServicesList);
+                        //if (LabServicesList.length > 0) {
+                        //    $("#btnNext").show();
+                        //}
+                    //}
+                    //else {
+                    //   // alert(data.Status);
+                    //}
+                },
+                error: function (xhr) {
+
+                    LoaderHide();
+                    alert(xhr.responseText);
+                }
+            });
+        }
+        catch (e) {
+
+            LoaderHide();
+            alert(e.message);
+            //  return false;
+        }
+    }
+
+    //////////////////////// Vehicle Edit ////////////////////////////////////////////////////////////
+    function LabServicesEdit(varEstimateDetailId) {
+        try {
+            EstimateDetailId = 0;
+            if (BookingList.length > 0) {
+                var varWS = jQuery.grep(BookingList, function (obj) {
+                    return obj.EstimateDetailId == varEstimateDetailId;
+                });
+
+                EstimateDetailId = NullHandle(varWS[0].EstimateDetailId);
+
+                $("#AddMoreTR").find("button[id='btnSave']").each(function () {
+                    $(this).show();
+                });
+                $("#AddMoreTR").find("select[id='LabType']").each(function () {
+                    var varServiceList = jQuery.grep(ServiceList, function (obj) {
+                        return obj.ServiceId == varWS[0].ServiceId;
+                    });
+
+                    if (varServiceList != undefined && varServiceList.length > 0) {
+                        $(this).val(varServiceList[0].ServiceName);
+                    }
+                    SetFacility();
+                });
+                $("#AddMoreTR").find("select[id='ServiceType']").each(function () {
+                    $(this).val(NullHandle(varWS[0].ServiceId));
+                    SetVehicleComp()
+                });
+                //$("#AddMoreTR").find("select[id='VehicleType']").each(function () {
+                //    $(this).val(NullHandle(varWS[0].VehCompId));
+                //});
+                //$("#AddMoreTR").find("input[type='text'][id='Date']").each(function () {
+                //    $(this).val(NullHandle(varWS[0].ZZUsageDate));
+                //    $('.datetimepicker').datetimepicker({ theme: 'light', timepicker: false, format: 'd-m-Y', scrollMonth: false, scrollInput: false });
+                //});
+                //$("#AddMoreTR").find("input[type='text'][id='Day']").each(function () {
+                //    $(this).val(NullHandle(varWS[0].BookingDay));
+                //});
+                $("#AddMoreTR").find("input[type='text'][id='Usage']").each(function () {
+                    $(this).val(NullHandle(varWS[0].BillingQty));
+                });
+                $("#AddMoreTR").find("input[type='text'][id='Unit']").each(function () {
+                    $(this).val(NullHandle(varWS[0].ZZUOM));
+                });
+                $("#AddMoreTR").find("input[type='text'][id='Rate']").each(function () {
+                    $(this).val(NullHandle(varWS[0].Rate));
+                });
+                $("#AddMoreTR").find("input[type='text'][id='Amount']").each(function () {
+                    $(this).val(NullHandle(varWS[0].Amount));
+                });
+                $("#AddMoreTR").find("textarea[id='Remark']").each(function () {
+                    $(this).val(NullHandle(varWS[0].Remark));
+                });
+                $("#AddMoreTR").find("input[type='hidden'][id='hdnUOMPropId']").each(function () {
+                    $(this).val(NullHandle(varWS[0].UOMPropId));
+                });
+
+                $("#AddMoreTR").show();
+                MaskControls();
+                $("#LabType").focus();
+            }
+        }
+        catch (e) {
+
+        }
+    }
+
+    ///////////////////////////// Vehicle Save  //////////////////////////////////////////////////////
+    function LabServicesSave() {
+        try {
+            debugger
+            var model = {};
+            var strMSG = '';
+            var varWS = jQuery.grep(BookingList, function (obj) {
+                return obj.EstimateDetailId == EstimateDetailId;
+            });
+            var btnSave = "";
+
+            if (parseInt(EstimateDetailId) > 0 && varWS != undefined && varWS.length > 0) {
+                model = varWS[0];
+            }
+            else {
+                model.EstimateDetailId = -1;
+            }
+
+            $("#AddMoreTR").find("button[id='btnSave']").each(function () {
+                btnSave = $(this);
+            });
+            $("#AddMoreTR").find("select[id='LabType']").each(function () {
+                // model.TrackGroupId = $(this).val();
+                model.CategoryId = 0;
+                model.TrackGroupId = 0;
+                if ($(this).val().trim() == 0) {
+                    strMSG = strMSG + 'Lab \n</br>'
+                }
+            });
+            $("#AddMoreTR").find("select[id='ServiceType']").each(function () {
+                model.ServiceId = $(this).val();
+                if (parseInt($(this).val()) == 0 || $(this).val() == "" || $(this).val() == undefined || $(this).val() == null) {
+                    strMSG = strMSG + 'Service \n</br>'
+                }
+            });
+
+            //$("#AddMoreTR").find("input[type='text'][id='Date']").each(function () {
+            //    model.ZZUsageDate = $(this).val().trim();
+            //    if ($(this).val().trim() == "") {
+            //        strMSG = strMSG + 'Select Date \n</br>'
+            //    }
+            //});
+
+            $("#AddMoreTR").find("input[type='text'][id='Usage']").each(function () {
+                model.BillingQty = $(this).val().trim();
+                if ($(this).val().trim() == "" || parseInt($(this).val().trim()) <= 0) {
+                    strMSG = strMSG + 'Usage \n</br>'
+                }
+            });
+            $("#AddMoreTR").find("input[type='hidden'][id='hdnUOMPropId']").each(function () {
+                model.UOMId = $(this).val();
+            });
+            $("#AddMoreTR").find("input[type='text'][id='Rate']").each(function () {
+                model.Rate = $(this).val().trim();
+            });
+            $("#AddMoreTR").find("input[type='text'][id='Amount']").each(function () {
+                model.Amount = $(this).val().trim();
+            });
+            $("#AddMoreTR").find("textarea[id='Remark']").each(function () {
+                model.Remark = $(this).val().trim();
+                //if ($(this).val().trim() == "") {
+                //    strMSG = strMSG + 'Remark \n</br>'
+                //}
+            });
+
+            var varWSDuplicate = jQuery.grep(BookingList, function (obj) {
+                return obj.ServiceId == model.ServiceId && obj.EstimateDetailId != EstimateDetailId;
+            });
+
+            if (varWSDuplicate.length > 0) {
+                strMSG = strMSG + 'Service already exist\n</br>'
+            }
+
+            if (strMSG != '') {
+                alert("Please enter data for Mandatory fields  \n</br>" + strMSG);
+                return false;
+            }
+            else {
+                debugger
+                model.RefBPId = 11;
+                btnSave.hide();
+                LoaderShow();
+                var data = {'model': model};
+                var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+                $.ajax({
+                    url: '@Url.Action("EstimateDetailSave", "Home")',
+                    type: 'POST',
+                    dataType: 'json',
+                    async: true,
+                    data: dataWithAntiforgeryToken,
+                    //contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        LoaderHide();
+                        if (data.StatusId != "99" && data.StatusId != "-99") {
+                            if (data.BookingList.length > 0) {
+                                debugger
+                                BookingList = jQuery.grep(data.BookingList, function (obj) {
+                                    return obj.RefBPId == 11;
+                                });
+                                if (BookingList.length > 0) {
+                                    BindWSData(BookingList);
+                                    $("#btnNext").show();
+                                }
+                            }
+                        }
+                        btnSave.show();
+                        alert(data.Status);
+                    },
+                    error: function (xhr) {
+                        btnSave.show();
+                        LoaderHide();
+                        alert(xhr.responseText);
+                    }
+                });
+            }
+        }
+        catch (e) {
+            LoaderHide();
+            btnSave.show();
+            alert(e.message);
+            return false;
+        }
+    }
+
+    ///////////////////////////// Delete Info  //////////////////////////////////////////////////////
+    function LabServicesDelete(varEstimateDetailId) {
+        try {
+            $.confirm({
+                title: 'Confirm Alert!',
+                content: "Are you sure want to delete?",
+                icon: 'fa fa-question',
+                closeIcon: true,
+                animation: 'scale',
+                type: 'orange',
+                escapeKey: 'cancel',
+                buttons: {
+                    MyFunction: {
+                        text: 'OK',
+                        action: function () {
+                            LoaderShow();
+                            var data = { 'intEstimateDetailId': varEstimateDetailId };
+                            var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+                            $.ajax({
+                                url: '@Url.Action("EstimateDetailDelete", "Home")',
+                                type: 'POST',
+                                dataType: 'json',
+                                async: true,
+                                data: dataWithAntiforgeryToken,
+                                success: function (data) {
+                                    LoaderHide();
+                                    if (data.StatusId != "99" && data.StatusId != "-99") {
+                                        if (data.BookingList.length > 0) {
+                                            debugger
+                                            BookingList = jQuery.grep(data.BookingList, function (obj) {
+                                                return obj.RefBPId == 11;
+                                            });
+                                            BindWSData(BookingList);
+                                            $("#btnNext").show();
+                                        }
+                                    }
+                                    alert(data.Status);
+                                },
+                                error: function (xhr) {
+
+                                    LoaderHide();
+                                    alert(xhr.responseText);
+                                }
+                            });
+
+                        }
+                    },
+                    cancel: function () {
+                    }
+                }
+            });
+
+        }
+        catch (e) {
+
+            LoaderHide();
+            alert(e.message);
+            //  return false;
+        }
+    }
+
+    ///////////////////////////// Bind Info  //////////////////////////////////////////////////////
+    function BindWSData(data) {
+        try {
+            var gridData = "";
+            var StatusPropId = $("#StatusPropId").val();
+            var WorkFlowId = $("#WorkFlowId").val();
+            gridData = '<tr id="AddMoreTR" style="display: none;">' + $("#AddMoreTR").html() + '</tr>';
+            $("#lblWSCount").text(NullHandle(data.length));
+            $("#tbodyWS").html("");
+            for (var i = 0; i < data.length; i++) {
+                gridData = gridData + "<tr>";
+                gridData = gridData + "<td>" + NullHandle(data[i].ZZTrackGroup) + "</td>";
+                gridData = gridData + "<td>" + NullHandle(data[i].ZZService) + "</td>";
+                // gridData = gridData + "<td>" + NullHandle(data[i].ZZVehComp) + "</td>";
+                // gridData = gridData + "<td style='text-align:center'>" + NullHandle(data[i].ZZUsageDate) + "</td>";
+                gridData = gridData + "<td style='text-align:right'>" + NullHandle(data[i].BillingQty) + "</td>";
+                gridData = gridData + "<td style='text-align:left'>" + NullHandle(data[i].ZZUOM) + "</td>";
+                if (parseInt($("#WorkFlowId").val()) == 221 && parseInt($("#StatusPropId").val()) == 40) {
+                    gridData = gridData + "<td style='text-align:right;'>" + NullHandle(data[i].Rate) + "</td>";
+                    gridData = gridData + "<td style='text-align:right;'>" + NullHandle(data[i].Amount) + "</td>";
+                }
+                else {
+                    gridData = gridData + "<td style='text-align:right; display:none'>" + NullHandle(data[i].Rate) + "</td>";
+                    gridData = gridData + "<td style='text-align:right; display:none'>" + NullHandle(data[i].Amount) + "</td>";
+                }
+                gridData = gridData + "<td>" + NullHandle(data[i].Remark) + "</td>";
+                if (parseInt($("#StatusPropId").val()) == 40 && parseInt($("#WorkFlowId").val()) == 219) {
+                    gridData = gridData + "<td class='td-actions text-center'>";
+                    gridData = gridData + "<button type='button' rel='tooltip' class='btn btn-info' title='Edit Lab Service : " + NullHandle(data[i].ZZService) + "' onclick='return LabServicesEdit(" + NullHandle(data[i].EstimateDetailId) + ")' > <i class='material-icons'>edit</i></button>&nbsp;";
+                    gridData = gridData + "<button type='button' rel='tooltip' class='btn btn-danger' title='Delete Lab Service : " + NullHandle(data[i].ZZService) + "' onclick='return LabServicesDelete(" + NullHandle(data[i].EstimateDetailId) +")'><i class='material-icons'>close</i></button>";
+                    gridData = gridData +"</td>";
+                }
+                gridData = gridData + "</tr>";
+            }
+            $("#tbodyWS").html(gridData);
+        }
+        catch (e) {
+
+        }
+    }
+
+    //////////////////////// Set Rate Unit ////////////////////////////////////////////////////////
+    function SetRateUnit() {
+        try {
+            var varServiceId = $("#ServiceType").val();
+            var varTimeSlotId = 0;
+
+            var strMSG = "";
+            if (parseInt(varServiceId) == 0) {
+                alert("Select Facility");
+                return false;
+            }
+
+            if (strMSG != '') {
+                alert("Please enter data for Mandatory fields  \n</br>" + strMSG);
+                return false;
+            }
+            else {
+                var varServiceList = [];
+                varServiceList[0] = NullHandle(varServiceId);
+                var data = { 'intlstServiceId': varServiceList, 'intTimeSlotId': parseInt(varTimeSlotId), 'strWED': "" };
+                var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+                LoaderShow();
+                $.ajax({
+                    url: '@Url.Action("BookingStatusGetByServiceIdTimeSlotPropIdWEFDateEstimate", "Home")',
+                    type: 'POST',
+                    dataType: 'json',
+                    async: true,
+                    data: dataWithAntiforgeryToken,
+                   // contentType: "application/json; charset=utf-8",
+                    success: function (dataBokkingStatus) {
+                        LoaderHide();
+                        if (dataBokkingStatus.StatusId != "99" && dataBokkingStatus.StatusId != "-99") {
+                            var varBookingStatusList = dataBokkingStatus.BookingStatusList;
+                            var varUsage = 0;
+                            if (varBookingStatusList.length > 0) {
+                                $("#AddMoreTR").find("input[type='text'][id='Usage']").each(function () {
+                                    varUsage = $(this).val().trim();
+                                    if (varUsage == undefined || varUsage == "") {
+                                        varUsage=0
+                                    }
+                                });
+
+                                $("#AddMoreTR").find("input[type='text'][id='Unit']").each(function () {
+                                    $(this).val(NullHandle(varBookingStatusList[0].UOM));
+                                });
+                                $("#AddMoreTR").find("input[type='text'][id='Rate']").each(function () {
+                                    $(this).val(NullHandle(varBookingStatusList[0].Rate));
+                                });
+                                $("#AddMoreTR").find("input[type='text'][id='Amount']").each(function () {
+                                    $(this).val(parseFloat(varBookingStatusList[0].Rate) * parseFloat(varUsage));
+                                });
+                                $("#AddMoreTR").find("input[type='hidden'][id='hdnUOMPropId']").each(function () {
+                                    $(this).val(NullHandle(varBookingStatusList[0].UOMPropId));
+                                });
+                            }
+                        }
+                        else {
+                            alert(data.Status);
+                        }
+                    },
+                    error: function (xhr) {
+                        LoaderHide();
+                        alert(xhr.responseText);
+                    }
+                });
+            }
+        }
+        catch (e) {
+            LoaderHide();
+            alert(xhr.responseText);
+        }
+
+    }
+
+    ///////////////////////////// Lab Change Event //////////////////////////////////////////////////////
+    function SetFacility() {
+        debugger
+        try {
+            var varLabType = 0;
+
+            $("#AddMoreTR").find("select[id='LabType']").each(function () {
+                varLabType=$(this).val();
+            });
+            $("#AddMoreTR").find("select[id='ServiceType']").each(function () {
+                $(this).html("");
+            });
+            $("#AddMoreTR").find("select[id='VehicleType']").each(function () {
+                $(this).html("");
+            });
+            //$("#AddMoreTR").find("input[type='text'][id='Usage']").each(function () {
+            //    $(this).val("");
+            //});
+
+            if (varLabType.toString() == '0') {
+                alert("Select Lab");
+            }
+            else {
+                var varServiceList = jQuery.grep(ServiceList, function (obj) {
+                    return obj.ServiceName == varLabType;
+                });
+
+                if (varServiceList != undefined && varServiceList.length > 0) {
+                    var gridData = gridData + "<option value='0'>- Select -</option>";
+                    var selected = '';
+                    varServiceList.length === 1 ? selected = "selected='selected'" : selected = '';
+                    $("#Unit").val("");
+                    for (var i = 0; i < varServiceList.length; i++) {
+                        gridData = gridData + "<option value='" + NullHandle(varServiceList[i].ServiceId) + "' "+ selected +">" + NullHandle(varServiceList[i].ServiceSpecification) + "</option>";
+                    }
+                    gridData = gridData + "</select>";
+
+                    $("#AddMoreTR").find("select[id='ServiceType']").each(function () {
+                        $(this).html(gridData);
+                        varServiceList.length === 1 ? SetRateUnit() : '';
+                    });
+                }
+            }
+        }
+        catch (e) {
+
+        }
+    }
+
+    ///////////////////////////// Facility  Change Event //////////////////////////////////////////////////////
+    function SetVehicleComp() {
+        try {
+            var varServiceType = 0;
+            $("#AddMoreTR").find("select[id='ServiceType']").each(function () {
+                varServiceType = $(this).val();
+            });
+            $("#AddMoreTR").find("select[id='VehicleType']").each(function () {
+                $(this).html("");
+            });
+            //$("#AddMoreTR").find("input[type='text'][id='Usage']").each(function () {
+            //    $(this).val("");
+            //});
+
+            if (varServiceType.toString() == '0') {
+                alert("Select Facility");
+            }
+            else {
+
+                var varLablinkVorCList = jQuery.grep(LablinkVorCList, function (obj) {
+                    return obj.ServiceId == varServiceType;
+                });
+
+                if (varLablinkVorCList != undefined && varLablinkVorCList.length > 0) {
+                    var varVehicleCompList = jQuery.grep(VehicleCompList, function (obj) {
+                        return obj.GroupId == varLablinkVorCList[0].GroupPropId;
+                    });
+
+                    if (varVehicleCompList != undefined && varVehicleCompList.length > 0) {
+                        var gridData = "";//gridData + "<option value='0'>- Select -</option>";
+                        for (var i = 0; i < varVehicleCompList.length; i++) {
+                            gridData = gridData + "<option value='" + NullHandle(varVehicleCompList[i].VehCompId) + "'>" + NullHandle(varVehicleCompList[i].VorC) + "</option>";
+                        }
+                        gridData = gridData + "</select>";
+
+                        $("#AddMoreTR").find("select[id='VehicleType']").each(function () {
+                            $(this).html(gridData);
+                        });
+                    }
+                }
+
+                SetRateUnit();
+            }
+        }
+        catch (e) {
+
+        }
+    }
+
+
+    ///////////////////////////// Calculate Amount  //////////////////////////////////////////////////////
+    function CalculateAmount() {
+        try {
+            var varUsage = 0;
+            var varRate = 0;
+
+            $("#AddMoreTR").find("input[type='text'][id='Usage']").each(function () {
+                varUsage = $(this).val().trim();
+                if (varUsage == undefined || varUsage == "") {
+                    varUsage = 0
+                }
+            });
+
+            $("#AddMoreTR").find("input[type='text'][id='Rate']").each(function () {
+                varRate = $(this).val().trim();
+                if (varRate == undefined || varRate == "") {
+                    varRate = 0
+                }
+            });
+
+            $("#AddMoreTR").find("input[type='text'][id='Amount']").each(function () {
+                $(this).val(parseFloat(varRate) * parseFloat(varUsage));
+            });
+
+
+        }
+        catch (e) {
+
+        }
+    }
+
+    ///////////////////////////// Set Button Visibility  //////////////////////////////////////////////////////
+    function SetButtonVisibility() {
+        try {
+            if (parseInt($("#StatusPropId").val()) == 40 && (parseInt($("#WorkFlowId").val()) == 219)) {
+                $("#btnAdd").attr('disabled', false);
+            }
+            else {
+                $("#btnAdd").attr('disabled', true);
+            }
+        }
+        catch (e) {
+
+        }
+    }
+
+
+    ///////////////////////////// Masking  //////////////////////////////////////////////////////
+    function MaskControls() {
+        try {
+            (function ($) {
+                $(function () {
+                    //$("#AddMoreTR").find("input[type='text'][id='Usage']").each(function () {
+                    //    $(this).attr('onkeypress', 'return CheckIsNumeric(event,this);');
+                    //});
+                });
+            })(jQuery);
+        }
+        catch (e) {
+
+        }
+    }
+
+    function ToDate(strdate) {
+        var parts = strdate.split("-");
+        if (parts.length < 3) {
+            parts = strdate.split("/");
+        }
+        return new Date(parts[2], parts[1] - 1, parts[0])
+    }
+
+    $(document).ready(function () {
+        MaskControls();
+        SetButtonVisibility();
+        LoadLabServicesInfo();
+        LoadLabServicesInfo1();
+    });
+
+</script>

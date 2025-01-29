@@ -1,0 +1,256 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+<style>
+    .card-block {
+        padding: 1.25rem;
+        cursor: pointer;
+    }
+</style>
+<div class="department_area section_gap">
+    @*<div class="container" id="Bind"></div>*@
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card text-center h-100">
+                    <a href="@Url.Action("Track", "Front")" target="_blank">
+                        <div class="card-block">
+                            <h4 class="card-title">Track</h4>
+                            <h2><i class="fa fa-road fa-2x"></i></h2>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-center h-100">
+                    <a href="@Url.Action("Workshop", "Front")" target="_blank">
+                        <div class="card-block">
+                            <h4 class="card-title">Workshop</h4>
+                            <h2><i class="fa fa-building fa-2x"></i></h2>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-center h-100">
+                    <a href="@Url.Action("Storage", "Front")" target="_blank">
+                        <div class="card-block">
+                            <h4 class="card-title">Storage</h4>
+                            <h2><i class="fa fa-battery-full fa-2x"></i></h2>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-center h-100">
+                    <a href="@Url.Action("InstrumentationLab", "Front")" target="_blank">
+                        <div class="card-block">
+                            <h4 class="card-title">Instrumentation Lab</h4>
+                            <h2><i class="fa fa-building fa-2x"></i></h2>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="        margin-top: 10px;">
+            <div class="col-md-3">
+                <div class="card text-center h-100">
+                    <a href="@Url.Action("VehicleDynamicsLab", "Front")" target="_blank">
+                        <div class="card-block">
+                            <h4 class="card-title">Vehicle Dynamics Lab</h4>
+                            <h2><i class="fa fa-truck fa-2x"></i></h2>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-center h-100">
+                    <a href="@Url.Action("PowerTrainLab", "Front")" target="_blank">
+                        <div class="card-block">
+                            <h4 class="card-title">Power Train Lab</h4>
+                            <h2><i class="fa fa-building fa-2x"></i></h2>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-center h-100">
+                    <a href="@Url.Action("CADCAELab", "Front")" target="_blank">
+                        <div class="card-block">
+                            <h4 class="card-title">CAD CAE Lab</h4>
+                            <h2><i class="fa fa-building fa-2x"></i></h2>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-center h-100">
+                    <a href="@Url.Action("ElectricalBatteryTestingFacilities", "Front")" target="_blank">
+                        <div class="card-block">
+                            <h4 class="card-title">Electrical Battery Testing Facilities</h4>
+                            <h2><i class="fa fa-battery-three-quarters fa-2x"></i></h2>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="        margin-top: 10px;">
+            <div class="col-md-3">
+                <div class="card text-center h-100">
+                    <a href="@Url.Action("ElectricalVehicleTestingLab", "Front")" target="_blank">
+                        <div class="card-block">
+                            <h4 class="card-title">Electrical Vehicle Testing Lab</h4>
+                            <h2><i class="fa fa-building fa-2x"></i></h2>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-center h-100">
+                    <a href="@Url.Action("AddOnServices", "Front")" target="_blank">
+                        <div class="card-block">
+                            <h4 class="card-title">Add On Services</h4>
+                            <h2><i class="fa fa-picture-o fa-2x"></i></h2>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            @*<div class="col-md-3">
+                    <div class="card text-center h-100">
+                        <a href="https://www.accuweather.com/en/in/pithampur/2999688/hourly-weather-forecast/2999688" target="_blank">
+                            <div class="card-block">
+                                <h4 class="card-title">Weather Service</h4>
+                                <h2><i class="fa fa-cloud fa-2x"></i></h2>
+                            </div>
+                        </a>
+                    </div>
+                </div>*@
+            <div class="col-md-3">
+                <div class="card text-center h-100">
+                    <a href="@Url.Action("MoreServices", "Front")" target="_blank">
+                        <div class="card-block">
+                            <h4 class="card-title">More Services</h4>
+                            <h2><i class="fa fa-cloud fa-2x"></i></h2>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="readMoreModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" style="        text-align: center">More Services</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="fa fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" style="        text-align: center">
+                <div id="more"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-fill btn-danger btn-sm" data-dismiss="modal" style="        margin-left: 5px;
+        margin-top: 5px;">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var List = [];
+    var strImgPath = $("#strImgPath").val();
+    $(document).ready(function () {
+        GetAll();
+        //var showChar = 200;
+        //var ellipsestext = "...";
+        //var moretext = 'Show more&nbsp;<i class="icon fa fa-arrow-down"></i>';
+        //var lesstext = 'Show less&nbsp;<i class="icon fa fa-arrow-up"></i>';
+        //$('.more').each(function() {
+        //    var content = $(this).html();
+        //    if(content.length > showChar) {
+        //        var c = content.substr(0, showChar);
+        //        var h = content.substr(showChar, content.length - showChar);
+        //        var html = c + '<span class="moreellipses">' + ellipsestext+ '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href=""class="morelink">' + moretext + '</a></span>';
+        //        $(this).html(html);
+        //    }
+        //});
+
+        //$(".morelink").click(function(){
+        //    if($(this).hasClass("less")) {
+        //        $(this).removeClass("less");
+        //        $(this).html(moretext);
+        //    } else {
+        //        $(this).addClass("less");
+        //        $(this).html(lesstext);
+        //    }
+        //    $(this).parent().prev().toggle();
+        //    $(this).prev().toggle();
+        //    return false;
+        //});
+    });
+
+    function Bind() {
+        try {
+            var HTMl = "";
+            $("#Track").empty();
+            $.each(List, function (Index, Object) {
+                HTMl += '<div class="row">';
+                HTMl += '<div class="col-lg-3">';
+                HTMl += '<img class="img-responsive img-thumbnail" src="'+ strImgPath + Object.UploadPath +'" style="width: 250px; height: 150px;" />';
+                HTMl += '</div>';
+                HTMl += '<div class="col-lg-9">';
+                //HTMl += '<h6 style="font-size: 12px; color: #188fff;">News &nbsp;&nbsp;<span style="color: #959595 !important;">News</span></h6>';
+                HTMl += '<h4 style="font-size: 22px; color: #000;">' + Object.Title + '</h4>';
+                //var splitDesc = Object.Description.slice(0, 240);
+                //HTMl += '<p style="font-size: 14px; color: #000; font-weight: 500; margin-bottom: 9px;">' + splitDesc + '...</p>';
+                HTMl += '<p class="text more" style="font-size: 14px; color: #000; font-weight: 500; margin-bottom: 9px;">' + Object.Description + '</p>';
+                HTMl += '<a href="#" class="primary-btn text-uppercase" style="line-height: 35px; padding: 0px 10px;" onclick="readMoreModal(' + Object.NewsHotelsTrainingVideoId + ')">Read More</a>';
+                HTMl += '</div>';
+                HTMl += '</div>';
+                HTMl += '<hr />';
+            });
+            $("#Bind").append(HTMl);
+        }catch (e) {
+          alert(e.message);
+      }
+    }
+
+    function GetAll() {
+        try {
+            var data = { 'intBPId': '173' };
+            var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+            $.ajax({
+                url: '@Url.Action("NewsHotelsTrainingVideoViewGetByBPId","Front")',
+                type: 'POST',
+                dataType: 'json',
+                async: true,
+                data: dataWithAntiforgeryToken,
+                success: function (data) {
+                    if (data.StatusId != "99" && data.StatusId != "-99") {
+                        List = data.NewsHotelsTrainingDetails;
+                         debugger;
+                        Bind();
+                    } else {
+                        alert(data.Status);
+                    }
+                },
+                error: function (xhr) {
+                    alert(xhr.responseText);
+                }
+            });
+        }
+        catch (e) {
+            alert(e.message);
+        }
+    }
+
+    function readMoreModal(newsId) {
+        const res = List.filter((ele) => newsId === ele.NewsHotelsTrainingVideoId);
+        $("#more").html(res[0].Description);
+        $("#readMoreModal").modal("show");
+    }
+</script>

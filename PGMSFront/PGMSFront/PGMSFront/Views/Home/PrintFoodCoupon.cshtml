@@ -1,0 +1,257 @@
+﻿@model PGMSFront.Models.CommonModel
+@{
+    ViewBag.Title = "Print Food Coupon";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .dx-placeholder:before {
+        padding: 5px 9px 8px !important;
+    }
+
+    .ActionBtn {
+        background-color: #e91e63 !important;
+        border-color: #e91e63 !important;
+        color: #FFF !important;
+    }
+
+    .dx-button-mode-contained .dx-icon {
+        color: #FFF !important;
+    }
+
+    .dx-button-has-icon .dx-button-content {
+        padding: 2px;
+    }
+</style>
+@Html.AntiForgeryToken()
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="card">
+                <div class="card-header card-header-rose card-header-icon">
+                    <div class="card-text">
+                        <h4 class="card-title">Print Food Coupon</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form class="form-sample">
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="ddlBooking">Booking</label>
+                                    <div id="ddlBooking"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label></label><br />
+                                    <button type="button" class="btn btn-fill btn-rose btn-sm" id="btnGetData" onclick="return ShowPrintPI_DevReport(0)">Print All</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-6">
+                                <div id="tbl"></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@Html.HiddenFor(m => m.ZZCompanyId, new { id = "CompanyId", style = "width:0px;" })
+@Html.HiddenFor(m => m.UserId, new { id = "UserId", style = "width:0px;" })
+@Html.HiddenFor(m => m.ReportURL, new { id = "ReportURL", style = "width:0px;" })
+@*@Html.HiddenFor(m => m.BPId, new { id = "BPId", style = "width:0px;" })*@
+<script>
+    var BPId = 219;
+    var UserId = $("#UserId").val();
+    var lookupList = [];
+    var List = [];
+    var varBookingId = 0;
+    $(document).ready(function () {
+        InitializeComponent();
+        BookinglookupforCouponPrintGetByComapnyIdBPId();
+        bindGrid();
+    });
+
+    function InitializeComponent() {
+        $("#ddlBooking").dxDropDownBox({
+            valueExpr: 'BookingId',
+            placeholder: 'Select...',
+            displayExpr: 'BookingNo',
+            height: 29,
+            showClearButton: false,
+            dataSource: lookupList,
+            dropDownOptions: {  
+                width: 600  
+            },
+            contentTemplate(e) {
+                const v = e.component.option('value');
+                const $dataGrid = $('<div>').dxDataGrid({
+                    dataSource: lookupList,
+                    keyExpr: 'BookingId',
+                    columns: [
+                        { dataField: "ZZBookingDate", width: '20%', caption: "Booking Date" },
+                        { dataField: "CompanyName", width: '30%', caption: "Company Name" },
+                        { dataField: "Department", width: '30%', caption: "Department" },
+                        { dataField: "Project", width: '20%', caption: "Project" },
+                    ],
+                    hoverStateEnabled: false,
+                    focusedRowEnabled: false,
+                    allowColumnResizing: true,
+                    columnResizingMode: "widget",
+                    columnAutoWidth: true,
+                    wordWrapEnabled: false,
+                    height: 200,
+                    paging: { enabled: false },
+                    filterRow: { visible: true },
+                    showRowLines: true,
+                    showBorders: true,
+                    selection: { mode: 'single' },
+                    selectedRowKeys: v,
+                    onSelectionChanged(selectedItems) {
+                        const keys = selectedItems.selectedRowKeys;
+                        const hasSelection = keys.length;
+                        varBookingId = keys[0];
+                        BookedCouponDetailGetByBookingId(varBookingId);
+                        e.component.option('value', hasSelection ? keys[0] : null);
+                    },
+                });
+                dataGrid = $dataGrid.dxDataGrid('instance');
+                e.component.on('valueChanged', (args) => {
+                    dataGrid.selectRows(args.value, false);
+                    e.component.close();
+                });
+                return $dataGrid;
+            },
+        });
+    }
+
+    function BookinglookupforCouponPrintGetByComapnyIdBPId() {
+        try {
+            var modal = {};
+            modal.IntOne = $("#CompanyId").val();
+            var data = { 'objdbmlGeneral': modal };
+            var dataWithAntiforgeryToken = $.extend(data, { '__RequestVerificationToken': $("input[name='__RequestVerificationToken']").val() });
+            debugger
+            $.ajax({
+                url: '@Url.Action("BookinglookupforCouponPrintGetByComapnyIdBPId", "Home")',
+                type: 'POST',
+                dataType: 'json',
+                async: true,
+                data: dataWithAntiforgeryToken,
+                success: function (Response) {
+                    debugger
+                    if (Response.StatusId != "99") {
+                        lookupList = Response.Result;
+                        InitializeComponent();
+                    }
+                    else {
+                        alert(Response.Status);
+                    }
+                },
+                error: function (xhr) {
+                    alert(xhr.message);
+                }
+            });
+        }
+        catch (e) {
+            alert(e.message);
+        }
+    }
+
+    function BookedCouponDetailGetByBookingId(bookingId) {
+        try {
+            var modal = {};
+            modal.IntOne = bookingId;
+            var data = { 'objdbmlGeneral': modal };
+            var dataWithAntiforgeryToken = $.extend(data, { '__RequestVerificationToken': $("input[name='__RequestVerificationToken']").val() });
+            debugger
+            $.ajax({
+                url: '@Url.Action("BookedCouponDetailGetByBookingId", "Home")',
+                type: 'POST',
+                dataType: 'json',
+                async: true,
+                data: dataWithAntiforgeryToken,
+                success: function (Response) {
+                    debugger
+                    if (Response.StatusId != "99") {
+                        List = Response.Result;
+                        bindGrid();
+                    }
+                    else {
+                        alert(Response.Status);
+                    }
+                },
+                error: function (xhr) {
+                    alert(xhr.message);
+                }
+            });
+        }
+        catch (e) {
+            alert(e.message);
+        }
+    }
+
+    function bindGrid() {
+        $("#tbl").dxDataGrid({
+            dataSource: List,
+            columns: [
+                { dataField: "ServiceName", width: '54%', caption: "Service Name" },
+                { dataField: "ZZServiceDate", width: '18%', caption: "Booking Date" },
+                { dataField: "Consumption", width: '18%', caption: "Consumption" },
+                {
+                    dataField: "", width: '10%', alignment: "center", caption: "Print", cellTemplate: function (container, options) {
+                        $("<div class='ActionBtn'>").dxButton({
+                            class: "btn btn-fill btn-rose btn-xs",
+                            icon: "fa fa-print",
+                            hint: "Print",
+                            onClick: function () {
+                                ShowPrintPI_DevReport(options.data.BookingAddOnServiceId);
+                            }
+                        }).append(options.value).appendTo(container);
+                    },
+                }
+            ],
+            onSelectionChanged: function (selectedItems) {
+                var data = selectedItems.selectedRowsData[0];
+            },
+            loadPanel: { enabled: true },
+            keyExpr: "BookingAddOnServiceId",
+            selection: {
+                mode: "single"
+            },
+            hoverStateEnabled: false,
+            focusedRowEnabled: false,
+            allowColumnResizing: true,
+            columnResizingMode: "widget",
+            columnAutoWidth: true,
+            wordWrapEnabled: false,
+            height: 460,
+            paging: { enabled: false },
+            filterRow: { visible: true },
+            showRowLines: true,
+            showBorders: true
+        });
+    }
+
+    function ShowPrintPI_DevReport(BookingDetailId) {
+        try {
+            debugger
+            var strReportViewerUrl = $("#ReportURL").val();
+            strReportName = "rptCoupenPrint";
+            if (List.length > 0) {
+                window.open(strReportViewerUrl + "?rptName=" + strReportName + "&BPId=" + BPId + "&DocId=" + varBookingId + "&UserId=" + UserId + "&FlagId=" + 2 + "&BookingDetailId=" + BookingDetailId, '_blank');
+            }
+            else {
+                alert("No record found!");
+            }
+        }
+        catch (e) {
+            alert(e.message);
+        }
+    }
+</script>

@@ -1,0 +1,162 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+<div class="department_area section_gap" style="min-height: 800px;">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <div class="dpmt_courses">
+                    <div class="row">
+                        <!-- single course -->
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-12 text-center mt-100">
+                            <div class="single_department">
+                                <div class="dpmt_icon">
+                                    <img src="~/Templates/img/dpmt/icon1.png" alt="">
+                                </div>
+                                <h4>Homologation Services</h4>
+                            </div>
+                        </div>
+                        <!-- single course -->
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-12 text-center">
+                            <div class="single_department">
+                                <div class="dpmt_icon">
+                                    <img src="~/Templates/img/dpmt/icon2.png" alt="">
+                                </div>
+                                <h4>Homologation CVE</h4>
+                            </div>
+                        </div>
+                        <!-- single course -->
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-12 text-center mt-100">
+                            <div class="single_department">
+                                <div class="dpmt_icon">
+                                    <img src="~/Templates/img/dpmt/icon3.png" alt="">
+                                </div>
+                                <h4>Proving Ground Services</h4>
+                            </div>
+                        </div>
+                        <!-- single course -->
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-12 text-center">
+                            <div class="single_department">
+                                <div class="dpmt_icon">
+                                    <img src="~/Templates/img/dpmt/icon4.png" alt="">
+                                </div>
+                                <h4>Costing</h4>
+                            </div>
+                        </div>
+                        <!-- single course -->
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-12 text-center mt--100">
+                            <div class="single_department">
+                                <div class="dpmt_icon">
+                                    <img src="~/Templates/img/dpmt/icon5.png" alt="">
+                                </div>
+                                <h4>Tracking</h4>
+                            </div>
+                        </div>
+                        <!-- single course -->
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-12 text-center">
+                            <div class="single_department">
+                                <div class="dpmt_icon">
+                                    <img src="~/Templates/img/dpmt/icon6.png" alt="">
+                                </div>
+                                <h4>Test Facilities</h4>
+                            </div>
+                        </div>
+                        <!-- single course -->
+                        <div class="offset-lg-4 col-lg-4 col-md-4 col-sm-6 col-12 text-center mt--100">
+                            <div class="single_department">
+                                <div class="dpmt_icon">
+                                    <img src="~/Templates/img/dpmt/icon7.png" alt="">
+                                </div>
+                                <h4>Logistical Support</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="offset-lg-1 col-lg-5">
+                <div class="dpmt_right" id="bind">
+                    @*<h1>About NATRAX</h1>
+                        <p>National Automotive Testing and R&D Infrastructure Project (NATRiP), is a fully Government of India funded project with a total project cost of Rs. 3727.30 crore. This is the largest and one of the most significant initiatives in Automotive sector so far. </p>
+                        <p>The project aims at creating core global competencies in automotive sector in India by facilitating seamless integration of Indian Automotive industry with the world, through setting up state-of-the-art, four green field automotive testing, homologation and R&D infrastructure facilities and up-gradation of two existing facilities with new technology and equipment. </p>
+                        <a href="#" class="primary-btn text-uppercase">View More</a>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="readMoreModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" style="text-align:center">About Us</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="fa fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" style="text-align: center">
+                <div id="more"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-fill btn-danger btn-sm" data-dismiss="modal" style="margin-left: 5px; margin-top: 5px;">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+        var List = [];
+        $(document).ready(function () {
+            GetAll();
+        });
+
+        function Bind() {
+            try {
+                var HTMl = "";
+                $.each(List, function (Index, Object) {
+                    debugger;
+                    HTMl += '<h1>' + Object.Title + '</h1>';
+                    HTMl += '<div class="textLimit">' + Object.Description + '</div>';
+                    HTMl += '<a href="#" class="primary-btn text-uppercase" onclick="readMoreModal(' + Object.NewsHotelsTrainingVideoId + ')">View More</a>';
+                });
+                $("#bind").append(HTMl);
+            } catch (e) {
+                alert(e.message);
+            }
+        }
+
+        function GetAll() {
+            try {
+                var data = { 'intBPId': '174' };
+                var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+                $.ajax({
+                    url: '@Url.Action("NewsHotelsTrainingVideoViewGetByBPId","Front")',
+                    type: 'POST',
+                    dataType: 'json',
+                    async: true,
+                    data: dataWithAntiforgeryToken,
+                    success: function (data) {
+                        if (data.StatusId != "99" && data.StatusId != "-99") {
+                            List = data.NewsHotelsTrainingDetails;
+                            Bind();
+                        } else {
+                            alert(data.Status);
+                        }
+                    },
+                    error: function (xhr) {
+                        alert(xhr.responseText);
+                    }
+                });
+            }
+            catch (e) {
+                alert(e.message);
+            }
+    }
+
+    function readMoreModal(id) {
+        const res = List.filter((ele) => id === ele.NewsHotelsTrainingVideoId);
+        $("#more").html(res[0].Description);
+        $("#readMoreModal").modal("show");
+    }
+</script>

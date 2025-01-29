@@ -1,0 +1,575 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+
+<style>
+    .contentPage {
+        display: inline-block;
+        width: 100%;
+    }
+
+    .contactFormPage {
+        /*padding: 30px 100px;*/
+        padding: 30px 10px;
+        max-width: 1300px;
+        margin: 0 auto;
+        display: block;
+        width: 100%;
+    }
+
+        .contactFormPage div[class*="col-"] {
+            padding: 0;
+        }
+
+    /*.form-group {
+            margin-bottom: 15px;
+        }*/
+
+    .contactForm.lined,
+    .contactFormSent.lined {
+        border-right: 1px solid #DDD;
+    }
+
+    .contactForm {
+        padding-right: 10px !important;
+        display: inline-block;
+        margin-bottom: 20px !important;
+    }
+
+    /*.cmp-contact-form {
+            padding-top: 16px;
+        }*/
+
+    .form-horizontal .control-label {
+        text-align: left !important;
+        padding-left: 0;
+        font-weight: normal;
+        font-family: Tahoma, sans-serif;
+        font-size: 13px;
+        color: #323233;
+        /* line-height: 50px; */
+        padding-top: 0;
+    }
+
+    .req {
+        color: red;
+    }
+
+    .contactForm .has-error .form-control {
+        border: 2px solid #FF0303;
+        box-shadow: none;
+        -webkit-box-shadow: none;
+    }
+
+    .contactForm .form-control {
+        background-color: #EEE;
+        box-shadow: none;
+        border: none;
+        border-radius: 0;
+        height: 40px;
+        color: #323233;
+        font-family: Tahoma, sans-serif;
+        font-size: 13px;
+        margin-bottom: 10px;
+    }
+
+    .col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12 {
+        float: left;
+    }
+
+    .col-xs-3 {
+        width: 25%;
+    }
+
+    .col-xs-4 {
+        width: 33.3333333%;
+    }
+
+    .col-xs-9 {
+        width: 75%;
+    }
+
+    .col-xs-10 {
+        width: 83.33333333333334%;
+    }
+
+    .col-xs-offset-2 {
+        margin-left: 16.666666666666664%;
+    }
+
+    .col-xs-offset-3 {
+        margin-left: 25%;
+    }
+
+
+
+    .form-horizontal .form-group {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .mandatoryAdvisor {
+        color: #333;
+        font-family: Tahoma, sans-serif;
+        font-weight: bold;
+        font-size: 13px;
+        margin-top: 5px;
+        margin-bottom: 20px;
+        text-align: right;
+    }
+
+    .contactForm .checkbox {
+        padding-left: 0;
+    }
+
+    .form-horizontal .radio, .form-horizontal .checkbox {
+        min-height: 27px;
+    }
+
+    .form-horizontal .control-label, .form-horizontal .radio, .form-horizontal .checkbox, .form-horizontal .radio-inline, .form-horizontal .checkbox-inline {
+        padding-top: 7px;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .legalTextGPDR2 {
+        font-family: Tahoma, sans-serif;
+        font-size: 1.1rem;
+        color: #777;
+        line-height: 1.32rem;
+    }
+
+        .legalTextGPDR2 p {
+            font-family: Tahoma, sans-serif;
+            font-size: 1.1rem;
+            color: #777;
+            line-height: 1.32rem;
+            margin-bottom: 15px;
+        }
+
+    .cmp-contact-form .btnForm {
+        margin-top: 10px;
+    }
+
+    .btnForm {
+        border: none;
+        background: linear-gradient(60deg, #ec407a, #d81b60);
+        font-size: 18px;
+        color: #FFF;
+        text-transform: uppercase;
+        line-height: 0em;
+        padding: 25px 50px;
+        cursor: pointer;
+    }
+
+    .list-unstyled {
+        padding-left: 0;
+        list-style: none;
+        font-size: 13px;
+    }
+
+    label {
+        display: inline-block;
+        margin-bottom: .5rem;
+        font-size: 13px;
+    }
+
+    .contactFormPage .offices {
+        padding-top: 0 !important;
+    }
+
+    .offices {
+        padding-left: 55px !important;
+    }
+
+    .linkInterPresence {
+        display: block;
+        margin: 20px 0 30px 0;
+    }
+
+        .linkInterPresence a {
+            font-family: Tahoma, sans-serif;
+            font-size: 13px;
+            font-weight: bold;
+            color: #FF6900;
+        }
+
+            .linkInterPresence a:before {
+                content: '';
+                margin-right: 15px;
+                background: url(../../Templates/img/locationPointer.png) no-repeat;
+                width: 28px;
+                height: 36px;
+                display: inline-block;
+                float: left;
+                margin-top: -11px;
+            }
+
+    .h3HeadOffices {
+        font-size: 1.487rem;
+        text-transform: uppercase;
+        font-family: FoundryBold, Tahoma, SimSun, sans-serif;
+        color: #323233;
+        margin-top: 0;
+        margin-bottom: 6px;
+        font-weight: 500;
+        line-height: 1.1;
+    }
+
+    .headOffice {
+        font-family: Tahoma, sans-serif;
+        font-size: 13px;
+        line-height: 2.5rem;
+        color: #323233;
+        display: block;
+        margin-top: 0;
+    }
+
+    .officeName {
+        font-weight: bold;
+    }
+
+    .titlePage h2, .titlePage h1 {
+        font-family: foundryLight, Tahoma, SimSun, Sans-serif;
+        text-transform: none;
+        font-size: 30px;
+        line-height: 3rem;
+        margin-top: 0px;
+        color: #2c2c31;
+        margin-bottom: 0 !important;
+    }
+
+    .bigText {
+        display: block;
+        margin: 25px 0 22px 0;
+        font-family: foundryLight, Tahoma, SimSun, Sans-serif;
+        font-size: 30px;
+        color: #2C2C31;
+    }
+
+    .smallText {
+        display: block;
+        margin: 0px 0 40px 0;
+        font-family: Tahoma, sans-serif;
+        font-size: 15px;
+        color: #000;
+    }
+
+    .contactFormSent {
+        padding: 0px 0px 94px 0px !important;
+    }
+</style>
+
+<div class="contentPage" style="min-height: 800px;">
+    <div class="contactFormPage">
+        <div class="contactForm lined col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12 col-xxs-12">
+            <section class="cmp-contact-form">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="inputCompany" class="col-xs-3 col-xxs-12 control-label">
+                            Company
+                            <span class="req">*</span>
+                        </label>
+                        <div class="col-xs-9 col-xxs-12">
+                            <input type="text" class="form-control" name="inputCompany" id="inputCompany">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputFirstName" class="col-xs-3 col-xxs-12 control-label">
+                            First Name
+                            <span class="req">*</span>
+                        </label>
+                        <div class="col-xs-9 col-xxs-12">
+                            <div class="help-block with-errors"></div>
+                            <input type="text" class="form-control" name="inputFirstName" id="inputFirstName">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputLastName" class="col-xs-3 col-xxs-12 control-label">
+                            Last Name
+                            <span class="req">*</span>
+                        </label>
+                        <div class="col-xs-9 col-xxs-12">
+                            <div class="help-block with-errors"></div>
+                            <input type="text" class="form-control" name="inputLastName" id="inputLastName">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail" class="col-xs-3 col-xxs-12 control-label">
+                            E-mail
+                            <span class="req">*</span>
+                        </label>
+                        <div class="col-xs-9 col-xxs-12">
+                            <div class="help-block with-errors"></div>
+                            <input type="email" class="form-control" name="inputEmail" id="inputEmail">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputTel" class="col-xs-3 col-xxs-12 control-label">
+                            Phone number
+                            <span class="req">*</span>
+                        </label>
+                        <div class="col-xs-9 col-xxs-12">
+                            <div class="help-block with-errors"></div>
+                            <input type="tel" class="form-control" name="inputTel" id="inputTel">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="selectCountry" class="col-xs-3 col-xxs-12 control-label">
+                            Country
+                            <span class="req">*</span>
+                        </label>
+                        <div class="col-xs-9 col-xxs-12">
+                            <select name="selectCountry" id="selectCountry" class="form-control" data-style="btn-primary">
+                                <option value="0">Select a country</option>
+                                @foreach (var itm in ViewBag.Country)
+                                {
+                                    <option value='@itm.Value'>@itm.Text</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    @*<div class="form-group">
+                            <label for="selectSubject" class="col-xs-3 col-xxs-12 control-label">
+                                Subject
+                                <span class="req">*</span>
+                            </label>
+                            <div class="selectwrap col-xs-9 col-xxs-12">
+                                <select name="selectSubject" id="selectSubject" class="form-control">
+                                    <option value="0">Select a subject</option>
+                                    @foreach (var itm in ViewBag.Subject)
+                                    {
+                                        <option value='@itm.Value'>@itm.Text</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>*@
+                    <div class="form-group">
+                        <label for="inputSubject" class="col-xs-3 col-xxs-12 control-label">
+                            Subject
+                            <span class="req">*</span>
+                        </label>
+                        <div class="col-xs-9 col-xxs-12">
+                            <div class="help-block with-errors"></div>
+                            <input type="text" class="form-control" name="inputSubject" id="inputSubject">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="textareaMessage" class="col-xs-3 col-xxs-12 control-label">
+                            Message
+                            <span class="req">*</span>
+                        </label>
+                        <div class="col-xs-9 col-xxs-12">
+                            <textarea name="textareaMessage" id="textareaMessage" class="form-control" style="height: 50px !important;"></textarea>
+                        </div>
+                    </div>
+                    <div class="mandatoryAdvisor col-xs-offset-3 col-xs-9 col-xxs-12">
+                        <label style="float: left;">Please read and accept our Privacy Policy</label>
+                        <span class="req">(*)</span>
+                        Mandatory field
+                    </div>
+                    <div class="col-xs-offset-3 col-xs-9 col-xxs-12">
+                        <div class="checkbox">
+                            <div class="help-block with-errors"></div>
+                            <input type="checkbox" name="policy" id="policy" class="styled">
+                            <label for="policy">
+                                I have read and accept the
+                                <a href="javascript:void(0)">
+                                    Privacy Policy
+                                </a>
+                                <span class="req">*</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-xs-offset-3 col-xs-9 col-xxs-12">
+                        <div class="checkbox">
+                            <div class="help-block with-errors"></div>
+                            <input type="checkbox" name="event" id="event" class="styled">
+                            <label for="event">
+                                I want to be informed about events, news, products and services of the Natrax group
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-xs-offset-3 col-xs-9 col-xxs-12">
+                        <div class="checkbox">
+                            <div class="help-block with-errors"></div>
+                            <input type="checkbox" name="sendcopy" id="sendcopy" class="styled">
+                            <label for="sendcopy">Send a copy of this message to my email address</label>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <div class="col-xs-offset-3 col-xs-9 col-xxs-12">
+                            <button id="btnContact" type="button" class="btnForm">
+                                Send
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </section>
+        </div>
+        <div class="contactFormSent lined col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12" style="display: none;">
+            <img src="https://www.applusidiada.com/.imaging/mte/applus-theme/210x166/dam/static-images/contactSentDecoration.png/jcr:content/contactSentDecoration.png" width="210" height="166" alt="Form sent">
+            <div class="bigText noFormId">
+                Thanks for your request
+            </div>
+            <div class="bigText formId" style="display:none;">
+                Your form number <span id="formId"></span> has been received
+            </div>
+            <div class="smallText">
+                You'll be contacted shortly.
+            </div>
+        </div>
+        <div class="offices col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 col-xxs-12">
+            <div class="linkInterPresence">
+                <a href="https://www.google.com/maps/place/NATRAX/22.5715856,75.6138646,15z/data=!4m2!3m1!1s0x0:0x2065ae31850dd525?sa=X&ved=2ahUKEwi8xauGsqruAhUTeysKHSmnD2QQ_BIwFnoECCEQBQ" target="_blank">
+                    Visit our international presence map
+                </a>
+            </div>
+            <div class="headOffices">
+                <div class="h3HeadOffices">Head Offices</div>
+                <div class="headOffice">
+                    <span class="officeName">NATRAX PGMS</span>
+                    <div class="officeAddress" style="font-size: 12px;">
+                        Manpur Road, Madav Pura Village, Khandva, Pithampur, Madhya Pradesh 454774
+                    </div>
+                    <div class="officeTelFax" style="font-size: 12px;">
+                        Tel.:
+                        <a href="tel:011 4921 5555" style="color: #333333;">+91 9893892310</a>
+                        @*Fax.:
+                            +34 977 166 007*@
+                    </div>
+                    Email.:
+                    <a href="mailto:info@natrax.in" class="officeMail">info@natrax.in</a>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+        $(document).ready(function () {
+            MaskControls();
+            $("#inputCompany").focus();
+            $("#btnContact").click(function () {
+                if (validation()) {
+                    var model = {};
+                    model.CompanyName = $("#inputCompany").val().trim();
+                    model.FirstName = $("#inputFirstName").val().trim();
+                    model.LastName = $("#inputLastName").val().trim();
+                    model.EmailAddress = $("#inputEmail").val();
+                    model.PhoneNo = $("#inputTel").val().trim();
+                    model.CountryId = $("#selectCountry").val().trim();
+                    //model.SubjectPropId = $("#selectSubject").val().trim();
+                    model.Subject = $("#inputSubject").val().trim();
+                    model.Remark = $("#textareaMessage").val().trim();
+                    if ($("input[name='policy']:checked").val() === "on") {
+                        model.AcceptPrivacyPolicy = true;
+                    } else {
+                        model.AcceptPrivacyPolicy = false;
+                    }
+                    if ($("input[name='event']:checked").val() === "on") {
+                        model.EventInformed = true;
+                    } else {
+                        model.EventInformed = false;
+                    }
+                    if ($("input[name='sendcopy']:checked").val() === "on") {
+                        model.SendMail = true;
+                    } else {
+                        model.SendMail = false;
+                    }
+                    var data = {'model': model};
+                    var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+                    $.ajax({
+                        url: '@Url.Action("ContactInsertFront", "Front")',
+                        type: 'POST',
+                        dataType: 'json',
+                        async: true,
+                        data: dataWithAntiforgeryToken,
+                        beforeSend: function () {
+                            $(".ntx-loader").show();
+                        },
+                        success: function (data) {
+                            if (data.StatusId != "99" && data.StatusId != "-99") {
+                                $(".contactForm").hide();
+                                $(".contactFormSent").show();
+                                $(".ntx-loader").hide();
+                            }
+                            else {
+                                $(".ntx-loader").hide();
+                                alert(data.Status);
+                            }
+                        },
+                        error: function (xhr) {
+                            $(".ntx-loader").hide();
+                            alert(xhr.responseText);
+                        }
+                    });
+                }
+            });
+        });
+
+        function validation() {
+            try {
+                var strMSG = '';
+                if ($("#inputCompany").val().trim() == "") {
+                    strMSG = strMSG + 'Company Name \n</br>'
+                }
+                if ($("#inputFirstName").val().trim() == "") {
+                    strMSG = strMSG + 'First Name \n</br>'
+                }
+                if ($("#inputLastName").val().trim() == "") {
+                    strMSG = strMSG + 'Last Name \n</br>'
+                }
+                if ($("#inputEmail").val().trim() == "") {
+                    strMSG = strMSG + 'E-mail \n</br>'
+                }
+                if ($("#inputTel").val().trim() == "") {
+                    strMSG = strMSG + 'Phone number \n</br>'
+                }
+                if ($("#selectCountry").val() == null || $("#selectCountry").val() == undefined || parseInt($("#selectCountry").val()) == 0) {
+                    strMSG = strMSG + 'Country \n</br>'
+                }
+                //if ($("#selectSubject").val() == null || $("#selectSubject").val() == undefined || parseInt($("#selectSubject").val()) == 0) {
+                //    strMSG = strMSG + 'Subject \n</br>'
+                //}
+                if ($("#inputSubject").val().trim() == "") {
+                    strMSG = strMSG + 'Subject \n</br>'
+                }
+                if ($("#textareaMessage").val().trim() == "") {
+                    strMSG = strMSG + 'Message \n</br>'
+                }
+                if ($("input[name='policy']:checked").val() == undefined || $("input[name='policy']:checked").val() == "") {
+                    strMSG = strMSG + 'Please read the policy \n</br>'
+                }
+                if (strMSG != '') {
+                    alert("Please enter data for Mandatory fields  \n</br>" + strMSG);
+                    return false;
+                } else {
+                    return true;
+                }
+            } catch (e) {
+                $(".ntx-loader").hide();
+                alert(e.message);
+                return false;
+            }
+        }
+
+        function MaskControls() {
+            try {
+                (function ($) {
+                    $(function () {
+                        $("#inputCompany").attr('onkeypress', 'return CheckIsAlphaNumeric(event,this);');
+                        $("#inputFirstName").attr('onkeypress', 'return CheckIsAlpha(event,this);');
+                        $("#inputLastName").attr('onkeypress', 'return CheckIsAlpha(event,this);');
+                        $("#inputEmail").IsEmailOnly();
+                        $("#inputTel").attr('onkeypress', 'return CheckIsNumeric(event,this);');
+                    });
+                })(jQuery);
+            }
+            catch (e) {
+                $(".ntx-loader").hide();
+                alert(e.message);
+                return false;
+            }
+        }
+</script>

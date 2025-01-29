@@ -1,0 +1,34 @@
+﻿@{
+    Layout = null;
+}
+
+<div class="table-responsive">
+    <table id="datatables" class="table table-striped table-no-bordered table-hover">
+        <thead>
+            <tr>
+                <th width="20%">ServiceId</th>
+                <th width="20%">Service Name</th>
+                <th width="20%">Facility</th>
+                <th width="20%">Document</th>
+                <th width="20%">Document Name</th>
+                <th width="20%">Action</th>
+            </tr>
+        </thead>
+        <tbody id="tbodyBooking">
+            @foreach (var itm in Model)
+            {
+                <tr>
+                    <td>@itm.ServiceId</td>
+                    <td>@itm.ServiceName</td>
+                    <td>@itm.ServiceSpecification</td>
+                    <td>@itm.DocumentDescription</td>
+                    <td>@itm.DocumentName</td>
+                    <td>
+                        @*<i class="fa fa-download"></i>*@
+                        <a href="@Url.Action("DownloadLabForm", "Home",new {DocumentName=@itm.DocumentName })" class="btn btn-primary" style="padding:inherit;">download</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

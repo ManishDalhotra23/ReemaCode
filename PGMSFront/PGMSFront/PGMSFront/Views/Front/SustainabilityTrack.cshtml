@@ -1,0 +1,265 @@
+﻿@{
+    ViewBag.Title = "Sustainability Track";
+    Layout = "~/Views/Shared/_LayoutTrack.cshtml";
+}
+<style>
+    .card {
+        margin-bottom: 0px !important;
+        margin-top: 25px !important;
+    }
+
+    .table thead tr th {
+        font-size: 14px;
+        border-top: 1px solid #ddd;
+    }
+
+    .table tbody tr td {
+        font-size: 14px;
+    }
+
+    .card-header {
+        padding: 0px 4px 0px 10px !important;
+    }
+
+    .card .card-body {
+        padding: 0px 5px 0px 5px !important;
+    }
+</style>
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Vehicle wise Test Summary</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-striped">
+                                        <thead class=" text-primary">
+                                            <tr>
+                                                <th width="5%">#</th>
+                                                <th width="14%">Vehicle No.</th>
+                                                <th width="15%">Vehicle Category</th>
+                                                <th width="15%">Driver</th>
+                                                <th width="7%" class="text-right">From Date</th>
+                                                <th width="7%" class="text-right">To Date</th>
+                                                <th width="7%" class="text-right">Test Days</th>
+                                                <th width="9%" class="text-right">Usage Hrs.</th>
+                                                <th width="9%" class="text-right">Rounded</th>
+                                                <th width="6%" class="text-right">Bill Hrs.</th>
+                                                <th width="6%" class="text-right">Amount</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr id="tr_1" onclick="changeColor('1')">
+                                                <td>1</td>
+                                                <td>MP09 CH 1234</td>
+                                                <td>HCV</td>
+                                                <td class="table-warning">
+                                                    <select class="form-control">
+                                                        <option>- Select Driver -</option>
+                                                        <option>Kapil</option>
+                                                        <option>Nilesh</option>
+                                                    </select>
+                                                </td>
+                                                <td class="text-right">18/03/2020</td>
+                                                <td class="text-right">22/03/2020</td>
+                                                <td class="text-right">5</td>
+                                                <td class="text-right">03:24</td>
+                                                <td class="text-right">4</td>
+                                                <td class="text-right">12</td>
+                                                <td class="text-right">60,000.00</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        #1&nbsp;&nbsp;@*<span class="suggestion">.....</span>&nbsp;&nbsp;<span style="color: red;">Fields must be filled out.</span>*@
+                        <button type="button" class="btn btn-fill btn-rose btn-sm pull-right" onclick="AddMore()">Add More</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-striped">
+                                        <thead class=" text-primary">
+                                            <tr>
+                                                <th width="16%">Date</th>
+                                                <th width="10%"></th>
+                                                <th width="20%">Time slot for starting the Test</th>
+                                                <th width="16%" class="text-right">Bookings Status on Day</th>
+                                                <th width="16%" class="text-right">Booking Status in slot</th>
+                                                <th width="22%" class="text-right">Slot wise Confirmed</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="table-warning">
+                                                    <input type="text" class="form-control datetimepicker">
+                                                </td>
+                                                <td></td>
+                                                <td class="table-warning">
+                                                    <select class="form-control">
+                                                        <option>- Select Time Slot -</option>
+                                                        <option>08AM - 11AM</option>
+                                                        <option>11AM - 02PM</option>
+                                                        <option>02PM - 5PM</option>
+                                                        <option>05PM - 08PM</option>
+                                                    </select>
+                                                </td>
+                                                <td>-</td>
+                                                <td>-</td>
+                                                <td>-</td>
+                                            </tr>
+                                        </tbody>
+                                        <thead class=" text-primary">
+                                            <tr>
+                                                <th width="20%">Track</th>
+                                                <th width="16%" class="text-right">Rate</th>
+                                                <th width="16%" class="text-right">Usage HH:MM</th>
+                                                <th width="16%" class="text-right">Round Hours</th>
+                                                <th width="16%" class="text-right">Bill Hours</th>
+                                                <th width="16%" class="text-right">Amount</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Sustainability</td>
+                                                <td class="text-right">5000</td>
+                                                <td class="text-right table-warning"><input type="text" class="form-control timepicker text-right"></td>
+                                                <td class="text-right">1</td>
+                                                <td class="text-right">4</td>
+                                                <td class="text-right">20000</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        @*<div class="row">
+                                <div class="col-md-12">
+                                    <button type="button" class="btn btn-fill btn-rose btn-sm pull-right" onclick="AddMore()">Submit</button>
+                                </div>
+                            </div>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" id="AddMoreRow" style="display: none">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        #2&nbsp;&nbsp;@*<span class="suggestion">.....</span>&nbsp;&nbsp;<span style="color: red;">Fields must be filled out.</span>*@
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-striped">
+                                        <thead class=" text-primary">
+                                            <tr>
+                                                <th width="16%">Date</th>
+                                                <th width="10%"></th>
+                                                <th width="20%">Time slot for starting the Test</th>
+                                                <th width="16%" class="text-right">Bookings Status on Day</th>
+                                                <th width="16%" class="text-right">Booking Status in slot</th>
+                                                <th width="22%" class="text-right">Slot wise Confirmed</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="table-warning">
+                                                    <input type="text" class="form-control datetimepicker">
+                                                </td>
+                                                <td></td>
+                                                <td class="table-warning">
+                                                    <select class="form-control">
+                                                        <option>- Select Time Slot -</option>
+                                                        <option>08AM - 11AM</option>
+                                                        <option>11AM - 02PM</option>
+                                                        <option>02PM - 5PM</option>
+                                                        <option>05PM - 08PM</option>
+                                                    </select>
+                                                </td>
+                                                <td>-</td>
+                                                <td>-</td>
+                                                <td>-</td>
+                                            </tr>
+                                        </tbody>
+                                        <thead class=" text-primary">
+                                            <tr>
+                                                <th width="20%">Track</th>
+                                                <th width="16%" class="text-right">Rate</th>
+                                                <th width="16%" class="text-right">Usage HH:MM</th>
+                                                <th width="16%" class="text-right">Round Hours</th>
+                                                <th width="16%" class="text-right">Bill Hours</th>
+                                                <th width="16%" class="text-right">Amount</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Sustainability</td>
+                                                <td class="text-right">5000</td>
+                                                <td class="text-right table-warning"><input type="text" class="form-control timepicker text-right"></td>
+                                                <td class="text-right">1</td>
+                                                <td class="text-right">4</td>
+                                                <td class="text-right">20000</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        @*<div class="row">
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-fill btn-rose btn-sm pull-right" onclick="AddMore()">Submit</button>
+                    </div>
+                </div>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var Holdid = '';
+    var spanPrv = '';
+    function changeColor(id) {
+        if (id != Holdid || Holdid == "") {
+            $("#tr_" + Holdid + "").removeClass('highlighted');
+            $("#sp_" + Holdid).css("visibility", "hidden");
+            $("#tr_" + id + "").addClass('highlighted');
+            Holdid = id;
+        }
+        else {
+            if ($("#tr_" + id + "").hasClass('highlighted')) {
+                $("#tr_" + id + "").removeClass('highlighted');
+                Holdid = 0;
+            }
+            else {
+                $("#tr_" + id + "").addClass('highlighted');
+                Holdid = id;
+            }
+        }
+    }
+
+    function AddMore() {
+        $("#AddMoreRow").show();
+    }
+</script>

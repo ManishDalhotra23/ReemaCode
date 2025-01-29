@@ -1,0 +1,96 @@
+﻿@{
+    ViewBag.Title = "Trainig Videos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .main-panel > .content {
+        padding: 0px 15px !important;
+    }
+
+    h3{
+        margin: 0px 0 0px !important;
+    }
+</style>
+<input type="hidden" id="strImgPath" value="@System.Configuration.ConfigurationManager.AppSettings["strImgPath"]" />
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-rose card-header-icon">
+                        <h4 class="card-title">Training Videos</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row" id="Bind"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var List = [];
+    var strImgPath = $("#strImgPath").val();
+    $(document).ready(function () {
+        GetAll();
+    });
+
+    function Bind() {
+        try {
+            var HTMl = "";
+            $("#Track").empty();
+            $.each(List, function (Index, Object) {
+                debugger
+                HTMl += '<div class="col-md-4">';
+                HTMl += '<div class="card-header text-center" style="padding: 0px 0px 3px 0px;">';
+                HTMl += '<h3 class="card-title">' + Object.Title + '</h3>';
+                HTMl += '</div>';
+                HTMl += '<div class="embed-responsive embed-responsive-16by9">';
+                //HTMl += '<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/tgbNymZ7vqY" allowfullscreen></iframe>';
+                HTMl += '<video width="480" height="320" controls="controls">';
+                HTMl += '<source src="'+ strImgPath + Object.UploadPath +'" type="video/mp4">';
+                HTMl += '</video>';
+                HTMl += '</div>';
+                HTMl += '<p class="text-primary">'+ Object.Description +'</p>';
+                HTMl += '<hr style="margin-top: 0px; margin-bottom: 0px;" />';
+                HTMl += '</div>';
+            });
+            $("#Bind").append(HTMl);
+        }catch (e) {
+          alert(e.message);
+      }
+    }
+
+    function GetAll() {
+        try {
+            LoaderShow();
+            var data = { 'intBPId': '147' };
+            var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+            $.ajax({
+                url: '@Url.Action("NewsHotelsTrainingVideoViewGetByBPId","Front")',
+                type: 'POST',
+                dataType: 'json',
+                async: true,
+                data: dataWithAntiforgeryToken,
+                success: function (data) {
+                    LoaderHide();
+                    if (data.StatusId != "99" && data.StatusId != "-99") {
+                        List = data.NewsHotelsTrainingDetails;
+                         debugger;
+                        Bind();
+                    } else {
+                        alert(data.Status);
+                    }
+                },
+                error: function (xhr) {
+                    LoaderHide();
+                    alert(xhr.responseText);
+                }
+            });
+        }
+        catch (e) {
+            LoaderHide();
+            alert(e.message);
+        }
+    }
+</script>

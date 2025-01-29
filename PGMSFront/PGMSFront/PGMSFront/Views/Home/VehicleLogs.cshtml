@@ -1,0 +1,225 @@
+﻿@{
+    ViewBag.Title = "Vehicle Logs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Html.AntiForgeryToken()
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="card">
+                <div class="card-header card-header-rose card-header-icon">
+                    <div class="card-text">
+                        <h4 class="card-title">Vehicle Logs Report</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="ddlDepartment">Department *</label>
+                                <select class="form-control" id="ddlDepartment">
+                                    <option value="-1">-Select-</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="txtDate">Date *</label>
+                                <input type="text" id="txtDate" class="form-control datetimepicker" placeholder="DD-MM-YYYY">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group" style="margin: 0 !important;">
+                                <label for="">&nbsp;</label><br />
+                                <button type="button" class="btn btn-fill btn-rose btn-sm" id="btnGetData" onclick="return GetData()">Get Data</button>
+                                <button type="button" class="btn btn-fill btn-rose btn-sm" id="btnExport" onclick="return ExcelExport()">Export</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="tbl"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="hiddenUserTypePropId" value="@Session["UserTypePropId"]" />
+<script>
+    $(document).ready(function () {
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1;
+        var yyyy = today.getFullYear();
+        if(dd<10){dd='0'+dd} if(mm<10){mm='0'+mm} today = dd+'/'+mm+'/'+yyyy;
+        $("#txtDate").val(today);
+        var List = [];
+        var CompanyDepartmentList = [];
+        var CompanyDepartment = @Html.Raw(Json.Encode(@ViewBag.Department));
+        for(var i = 0; i < CompanyDepartment.length; i++) {
+            CompanyDepartmentList[i] = CompanyDepartment[i];
+        }
+        debugger
+        bindDepartment(CompanyDepartmentList);
+        Bind(List);
+    });
+
+    function bindDepartment(CompanyDepartmentList) {
+        var selected = "";
+        debugger
+        $("#ddlDepartment").html("");
+        if ($("#hiddenUserTypePropId").val() == "81") {
+            selected = "";
+            var gridData = "<option value='-1'>-Select-</option>";
+            gridData = gridData + "<option value='0' selected>All</option>";
+        } else if ($("#hiddenUserTypePropId").val() == "167") {
+            $("#ddlDepartment").attr('disabled',true);
+            selected = "selected";
+        }
+        for (var i = 0; i < CompanyDepartmentList.length; i++) {
+            gridData = gridData + "<option value='" + NullHandle(CompanyDepartmentList[i].Value) + "' '"+ selected +"'>" + NullHandle(CompanyDepartmentList[i].Text) + "</option>";
+        }
+        $("#ddlDepartment").html(gridData);
+    }
+
+    function GetData() {
+        try {
+            if (Validate()) {
+                LoaderShow();
+                var model = {};
+                model.IntTwo = $("select[id='ddlDepartment']").val();
+                model.StrOne = $("input[id='txtDate']").val();
+                var data = { 'model': model };
+                debugger
+                var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+                $.ajax({
+                    url: '@Url.Action("VehicleLogsGetByCompanyIdDepartmentIdDate_Reports", "Home")',
+                    type: 'POST',
+                    dataType: 'json',
+                    async: true,
+                    data: dataWithAntiforgeryToken,
+                    success: function (data) {
+                        LoaderHide();
+                        debugger
+                        if (data.StatusId != "99" && data.StatusId != "-99") {
+                            List = data.VehicleLogsList;
+                            if (List.length) {
+                                Bind(List);
+                            }
+                        }
+                        else {
+                            alert(data.Status);
+                        }
+                    },
+                    error: function (xhr) {
+                        LoaderHide();
+                        alert(xhr.responseText);
+                    }
+                });
+            }
+        }
+        catch (e) {
+            LoaderHide();
+            alert(e.message);
+        }
+    }
+
+    function Bind(data) {
+        $(".tbl").dxDataGrid({
+            dataSource: data,
+            keyExpr: "",
+            loadPanel: {
+                enabled: true,
+                text: 'Please wait...'
+            },
+            export: {
+                enabled: false,
+                fileName: "Vehicle-Logs-Report",
+            },
+            headerFilter: {
+                visible: true
+            },
+            hoverStateEnabled: true,
+            allowColumnResizing: true,
+            columnResizingMode: "widget",
+            columnAutoWidth: false,
+            wordWrapEnabled: true,
+            height: 440,
+            paging: { enabled: false, pageSize: 25 },
+            filterRow: { visible: true },
+            showRowLines: true,
+            showBorders: true,
+            selection: {
+                mode: 'single',
+            },
+            scrolling: { mode: 'infinite' },
+            columns: [
+                {
+                    dataField: "BookingNo",
+                    caption: "Booking No.",
+                    width: '12%',
+                },
+                {
+                    dataField: "Department",
+                    caption: "Department",
+                    width: '12%',
+                },
+                {
+                    dataField: "Project",
+                    caption: "Project",
+                    width: '12%',
+                },
+                {
+                    dataField: "TrackName",
+                    caption: "Track Name",
+                    width: '22%',
+                },
+                {
+                    dataField: "RFIDNo",
+                    caption: "RFID",
+                    width: '8%',
+                    alignment: 'right',
+                },
+                {
+                    dataField: "VehName",
+                    caption: "Vehicle No.",
+                    width: '10%',
+                },
+                {
+                    dataField: "InDateTime",
+                    caption: "In Date/Time",
+                    width: '12%',
+                    alignment: 'right',
+                },
+                {
+                    dataField: "OutDateTime",
+                    caption: "Out Date/Time",
+                    width: '12%',
+                    alignment: 'right',
+                },
+            ]
+        });
+    }
+
+    function ExcelExport() {
+        $(".tbl").dxDataGrid("instance").exportToExcel(false);
+    }
+
+    function Validate() {
+        debugger
+        var msg = "";
+        if ($("#ddlDepartment").val() == -1 || $("#ddlDepartment").val() == undefined || $("#ddlDepartment").val() == null) {
+            msg += '<br>Department';
+        }
+        if ($("#txtDate").val() == '' || $("#txtDate").val() == undefined || $("#txtDate").val() == null) {
+            msg += '<br>Date';
+        }
+        if (msg != "") {
+            alert("Please fill valid details in the fields below: \n" + msg);
+            return false;
+        }
+        return true;
+    }
+</script>

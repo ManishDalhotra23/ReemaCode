@@ -1,0 +1,1060 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+
+    <link href="~/Templates/Alert/jquery-confirm.min.css" rel="stylesheet" />
+    <link rel="icon" href="~/Templates/img/favicon.png" type="image/png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>@ViewBag.Title</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <!-- CSS Files -->
+    <link href="~/Templates/assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link href="~/Templates/assets/demo/demo.css" rel="stylesheet" />
+    <link href="~/Templates/assets/owl/owl.carousel.min.css" rel="stylesheet" />
+    <link href="~/Templates/assets/owl/owl.theme.default.min.css" rel="stylesheet" />
+    <link href="~/Templates/assets/DateTimePicker/jquery.datetimepicker.css" rel="stylesheet" />
+    <link href="~/Templates/Alert/jquery-confirm.min.css" rel="stylesheet" />
+    <script src="~/Templates/assets/js/core/jquery.min.js"></script>
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>*@
+    <!-- DevExtreme-->
+    <link href="~/Templates/Devextreme/css/dx.common.css" rel="stylesheet" />
+    <link href="~/Templates/Devextreme/css/dx.light.css" rel="stylesheet" />
+    <script src="~/Templates/Devextreme/js/jszip.min.js"></script>
+    <script src="~/Templates/Devextreme/js/cldr.js"></script>
+    <script src="~/Templates/Devextreme/js/cldr/event.js"></script>
+    <script src="~/Templates/Devextreme/js/cldr/supplemental.js"></script>
+    <script src="~/Templates/Devextreme/js/cldr/unresolved.js"></script>
+    <script src="~/Templates/Devextreme/js/globalize.js"></script>
+    <script src="~/Templates/Devextreme/js/globalize/message.js"></script>
+    <script src="~/Templates/Devextreme/js/globalize/number.js"></script>
+    <script src="~/Templates/Devextreme/js/globalize/currency.js"></script>
+    <script src="~/Templates/Devextreme/js/globalize/date.js"></script>
+    <script src="~/Templates/Devextreme/js/dx.all.js"></script>
+    <script src="~/Templates/Devextreme/js/vectormap-data/world.js"></script>
+    <script src="~/Templates/Devextreme/js/aspnet/dx.aspnet.data.js"></script>
+    <script src="~/Templates/Devextreme/js/aspnet/dx.aspnet.mvc.js"></script>
+    <style>
+        .sidebar .nav i {
+            margin-right: 0px;
+        }
+
+        .sidebar .nav li a, .sidebar .nav li .dropdown-menu a {
+            margin: 10px 0px 0;
+        }
+
+        .sidebar .nav li:first-child > a {
+            margin: 0 0px;
+        }
+
+        #button {
+            display: inline-block;
+            background-color: #FF9800;
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            border-radius: 4px;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            transition: background-color .3s, opacity .5s, visibility .5s;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 1000;
+        }
+
+            #button::after {
+                content: "\f077";
+                font-family: FontAwesome;
+                font-weight: normal;
+                font-style: normal;
+                font-size: 2em;
+                line-height: 50px;
+                color: #fff;
+            }
+
+            #button:hover {
+                cursor: pointer;
+                background-color: #333;
+            }
+
+            #button:active {
+                background-color: #555;
+            }
+
+            #button.show {
+                opacity: 1;
+                visibility: visible;
+            }
+
+        @@media only screen and (max-width: 767px) {
+            .arrow-steps .step {
+                min-width: 343px !important;
+            }
+
+                .arrow-steps .step::after, .arrow-steps .step::before {
+                    right: 0 !important;
+                }
+
+                .arrow-steps .step::before {
+                    left: -17px !important;
+                }
+
+                .arrow-steps .step.current {
+                    margin-bottom: 5px !important;
+                }
+
+            .arrow-steps .step {
+                margin-bottom: 5px !important;
+            }
+
+                .arrow-steps .step::before {
+                    border-left: 0px solid #fff !important;
+                }
+
+            #bar {
+                display: none !important;
+            }
+        }
+
+        .dx-header-row {
+            background: #e91e63 !important;
+            color: #FFF !important;
+        }
+
+        .dx-overlay-content {
+            height:auto!important;
+        }
+    </style>
+</head>
+<body class="">
+    <div class="ntx-loader" style="display: none;">
+        <div class="ntx-loader-box">
+            <img src="~/Templates/img/loader.gif" alt="natrax_loader">
+        </div>
+    </div>
+    <div class="Loader" id="divLoading" style="display: none;">
+        <div id="preloading" class="preloading">
+            <img src="@Url.Content("~/Templates/assets/img/load.gif")" style="width: 100px;">
+        </div>
+        <div id="overlay"></div>
+    </div>
+    @{
+        var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+        var actionName = this.ViewContext.RouteData.Values["action"].ToString();
+        string url = "/" + controllerName + "/" + actionName;
+        string Dashboard = "";
+        string TrainingVideos = "";
+        //string Hotels = "";
+        string Department = "";
+        string Users = "";
+        //string Track = "";
+        //string Workshop = "";
+        //string Storage = "";
+        //string InstrumentationLab = "";
+        //string VehicleDynamicsLab = "";
+        //string PowerTrainLab = "";
+        //string CADCAELab = "";
+        //string ElectricalBatteryTestingFacilities = "";
+        //string ElectricalVehicleTestingLab = "";
+        //string AddOnServices = "";
+        string ManageBooking = "";
+        string TrackBookingHistory = "";
+        string LabBookingHistory = "";
+        string Reports = "";
+        string VehicleLogs = "";
+        string PrintFoodCoupon = "";
+        string CancelFoodCoupon = "";
+        string Show = "";
+        switch (url)
+        {
+            case "/Home/Dashboard":
+                Dashboard = "class = active";
+                break;
+
+            case "/Front/TrainingVideos":
+                TrainingVideos = "class = active";
+                break;
+
+            //case "/Front/Hotels":
+            //    Hotels = "class = active";
+            //    break;
+
+            case "/Home/Department":
+                Department = "class = active";
+                break;
+
+            case "/Home/Users":
+                Users = "class = active";
+                break;
+
+            case "/Home/VehicleLogs":
+                Reports = "active";
+                VehicleLogs = "active";
+                Show = "show";
+                break;
+
+            case "/Home/PrintFoodCoupon":
+                Reports = "active";
+                PrintFoodCoupon = "active";
+                Show = "show";
+                break;
+
+            //case "/Home/CancelFoodCoupon":
+            //    Reports = "active";
+            //    CancelFoodCoupon = "active";
+            //    Show = "show";
+            //    break;
+
+
+            //case "/Front/Workshop":
+            //    Workshop = "class = active";
+            //    break;
+
+            //case "/Front/Storage":
+            //    Storage = "class = active";
+            //    break;
+
+            //case "/Front/InstrumentationLab":
+            //    InstrumentationLab = "class = active";
+            //    break;
+
+            //case "/Front/VehicleDynamicsLab":
+            //    VehicleDynamicsLab = "class = active";
+            //    break;
+
+            //case "/Front/PowerTrainLab":
+            //    PowerTrainLab = "class = active";
+            //    break;
+
+            //case "/Front/CADCAELab":
+            //    CADCAELab = "class = active";
+            //    break;
+
+            //case "/Front/ElectricalBatteryTestingFacilities":
+            //    ElectricalBatteryTestingFacilities = "class = active";
+            //    break;
+
+            //case "/Front/ElectricalVehicleTestingLab":
+            //    ElectricalVehicleTestingLab = "class = active";
+            //    break;
+
+            //case "/Front/AddOnServices":
+            //    AddOnServices = "class = active";
+            //    break;
+
+            case "/Home/ManageBooking":
+                ManageBooking = "class = active";
+                break;
+
+            case "/Home/TrackBookingHistory":
+                TrackBookingHistory = "class = active";
+                break;
+
+            case "/Home/LabBookingHistory":
+                LabBookingHistory = "class = active";
+                break;
+
+
+        }
+    }
+    <div class="wrapper ">
+        <div class="sidebar" data-color="rose" data-background-color="black" data-image="~/Templates/assets/img/sidebar-1.jpg">
+            <div class="logo">
+                <a href="@Url.Action("Dashboard", "Home")" class="simple-text logo-mini"></a>
+                <a href="@Url.Action("Dashboard", "Home")" class="simple-text logo-normal">
+                    <img src="~/Templates/img/logo.png" />
+                </a>
+            </div>
+            <div class="sidebar-wrapper">
+                @*<div class="user">
+                        <div class="photo">
+                            <img src="~/Templates/assets/img/faces/marc.jpg" />
+                        </div>
+                        <div class="user-info">
+                            <a data-toggle="collapse" href="#collapseExample" class="username">
+                                <span>
+                                    Ranbir Singh
+                                </span>
+                            </a>
+                        </div>
+                    </div>*@
+                <ul class="nav" id="nav-item">
+                    <li class="nav-item @Dashboard">
+                        <a class="nav-link" href="@Url.Action("Dashboard", "Home")">
+                            <i class="material-icons">dashboard</i>
+                            <p> Dashboard </p>
+                        </a>
+                    </li>
+                    @*<li class="nav-item @Hotels">
+            <a class="nav-link" href="@Url.Action("Hotels", "Front")">
+                <i class="material-icons">corporate_fare</i>
+                <p> Hotels </p>
+            </a>
+        </li>*@
+                    <li class="nav-item @ManageBooking">
+                        <a class="nav-link" id="TrackLI" href="javascript:void(0)" onclick="todo()">
+                            <i class="material-icons">notification_important</i>
+                            <p> Alerts & ToDo List </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="TrackLI" href="@Url.Action("TrackBookingsAndRFQ", "Home")">
+                            <i class="material-icons">emoji_transportation</i>
+                            <p> Track Booking / RFQ </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="LabLI" href="@Url.Action("LabBookingsAndRFQ", "Home")">
+                            <i class="material-icons">room_preferences</i>
+                            <p> Lab Booking / RFQ </p>
+                        </a>
+                    </li>
+                    <li class="nav-item @TrackBookingHistory">
+                        <a class="nav-link" id="LabLI" href="@Url.Action("TrackBookingHistory", "Home")">
+                            <i class="material-icons">policy</i>
+                            <p> Track Booking History </p>
+                        </a>
+                    </li>
+                    <li class="nav-item @LabBookingHistory">
+                        <a class="nav-link" id="LabLI" href="@Url.Action("LabBookingHistory", "Home")">
+                            <i class="material-icons">policy</i>
+                            <p> Lab Booking History </p>
+                        </a>
+                    </li>
+                   
+                    @{
+                        if (Convert.ToInt32(Session["UserTypePropId"]) == 81)
+                        {
+                            <li class="nav-item @Department">
+                                <a class="nav-link" href="@Url.Action("Department", "Home")">
+                                    <i class="material-icons">work_outline</i>
+                                    <p> Manage Departments </p>
+                                </a>
+                            </li>
+                            <li class="nav-item @Users">
+                                <a class="nav-link" href="@Url.Action("Users", "Home")">
+                                    <i class="material-icons">people</i>
+                                    <p> Manage Users </p>
+                                </a>
+                            </li>
+                        }
+                        else if (Convert.ToInt32(Session["UserTypePropId"]) == 167)
+                        {
+                            <li class="nav-item @Users">
+                                <a class="nav-link" href="@Url.Action("Users", "Home")">
+                                    <i class="material-icons">people</i>
+                                    <p> Manage Users </p>
+                                </a>
+                            </li>
+                        }
+
+                        if (Convert.ToInt32(Session["UserTypePropId"]) == 81 || Convert.ToInt32(Session["UserTypePropId"]) == 167)
+                        {
+                            <li class="nav-item @Reports">
+                                <a class="nav-link collapsed" data-toggle="collapse" href="#pagesExamples" aria-expanded="false">
+                                    <i class="material-icons">report</i>
+                                    <p>Reports<b class="caret"></b></p>
+                                </a>
+                                <div class="collapse @Show" id="pagesExamples" style="">
+                                    <ul class="nav">
+                                        <li class="nav-item @VehicleLogs">
+                                            <a class="nav-link" href="@Url.Action("VehicleLogs", "Home")">
+                                                <span class="sidebar-mini">&nbsp;</span>
+                                                <span class="sidebar-normal"> Vehicle Logs</span>
+                                            </a>
+                                        </li>
+                                        @*<li class="nav-item @CancelFoodCoupon">
+                                <a class="nav-link" href="@Url.Action("CancelFoodCoupon", "Home")">
+                                    <span class="sidebar-mini">&nbsp;</span>
+                                    <span class="sidebar-normal"> Cancel Food Coupon</span>
+                                </a>
+                            </li>*@
+                                        <li class="nav-item @PrintFoodCoupon">
+                                            <a class="nav-link" href="@Url.Action("PrintFoodCoupon", "Home")">
+                                                <span class="sidebar-mini">&nbsp;</span>
+                                                <span class="sidebar-normal"> Print Food Coupon</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        }
+                    }
+
+
+
+                    @*<li class="nav-item">
+            <a class="nav-link" href="@Url.Action("ManageBooking", "Home")">
+                <i class="material-icons">business_center</i>
+                <p> Manage Bookings </p>
+            </a>
+        </li>*@
+
+                    @*<li class="nav-item @Track">
+            <a class="nav-link" href="@Url.Action("Track", "Front")">
+                <i class="material-icons">emoji_transportation</i>
+                <p> Track </p>
+            </a>
+        </li>
+
+        <li class="nav-item @Workshop">
+            <a class="nav-link" href="@Url.Action("Workshop", "Front")">
+                <i class="material-icons">apartment</i>
+                <p> Workshop </p>
+            </a>
+        </li>
+
+        <li class="nav-item @Storage">
+            <a class="nav-link" href="@Url.Action("Storage", "Front")">
+                <i class="material-icons">battery_full</i>
+                <p> Storage </p>
+            </a>
+        </li>
+
+        <li class="nav-item @InstrumentationLab">
+            <a class="nav-link" href="@Url.Action("InstrumentationLab", "Front")">
+                <i class="material-icons">room_preferences</i>
+                <p> Instrumentation Lab </p>
+            </a>
+        </li>
+
+        <li class="nav-item @VehicleDynamicsLab">
+            <a class="nav-link" href="@Url.Action("VehicleDynamicsLab", "Front")">
+                <i class="material-icons">commute</i>
+                <p> Vehicle Dynamics Lab </p>
+            </a>
+        </li>
+
+        <li class="nav-item @PowerTrainLab">
+            <a class="nav-link" href="@Url.Action("PowerTrainLab", "Front")">
+                <i class="material-icons">gavel</i>
+                <p> Power Train Lab </p>
+            </a>
+        </li>
+
+        <li class="nav-item @CADCAELab">
+            <a class="nav-link" href="@Url.Action("CADCAELab", "Front")">
+                <i class="material-icons">room_preferences</i>
+                <p> CAD CAE Lab </p>
+            </a>
+        </li>
+
+        <li class="nav-item @ElectricalBatteryTestingFacilities">
+            <a class="nav-link" href="@Url.Action("ElectricalBatteryTestingFacilities", "Front")">
+                <i class="material-icons">battery_charging_full</i>
+                <p> Electrical Battery Testing Facilities </p>
+            </a>
+        </li>
+
+        <li class="nav-item @ElectricalVehicleTestingLab">
+            <a class="nav-link" href="@Url.Action("ElectricalVehicleTestingLab", "Front")">
+                <i class="material-icons">electric_car</i>
+                <p> Electrical Vehicle Testing Lab </p>
+            </a>
+        </li>
+
+        <li class="nav-item @AddOnServices">
+            <a class="nav-link" href="@Url.Action("AddOnServices", "Front")">
+                <i class="material-icons">image</i>
+                <p> Add-On Services </p>
+            </a>
+        </li>*@
+
+
+                    @*<li class="nav-item ">
+            <a class="nav-link" href="">
+                <i class="material-icons">apps</i>
+                <p>
+                    Booking Summary
+                </p>
+            </a>
+        </li>
+        <li class="nav-item ">
+            <a class="nav-link" href="">
+                <i class="material-icons">content_paste</i>
+                <p>
+                    Services Summary
+                </p>
+            </a>
+        </li>
+        <li class="nav-item ">
+            <a class="nav-link" href="#">
+                <i class="material-icons">grid_on</i>
+                <p>
+                    Client Informations
+                </p>
+            </a>
+        </li>*@
+
+                    <li class="nav-item @TrainingVideos">
+                        <a class="nav-link" href="@Url.Action("TrainingVideos", "Front")">
+                            <i class="material-icons">live_tv</i>
+                            <p> Training Videos </p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item ">
+                        <a class="nav-link" href="https://pgmsfront1.azurewebsites.net/Front/Services" target="_blank">
+                            <i class="material-icons">settings</i>
+                            <p>Services </p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item ">
+                        <a class="nav-link" href="https://www.accuweather.com/en/in/pithampur/2999688/hourly-weather-forecast/2999688" target="_blank">
+                            <i class="material-icons">filter_drama</i>
+                            <p>Weather Service </p>
+                        </a>
+                    </li>
+                    @*<li class="nav-item ">
+            <a class="nav-link" href="javascript:void(0)">
+                <i class="material-icons">folder</i>
+                <p>Invoice Details </p>
+            </a>
+        </li>*@
+                </ul>
+            </div>
+        </div>
+        <div class="main-panel">
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+                <div class="container-fluid">
+                    <a href="javascript:void(0)" id="bar" onclick="sidebar()"><i class="material-icons">dehaze</i></a>
+                    <div class="navbar-wrapper">
+                        <a class="navbar-brand" href="javascript:void(0)">Company Name:&nbsp;@Session["ZZCompanyName"]</a>
+                    </div>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="navbar-toggler-icon icon-bar"></span> <span class="navbar-toggler-icon icon-bar"></span> <span class="navbar-toggler-icon icon-bar"></span> </button>
+                    <div class="collapse navbar-collapse justify-content-end">
+                        @*<form class="navbar-form">
+                                <div class="input-group no-border">
+                                    <input type="text" value="" class="form-control" placeholder="Search...">
+                                    <button type="submit" class="btn btn-white btn-round btn-just-icon">
+                                        <i class="material-icons">search</i>
+                                        <div class="ripple-container"></div>
+                                    </button>
+                                </div>
+                            </form>*@
+                        <ul class="navbar-nav">
+                            @*<li class="nav-item dropdown">
+                                    <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="material-icons">notifications</i> <span class="notification">5</span>
+                                        <p class="d-lg-none d-md-block"> Some Actions </p>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink"> <a class="dropdown-item" href="#">Mike John responded to your email</a> <a class="dropdown-item" href="#">You have 5 new tasks</a> <a class="dropdown-item" href="#">You're now friend with Andrew</a> <a class="dropdown-item" href="#">Another Notification</a> <a class="dropdown-item" href="#">Another One</a> </div>
+                                </li>*@
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" href="#pablo" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="material-icons">person</i>
+                                    <span>@Session["UserName"]</span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
+                                    <a class="dropdown-item" href="@Url.Action("ChangePassword", "Home")">Change Password</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="@Url.Action("Index", "Home")">Log out</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- End Navbar -->
+            @RenderBody()
+            @*<footer class="footer">
+                    <div class="container-fluid">
+                        <nav class="float-left">
+                            <ul>
+                                <li> <a href="">Term of Uses </a> </li>
+                                <li> <a href=""> About Us </a> </li>
+                                <li> <a href=""> Blog </a> </li>
+                                <li> <a href=""> Licenses </a> </li>
+                            </ul>
+                        </nav>
+                        <div class="copyright float-right"> Copyright © 2020 All rights reserved   </div>
+                    </div>
+                </footer>*@
+        </div>
+    </div>
+    <!--   Core JS Files   -->
+
+    <script src="~/Templates/assets/js/core/popper.min.js"></script>
+    <script src="~/Templates/assets/js/core/bootstrap-material-design.min.js"></script>
+    @*<script src="~/Templates/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>*@
+    <!-- Plugin for the momentJs  -->
+    <script src="~/Templates/assets/js/plugins/moment.min.js"></script>
+    <!--  Plugin for Sweet Alert -->
+    <script src="~/Templates/assets/js/plugins/sweetalert2.js"></script>
+    <!-- Forms Validations Plugin -->
+    <script src="~/Templates/assets/js/plugins/jquery.validate.min.js"></script>
+    <!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
+    <script src="~/Templates/assets/js/plugins/jquery.bootstrap-wizard.js"></script>
+    <!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+    <script src="~/Templates/assets/js/plugins/bootstrap-selectpicker.js"></script>
+    <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
+    <script src="~/Templates/assets/js/plugins/bootstrap-datetimepicker.min.js"></script>
+    <!--  DataTables.net Plugin, full documentation here: https://datatables.net/  -->
+    <script src="~/Templates/assets/js/plugins/jquery.dataTables.min.js"></script>
+    <!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
+    <script src="~/Templates/assets/js/plugins/bootstrap-tagsinput.js"></script>
+    <!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
+    <script src="~/Templates/assets/js/plugins/jasny-bootstrap.min.js"></script>
+    <!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
+    <script src="~/Templates/assets/js/plugins/fullcalendar.min.js"></script>
+    <!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
+    @*<script src="~/Templates/assets/js/plugins/jquery-jvectormap.js"></script>*@
+    <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+    <script src="~/Templates/assets/js/plugins/nouislider.min.js"></script>
+    <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+    <!-- Library for adding dinamically elements -->
+    <script src="~/Templates/assets/js/plugins/arrive.min.js"></script>
+    <!--  Google Maps Plugin    -->
+    @*<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>*@
+    <!-- Chartist JS -->
+    <script src="~/Templates/assets/js/plugins/chartist.min.js"></script>
+    <!--  Notifications Plugin    -->
+    <script src="~/Templates/assets/js/plugins/bootstrap-notify.js"></script>
+    <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="~/Templates/assets/js/material-dashboard.js?v=2.1.0" type="text/javascript"></script>
+    <!-- Material Dashboard DEMO methods, don't include it in your project! -->
+    <script src="~/Templates/assets/demo/demo.js"></script>
+    <script src="~/Templates/assets/owl/owl.carousel.js"></script>
+    <script src="~/Templates/assets/DateTimePicker/jquery.datetimepicker.js"></script>
+    <script src="~/Templates/assets/DateTimePicker/jquery.maskedinput-1.3.1.min.js"></script>
+    <script src="~/Templates/Alert/jquery-confirm.min.js"></script>
+    @Scripts.Render("~/bundles/MyScripts")
+    <script>
+        function todo() {
+            $("#divDashboard").hide();
+            $("#divTodo").show();
+            $('html, body').animate({
+                scrollTop: $("#divTodo").offset().top
+            }, 30);
+        }
+
+        function sidebar() {
+            if ($("body").hasClass("sidebar-mini")) {
+                $("body").removeClass("sidebar-mini");
+            } else {
+                $("body").addClass("sidebar-mini");
+            }
+        }
+
+        function LoaderShow() {
+            //waitingDialog.show('', {
+            //    dialogSize: 'sm', progressType: 'warning'
+            //});
+            $(".Loader").show();
+        }
+
+        function LoaderHide() {
+            //waitingDialog.hide();
+            $(".Loader").hide();
+        }
+
+
+        //document.onreadystatechange = function () {
+        //    if (document.readyState !== "complete") {
+        //        $(".ntx-loader").show();
+        //    } else {
+        //        $(".ntx-loader").hide();
+        //    }
+        //};
+
+    $(document).ready(function () {
+            $('.datetimepicker').datetimepicker({ theme: 'light', timepicker: false, format: 'd-m-Y', scrollMonth: false, scrollInput: false });
+                //$('.timepicker').datetimepicker({ theme: 'dark', datepicker: false, format: 'H:i', scrollMonth: false, scrollInput: false, maxDate: new Date() });
+                $(".datetimepicker").attr("placeholder", "DD-MM-YYYY");
+                $(".datetimepicker").mask("99-99-9999");
+                $(".timepicker").mask("99:99");
+                $(".timepicker").attr("placeholder", "HH:MM");
+            $().ready(function () {
+                
+                $sidebar = $('.sidebar');
+
+                $sidebar_img_container = $sidebar.find('.sidebar-background');
+
+                $full_page = $('.full-page');
+
+                $sidebar_responsive = $('body > .navbar-collapse');
+
+                window_width = $(window).width();
+
+                fixed_plugin_open = $('.sidebar .sidebar-wrapper .nav li.active a p').html();
+
+                if (window_width > 767 && fixed_plugin_open == 'Dashboard') {
+                    if ($('.fixed-plugin .dropdown').hasClass('show-dropdown')) {
+                        $('.fixed-plugin .dropdown').addClass('open');
+                    }
+
+                }
+
+                $('.fixed-plugin a').click(function (event) {
+                    // Alex if we click on switch, stop propagation of the event, so the dropdown will not be hide, otherwise we set the  section active
+                    if ($(this).hasClass('switch-trigger')) {
+                        if (event.stopPropagation) {
+                            event.stopPropagation();
+                        } else if (window.event) {
+                            window.event.cancelBubble = true;
+                        }
+                    }
+                });
+
+                $('.fixed-plugin .active-color span').click(function () {
+                    $full_page_background = $('.full-page-background');
+
+                    $(this).siblings().removeClass('active');
+                    $(this).addClass('active');
+
+                    var new_color = $(this).data('color');
+
+                    if ($sidebar.length != 0) {
+                        $sidebar.attr('data-color', new_color);
+                    }
+
+                    if ($full_page.length != 0) {
+                        $full_page.attr('filter-color', new_color);
+                    }
+
+                    if ($sidebar_responsive.length != 0) {
+                        $sidebar_responsive.attr('data-color', new_color);
+                    }
+                });
+
+                $('.fixed-plugin .background-color .badge').click(function () {
+                    $(this).siblings().removeClass('active');
+                    $(this).addClass('active');
+
+                    var new_color = $(this).data('background-color');
+
+                    if ($sidebar.length != 0) {
+                        $sidebar.attr('data-background-color', new_color);
+                    }
+                });
+
+                $('.fixed-plugin .img-holder').click(function () {
+                    $full_page_background = $('.full-page-background');
+
+                    $(this).parent('li').siblings().removeClass('active');
+                    $(this).parent('li').addClass('active');
+
+
+                    var new_image = $(this).find("img").attr('src');
+
+                    if ($sidebar_img_container.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
+                        $sidebar_img_container.fadeOut('fast', function () {
+                            $sidebar_img_container.css('background-image', 'url("' + new_image + '")');
+                            $sidebar_img_container.fadeIn('fast');
+                        });
+                    }
+
+                    if ($full_page_background.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
+                        var new_image_full_page = $('.fixed-plugin li.active .img-holder').find('img').data('src');
+
+                        $full_page_background.fadeOut('fast', function () {
+                            $full_page_background.css('background-image', 'url("' + new_image_full_page + '")');
+                            $full_page_background.fadeIn('fast');
+                        });
+                    }
+
+                    if ($('.switch-sidebar-image input:checked').length == 0) {
+                        var new_image = $('.fixed-plugin li.active .img-holder').find("img").attr('src');
+                        var new_image_full_page = $('.fixed-plugin li.active .img-holder').find('img').data('src');
+
+                        $sidebar_img_container.css('background-image', 'url("' + new_image + '")');
+                        $full_page_background.css('background-image', 'url("' + new_image_full_page + '")');
+                    }
+
+                    if ($sidebar_responsive.length != 0) {
+                        $sidebar_responsive.css('background-image', 'url("' + new_image + '")');
+                    }
+                });
+
+                $('.switch-sidebar-image input').change(function () {
+                    $full_page_background = $('.full-page-background');
+
+                    $input = $(this);
+
+                    if ($input.is(':checked')) {
+                        if ($sidebar_img_container.length != 0) {
+                            $sidebar_img_container.fadeIn('fast');
+                            $sidebar.attr('data-image', '#');
+                        }
+
+                        if ($full_page_background.length != 0) {
+                            $full_page_background.fadeIn('fast');
+                            $full_page.attr('data-image', '#');
+                        }
+
+                        background_image = true;
+                    } else {
+                        if ($sidebar_img_container.length != 0) {
+                            $sidebar.removeAttr('data-image');
+                            $sidebar_img_container.fadeOut('fast');
+                        }
+
+                        if ($full_page_background.length != 0) {
+                            $full_page.removeAttr('data-image', '#');
+                            $full_page_background.fadeOut('fast');
+                        }
+
+                        background_image = false;
+                    }
+                });
+
+                $('.switch-sidebar-mini input').change(function () {
+                    $body = $('body');
+
+                    $input = $(this);
+
+                    if (md.misc.sidebar_mini_active == true) {
+                        $('body').removeClass('sidebar-mini');
+                        md.misc.sidebar_mini_active = false;
+
+                        $('.sidebar .side bar-wrapper, .main-panel').perfectScrollbar();
+
+                    } else {
+
+                        $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar('destroy');
+
+                        setTimeout(function () {
+                            $('body').addClass('sidebar-mini');
+
+                            md.misc.sidebar_mini_active = true;
+                        }, 300);
+                    }
+
+                    // we simulate the window Resize so the charts will get updated in realtime.
+                    var simulateWindowResize = setInterval(function () {
+                        window.dispatchEvent(new Event('resize'));
+                    }, 180);
+
+                    // we stop the simulation of Window Resize after the animations are completed
+                    setTimeout(function () {
+                        clearInterval(simulateWindowResize);
+                    }, 1000);
+
+                });
+            });
+        });
+        $('#nav-item').removeAttr('data-toggle');
+    </script>
+    <script>
+        //document.onreadystatechange = function () {
+        //    if (document.readyState !== "complete") {
+        //        $(".ntx-loader").show();
+        //    } else {
+        //        $(".ntx-loader").hide();
+        //    }
+        //};
+        $(document).ready(function () {
+            $().ready(function () {
+                var owl = $('.owl-carousel');
+                owl.owlCarousel({
+                    loop: true,
+                    margin: 10,
+                    nav: true,
+                    responsive: {
+                        0: {
+                            items: 1
+                        },
+                        600: {
+                            items: 2
+                        },
+                        1000: {
+                            items: 4
+                        }
+                    }
+                });
+
+
+                $('#AddMoreCancel').click(function () {
+                    $("#AddMoreTR").hide();
+                });
+
+
+                $sidebar = $('.sidebar');
+
+                $sidebar_img_container = $sidebar.find('.sidebar-background');
+
+                $full_page = $('.full-page');
+
+                $sidebar_responsive = $('body > .navbar-collapse');
+
+                window_width = $(window).width();
+
+                fixed_plugin_open = $('.sidebar .sidebar-wrapper .nav li.active a p').html();
+
+                if (window_width > 767 && fixed_plugin_open == 'Dashboard') {
+                    if ($('.fixed-plugin .dropdown').hasClass('show-dropdown')) {
+                        $('.fixed-plugin .dropdown').addClass('open');
+                    }
+
+                }
+
+                $('.fixed-plugin a').click(function (event) {
+                    // Alex if we click on switch, stop propagation of the event, so the dropdown will not be hide, otherwise we set the  section active
+                    if ($(this).hasClass('switch-trigger')) {
+                        if (event.stopPropagation) {
+                            event.stopPropagation();
+                        } else if (window.event) {
+                            window.event.cancelBubble = true;
+                        }
+                    }
+                });
+
+                $('.fixed-plugin .active-color span').click(function () {
+                    $full_page_background = $('.full-page-background');
+
+                    $(this).siblings().removeClass('active');
+                    $(this).addClass('active');
+
+                    var new_color = $(this).data('color');
+
+                    if ($sidebar.length != 0) {
+                        $sidebar.attr('data-color', new_color);
+                    }
+
+                    if ($full_page.length != 0) {
+                        $full_page.attr('filter-color', new_color);
+                    }
+
+                    if ($sidebar_responsive.length != 0) {
+                        $sidebar_responsive.attr('data-color', new_color);
+                    }
+                });
+
+                $('.fixed-plugin .background-color .badge').click(function () {
+                    $(this).siblings().removeClass('active');
+                    $(this).addClass('active');
+
+                    var new_color = $(this).data('background-color');
+
+                    if ($sidebar.length != 0) {
+                        $sidebar.attr('data-background-color', new_color);
+                    }
+                });
+
+                $('.fixed-plugin .img-holder').click(function () {
+                    $full_page_background = $('.full-page-background');
+
+                    $(this).parent('li').siblings().removeClass('active');
+                    $(this).parent('li').addClass('active');
+
+
+                    var new_image = $(this).find("img").attr('src');
+
+                    if ($sidebar_img_container.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
+                        $sidebar_img_container.fadeOut('fast', function () {
+                            $sidebar_img_container.css('background-image', 'url("' + new_image + '")');
+                            $sidebar_img_container.fadeIn('fast');
+                        });
+                    }
+
+                    if ($full_page_background.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
+                        var new_image_full_page = $('.fixed-plugin li.active .img-holder').find('img').data('src');
+
+                        $full_page_background.fadeOut('fast', function () {
+                            $full_page_background.css('background-image', 'url("' + new_image_full_page + '")');
+                            $full_page_background.fadeIn('fast');
+                        });
+                    }
+
+                    if ($('.switch-sidebar-image input:checked').length == 0) {
+                        var new_image = $('.fixed-plugin li.active .img-holder').find("img").attr('src');
+                        var new_image_full_page = $('.fixed-plugin li.active .img-holder').find('img').data('src');
+
+                        $sidebar_img_container.css('background-image', 'url("' + new_image + '")');
+                        $full_page_background.css('background-image', 'url("' + new_image_full_page + '")');
+                    }
+
+                    if ($sidebar_responsive.length != 0) {
+                        $sidebar_responsive.css('background-image', 'url("' + new_image + '")');
+                    }
+                });
+
+                $('.switch-sidebar-image input').change(function () {
+                    $full_page_background = $('.full-page-background');
+
+                    $input = $(this);
+
+                    if ($input.is(':checked')) {
+                        if ($sidebar_img_container.length != 0) {
+                            $sidebar_img_container.fadeIn('fast');
+                            $sidebar.attr('data-image', '#');
+                        }
+
+                        if ($full_page_background.length != 0) {
+                            $full_page_background.fadeIn('fast');
+                            $full_page.attr('data-image', '#');
+                        }
+
+                        background_image = true;
+                    } else {
+                        if ($sidebar_img_container.length != 0) {
+                            $sidebar.removeAttr('data-image');
+                            $sidebar_img_container.fadeOut('fast');
+                        }
+
+                        if ($full_page_background.length != 0) {
+                            $full_page.removeAttr('data-image', '#');
+                            $full_page_background.fadeOut('fast');
+                        }
+
+                        background_image = false;
+                    }
+                });
+
+                $('.switch-sidebar-mini input').change(function () {
+                    $body = $('body');
+
+                    $input = $(this);
+
+                    if (md.misc.sidebar_mini_active == true) {
+                        $('body').removeClass('sidebar-mini');
+                        md.misc.sidebar_mini_active = false;
+
+                        $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar();
+
+                    } else {
+
+                        $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar('destroy');
+
+                        setTimeout(function () {
+                            $('body').addClass('sidebar-mini');
+
+                            md.misc.sidebar_mini_active = true;
+                        }, 300);
+                    }
+
+                    // we simulate the window Resize so the charts will get updated in realtime.
+                    var simulateWindowResize = setInterval(function () {
+                        window.dispatchEvent(new Event('resize'));
+                    }, 180);
+
+                    // we stop the simulation of Window Resize after the animations are completed
+                    setTimeout(function () {
+                        clearInterval(simulateWindowResize);
+                    }, 1000);
+
+                });
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            // Javascript method's body can be found in assets/js/demos.js
+            md.initDashboardPageCharts();
+
+            md.initVectorMap();
+
+        });
+        $('#nav-item').removeAttr('data-toggle');
+    </script>
+</body>
+</html>
+@*https://demos.creative-tim.com/material-dashboard-pro-bs4/examples/dashboard.html*@

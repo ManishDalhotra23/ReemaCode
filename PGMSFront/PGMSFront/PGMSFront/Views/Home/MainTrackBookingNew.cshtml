@@ -1,0 +1,2630 @@
+﻿@model PGMSFront.Models.CommonModel
+@{
+    ViewBag.Title = Model.ViewTitle;
+    Layout = "~/Views/Shared/_LayoutTrack.cshtml";
+}
+<style>
+    .card {
+        margin-bottom: 0px !important;
+        margin-top: 25px !important;
+    }
+
+    .table thead tr th {
+        font-size: 14px;
+        border-top: 1px solid #ddd;
+        background: #f2dede;
+        color: #000;
+        border-color: #FFF;
+        /*background: #e91e63;
+        color: #FFF;*/
+    }
+
+    .table tbody tr td {
+        font-size: 14px;
+    }
+
+    .card-header {
+        padding: 0px 5px 0px 5px !important;
+    }
+
+    .card .card-body {
+        padding: 0px 5px 5px 5px !important;
+    }
+
+    #txtUsageHrs, #txtUsageMin {
+        height: 24px !important;
+    }
+
+    #txtUsageHrs, .is-focused #txtUsageHrs {
+        background-image: linear-gradient(to top, #9c27b0 2px, rgba(156, 39, 176, 0) 2px), linear-gradient(to top, #fff9c8 1px, rgba(210, 210, 210, 0) 1px);
+    }
+
+    #txtUsageMin, .is-focused #txtUsageMin {
+        background-image: linear-gradient(to top, #9c27b0 2px, rgba(156, 39, 176, 0) 2px), linear-gradient(to top, #fff9c8 1px, rgba(210, 210, 210, 0) 1px);
+    }
+
+    .main-panel > .content {
+        margin-top: 0 !important;
+    }
+
+    @@media (min-width: 992px) {
+        .modal-lg {
+            max-width: 1200px;
+        }
+    }
+
+    .bgTitle {
+        background: #e91e63 !important;
+        border-radius: 4px;
+        color: #FFF !important;
+        font-weight: bold;
+    }
+
+    .filter-option-inner-inner {
+        color: #000 !important;
+        font-size: 14px !important;
+    }
+
+    .bootstrap-select .dropdown-toggle .filter-option {
+        /*top: -15px !important;*/
+        text-transform: capitalize !important;
+    }
+
+    .dropdown {
+        top: -15px !important;
+    }
+
+    .form-check {
+        display: inline !important;
+        margin-left: 20px;
+    }
+</style>
+@*irfan*@
+<div class="content">
+    <div class="container-fluid">
+        @Html.Partial("~/Views/Home/BookingHeader.cshtml")
+        <div class="row">
+            <div class="col-md-4" style="padding-right: 0px; padding-left: 0px;">
+                <div class="card" style="min-height: 317px;">
+                    <div class="card-body" style="padding: 0px 6px 5px 6px !important">
+                        <div class="row">
+                            <div class="col-md-12" id="divServiveLookup">
+                                <label for="lstServiceLookup" style="color: #000;font-weight: bold;">Track Group</label>
+                                <select class="selectpicker" data-style="select-with-transition" id="lstServiceLookup" onchange="LoadTrackInfo();" title="" data-size="7">
+                                    <option value="0">- Select Track -</option>
+                                    @foreach (var itm in ViewBag.ServiveLookup)
+                                    {
+                                        <option value='@itm.Value'>@itm.Text</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6" id="divVehicleLookup">
+                                <label for="lstVehicleLookup" style="color: #000;font-weight: bold;">Vehicle</label>
+                                <select class="selectpicker" data-style="select-with-transition" id="lstVehicleLookup" onchange="BindTrackcategoryNew()" title="" data-size="7"></select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="TrackDate" style="color: #000;font-weight: bold;margin-bottom: 7px;">Date</label>
+                                <input disabled="disabled" style="display: none;border-bottom: 2px solid #e91e63;" type="text" id="Day">
+                                <input disabled="disabled" type="text" id="TrackDate" onblur="ResetCategoryTimeSlot()" class="form-control datetimepicker" placeholder="DD-MM-YYYY" style="        border-bottom: 2px solid #e91e63;">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12" id="divCategoryTitle" style='        display: none;'>
+                                <div class="form-group">
+                                    <label for="divCategory" style="        color: #000;font-weight: bold;">Track Type:</label>
+                                    <div class="form-check" id="divCategory"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label for="lstTrackTimeSlot" style="        color: #000;font-weight: bold;">Time slot for starting the Test</label>
+                                <select class="form-control" id="lstTrackTimeSlot" onchange="BindBookingStatus()" style="        border-bottom: 2px solid #e91e63;">
+                                    <option value="0">- Select Time Slot -</option>
+                                    @foreach (var itm in ViewBag.TimeSlot)
+                                    {
+                                        <option value='@itm.Value'>@itm.Text</option>
+                                    }
+                                </select>
+                            </div>
+                        </div><hr style="        margin-top: 5px;margin-bottom: 5px;" />
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="table-responsive" id="divCardBody" style="display: none; overflow-y: auto; max-height: 200px;">
+                                    <table class="table table-bordered table-striped">
+                                        <thead class=" text-primary">
+                                            <tr>
+                                                <th width="50%">Track</th>
+                                                @if (Model.WorkFlowId == 57 || Model.WorkFlowId == 58 ||
+                                               Model.WorkFlowId == 29 || Model.WorkFlowId == 51 ||
+                                               Model.WorkFlowId == 38 || Model.WorkFlowId == 53
+                                               || Model.WorkFlowId == 6 || Model.WorkFlowId == 8
+                                               || Model.WorkFlowId == 36 || Model.WorkFlowId == 44)
+                                                {
+                                                    <th width="5%" class="text-right" style="        display: none">Rate</th>
+                                                }
+                                                else
+                                                {
+                                                    <th width="5%" class="text-right">Rate</th>
+                                                }
+                                                @*<th width="4%" class="text-center">Unit</th>*@
+                                                <th width="20%" class="text-center">Estimated Usage Hours</th>
+                                                <th width="20%" class="text-center">Estimated Usage Minutes</th>
+                                                @*<th width="14%" class="text-center">Bookings Status on Day</th>
+                                                    <th width="13%" class="text-center">Booking Status in slot</th>
+                                                    <th width="12%" class="text-center">Slot wise Confirmed</th>*@
+                                                <th width="10%" class="text-center">Round Hrs.</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbodyTrack"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            @if (Model.StatusPropId == 40 && Model.RFQId == 0 && (Model.WorkFlowId == 6 || Model.WorkFlowId == 57 || Model.WorkFlowId == 29 || Model.WorkFlowId == 36 || Model.WorkFlowId == 38))
+                            {
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <button type="button" class="btn btn-fill btn-rose btn-sm pull-right" onclick="return location.reload()">Cancel</button>&nbsp;
+                                        <button type="button" class="btn btn-fill btn-rose btn-sm pull-right" id="single" onclick="TrackDetailSave()">Save</button>
+                                        @*<button type="button" class="btn btn-fill btn-rose btn-sm pull-right" id="multiple" onclick="TrackDetailSaveMultiple()">Save</button>*@
+                                        @*<button type="button" class="btn btn-fill btn-rose btn-sm" onclick="RepeatRowTrack()">Copy Testing Date</button>*@
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8" style="padding-right: 0px;">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title text-center bgTitle">Booking Details</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="table-responsive" style="overflow-y: auto; min-height: 254px; max-height: 254px;">
+                                    <table class="table table-bordered table-striped" style="min-width: 1100px;">
+                                        <thead class=" text-primary">
+                                            <tr>
+                                                <th class="text-center" width="9%">Action</th>
+                                                <th width="10%">Vehicle No.</th>
+                                                <th width="17%">Track</th>
+                                                <th width="8%">Category</th>
+                                                <th class="text-center" width="10%">Date</th>
+                                                <th class="text-center" width="10%">Time Slot</th>
+                                                @if (Model.WorkFlowId == 57 || Model.WorkFlowId == 58 ||
+                                                   Model.WorkFlowId == 29 || Model.WorkFlowId == 51 ||
+                                                   Model.WorkFlowId == 38 || Model.WorkFlowId == 53
+                                                   || Model.WorkFlowId == 6 || Model.WorkFlowId == 8
+                                                   || Model.WorkFlowId == 36 || Model.WorkFlowId == 44)
+                                                {
+                                                    <th class="text-right" style="display: none" width="7%">Rate</th>
+                                                }
+                                                else
+                                                {
+                                                    <th class="text-right" width="7%">Rate</th>
+                                                }
+                                                <th class="text-center" width="7%">Unit</th>
+                                                <th class="text-center" width="8%">Usage Hours</th>
+                                                <th class="text-center" width="8%">Usage Minutes</th>
+                                                <th class="text-center" width="8%">Round Hours</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbodyServiceDetails"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-md-12 text-center" id="divCopy" style="display: none;">
+                                <label for="TrackDate" style="color: #000; font-weight: bold;">Do you want to repeat this track detail for next days?</label>
+                                <div class="form-check" style="margin-left: 10px;">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="radio" id="" name="copyRow" value="Yes" onclick="copyRow()">Yes<span class="circle"><span class="check"></span></span>
+                                    </label>
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="radio" id="" name="copyRow" value="No" onclick="copyRow()" checked>No<span class="circle"><span class="check"></span></span>
+                                    </label>
+                                </div>
+                                &nbsp;<button type="button" id="btnCopy" class="btn btn-fill btn-rose btn-sm" style="display: none;" onclick="RepeatRowTrack()">Repeat these details</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*Dynamic Start*@
+        <div class="row Track" id="DynamicTrack">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title text-center bgTitle">Booked Summary</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="table-responsive" style="        max-height: 500px;
+        overflow-y: auto;">
+                                <table class="table table-bordered table-striped">
+                                    <thead class=" text-primary">
+                                        <tr>
+                                            <th width="5%">#</th>
+                                            <th width="22%">Track</th>
+                                            <th width="12%">Vehicle No.</th>
+                                            @*<th width="9%">Vehicle Category</th>*@
+                                            <th class="text-center" width="9%">From Date</th>
+                                            <th class="text-center" width="9%">To Date</th>
+                                            <th class="text-center" width="8%">Test Days</th>
+                                            <th class="text-center" width="9%">Usage Hours</th>
+                                            <th class="text-center" width="8%">Usage Minutes</th>
+                                            <th class="text-center" width="8%">Bill Hours</th>
+                                            @if (Model.WorkFlowId == 59 || Model.WorkFlowId == 52 || Model.WorkFlowId == 54)
+                                            {
+                                                <th class="text-right" width="8%">Quot. Amount</th>
+
+                                            }
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbodyVehicle"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr style="        margin-top: 5px;
+        margin-bottom: 5px;
+" />
+                <div class="card-body">
+                    @using (Html.BeginForm(new { @class = "form-horizontal" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-2 text-center">
+                                <input type="submit" id="btnPrev" name="btnPrevNext" value="Prev" class="btn btn-fill btn-rose btn-sm" />
+                            </div>
+                            @*<div class="col-md-2 text-center">
+                                    <input type="button" id="btnVWS" value="Vehicle Wise Summary" class="btn btn-fill btn-rose btn-sm " />
+                                </div>*@
+                            <div class="col-md-2 text-center">
+                                <input type="button" id="btnTWS" value="Track Wise Summary" class="btn btn-fill btn-rose btn-sm " />
+                            </div>
+                            <div class="col-md-2 text-center">
+                                <input type="button" id="btnBD" value="Billing Detail" class="btn btn-fill btn-rose btn-sm " />
+                            </div>
+                            <div class="col-md-2 text-center">
+                                <input type="submit" id="btnNext" name="btnPrevNext" value="Next" class="btn btn-fill btn-rose btn-sm " />
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            @Html.HiddenFor(m => m.TrackBookingTimeDetailId, new { id = "hiddenTrackBookingTimeDetailId", style = "width:0px;" })
+            @Html.HiddenFor(m => m.UserId, new { id = "UserId", style = "width:0px;" })
+            @Html.HiddenFor(m => m.UserTypePropId, new { id = "UserTypePropId", style = "width:0px;" })
+            @Html.HiddenFor(m => m.ZZCompanyId, new { id = "ZZCompanyId", style = "width:0px;" })
+            @Html.HiddenFor(m => m.TrackGroupId, new { id = "TrackGroupId", style = "width:0px;" })
+            @Html.HiddenFor(m => m.WorkFlowId, new { id = "WorkFlowId", style = "width:0px;" })
+            @Html.HiddenFor(m => m.StatusPropId, new { id = "StatusPropId", style = "width:0px;" })
+            @Html.HiddenFor(m => m.StateId, new { id = "StateId", style = "width:0px;" })
+            @Html.HiddenFor(m => m.BPId, new { id = "BPId", style = "width:0px;" })
+            @Html.HiddenFor(m => m.DocId, new { id = "DocId", style = "width:0px;" })
+            @Html.HiddenFor(m => m.ReportURL, new { id = "ReportURL", style = "width:0px;" })
+            @Html.HiddenFor(m => m.POURL, new { id = "POURL", style = "width:0px;" })
+            @Html.HiddenFor(m => m.RFQId, new { id = "RFQId", style = "width:0px;" })
+        </div>
+        @*Dynamic End*@
+    </div>
+</div>
+
+<div class="modal fade" role="dialog" id="modalVWS" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Vehicle Wise Summary</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-fill btn-rose btn-sm" data-dismiss="modal" style="        margin-top: 10px;">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" role="dialog" id="modalTWS" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Track Wise Summary</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    @*<div class="col-md-2">
+                            <div class="form-group">
+                                <label for="lstServiceLookupPopup" style="color: #000; font-weight: bold;">Select Track</label>
+                            </div>
+                        </div>*@
+                    <div class="col-md-3" id="divServiveLookup">
+                        <div class="form-group">
+                            <select class="selectpicker" data-style="select-with-transition" id="lstServiceLookupPopup" onchange="LoadTrackInfoPopup()" title="" data-size="7">
+                                <option value="-1" selected>All</option>
+                                @foreach (var itm in ViewBag.ServiveLookup)
+                                {
+                                    <option value='@itm.Value'>@itm.Text</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="        margin-top: 10px;">
+                    <div class="col-md-12">
+                        <div class="table-responsive" style="        max-height: 430px;
+        overflow-y: auto;">
+                            <table class="table table-bordered table-striped">
+                                <thead class=" text-primary">
+                                    <tr>
+                                        @*<th class="text-center" width="3%">#</th>*@
+                                        <th width="10%">Vehicle No.</th>
+                                        <th class="text-center" width="10%">Date</th>
+                                        <th width="15%">Track</th>
+                                        <th width="8%">Category</th>
+                                        <th class="text-center" width="10%">Time Slot</th>
+                                        @if (Model.WorkFlowId == 57 || Model.WorkFlowId == 58 ||
+                                           Model.WorkFlowId == 29 || Model.WorkFlowId == 51 ||
+                                           Model.WorkFlowId == 38 || Model.WorkFlowId == 53
+                                           || Model.WorkFlowId == 6 || Model.WorkFlowId == 8
+                                           || Model.WorkFlowId == 36 || Model.WorkFlowId == 44)
+                                        {
+                                            <th class="text-right" style="        display: none" width="7%">Rate</th>
+                                        }
+                                        else
+                                        {
+                                            <th class="text-right" width="7%">Rate</th>
+                                        }
+                                        <th class="text-center" width="7%">Unit</th>
+                                        <th class="text-center" width="8%">Usage Hours</th>
+                                        <th class="text-center" width="10%">Usage Minutes</th>
+                                        <th class="text-center" width="8%">Round Hours</th>
+                                        @*<th class="text-center" width="3%">#</th>*@
+                                    </tr>
+                                </thead>
+                                <tbody id="tbodyServiceDetailsPopup"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-fill btn-rose btn-sm" data-dismiss="modal" style="        margin-top: 10px;">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" role="dialog" id="modalBD" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Billing Detail</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-responsive" style="        max-height: 500px;
+        overflow-y: auto;">
+                            <table class="table table-bordered table-striped">
+                                <thead class=" text-primary">
+                                    <tr>
+
+                                        <th width="25%">Biiling Item</th>
+                                        <th width="25%">Specification</th>
+                                        @*@if (Model.BPId == 46 || Model.BPId == 91)
+                                            {
+                                                <th class="text-center" width="5%">Day</th>
+                                            }*@
+                                        <th class="text-center" width="10%">Vehicle No.</th>
+                                        @if (Model.BPId == 46 || Model.BPId == 91)
+                                        {
+                                            @*<th class="text-center" width="8%">Day</th>*@
+                                        }
+                                        else
+                                        {
+                                            <th class="text-center" width="8%">Date</th>
+                                        }
+
+                                        <th class="text-center" width="8%">Usage Hours (Rounded)</th>
+                                        <th class="text-center" width="5%">Billing Qty.</th>
+                                        <th class="text-center" width="5%">Unit</th>
+                                        @if (Model.WorkFlowId == 57 || Model.WorkFlowId == 58 ||
+                                           Model.WorkFlowId == 29 || Model.WorkFlowId == 51 ||
+                                           Model.WorkFlowId == 38 || Model.WorkFlowId == 53 ||
+                                           Model.WorkFlowId == 59 || Model.WorkFlowId == 52 ||
+                                            Model.WorkFlowId == 54
+                                           || Model.WorkFlowId == 6 || Model.WorkFlowId == 8
+                                           || Model.WorkFlowId == 36 || Model.WorkFlowId == 44)
+                                        {
+                                            <th class="text-right" style="        display: none" width="6%">Rate</th>
+                                            <th class="text-right" style="        display: none" width="8%">Amount</th>
+                                        }
+                                        else
+                                        {
+                                            <th class="text-right" width="6%">Rate</th>
+                                            <th class="text-right" width="8%">Amount</th>
+                                        }
+
+
+                                    </tr>
+                                </thead>
+                                <tbody id="tbodyCalculationSummary"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-fill btn-rose btn-sm" data-dismiss="modal" style="        margin-top: 10px;">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="PopupFromDateToDate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title bgTitle">Copy Rows for <span id="txtTrackName"></span></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="material-icons">clear</i>
+                </button>
+            </div>
+            <div class="modal-body" style="        text-align: center">
+                <div class="row">
+                    <div class="table-responsive">
+                        <table style="        width: 100%">
+                            <tr>
+                                <td style="        width: 50%;
+        text-align: center">
+                                    From Date
+                                </td>
+                                <td style="        text-align: center">
+                                    To Date
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="        text-align: center">
+                                    <input type="text" id="FromDate" style="        text-align: center" class="form-control datetimepicker" placeholder="DD-MM-YYYY">
+                                </td>
+                                <td style="        text-align: center">
+                                    <input type="text" id="ToDate" style="        text-align: center" class="form-control datetimepicker" placeholder="DD-MM-YYYY">
+                                </td>
+                            </tr>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnGenerateRepeatRowTrack" class="btn btn-fill btn-rose btn-sm" style="        margin-top: 5px;" onclick="GenerateRepeatRowTrack()">Save</button>
+                <button type="button" class="btn btn-fill btn-danger btn-sm" data-dismiss="modal" style="        margin-left: 5px;
+        margin-top: 5px;">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $("#btnVWS").click(function () {
+        TrackBookingDetailViewFrontGetByBookingIdTrackGroupIdPopup();
+        $("#modalVWS").modal("show");
+    });
+
+    $("#btnTWS").click(function () {
+        LoadTrackInfoPopup();
+        $("#modalTWS").modal("show");
+    });
+
+    $("#btnBD").click(function () {
+        $("#modalBD").modal("show");
+    });
+
+    function copyRow() {
+        varCopyRow = $("input[name='copyRow']:checked").val();
+        if (varCopyRow == "Yes")
+            $("#btnCopy").show();
+        else
+            $("#btnCopy").hide();
+    }
+
+    var ServicesList = '';
+    var TimeSlotList = '';
+    var ServiceCategoryList = '';
+    var TrackBookingDetailList = '';
+    var TrackBookingTimeDetailList = '';
+    var TrackBookingTimeSummaryList = '';
+    var VehicleId = 0;
+    var ColourRowId = -1;
+    var Holdid = '';
+    var spanPrv = '';
+    try {
+        TimeSlotList = @Html.Raw(Json.Encode(ViewBag.TimeSlot));
+    }
+    catch (e) {
+    }
+
+    function TrackBookingDetailViewFrontGetByBookingIdTrackGroupIdPopup() {
+        LoaderShow();
+        var data = {};
+        var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+        $.ajax({
+            url: '@Url.Action("TrackBookingDetailViewFrontGetByBookingIdTrackGroupIdPopup", "Home")',
+            type: 'POST',
+            dataType: 'json',
+            async: true,
+            data: dataWithAntiforgeryToken,
+            success: function (data) {
+                debugger
+                LoaderHide();
+                if (data.StatusId != "99" && data.StatusId != "-99") {
+                    BindVehicleData(data.TrackBookingDetailList);
+                }
+                else {
+                    alert(data.Status);
+                }
+            },
+            error: function (xhr) {
+                LoaderHide();
+                alert(xhr.responseText);
+            }
+        });
+    }
+
+    function changeColorVehicle(id) {
+        $("#trVehicle_" + Holdid + "").removeClass('highlighted');
+        $("#trVehicle_" + id + "").addClass('highlighted');
+        Holdid = id;
+
+        //if (id != Holdid || Holdid == "") {
+        //    $("#trVehicle_" + Holdid + "").removeClass('highlighted');
+        //    $("#sp_" + Holdid).css("visibility", "hidden");
+        //    $("#trVehicle_" + id + "").addClass('highlighted');
+        //    //Holdid = id;
+        //}
+        //else {
+        //    if ($("#trVehicle_" + id + "").hasClass('highlighted')) {
+        //        $("#trVehicle_" + id + "").removeClass('highlighted');
+        //        Holdid = 0;
+        //    }
+        //    else {
+        //        $("#trVehicle_" + id + "").addClass('highlighted');
+        //       // Holdid = id;
+        //    }
+        //}
+    }
+
+    //////////////////////////// Track Selection Changed ///////////////////////////////////////////////////////////
+    ///////////////////////////// Load Track/Vehicle Info  //////////////////////////////////////////////////////
+    function LoadTrackInfo() {
+        try {
+
+            LoaderShow();
+            $("#TrackDate").attr('disabled', true);
+            $("#Day").attr('disabled', true);
+            var varTrackGroupId = $("#lstServiceLookup").val();
+            debugger
+            //if (varTrackGroupId == undefined || parseInt(varTrackGroupId <= 0)) {
+            //    alert("Please Select Track");
+            //    return false;
+            //}
+            //else
+            {
+
+                if (ServiceCategoryList.length > 1) {
+                    $("input[name='Category']:checked").prop('checked', false);
+                }
+                //$("#tbodyVehicle").html("");
+                $("#TrackDate").val("");
+                $("#Day").val("");
+                // $("#lstTrackTimeSlot").val(0);
+                $("#lstTrackTimeSlot").val("-99");
+                $("#tbodyTrack").html("");
+                $("#divCardBody").hide();
+                VehicleId = 0;
+                ColourRowId = -1;
+                Holdid = '';
+
+                var data = { 'intTrackGroupId': varTrackGroupId };
+                debugger
+                var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+                LoaderShow();
+                $.ajax({
+                    url: '@Url.Action("LoadTrackInfo", "Home")',
+                    type: 'POST',
+                    dataType: 'json',
+                    async: true,
+                    data: dataWithAntiforgeryToken,
+                    success: function (data) {
+                        $(".filter-option").css({"color": "#ec407a", "font-size": "15px", "border-bottom": "2px solid #ec407a"});
+                        LoaderHide();
+
+                        if (data.StatusId != "99" && data.StatusId != "-99") {
+                            ServicesList = data.ServicesList;
+                            // Non Disabled service filter
+                            ServicesList = ServicesList.filter(ele => ele.IsActive === true);
+                            ServiceCategoryList = data.ServiceCategoryList;
+                            TrackBookingDetailList = data.TrackBookingDetailList;
+                            debugger
+                            TrackBookingTimeDetailList = data.TrackBookingTimeDetailList;
+                            TrackBookingTimeSummaryList = data.TrackBookingTimeSummaryList;
+                            //BindVehicleData(data.TrackBookingDetailList);
+                            BindServiceTimeDetails(0);
+                            BindServiceCategory(ServiceCategoryList);
+                            BindCalculationSummary();
+
+                            $("#divVehicleTitle").show();
+                            $("#divVehicle").show();
+                            if (parseInt(varTrackGroupId) == 0 && (parseInt($("#WorkFlowId").val()) != 6 && parseInt($("#WorkFlowId").val()) != 57 && parseInt($("#WorkFlowId").val()) != 29)) {
+                                BindServiceLookup(ServicesList, TrackBookingTimeSummaryList);
+                            }
+                            else if (parseInt(varTrackGroupId) == 0 && parseInt($("#RFQId").val()) > 0) {
+                                BindServiceLookup(ServicesList, TrackBookingTimeSummaryList);
+                            }
+
+                            //$("#lstVehicleLookup").html("");
+                            //var gridData = "<option value='0'>Select Vehicle</option>";
+                            //for (var i = 0; i < TrackBookingDetailList.length; i++) {
+                            //    debugger;
+                            //    gridData = gridData + "<option value='" + NullHandle(TrackBookingDetailList[i].VehicleId) + "'>" + NullHandle(TrackBookingDetailList[i].VehicleNo) + "</option>";
+                            //}
+                            //$("#lstVehicleLookup").html(gridData);
+
+                            $("#lstVehicleLookup").html("");
+                            $("#lstVehicleLookup").selectpicker("refresh");
+                            $('#lstVehicleLookup').selectpicker();
+                            $("#lstVehicleLookup").append('<option value="0">- Select Vehicle -</option>').selectpicker('refresh');
+                            $.each(TrackBookingDetailList, function (index, object) {
+                                if (TrackBookingDetailList.length > 0) {
+                                    debugger;
+                                    $("#lstVehicleLookup").append('<option value="' + NullHandle(object.VehicleId) + '">' + NullHandle(object.VehicleNo) + '</option>').selectpicker('refresh');
+                                }
+                            });
+                        }
+                        else {
+                            alert(data.Status);
+                        }
+
+                    },
+                    error: function (xhr) {
+                        LoaderHide();
+
+                        alert(xhr.responseText);
+                    }
+                });
+            }
+        }
+        catch (e) {
+
+            LoaderHide();
+            alert(e.message);
+            //  return false;
+        }
+    }
+
+    ///////////////////////////// Bind Track Info  //////////////////////////////////////////////////////
+    function BindServiceLookup(dataService,dataSummary) {
+        try {
+            //$("#divServiveLookup").html("");
+            //var gridData = "<select class='selectpicker' data-style='select -with-transition' id='lstServiceLookup' onchange='LoadTrackInfo()' title='' data-size='7'>";
+            //gridData = gridData + "<option value='0'>- Please Select Track -</option>";
+            //for (var i = 0; i < dataService.length; i++) {
+            //    if (dataSummary.length > 0) {
+            //        var data = jQuery.grep(dataSummary, function (obj) {
+            //            return obj.BillingItem == NullHandle(dataService[i].ZZServiceGroupName);
+            //        });
+            //        if (data.length > 0) {
+            //            gridData = gridData + "<option value='" + NullHandle(dataService[i].TrackGroupId) + "'>" + NullHandle(dataService[i].ZZTrackGroup) + "</option>";
+            //            //$("#lstServiceLookup").append(gridData);
+            //        }
+            //    }
+            //}
+            //gridData = gridData + "</select>";
+            //
+            //$("#divServiveLookup").html(gridData);
+
+            var itemSelectorOption = $('#lstServiceLookup option');
+            itemSelectorOption.remove();
+            $("#lstServiceLookup").selectpicker("refresh");
+
+            $("#lstServiceLookup").append('<option value="0">- Please Select Track -</option>').selectpicker('refresh');
+            var TestList = [];
+            var i = 0;
+            $.each(dataService, function (index, object) {
+                if (dataSummary.length > 0) {
+                    //var data = jQuery.grep(dataSummary, function (obj) {
+                    //    return obj.BillingItem == NullHandle(object.ZZServiceGroupName);
+                    //});
+                    //Mahesh
+                    var data = jQuery.grep(dataSummary, function (obj) {
+                        return obj.GroupId == object.ServiceGroupMCId;
+                    });
+
+                    var dataSer = jQuery.grep(TestList, function (obj) {
+                        return obj.TrackGroupId == object.TrackGroupId;
+                    });
+
+                    if (data.length > 0 && dataSer.length==0) {
+                        TestList[i] = new Object(object);
+                        $("#lstServiceLookup").append('<option value="' + NullHandle(object.TrackGroupId) + '">' + NullHandle(object.ZZTrackGroup) + '</option>').selectpicker('refresh');
+                        dataSer = '';
+                        i = i + 1;
+                    }
+                }
+            });
+
+        }
+        catch (e) {
+
+        }
+    }
+
+
+    ///////////////////////////// Bind Vehicle Info  //////////////////////////////////////////////////////
+    function BindVehicleData(data) {
+        try {
+            debugger
+            var gridData = "";
+
+            $("#tbodyVehicle").html("");
+
+            for (var i = 0; i < data.length; i++) {
+                var indx = i + 1;
+                gridData = gridData + "<tr title='Select Vehicle : " + NullHandle(data[i].VehicleNo) + "' style='cursor: pointer' id='trVehicle_" + indx + "'  class=''>"; // onclick = 'BindTrackcategory(" + indx + "," + NullHandle(data[i].VehicleId)+")'
+                gridData = gridData + "<td>" + indx + "</td>";
+                gridData = gridData + "<td>" + NullHandle(data[i].TrackGroup) + "</td>";
+                gridData = gridData + "<td>" + NullHandle(data[i].VehicleNo) + "</td>";
+                //gridData = gridData + "<td>" + NullHandle(data[i].VehicleType) + "</td>";
+
+                //if (parseInt($("#BPId").val()) == 46 || parseInt($("#BPId").val()) == 91) {
+                //    gridData = gridData + "<td class='text-center'>" + NullHandle(data[i].FromDay) + "</td>";
+                //    gridData = gridData + "<td class='text-center'>" + NullHandle(data[i].ToDay) + "</td>";
+                //}
+                //else {
+                 gridData = gridData + "<td class='text-center'>" + NullHandle(data[i].ZZFromDate) + "</td>";
+                 gridData = gridData + "<td class='text-center'>" + NullHandle(data[i].ZZToDate) + "</td>";
+                //}
+
+                gridData = gridData + "<td class='text-center'>" + NullHandle(data[i].TestDays) + "</td>";
+                gridData = gridData + "<td class='text-center'>" + NullHandle(data[i].UsagesHrs) + "</td>";
+                gridData = gridData + "<td class='text-center'>" + NullHandle(data[i].UsagesMinute) + "</td>";
+                gridData = gridData + "<td class='text-center'>" + NullHandle(data[i].BillingHrs) + "</td>";
+                //gridData = gridData + "<td class='text-center'>" + NullHandle(data[i].BillingHrs) + "</td>";
+                //gridData = gridData + "<td class='text-right'>" + NullHandle(data[i].Amount) + "</td>";
+                if (parseInt($("#WorkFlowId").val()) == 59 || parseInt($("#WorkFlowId").val()) == 52 || parseInt($("#WorkFlowId").val()) == 54) {
+                    gridData = gridData + "<td class='text-right'>" + NullHandle(data[i].QuotAmount) + "</td>";
+                }
+
+                gridData = gridData + "<td style='display:none'><input type='hidden' id='hdnVehicleId' value=" + NullHandle(data[i].VehicleId) + " /><input type='hidden' id='hdnRowId' value=" + NullHandle(indx) + " /> </td>";
+
+                gridData = gridData + "</tr>";
+
+            }
+
+            $("#tbodyVehicle").html(gridData);
+
+
+        }
+        catch (e) {
+
+        }
+    }
+
+    ///////////////////////////// Bind Servive Category  //////////////////////////////////////////////////////
+    function BindServiceCategory(data) {
+        try {
+            debugger;
+            // alert($("#TrackDate").val())
+            var gridData = "";
+
+            $("#divCategory").html("");
+
+            var varchecked = "";
+            if (data.length == 1) {
+                varchecked = "checked='checked'";
+                $("#divCategoryTitle").hide();
+                $("#divCategoryValue").hide();
+            }
+            else {
+                $("#divCategoryTitle").show();
+                $("#divCategoryValue").show();
+            }
+
+            for (var i = 0; i < data.length; i++) {
+                debugger;
+                gridData = gridData + "<label class='form-check-label'>";
+
+                if (parseInt($("#StatusPropId").val()) == 40 && parseInt($("#RFQId").val()) == 0 && (parseInt($("#WorkFlowId").val()) == 6 || parseInt($("#WorkFlowId").val()) == 57 || parseInt($("#WorkFlowId").val()) == 29 || parseInt($("#WorkFlowId").val()) == 36 || parseInt($("#WorkFlowId").val()) == 38)) {
+                    gridData = gridData + "<input class='form-check-input' type='radio' id='rdoCategory" + data[i].Value + "' name='Category' " + varchecked + " value='" + data[i].Value + "' onclick='BindTrackService()'>" + data[i].Text + "";
+                }
+                else {
+                    gridData = gridData + "<input class='form-check-input' disabled='disabled' type='radio' id='rdoCategory" + data[i].Value + "' name='Category' " + varchecked + " value='" + data[i].Value + "' onclick='BindTrackService()'>" + data[i].Text + "";
+                }
+
+                gridData = gridData + "<span class='circle'>";
+                gridData = gridData + "<span class='check'></span>";
+                gridData = gridData + "</span>";
+                gridData = gridData + "</label>";
+            }
+
+            $("#divCategory").html(gridData);
+
+        }
+        catch (e) {
+
+        }
+    }
+
+    function ToDate(strdate) {
+        var parts = strdate.split("-");
+        if (parts.length < 3) {
+            parts = strdate.split("/");
+        }
+        return new Date(parts[2], parts[1] - 1, parts[0])
+    }
+
+
+    //////////////////////// Category Type Selection Changed /////////////////////////////////////////////
+    //////////////////////// Bind Track Service Grid ////////////////////////////////////////////////////////
+    function BindTrackService() {
+        try {
+            debugger
+            var gridData = "";
+            var varDate = $("#TrackDate").val();
+            //if (parseInt($("#BPId").val()) == 46 || parseInt($("#BPId").val()) == 91) {
+            //    varDate = $("#Day").val();
+            //}
+
+            var varCategoryId = 0;
+            var varTimeSlotId = 0;
+            varCategoryId = $("input[name='Category']:checked").val();
+            varTimeSlotId = $("#lstTrackTimeSlot").val();
+
+            // $("#lstTrackTimeSlot").val(0);
+            $("#lstTrackTimeSlot").val("-99");
+
+            var strMSG = "";
+            if (parseInt($("#lstServiceLookup").val()) == 0) {
+                strMSG = strMSG + 'Select Track  \n</br>'
+                if (ServiceCategoryList.length > 1) {
+                    $("input[name='Category']:checked").prop('checked', false);
+                }
+                // $("#lstTrackTimeSlot").val(0);
+                $("#lstTrackTimeSlot").val("-99");
+                alert('Select Track');
+                return false;
+            }
+            if (parseInt(VehicleId) == 0) {
+                strMSG = strMSG + 'Select Vehicle  \n</br>'
+                if (ServiceCategoryList.length > 1) {
+                    $("input[name='Category']:checked").prop('checked', false);
+                }
+               // $("#lstTrackTimeSlot").val(0);
+                $("#lstTrackTimeSlot").val("-99");
+                alert('Select Vehicle');
+                return false;
+            }
+
+            //if (parseInt($("#BPId").val()) == 46 || parseInt($("#BPId").val()) == 91) {
+            //    if (varDate.trim() == "") {
+            //        strMSG = strMSG + 'Day  \n</br>'
+            //        if (ServiceCategoryList.length > 1) {
+            //            $("input[name='Category']:checked").prop('checked', false);
+            //        }
+            //        $("#lstTrackTimeSlot").val(0);
+            //        alert('Input Day');
+            //        return false;
+            //    }
+            //}
+            //else {
+                if (varDate.trim() == "") {
+                    strMSG = strMSG + 'Date  \n</br>'
+                    if (ServiceCategoryList.length > 1) {
+                        $("input[name='Category']:checked").prop('checked', false);
+                    }
+                    // $("#lstTrackTimeSlot").val(0);
+                    $("#lstTrackTimeSlot").val("-99");
+                    alert('Select Date');
+                    return false;
+                }
+            //}
+
+
+            if (strMSG != '') {
+                alert("Please enter data for Mandatory fields  \n</br>" + strMSG);
+                return false;
+            }
+            else {
+
+                var TrackVehDateData = "";
+                if (TrackBookingTimeDetailList.length > 0) {
+
+                    //if (parseInt($("#BPId").val()) == 46 || parseInt($("#BPId").val()) == 91) {
+                    //    TrackVehDateData = jQuery.grep(TrackBookingTimeDetailList, function (obj) {
+                    //        return obj.ZZTrackGroupId == parseInt($("#lstServiceLookup").val()) && obj.VehicleId == VehicleId &&
+                    //            parseInt(obj.BookingDay) == parseInt(varDate) && obj.ZZCategoryId != varCategoryId;
+                    //    });
+                    //    if (TrackVehDateData.length > 0) {
+                    //        $("input[name='Category']:checked").prop('checked', false);
+                    //        $("#rdoCategory" + TrackVehDateData[0].ZZCategoryId).prop("checked", true);
+                    //        varCategoryId = TrackVehDateData[0].ZZCategoryId;
+                    //        alert("Data of this Track/Vehicle/Day already exist for category '" + TrackVehDateData[0].ZZCategory + "', so please delete the data for category '" + TrackVehDateData[0].ZZCategory + "' first");
+
+                    //        //return false;
+                    //    }
+                    //}
+                    //else {
+                        TrackVehDateData = jQuery.grep(TrackBookingTimeDetailList, function (obj) {
+                            return obj.ZZTrackGroupId == parseInt($("#lstServiceLookup").val()) && obj.VehicleId == VehicleId &&
+                                ToDate(obj.ZZDate).getTime() == ToDate(varDate).getTime() && obj.ZZCategoryId != varCategoryId;
+                        });
+                        var chk = [];
+                        var chkCopy = [];
+                        if ($("#BPId").val() == 98) {
+                            debugger
+                            chk = jQuery.grep(TrackBookingTimeDetailList, function (obj) {
+                                return obj.ZZTrackGroupId == parseInt($("#lstServiceLookup").val()) && ToDate(obj.ZZDate).getTime() == ToDate(varDate).getTime() && obj.ZZCategoryId != varCategoryId;
+                            });
+                            chkCopy = jQuery.grep(TrackBookingTimeDetailList, function (obj) {
+                                return obj.ZZTrackGroupId == parseInt($("#lstServiceLookup").val()) && ToDate(obj.ZZDate).getTime() == ToDate(varDate).getTime();
+                            });
+                            if (chkCopy.length > 0) {
+                                $("#lstTrackTimeSlot").val(chkCopy[0].SlotPropId);
+                                //BH = chkCopy[0].BillingHrs;
+                                //BM = chkCopy[0].BillingMin;
+                                //RO = chkCopy[0].RoundOffHrs;
+                            }
+                        }
+                        if (TrackVehDateData.length > 0) {
+                            $("input[name='Category']:checked").prop('checked', false);
+                            $("#rdoCategory" + TrackVehDateData[0].ZZCategoryId).prop("checked", true);
+                            varCategoryId = TrackVehDateData[0].ZZCategoryId;
+                            alert("Data of this Track/Vehicle/Date already exist for category '" + TrackVehDateData[0].ZZCategory + "', so please delete the data for category '" + TrackVehDateData[0].ZZCategory+"' first");
+                            //return false;
+                        } else if (chk.length > 0) {
+                            $("input[name='Category']:checked").prop('checked', false);
+                            $("#rdoCategory" + chk[0].ZZCategoryId).prop("checked", true);
+                            varCategoryId = chk[0].ZZCategoryId;
+                            alert("You can select only <b>" + chk[0].ZZCategory + "</b> with this date");
+                            // alert("Data of this Track/Date already exist for category '" + chk[0].ZZCategory + "', so please delete the data for category '" + chk[0].ZZCategory + "' first");
+                        }
+                    //}
+                }
+                var data = '';
+
+                if (ServicesList.length > 0) {
+                    data = jQuery.grep(ServicesList, function (obj) {
+                        return obj.CategoryPropId == varCategoryId;
+                    });
+                }
+
+
+
+                if (data.length > 0) {
+                    $("#divCardBody").show();
+                    $("#tbodyTrack").html("");
+                    for (var i = 0; i < data.length; i++) {
+                        debugger
+                        var varServiceId = NullHandle(data[i].ServiceId);
+                        var varRate = '';
+                        var varUsageHrs = '';
+                        var varUsageMin = '';
+                        var varUnit = "";
+                        var varBookingDay = '';
+                        var varBookingSlot = '';
+                        var varBookingConfirmSlot = '';
+                        var varRoundHrs = 0;
+                        var varBillingHrs = '';
+                        var varAmount = 0;
+
+                        /////////////////////// Bind Data From Track Booking Time Details ///////////////////////////////
+                        var BookingTimeDtls = '';
+
+                        if (TrackBookingTimeDetailList.length > 0) {
+                            //if (parseInt($("#BPId").val()) == 46 || parseInt($("#BPId").val()) == 91) {
+                            //    BookingTimeDtls = jQuery.grep(TrackBookingTimeDetailList, function (obj) {
+                            //        return obj.ServiceId == varServiceId && obj.VehicleId == VehicleId
+                            //            //&& obj.SlotPropId == parseInt(varTimeSlotId)
+                            //            && parseInt(obj.BookingDay) == parseInt(varDate);
+                            //    });
+                            //}
+                            //else {
+                            BookingTimeDtls = jQuery.grep(TrackBookingTimeDetailList, function (obj) {
+                                return obj.ServiceId == varServiceId && obj.VehicleId == VehicleId
+                                    //&& obj.SlotPropId == parseInt(varTimeSlotId)
+                                    && ToDate(obj.ZZDate).getTime() == ToDate(varDate).getTime();
+                            });
+                            //}
+
+
+                            if (BookingTimeDtls.length > 0) {
+                                varUsageHrs = NullHandle(BookingTimeDtls[0].TotalHours);
+                                varUsageMin = NullHandle(BookingTimeDtls[0].TotalMinutes);
+                                varRoundHrs = NullHandle(BookingTimeDtls[0].RoundOffHrs);
+                                varAmount = NullHandle(BookingTimeDtls[0].Amount);
+                            } else if (chkCopy.length > 0 && i == 0) {
+                                varUsageHrs = NullHandle(chkCopy[0].TotalHours);
+                                varUsageMin = NullHandle(chkCopy[0].TotalMinutes);
+                                varRoundHrs = NullHandle(chkCopy[0].RoundOffHrs);
+                                // varAmount = NullHandle(chkCopy[0].Amount);
+                            }
+                        }
+
+                        var rowId = "trTrackDtls" + i.toString();
+                        gridData = gridData + "<tr class='TypeBDynamic' id='" + rowId + "'>";
+                        gridData = gridData + "<td>" + NullHandle(data[i].ServiceSpecification) + "</td>";
+                        if (parseInt($("#WorkFlowId").val()) == 57 || parseInt($("#WorkFlowId").val()) == 58 ||
+                            parseInt($("#WorkFlowId").val()) == 29 || parseInt($("#WorkFlowId").val()) == 51 ||
+                            parseInt($("#WorkFlowId").val()) == 38 || parseInt($("#WorkFlowId").val()) == 53 ||
+                            parseInt($("#WorkFlowId").val()) == 6 || parseInt($("#WorkFlowId").val()) == 8
+                        ) {
+                            gridData = gridData + "<td class='text-right' style='display:none' id='txtRate'>" + NullHandle(varRate) + "</td>";//Rate
+                        }
+                        else {
+                            gridData = gridData + "<td class='text-right' id='txtRate'>" + NullHandle(varRate) + "</td>";//Rate
+                        }
+                        //gridData = gridData + "<td class='text-center' id='txtUnit'>" + NullHandle(varUnit) + "</td>";
+                        var disabled = '';
+                        if ($("#BPId").val() == 98) {
+                            //varUsageHrs = NullHandle(chkCopy[0] ? chkCopy[0].TotalHours : "");
+                            //varUsageMin = NullHandle(chkCopy[0] ? chkCopy[0].TotalMinutes : "");
+                            //varRoundHrs = NullHandle(chkCopy[0] ? chkCopy[0].RoundOffHrs : "");
+                            if (i > 0) {
+                                disabled = 'disabled="disabled"';
+                            } else {
+                                disabled = '';
+                            }
+                        }
+                        gridData = gridData + "<td class='text-right table-warning'><input id='txtUsageHrs' " + disabled + " onchange='ValidateHours(this," + rowId + ");' onkeypress='return CheckIsNumeric(event,this);'  maxlength='2' type='text' value='" + varUsageHrs + "' class='form-control timepicker text-left' placeholder='Hours'></td>";//UsageHrs
+                        gridData = gridData + "<td class='text-right table-warning'><input id='txtUsageMin' " + disabled + " onchange='ValidateMinutes(this," + rowId + ");' onkeypress='return CheckIsNumeric(event,this);' maxlength='2' type='text' value='" + varUsageMin + "' class='form-control timepicker text-left' placeholder='Minutes'></td>";//UsageMin
+                        //gridData = gridData + "<td class='text-center' id='txtBookingDay'>" + NullHandle(varBookingDay) + "</td>";
+                        //gridData = gridData + "<td class='text-center' id='txtBookingSlot'>" + NullHandle(varBookingSlot) + "</td>";
+                        //gridData = gridData + "<td class='text-center' id='txtBookingConfirmSlot'>" + NullHandle(varBookingConfirmSlot) + "</td>";
+                        gridData = gridData + "<td class='text-center' id='txtRoundHrs'>" + NullHandle(varRoundHrs) + "</td>";
+                        // gridData = gridData + "<td class='text-center'><label id='txtBillHrs'>" + NullHandle(varBillingHrs) + "</label></td>";// Billing Hrs
+                        //gridData = gridData + "<td class='text-right'><label id='txtAmount'>" + NullHandle(varAmount) + "</label></td>"; //Amount
+                        gridData = gridData + "<td style='display:none'><input type='hidden' id='hdnServiceId' value=" + NullHandle(data[i].ServiceId) + " /><input type='hidden' id='hdnBillingHrs' value=" + NullHandle(varBillingHrs) + " /><input type='hidden' id='hdnRate' value=" + NullHandle(varRate) + " /><input type='hidden' id='hdnSrNo' value=" + NullHandle(data[i].SrNo) + " /> </td>";
+                        gridData = gridData + "</tr>";
+                    }
+                    $("#tbodyTrack").html(gridData);
+                    BindBookingStatus();
+                } else {
+                    $("#rdoCategory" + varCategoryId).prop('checked', false);
+                    $("#rdoCategory" + varCategoryId).attr("disabled", true);
+                }
+            }
+        }
+        catch (e) {
+
+        }
+    }
+
+
+    ////////////////// Time Slot Selection Changed /////////////////////////////////////////////////
+    //////////////////////// BindBookingStatus ////////////////////////////////////////////////////////
+    function BindBookingStatus() {
+        try {
+
+            var gridData = "";
+            var varDate = $("#TrackDate").val();
+            //if (parseInt($("#BPId").val()) == 46 || parseInt($("#BPId").val()) == 91) {
+            //    var varDate = $("#Day").val();
+            //}
+            var varCategoryId = $("input[name='Category']:checked").val();
+            var varTimeSlotId = $("#lstTrackTimeSlot").val();
+
+            var strMSG = "";
+            if (parseInt($("#lstServiceLookup").val()) == 0) {
+                //strMSG = strMSG + 'Select Track  \n</br>'
+                if (ServiceCategoryList.length > 1) {
+                    $("input[name='Category']:checked").prop('checked', false);
+                }
+                //$("#lstTrackTimeSlot").val(0);
+                $("#lstTrackTimeSlot").val("-99");
+                alert('Select Track');
+                return false;
+            }
+            if (parseInt(VehicleId) == 0) {
+                //strMSG = strMSG + 'Select Vehicle Row  \n</br>'
+                if (ServiceCategoryList.length > 1) {
+                    $("input[name='Category']:checked").prop('checked', false);
+                }
+                //$("#lstTrackTimeSlot").val(0);
+                $("#lstTrackTimeSlot").val("-99");
+                alert('Select Vehicle');
+                return false;
+            }
+
+            //if (parseInt($("#BPId").val()) == 46 || parseInt($("#BPId").val()) == 91) {
+            //    if (varDate.trim() == "") {
+            //        // strMSG = strMSG + 'Date  \n</br>'
+            //        if (ServiceCategoryList.length > 1) {
+            //            $("input[name='Category']:checked").prop('checked', false);
+            //        }
+            //        $("#lstTrackTimeSlot").val(0);
+            //        alert('Input Day');
+            //        return false;
+            //    }
+            //}
+            //else {
+                if (varDate.trim() == "") {
+                    // strMSG = strMSG + 'Date  \n</br>'
+                    if (ServiceCategoryList.length > 1) {
+                        $("input[name='Category']:checked").prop('checked', false);
+                    }
+                   // $("#lstTrackTimeSlot").val(0);
+                    $("#lstTrackTimeSlot").val("-99");
+                    alert('Select Date');
+                    return false;
+                }
+           // }
+
+            if (varCategoryId==undefined || parseInt(varCategoryId) == 0) {
+               // strMSG = strMSG + 'Service Category  \n</br>'
+                alert('Select Service Category');
+                //$("#lstTrackTimeSlot").val(0);
+                $("#lstTrackTimeSlot").val("-99");
+                return false;
+            }
+            //if (varTimeSlotId == undefined || parseInt(varTimeSlotId) == 0) {
+            //    strMSG = strMSG + 'Time Slot  \n</br>'
+            //}
+
+            if (strMSG != '') {
+                alert("Please enter data for Mandatory fields  \n</br>" + strMSG);
+                return false;
+            }
+            else {
+
+                var data = '';
+                var varServiceList = [];
+
+                if (ServicesList.length > 0) {
+                    data = jQuery.grep(ServicesList, function (obj) {
+                        return obj.CategoryPropId == varCategoryId;
+                    });
+                }
+                for (var i = 0; i < data.length; i++) {
+                    varServiceList[i]=NullHandle(data[i].ServiceId);
+                }
+
+                var data = { 'intlstServiceId': varServiceList, 'intTimeSlotId': parseInt(varTimeSlotId), 'strWED': varDate };
+                var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+            LoaderShow();
+            $.ajax({
+                url: '@Url.Action("BookingStatusGetByServiceIdTimeSlotPropIdWEFDate", "Home")',
+                type: 'POST',
+                dataType: 'json',
+                async: true,
+                data: dataWithAntiforgeryToken,
+               // contentType: "application/json; charset=utf-8",
+                success: function (dataBokkingStatus) {
+
+                    LoaderHide();
+                    if (dataBokkingStatus.StatusId != "99" && dataBokkingStatus.StatusId != "-99") {
+                        var varBookingStatusList = dataBokkingStatus.BookingStatusList;
+
+                        $('#tbodyTrack').find('tr').each(function (i, el) {
+
+                            var varServiceId = 0;
+                            var varRate = 0;
+                            var varUnit = "";
+                            var varBookingDay = 0;
+                            var varBookingSlot = 0;
+                            var varBookingConfirmSlot = 0;
+                            var varBillingHrs = 0;
+
+                            $(this).find("input[type='hidden'][id='hdnServiceId']").each(function () {
+                                varServiceId = $(this).val().trim();
+                            });
+
+
+                            /////////////////////// Bind Data From Booking Status ///////////////////////////////
+                            var BookingStatus = '';
+
+                            if (varBookingStatusList.length > 0) {
+                                BookingStatus = jQuery.grep(varBookingStatusList, function (obj) {
+                                    return obj.ServiceId == varServiceId
+                                });
+
+                                if (BookingStatus.length > 0) {
+                                    varRate = NullHandle(BookingStatus[0].Rate);
+                                    varUnit = NullHandle(BookingStatus[0].UOM);
+                                    varBookingDay = NullHandle(BookingStatus[0].ZZBookingInADay);
+                                    varBookingSlot = NullHandle(BookingStatus[0].ZZSlotInADay);
+                                    varBookingConfirmSlot = NullHandle(BookingStatus[0].ZZConfirmedBookinginSlot);
+                                    varBillingHrs = NullHandle(BookingStatus[0].MinBilling);
+                                }
+
+                                $(this).find("[id='txtRate']").each(function () {
+                                    $(this).text(NullHandle(varRate));
+                                });
+                                $(this).find("[id='txtUnit']").each(function () {
+                                    $(this).text(NullHandle(varUnit));
+                                });
+                                $(this).find("[id='txtBookingDay']").each(function () {
+                                    $(this).text(NullHandle(varBookingDay));
+                                });
+                                $(this).find("[id='txtBookingSlot']").each(function () {
+                                    $(this).text(NullHandle(varBookingSlot));
+                                });
+                                $(this).find("[id='txtBookingConfirmSlot']").each(function () {
+                                    $(this).text(NullHandle(varBookingConfirmSlot));
+                                });
+
+                                $(this).find("input[type='hidden'][id='hdnBillingHrs']").each(function () {
+                                    $(this).val(NullHandle(varBillingHrs));
+                                });
+
+                                $(this).find("input[type='hidden'][id='hdnRate']").each(function () {
+                                    $(this).val(NullHandle(varRate));
+                                });
+
+                            }
+                        });
+                    }
+                    else {
+                        alert(data.Status);
+                    }
+                },
+                error: function (xhr) {
+
+                    LoaderHide();
+                    alert(xhr.responseText);
+                }
+            });
+            }
+        }
+        catch (e) {
+            LoaderHide();
+            alert(xhr.responseText);
+        }
+
+    }
+
+    ///////////////////////////// Track Detail Save   //////////////////////////////////////////////////////
+    @*function TrackDetailSaveMultiple() {
+        try {
+            var model = [];
+            var indx = 0;
+            var varDate = $("#TrackDate").val().trim();
+            var varDay= $("#Day").val();
+            var varTimeSlotId = $("#lstTrackTimeSlot").val().trim();
+            var varCategoryId = $("input[name='Category']:checked").val();
+            var varTrackGroupId = $("#lstServiceLookup").val();
+            var strMSG = "";
+            if (parseInt(varTrackGroupId) == 0) {
+                strMSG = strMSG + 'Select Track  \n</br>'
+            }
+            if (parseInt(VehicleId) == 0) {
+                strMSG = strMSG + 'Select Vehicle  \n</br>'
+            } else {
+                if (varDate == "") {
+                    strMSG = strMSG + 'Date  \n</br>'
+                }
+            }
+
+            if (varTimeSlotId == undefined || parseInt(varTimeSlotId) == 0) {
+                strMSG = strMSG + 'Time Slot  \n</br>'
+            }
+
+            $('#tbodyTrack').find('tr').each(function (i, el) {
+                TimeDtls = {};
+                TimeDtls.TrackBookingTimeDetailId = -1;
+                TimeDtls.ZZDate = varDate;
+                TimeDtls.BookingDay = varDay;
+                TimeDtls.SlotPropId = varTimeSlotId;
+                TimeDtls.VehicleId = VehicleId;
+                TimeDtls.ZZCategoryId = varCategoryId;
+                TimeDtls.ZZTrackGroupId = varTrackGroupId;
+
+                var varHrs = '';
+                var varMin = '';
+
+                $(this).find("input[type='hidden'][id='hdnServiceId']").each(function () {
+                    TimeDtls.ServiceId = $(this).val().trim();
+                });
+
+                $(this).find("input[type='hidden'][id='hdnSrNo']").each(function () {
+                    TimeDtls.SrNo = $(this).val().trim();
+                });
+
+                $(this).find("input[type='text'][id='txtUsageHrs']").each(function () {
+                    varHrs = $(this).val().trim();
+                });
+
+                $(this).find("input[type='text'][id='txtUsageMin']").each(function () {
+                    varMin = $(this).val().trim();
+                });
+
+                $(this).find("input[type='hidden'][id='hdnBillingHrs']").each(function () {
+                    TimeDtls.BillingHrs = $(this).val().trim();
+                });
+
+                $(this).find("input[type='hidden'][id='hdnRate']").each(function () {
+                    TimeDtls.Rate = $(this).val().trim();
+                });
+
+                if ((varHrs != undefined && varHrs != '' && parseInt(varHrs) > 0) || (varMin != undefined && varMin != '' && parseInt(varMin) >0)) {
+                    TimeDtls.TotalHours = varHrs;
+                    TimeDtls.TotalMinutes = varMin;
+                    model[indx] = new Object(TimeDtls);
+                    indx++;
+                }
+            });
+
+            if (model == undefined ||  model.length==0) {
+                strMSG = strMSG + 'Track Usage Hours/Minutes  \n</br>'
+            }
+
+            if (strMSG != '') {
+                alert("Please enter data for Mandatory fields  \n</br>" + strMSG);
+                return false;
+            }
+            else {
+                $("#btnSave").hide();
+                LoaderShow();
+                var arrayMultiple = [];
+                var modelMultiple = {};
+                for (var i = 0; i < TrackBookingDetailList.length; i++) {
+                    modelMultiple.BookingDay = model[0].BookingDay; // ""
+                    modelMultiple.Rate = model[0].Rate; // 15000
+                    modelMultiple.ServiceId = model[0].ServiceId; // 34
+                    modelMultiple.SlotPropId = model[0].SlotPropId; // 31
+                    modelMultiple.SrNo = model[0].SrNo; // 101
+                    modelMultiple.TotalHours = model[0].TotalHours; // 02 -->
+                    modelMultiple.TotalMinutes = model[0].TotalMinutes; // 30 -->
+                    modelMultiple.BillingHrs = model[0].BillingHrs; // 2
+                    modelMultiple.TrackBookingTimeDetailId = model[0].TrackBookingTimeDetailId; // -1
+                    modelMultiple.VehicleId = TrackBookingDetailList[i].VehicleId; // 2882
+                    modelMultiple.ZZCategoryId = model[0].ZZCategoryId; // 105
+                    modelMultiple.ZZDate = model[0].ZZDate; // 30-12-2022
+                    modelMultiple.ZZTrackGroupId = model[0].ZZTrackGroupId; // 1
+                    arrayMultiple.push(modelMultiple);
+                    modelMultiple = {};
+                }
+                debugger
+                model = arrayMultiple;
+                var data = { 'model': model };
+                var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+                $.ajax({
+                    url: '@Url.Action("TrackBookingDetailSave", "Home")',
+                    type: 'POST',
+                    dataType: 'json',
+                    async: true,
+                    data: dataWithAntiforgeryToken,
+                    //contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        LoaderHide();
+                        if (data.StatusId != "99" && data.StatusId != "-99") {
+                            $("#TrackDate").val("");
+                            $("#lstTrackTimeSlot").val("-99");
+                            $("#lstVehicleLookup").val(0);
+                            $('.selectpicker').selectpicker('refresh');
+                            $("#txtUsageHrs").val("");
+                            $("#txtUsageMin").val("");
+                            $("#tbodyTrack").html("");
+                            $("#divCardBody").hide();
+                            TrackBookingDetailList = data.TrackBookingDetailList;
+                            TrackBookingTimeDetailList = data.TrackBookingTimeDetailList;
+                            TrackBookingTimeSummaryList = data.TrackBookingTimeSummaryList;
+                            TrackBookingDetailViewFrontGetByBookingIdTrackGroupIdPopup();
+                            // BindVehicleData(data.TrackBookingDetailList);
+                            // BindServiceTimeDetails(VehicleId);
+                            LoadTrackInfo(model[0].ZZTrackGroupId);
+                            BindCalculationSummary();
+                            ChangeRowColour(ColourRowId);
+                        }
+                        $("#btnSave").show();
+                        alert(data.Status);
+                    },
+                    error: function (xhr) {
+
+                        $("#btnSave").show();
+                        LoaderHide();
+                        alert(xhr.responseText);
+                    }
+                });
+            }
+        }
+        catch (e) {
+
+            LoaderHide();
+            $("#btnSave").show();
+            alert(e.message);
+            return false;
+        }
+    }*@
+
+    function TrackDetailSaveMultiple() {
+        try {
+            var model = [];
+            var indx = 0;
+            var varDate = $("#TrackDate").val().trim();
+            var varDay= $("#Day").val();
+            var varTimeSlotId = $("#lstTrackTimeSlot").val().trim();
+            var varCategoryId = $("input[name='Category']:checked").val();
+            var varTrackGroupId = $("#lstServiceLookup").val();
+            var strMSG = "";
+            var strMSG = "";
+            debugger
+            if (TrackBookingTimeSummaryList.length > 0) {
+                alert("Exclusive booking can be done for one day and one Track only. Kindly create separate booking for other day and Other Track.");
+                return false;
+            }
+            if (TrackBookingTimeDetailList.length == 0 && TrackBookingTimeSummaryList.length > 0) {
+                alert("Only one track can be booked for Exclusive booking, Kindly create another Exclusive RFQ for other track.");
+                return false;
+            }
+            if (parseInt(varTrackGroupId) == 0) {
+                strMSG = strMSG + 'Select Track  \n</br>'
+            }
+            if (parseInt(VehicleId) == 0) {
+                strMSG = strMSG + 'Select Vehicle  \n</br>'
+            } else {
+                if (varDate == "") {
+                    strMSG = strMSG + 'Date  \n</br>'
+                }
+            }
+
+            if (varTimeSlotId == undefined || parseInt(varTimeSlotId) == 0) {
+                strMSG = strMSG + 'Time Slot  \n</br>'
+            }
+
+            $('#tbodyTrack').find('tr').each(function (i, el) {
+                TimeDtls = {};
+                TimeDtls.TrackBookingTimeDetailId = -1;
+                TimeDtls.ZZDate = varDate;
+                TimeDtls.BookingDay = varDay;
+                TimeDtls.SlotPropId = varTimeSlotId;
+                TimeDtls.VehicleId = VehicleId;
+                TimeDtls.ZZCategoryId = varCategoryId;
+                TimeDtls.ZZTrackGroupId = varTrackGroupId;
+
+                var varHrs = '';
+                var varMin = '';
+
+                $(this).find("input[type='hidden'][id='hdnServiceId']").each(function () {
+                    TimeDtls.ServiceId = $(this).val().trim();
+                });
+
+                $(this).find("input[type='hidden'][id='hdnSrNo']").each(function () {
+                    TimeDtls.SrNo = $(this).val().trim();
+                });
+
+                $(this).find("input[type='text'][id='txtUsageHrs']").each(function () {
+                    varHrs = $(this).val().trim();
+                });
+
+                $(this).find("input[type='text'][id='txtUsageMin']").each(function () {
+                    varMin = $(this).val().trim();
+                });
+
+                $(this).find("input[type='hidden'][id='hdnBillingHrs']").each(function () {
+                    TimeDtls.BillingHrs = $(this).val().trim();
+                });
+
+                $(this).find("input[type='hidden'][id='hdnRate']").each(function () {
+                    TimeDtls.Rate = $(this).val().trim();
+                });
+
+                if ((varHrs != undefined && varHrs != '' && parseInt(varHrs) > 0) || (varMin != undefined && varMin != '' && parseInt(varMin) >0)) {
+                    TimeDtls.TotalHours = varHrs;
+                    TimeDtls.TotalMinutes = varMin;
+                    model[indx] = new Object(TimeDtls);
+                    indx++;
+                }
+            });
+
+            if (model == undefined ||  model.length==0) {
+                strMSG = strMSG + 'Track Usage Hours/Minutes  \n</br>'
+            }
+
+            if (strMSG != '') {
+                alert("Please enter data for Mandatory fields  \n</br>" + strMSG);
+                return false;
+            }
+            else {
+                $("#btnSave").hide();
+                for (var i = 0; i < TrackBookingDetailList.length; i++) {
+                    LoaderShow();
+                    for (var j = 0; j < model.length; j++) {
+                        LoaderShow();
+                        model[j].VehicleId = TrackBookingDetailList[i].VehicleId; // 2882
+                    }
+                    debugger
+                    var data = { 'model': model };
+                    var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+                    $.ajax({
+                        url: '@Url.Action("TrackBookingDetailSave", "Home")',
+                        type: 'POST',
+                        dataType: 'json',
+                        async: false,
+                        data: dataWithAntiforgeryToken,
+                        //contentType: "application/json; charset=utf-8",
+                        beforeSend: function () {
+                            LoaderShow();
+                        },
+                        success: function (data) {
+                            debugger
+                            if (data.StatusId != "99" && data.StatusId != "-99") {
+                                $("#TrackDate").val("");
+                                $("#lstTrackTimeSlot").val("-99");
+                                $("#lstVehicleLookup").val(0);
+                                $('.selectpicker').selectpicker('refresh');
+                                $("#txtUsageHrs").val("");
+                                $("#txtUsageMin").val("");
+                                $("#tbodyTrack").html("");
+                                $("#divCardBody").hide();
+                                TrackBookingDetailList = data.TrackBookingDetailList;
+                                TrackBookingTimeDetailList = data.TrackBookingTimeDetailList;
+                                TrackBookingTimeSummaryList = data.TrackBookingTimeSummaryList;
+                            }
+                        },
+                        error: function (xhr) {
+                            $("#btnSave").show();
+                            LoaderHide();
+                            alert(xhr.responseText);
+                        }
+                    });
+                }
+                LoaderHide();
+                $("#btnSave").show();
+                LoadTrackInfo(model[0].ZZTrackGroupId);
+                BindCalculationSummary();
+                ChangeRowColour(ColourRowId);
+                TrackBookingDetailViewFrontGetByBookingIdTrackGroupIdPopup();
+                alert("Data saved successfully.");
+            }
+        }
+        catch (e) {
+            LoaderHide();
+            $("#btnSave").show();
+            alert(e.message);
+            return false;
+        }
+    }
+
+    function TrackDetailSave() {
+        try {
+            var model = [];
+            var indx = 0;
+
+            var varDate = $("#TrackDate").val().trim();
+            var varDay= $("#Day").val();
+            var varTimeSlotId = $("#lstTrackTimeSlot").val().trim();
+            var varCategoryId = $("input[name='Category']:checked").val();
+            var varTrackGroupId = $("#lstServiceLookup").val();
+
+            var strMSG = "";
+
+            if (parseInt(varTrackGroupId) == 0) {
+                strMSG = strMSG + 'Select Track  \n</br>'
+            }
+            if (parseInt(VehicleId) == 0) {
+                strMSG = strMSG + 'Select Vehicle  \n</br>'
+            }
+            //if (parseInt($("#BPId").val()) == 46 || parseInt($("#BPId").val()) == 91) {
+            //    if (varDay == "" || parseInt(varDay)<=0) {
+            //        strMSG = strMSG + 'Day  \n</br>'
+            //    }
+            //}
+            else {
+                if (varDate == "") {
+                    strMSG = strMSG + 'Date  \n</br>'
+                }
+            }
+
+            if (varTimeSlotId == undefined || parseInt(varTimeSlotId) == 0) {
+                strMSG = strMSG + 'Time Slot  \n</br>'
+            }
+
+
+            $('#tbodyTrack').find('tr').each(function (i, el) {
+                TimeDtls = {};
+                TimeDtls.TrackBookingTimeDetailId = -1;
+                TimeDtls.ZZDate = varDate;
+                TimeDtls.BookingDay = varDay;
+                TimeDtls.SlotPropId = varTimeSlotId;
+                TimeDtls.VehicleId = VehicleId;
+                TimeDtls.ZZCategoryId = varCategoryId;
+                TimeDtls.ZZTrackGroupId = varTrackGroupId;
+
+                var varHrs = '';
+                var varMin = '';
+
+
+                $(this).find("input[type='hidden'][id='hdnServiceId']").each(function () {
+                    TimeDtls.ServiceId = $(this).val().trim();
+                });
+
+                $(this).find("input[type='hidden'][id='hdnSrNo']").each(function () {
+                    TimeDtls.SrNo = $(this).val().trim();
+                });
+
+                $(this).find("input[type='text'][id='txtUsageHrs']").each(function () {
+                    varHrs = $(this).val().trim();
+                });
+
+                $(this).find("input[type='text'][id='txtUsageMin']").each(function () {
+                    varMin = $(this).val().trim();
+                });
+
+                $(this).find("input[type='hidden'][id='hdnBillingHrs']").each(function () {
+                    TimeDtls.BillingHrs = $(this).val().trim();
+                });
+
+                $(this).find("input[type='hidden'][id='hdnRate']").each(function () {
+                    TimeDtls.Rate = $(this).val().trim();
+                });
+
+                if ((varHrs != undefined && varHrs != '' && parseInt(varHrs) > 0) || (varMin != undefined && varMin != '' && parseInt(varMin) >0)) {
+
+                    TimeDtls.TotalHours = varHrs;
+                    TimeDtls.TotalMinutes = varMin;
+                    model[indx] = new Object(TimeDtls);
+                    indx++;
+                }
+
+            });
+            debugger;
+            if (model == undefined ||  model.length==0) {
+                strMSG = strMSG + 'Track Usage Hours/Minutes  \n</br>'
+            }
+            if (model != null && model.length > 1) {
+                strMSG = strMSG + 'Please select only one in Track Usage Hours/Minutes 3.T above or 3.5T below  \n</br>'
+            }
+
+            if (strMSG != '') {
+                alert("Please enter data for Mandatory fields  \n</br>" + strMSG);
+                return false;
+            }
+            else {
+                debugger
+                $("#btnSave").hide();
+                LoaderShow();
+                //'{model: ' + JSON.stringify(model) + '}'
+                var data = { 'model': model};
+                var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+                $.ajax({
+                    url: '@Url.Action("TrackBookingDetailSave", "Home")',
+                    type: 'POST',
+                    dataType: 'json',
+                    async: true,
+                    data: dataWithAntiforgeryToken,
+                    //contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+
+                        LoaderHide();
+                        if (data.StatusId != "99" && data.StatusId != "-99") {
+                            $("#TrackDate").val("");
+                            $("#lstTrackTimeSlot").val("-99");
+                            $("#lstVehicleLookup").val(0);
+                            $('.selectpicker').selectpicker('refresh');
+                            $("#txtUsageHrs").val("");
+                            $("#txtUsageMin").val("");
+                            $("#tbodyTrack").html("");
+                            $("#divCardBody").hide();
+                            debugger
+                            TrackBookingDetailList = data.TrackBookingDetailList;
+                            TrackBookingTimeDetailList = data.TrackBookingTimeDetailList;
+                            TrackBookingTimeSummaryList = data.TrackBookingTimeSummaryList;
+                            TrackBookingDetailViewFrontGetByBookingIdTrackGroupIdPopup();
+                            // BindVehicleData(data.TrackBookingDetailList);
+                            BindServiceTimeDetails(VehicleId);
+                            BindCalculationSummary();
+                            ChangeRowColour(ColourRowId);
+                        }
+                        $("#btnSave").show();
+                        alert(data.Status);
+                    },
+                    error: function (xhr) {
+
+                        $("#btnSave").show();
+                        LoaderHide();
+                        alert(xhr.responseText);
+                    }
+                });
+            }
+        }
+        catch (e) {
+
+            LoaderHide();
+            $("#btnSave").show();
+            alert(e.message);
+            return false;
+        }
+    }
+
+    ///////////////////////////// Bind Track Time Details  //////////////////////////////////////////////////////
+    function BindServiceTimeDetails(varVehicleId) {
+        debugger
+        try {
+            var gridData = "";
+            var data = TrackBookingTimeDetailList;
+            if (TrackBookingTimeDetailList.length > 0 && parseInt(varVehicleId)>0) {
+                data = "";
+                data = jQuery.grep(TrackBookingTimeDetailList, function (obj) {
+                    return obj.VehicleId == varVehicleId;
+                });
+            }
+
+            $("#tbodyServiceDetails").html("");
+            if (data.length > 0) {
+                if ($("#BPId").val() == 98) {
+                    $("#divCopy").hide();
+                } else {
+                    $("#divCopy").show();
+                }
+            } else {
+                $("#btnCopy").hide();
+                $("input[name=copyRow][value='No']").prop("checked",true);
+                $("#divCopy").hide();
+            }
+            for (var i = 0; i < data.length; i++) {
+                debugger
+                var indx = i + 1;
+                gridData = gridData + "<tr id='trTrack_" + indx + "' onclick='SelectRow(" + '"' + NullHandle(data[i].ZZDate) + '"'  + "," + indx + "," + NullHandle(data[i].TrackBookingTimeDetailId) + "," + '"' + NullHandle(data[i].ZZTrackGroup) + ' - ' + NullHandle(data[i].ZZServiceSpecification) + '"' + ")'>";
+
+                if (parseInt($("#BPId").val()) == 46 || parseInt($("#BPId").val()) == 91) {
+                    if (parseInt($("#StatusPropId").val()) == 40 && parseInt($("#RFQId").val()) == 0 && (parseInt($("#WorkFlowId").val()) == 6 || parseInt($("#WorkFlowId").val()) == 57 || parseInt($("#WorkFlowId").val()) == 29 || parseInt($("#WorkFlowId").val()) == 36 || parseInt($("#WorkFlowId").val()) == 38)) {
+                        gridData = gridData + "<td class='td-actions text-center'>";
+                        // => gridData = gridData + "<button type = 'button' class='btn btn-info' title = 'Edit Track Details' onclick = 'return TrackBookingDetailEdit(" + NullHandle(data[i].VehicleId) + "," + '"' + NullHandle(data[i].BookingDay) + '"' + "," + NullHandle(data[i].ZZCategoryId) + "," + NullHandle(data[i].SlotPropId) + "," + NullHandle(data[i].ZZTrackGroupId) + ")' > <i class='material-icons'>edit</i></button >";
+                        //gridData = gridData + "&nbsp;<button type='button' class='btn btn-info' title='Copy Track Details' onclick='return TrackBookingDetailCopy(" + NullHandle(data[i].TrackBookingTimeDetailId) + "," + '"' + NullHandle(data[i].ZZTrackGroup) + ' - ' + NullHandle(data[i].ZZServiceSpecification) + '"' + ")'><i class='fa fa-copy'></i></button>";
+                        gridData = gridData + "&nbsp;<button type='button' rel='tooltip' class='btn btn-danger' data-original-title='' title='Delete Track Detail' onclick='return TrackBookingDetailDelete(" + NullHandle(data[i].VehicleId) + "," + '"' + NullHandle(data[i].ZZDate) + '"' + "," + NullHandle(data[i].ServiceId) + "," + NullHandle(data[i].SlotPropId) + "," + NullHandle(data[i].ZZTrackGroupId) + ")'><i class='material-icons'>close</i></button>";
+                        gridData = gridData + "</td>";
+                    }
+                    else {
+                        gridData = gridData + "<td class='td-actions text-center'><button type='button' class='btn btn-info' title='View Track Details' onclick='return TrackBookingDetailEdit(" + NullHandle(data[i].VehicleId) + "," + '"' + NullHandle(data[i].BookingDay) + '"' + "," + NullHandle(data[i].ZZCategoryId) + "," + NullHandle(data[i].SlotPropId) + "," + NullHandle(data[i].ZZTrackGroupId) + ")'><i class='material-icons'>trending_up</i></button></td>";
+                    }
+                }
+                else {
+                    if (parseInt($("#StatusPropId").val()) == 40 && parseInt($("#RFQId").val()) == 0 && (parseInt($("#WorkFlowId").val()) == 6 || parseInt($("#WorkFlowId").val()) == 57 || parseInt($("#WorkFlowId").val()) == 29 || parseInt($("#WorkFlowId").val()) == 36 || parseInt($("#WorkFlowId").val()) == 38)) {
+                        gridData = gridData + "<td class='td-actions text-center'>";
+                        // => gridData = gridData + "<button type = 'button' class='btn btn-info' title = 'Edit Track Details' onclick = 'return TrackBookingDetailEdit(" + NullHandle(data[i].VehicleId) + "," + '"' + NullHandle(data[i].ZZDate) + '"' + "," + NullHandle(data[i].ZZCategoryId) + "," + NullHandle(data[i].SlotPropId) + "," + NullHandle(data[i].ZZTrackGroupId) + ")' > <i class='material-icons'>edit</i></button > ";
+                        //gridData = gridData + "&nbsp;<button type='button' class='btn btn-info' title='Copy Track Details' onclick='return TrackBookingDetailCopy(" + NullHandle(data[i].TrackBookingTimeDetailId) + "," + '"' + NullHandle(data[i].ZZTrackGroup) + ' - ' + NullHandle(data[i].ZZServiceSpecification) + '"' + ")'><i class='fa fa-copy'></i></button>";
+                        gridData = gridData + "&nbsp;<button type='button' rel='tooltip' class='btn btn-danger' data-original-title='' title='Delete Track Detail' onclick='return TrackBookingDetailDelete(" + NullHandle(data[i].VehicleId) + "," + '"' + NullHandle(data[i].ZZDate) + '"' + "," + NullHandle(data[i].ServiceId) + "," + NullHandle(data[i].SlotPropId) + "," + NullHandle(data[i].ZZTrackGroupId) + ")'><i class='material-icons'>close</i></button></td>";
+                    }
+                    else {
+                        gridData = gridData + "<td class='td-actions text-center'><button type='button' class='btn btn-info' title='View Track Details' onclick='return TrackBookingDetailEdit(" + NullHandle(data[i].VehicleId) + "," + '"' + NullHandle(data[i].ZZDate) + '"' + "," + NullHandle(data[i].ZZCategoryId) + "," + NullHandle(data[i].SlotPropId) + "," + NullHandle(data[i].ZZTrackGroupId) + ")'><i class='material-icons'>trending_up</i></button></td>";
+                    }
+                }
+                gridData = gridData + "<td>" + NullHandle(data[i].VehicleNo) + "</td>";
+
+
+                gridData = gridData + "<td>" + NullHandle(data[i].ZZTrackGroup) + "&nbsp;-&nbsp;" + NullHandle(data[i].ZZServiceSpecification) + "</td>";
+
+                gridData = gridData + "<td>" + NullHandle(data[i].ZZCategory) + "</td>";
+
+                //if (parseInt($("#BPId").val()) == 46 || parseInt($("#BPId").val()) == 91) {
+                //    gridData = gridData + "<td class='text-center'>" + NullHandle(data[i].BookingDay) + "</td>";
+                //}
+                //else {
+                gridData = gridData + "<td class='text-center'>" + NullHandle(data[i].ZZDate) + "</td>";
+               // }
+
+                gridData = gridData + "<td class='text-center'>" + NullHandle(data[i].ZZSlot) + "</td>";
+
+                if (parseInt($("#WorkFlowId").val()) == 57 || parseInt($("#WorkFlowId").val()) == 58 ||
+                    parseInt($("#WorkFlowId").val()) == 29 || parseInt($("#WorkFlowId").val()) == 51 ||
+                    parseInt($("#WorkFlowId").val()) == 38 || parseInt($("#WorkFlowId").val()) == 53 ||
+                    parseInt($("#WorkFlowId").val()) == 6 || parseInt($("#WorkFlowId").val()) == 8) {
+                    gridData = gridData + "<td class='text-right'style='display:none'>" + NullHandle(data[i].Rate) + "</td>";
+                }
+                else {
+                    gridData = gridData + "<td class='text-right'>" + NullHandle(data[i].Rate) + "</td>";
+                }
+                gridData = gridData + "<td class='text-center'>" + NullHandle(data[i].ZZUOM) + "</td>";
+
+                gridData = gridData + "<td class='text-center'>" + NullHandle(data[i].TotalHours) + "</td>";
+
+                gridData = gridData + "<td class='text-center'>" + NullHandle(data[i].TotalMinutes) + "</td>";
+               // gridData = gridData + "<td class='text-center'>" + NullHandle(data[i].RoundOffHrs) + "</td>";
+                gridData = gridData + "<td class='text-center'>" + NullHandle(data[i].BillingHrs) + "</td>";
+                //gridData = gridData + "<td class='text-right'>" + NullHandle(data[i].Amount) + "</td>";
+
+                gridData = gridData + "</tr>";
+            }
+            $("#tbodyServiceDetails").html(gridData);
+        }
+        catch (e) {
+
+        }
+    }
+
+    var strFromDate = "";
+    function SelectRow(varZZDate,RowId, varTrackBookingTImeDetailId,varCaption) {
+        try {
+            debugger;
+            strFromDate=varZZDate;
+            $("#hiddenTrackBookingTimeDetailId").val(varTrackBookingTImeDetailId);
+            $("#txtTrackName").text(varCaption);
+            ColourRowId = RowId;
+            changeColorTrack(RowId);
+            // $("#PopupFromDateToDate").modal("show");
+        }
+        catch (e) {
+
+        }
+    }
+
+    function changeColorTrack(id) {
+        $("#trTrack_" + Holdid + "").removeClass('highlighted');
+        $("#trTrack_" + id + "").addClass('highlighted');
+        Holdid = id;
+    }
+
+    var trackWiseSummaryList = [];
+
+    function LoadTrackInfoPopup() {
+        LoaderShow();
+        debugger;
+        var varTrackGroupId = $("#lstServiceLookupPopup").val();
+        var data = { 'intTrackGroupId': varTrackGroupId };
+        var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+        LoaderShow();
+        $.ajax({
+            url: '@Url.Action("LoadTrackInfo", "Home")',
+            type: 'POST',
+            dataType: 'json',
+            async: true,
+            data: dataWithAntiforgeryToken,
+            success: function (data) {
+                LoaderHide();
+                debugger;
+                if (data.StatusId != "99" && data.StatusId != "-99") {
+                    // trackWiseSummaryList = TrackBookingTimeDetailList;
+                    BindServiceTimeDetailsPopup(data.TrackBookingTimeDetailList);
+                }
+                else {
+                    alert(data.Status);
+                }
+            },
+            error: function (xhr) {
+                LoaderHide();
+                alert(xhr.responseText);
+            }
+        });
+    }
+
+    function BindServiceTimeDetailsPopup(data) {
+        try {
+            debugger;
+            var gridData = "";
+            $("#tbodyServiceDetailsPopup").html("");
+            for (var i = 0; i < data.length; i++) {
+                debugger
+                gridData = gridData + "<tr>";
+                gridData = gridData + "<td>" + NullHandle(data[i].VehicleNo) + "</td>";
+                gridData = gridData + "<td class='text-center'>" + NullHandle(data[i].ZZDate) + "</td>";
+                gridData = gridData + "<td>" + NullHandle(data[i].ZZTrackGroup) + "&nbsp;-&nbsp;" + NullHandle(data[i].ZZServiceSpecification) + "</td>";
+                gridData = gridData + "<td>" + NullHandle(data[i].ZZCategory) + "</td>";
+                gridData = gridData + "<td class='text-center'>" + NullHandle(data[i].ZZSlot) + "</td>";
+                if (parseInt($("#WorkFlowId").val()) == 57 || parseInt($("#WorkFlowId").val()) == 58 ||
+                    parseInt($("#WorkFlowId").val()) == 29 || parseInt($("#WorkFlowId").val()) == 51 ||
+                    parseInt($("#WorkFlowId").val()) == 38 || parseInt($("#WorkFlowId").val()) == 53 ||
+                    parseInt($("#WorkFlowId").val()) == 6 || parseInt($("#WorkFlowId").val()) == 8) {
+                    gridData = gridData + "<td class='text-right'style='display:none'>" + NullHandle(data[i].Rate) + "</td>";
+                }
+                else {
+                    gridData = gridData + "<td class='text-right'>" + NullHandle(data[i].Rate) + "</td>";
+                }
+                gridData = gridData + "<td class='text-center'>" + NullHandle(data[i].ZZUOM) + "</td>";
+                gridData = gridData + "<td class='text-center'>" + NullHandle(data[i].TotalHours) + "</td>";
+                gridData = gridData + "<td class='text-center'>" + NullHandle(data[i].TotalMinutes) + "</td>";
+                gridData = gridData + "<td class='text-center'>" + NullHandle(data[i].BillingHrs) + "</td>";
+                gridData = gridData + "</tr>";
+            }
+            $("#tbodyServiceDetailsPopup").html(gridData);
+        }
+        catch (e) {
+
+        }
+    }
+
+    //////////////////////////// Bind Track Calculation Summary //////////////////////////////////////////////////////
+    function BindCalculationSummary() {
+        try {
+
+            var gridData = "";
+            var data = TrackBookingTimeSummaryList;
+
+            $("#tbodyCalculationSummary").html("");
+
+            for (var i = 0; i < data.length; i++) {
+                gridData = gridData + "<tr>";
+
+                gridData = gridData + "<td>" + NullHandle(data[i].BillingItem) + "</td>";
+                gridData = gridData + "<td>" + NullHandle(data[i].Specification) + "</td>";
+                //if (parseInt($("#BPId").val()) == 46 || parseInt($("#BPId").val()) == 91) {
+                //    gridData = gridData + "<td class='text-center'>" + NullHandle(data[i].ZZDay) + "</td>";
+                //}
+                gridData = gridData + "<td class='text-center'>" + NullHandle(data[i].VehicleNo) + "</td>";
+                if (parseInt($("#BPId").val()) == 46 || parseInt($("#BPId").val()) == 91) {
+                    //gridData = gridData + "<td class='text-center'></td>";
+                }
+                else {
+                    gridData = gridData + "<td class='text-center'>" + NullHandle(data[i].ZZUsageDate) + "</td>";
+                }
+
+                gridData = gridData + "<td class='text-center'>" + NullHandle(data[i].RoundOffHrs) + "</td>";
+                gridData = gridData + "<td class='text-center'>" + NullHandle(data[i].BillingHrs) + "</td>";
+                gridData = gridData + "<td class='text-center'>" + NullHandle(data[i].ZZUOM) + "</td>";
+                if (parseInt($("#WorkFlowId").val()) == 57 || parseInt($("#WorkFlowId").val()) == 58 ||
+                    parseInt($("#WorkFlowId").val()) == 29 || parseInt($("#WorkFlowId").val()) == 51 ||
+                    parseInt($("#WorkFlowId").val()) == 38 || parseInt($("#WorkFlowId").val()) == 53 ||
+                    parseInt($("#WorkFlowId").val()) == 59 || parseInt($("#WorkFlowId").val()) == 52 ||
+                    parseInt($("#WorkFlowId").val()) == 54 ||
+                    parseInt($("#WorkFlowId").val()) == 6 || parseInt($("#WorkFlowId").val()) == 8) {
+                    gridData = gridData + "<td class='text-right'style='display:none'>" + NullHandle(data[i].Rate) + "</td>";
+                    gridData = gridData + "<td class='text-right'style='display:none'>" + NullHandle(data[i].Amount) + "</td>";
+                }
+                else {
+                    gridData = gridData + "<td class='text-right'>" + NullHandle(data[i].Rate) + "</td>";
+                    gridData = gridData + "<td class='text-right'>" + NullHandle(data[i].Amount) + "</td>";
+                }
+
+
+                gridData = gridData + "</tr>";
+            }
+
+            $("#tbodyCalculationSummary").html(gridData);
+
+
+        }
+        catch (e) {
+
+        }
+    }
+
+
+    //////////////////////// TrackBookingDetail Click Event ////////////////////////////////////////////////////////
+    function TrackBookingDetailEdit(varVehicleId, varDate, varCategoryId, varTimeSlotId, varTrackGroupId) {
+        try {
+            debugger;
+            var gridData = "";
+            VehicleId = varVehicleId;
+            var varVehicleIdTemp = 0;
+            var varRowId =-1;
+
+            $("#tbodyVehicle").find('tr').each(function () {
+
+                $(this).find("input[type='hidden'][id='hdnVehicleId']").each(function () {
+                    varVehicleIdTemp = $(this).val();
+                });
+
+                if (parseInt(varVehicleIdTemp) == parseInt(VehicleId)) {
+                    $(this).find("input[type='hidden'][id='hdnRowId']").each(function () {
+                        varRowId = $(this).val();
+                    });
+                }
+            });
+            // changeColorVehicle(varRowId);
+            $("#lstVehicleLookup").val(varVehicleId);
+            $('.selectpicker').selectpicker('refresh');
+            //if (parseInt($("#BPId").val()) == 46 || parseInt($("#BPId").val()) == 91) {
+            //    $("#Day").val(varDate);
+            //}
+            //else {
+                $("#TrackDate").val(varDate);
+            //}
+
+
+            if (parseInt($("#StatusPropId").val()) == 40 && parseInt($("#RFQId").val()) == 0 && (parseInt($("#WorkFlowId").val()) == 6 || parseInt($("#WorkFlowId").val()) == 57 || parseInt($("#WorkFlowId").val()) == 29 || parseInt($("#WorkFlowId").val()) == 36 || parseInt($("#WorkFlowId").val()) == 38)) {
+                $("#TrackDate").attr('disabled', false);
+                $("#Day").attr('disabled', false);
+            }
+            var xx = "#rdoCategory" + varCategoryId;
+            $(xx).prop("checked", true);
+            $("#lstTrackTimeSlot").val(varTimeSlotId);
+
+            var data = '';
+
+            if (ServicesList.length > 0) {
+                data = jQuery.grep(ServicesList, function (obj) {
+                    return obj.CategoryPropId == varCategoryId;
+                });
+            }
+
+            $("#divCardBody").show();
+            $("#tbodyTrack").html("");
+
+            for (var i = 0; i < data.length; i++) {
+                debugger;
+                var varServiceId = NullHandle(data[i].ServiceId);
+                var varRate = '';
+                var varUsageHrs = '';
+                var varUsageMin = '';
+                var varUnit = "";
+                var varBookingDay = '';
+                var varBookingSlot = '';
+                var varBookingConfirmSlot = '';
+                var varRoundHrs = 0;
+                var varBillingHrs = '';
+                var varAmount = 0;
+                /////////////////////// Bind Data From Track Booking Time Details ///////////////////////////////
+                var BookingTimeDtls = '';
+
+                if (TrackBookingTimeDetailList.length > 0) {
+                    //if (parseInt($("#BPId").val()) == 46 || parseInt($("#BPId").val()) == 91) {
+                    //    BookingTimeDtls = jQuery.grep(TrackBookingTimeDetailList, function (obj) {
+                    //        return obj.ServiceId == varServiceId && obj.VehicleId == VehicleId
+                    //            //&& obj.SlotPropId == parseInt(varTimeSlotId)
+                    //            && parseInt(obj.BookingDay) == parseInt(varDate);
+                    //    });
+                    //}
+                    //else {
+                        BookingTimeDtls = jQuery.grep(TrackBookingTimeDetailList, function (obj) {
+                            return obj.ServiceId == varServiceId && obj.VehicleId == VehicleId
+                                //&& obj.SlotPropId == parseInt(varTimeSlotId)
+                                && ToDate(obj.ZZDate).getTime() == ToDate(varDate).getTime();
+                        });
+                   // }
+
+
+                    if (BookingTimeDtls.length > 0) {
+
+                        varRate = NullHandle(BookingTimeDtls[0].Rate);
+                        varUnit = NullHandle(BookingTimeDtls[0].ZZUOM);
+
+                        varUsageHrs = NullHandle(BookingTimeDtls[0].TotalHours);
+                        varUsageMin = NullHandle(BookingTimeDtls[0].TotalMinutes);
+                        varRoundHrs = NullHandle(BookingTimeDtls[0].RoundOffHrs);
+                        varAmount = NullHandle(BookingTimeDtls[0].Amount);
+                    }
+                }
+
+                var rowId = "trTrackDtls" + i.toString();
+                gridData = gridData + "<tr class='TypeBDynamic' id='" + rowId + "'>";
+                gridData = gridData + "<td>" + NullHandle(data[i].ServiceSpecification) + "</td>";
+
+                //if (parseInt($("#WorkFlowId").val()) == 57 || parseInt($("#WorkFlowId").val()) == 58 ||
+                //    parseInt($("#WorkFlowId").val()) == 29 || parseInt($("#WorkFlowId").val()) == 51 ||
+                //    parseInt($("#WorkFlowId").val()) == 38 || parseInt($("#WorkFlowId").val()) == 53 ||
+                //    parseInt($("#WorkFlowId").val()) == 6 || parseInt($("#WorkFlowId").val()) == 8) {
+                //    gridData = gridData + "<td class='text-right'style='display:none' id='txtRate'>" + NullHandle(varRate) + "</td>";
+                //}
+                //else {
+                //    gridData = gridData + "<td class='text-right' id='txtRate'>" + NullHandle(varRate) + "</td>";
+                //}
+
+                //gridData = gridData + "<td class='text-center' id='txtUnit'>" + NullHandle(varUnit) + "</td>";
+                if (parseInt($("#StatusPropId").val()) == 40 && parseInt($("#RFQId").val()) == 0 && (parseInt($("#WorkFlowId").val()) == 6 || parseInt($("#WorkFlowId").val()) == 57 || parseInt($("#WorkFlowId").val()) == 29 || parseInt($("#WorkFlowId").val()) == 36 || parseInt($("#WorkFlowId").val()) == 38)) {
+                    gridData = gridData + "<td class='text-right table-warning'><input id='txtUsageHrs' onchange='ValidateHours(this," + rowId + ");' onkeypress='return CheckIsNumeric(event,this);'  maxlength='2' type='text' value='" + varUsageHrs + "' class='form-control timepicker text-left' placeholder='Hours'></td>";//UsageHrs
+                    gridData = gridData + "<td class='text-right table-warning'><input id='txtUsageMin' onchange='ValidateMinutes(this," + rowId + ");' onkeypress='return CheckIsNumeric(event,this);' maxlength='2' type='text' value='" + varUsageMin + "' class='form-control timepicker text-left' placeholder='Minutes'></td>";//UsageMin
+                }
+                else {
+                    gridData = gridData + "<td class='text-right table-warning'><input id='txtUsageHrs' disabled='disabled' onchange='ValidateHours(this," + rowId + ");' onkeypress='return CheckIsNumeric(event,this);'  maxlength='2' type='text' value='" + varUsageHrs + "' class='form-control timepicker text-left' placeholder='Hours'></td>";//UsageHrs
+                    gridData = gridData + "<td class='text-right table-warning'><input id='txtUsageMin' disabled='disabled' onchange='ValidateMinutes(this," + rowId + ");' onkeypress='return CheckIsNumeric(event,this);' maxlength='2' type='text' value='" + varUsageMin + "' class='form-control timepicker text-left' placeholder='Minutes'></td>";//UsageMin
+                }
+                //gridData = gridData + "<td class='text-center' id='txtBookingDay'>" + NullHandle(varBookingDay) + "</td>";
+                //gridData = gridData + "<td class='text-center' id='txtBookingSlot'>" + NullHandle(varBookingSlot) + "</td>";
+                //gridData = gridData + "<td class='text-center' id='txtBookingConfirmSlot'>" + NullHandle(varBookingConfirmSlot) + "</td>";
+                gridData = gridData + "<td class='text-center' id='txtRoundHrs'>" + NullHandle(varRoundHrs) + "</td>";//Round Hrs
+                // gridData = gridData + "<td class='text-center'><label id='txtBillHrs'>" + NullHandle(varBillingHrs) + "</label></td>";// Billing Hrs
+                //gridData = gridData + "<td class='text-right'><label id='txtAmount'>" + NullHandle(varAmount) + "</label></td>"; //Amount
+                gridData = gridData + "<td style='display:none'><input type='hidden' id='hdnServiceId' value=" + NullHandle(data[i].ServiceId) + " /><input type='hidden' id='hdnBillingHrs' value=" + NullHandle(varBillingHrs) + " /><input type='hidden' id='hdnRate' value=" + NullHandle(varRate) + " /><input type='hidden' id='hdnSrNo' value=" + NullHandle(data[i].SrNo) + " /> </td>";
+
+
+                gridData = gridData + "</tr>";
+            }
+            $("#lstServiceLookup").attr("disabled", true);
+            $("#lstVehicleLookup").attr("disabled", true);
+            $('.selectpicker').selectpicker('refresh');
+            $("#tbodyTrack").html(gridData);
+            BindBookingStatus();
+        }
+        catch (e) {
+
+        }
+
+    }
+
+    function TrackBookingDetailCopy(TrackBookingTimeDetailId,txtrackName) {
+        try {
+
+            $("#hiddenTrackBookingTimeDetailId").val(TrackBookingTimeDetailId);
+            $("#txtTrackName").text(txtrackName);
+            $("#PopupFromDateToDate").modal("show");
+        } catch { }
+
+        }
+
+    ///////////////////////////// Track Detail Delete  //////////////////////////////////////////////////////
+    function TrackBookingDetailDelete(varVehicleId, varDate, varServiceId, varTimeSlotId, varTrackGroupId) {
+        debugger
+        try {
+            $.confirm({
+                title: 'Confirm Alert!',
+                content: "Are you sure want to delete?",
+                icon: 'fa fa-question',
+                closeIcon: true,
+                animation: 'scale',
+                type: 'orange',
+                escapeKey: 'cancel',
+                buttons: {
+                    MyFunction: {
+                        text: 'OK',
+                        action: function () {
+                            LoaderShow();
+                            var data = { 'intVehicleId': varVehicleId, 'strDate': varDate, 'intServiceId': varServiceId, 'intTimeSlotId': varTimeSlotId, 'intTrackGroupId': varTrackGroupId };
+                            var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+                            $.ajax({
+                                url: '@Url.Action("TrackBookingDetailDelete", "Home")',
+                                type: 'POST',
+                                dataType: 'json',
+                                async: true,
+                                data: dataWithAntiforgeryToken,
+                                success: function (data) {
+                                    debugger
+                                    LoaderHide();
+                                    if (data.StatusId != "99" && data.StatusId != "-99") {
+                                        $("#lstServiceLookup").attr("disabled", false);
+                                        $("#lstVehicleLookup").attr("disabled", false);
+                                        $('.selectpicker').selectpicker('refresh');
+                                        TrackBookingDetailList = data.TrackBookingDetailList;
+                                        TrackBookingTimeDetailList = data.TrackBookingTimeDetailList;
+                                        TrackBookingTimeSummaryList = data.TrackBookingTimeSummaryList;
+                                        TrackBookingDetailViewFrontGetByBookingIdTrackGroupIdPopup()
+                                        //BindVehicleData(data.TrackBookingDetailList);
+                                        BindServiceTimeDetails(VehicleId);
+                                        BindCalculationSummary();
+                                        ChangeRowColour(ColourRowId);
+                                    }
+                                    alert(data.Status);
+                                },
+                                error: function (xhr) {
+
+                                    LoaderHide();
+                                    alert(xhr.responseText);
+                                }
+                            });
+
+                        }
+                    },
+                    cancel: function () {
+                    }
+                }
+            });
+
+        }
+        catch (e) {
+
+            LoaderHide();
+            alert(e.message);
+            //  return false;
+        }
+    }
+
+    /////////////////////// Date Selection Changed ////////////////////////////////////////
+    function ResetCategoryTimeSlot() {
+        debugger
+        try {
+            if (parseInt($("#lstServiceLookup").val()) == 0) {
+                $("#TrackDate").val("");
+                $("#lstServiceLookup").focus();
+                alert("Please Select Track");
+                return false;
+
+            } else {
+                var varDate = $("#TrackDate").val();
+                //if (parseInt($("#BPId").val()) == 46 || parseInt($("#BPId").val()) == 91) {
+                //    varDate = $("#Day").val();
+                //}
+                if (varDate.trim() != "") {
+                    if (ServiceCategoryList.length > 1) {
+                        $("input[name='Category']:checked").prop('checked', false);
+                        $("#tbodyTrack").html("");
+                        $("#divCardBody").hide();
+                    }
+                    else {
+                        BindTrackService();
+                    }
+                    // $("#lstTrackTimeSlot").val(0);
+                    $("#lstTrackTimeSlot").val("-99");
+                }
+            }
+        }
+        catch (e) {
+
+        }
+    }
+
+    //function ResetTimeSlot() {
+    //    try {
+    //        $("#lstTrackTimeSlot").val(0);
+    //        $("#tbodyTrack").html("");
+    //        $("#divCardBody").hide();
+    //    }
+    //    catch (e) {
+
+    //    }
+    //}
+
+    ////////////// Usage Hours Changed ////////////////////
+    function ValidateHours(tx, rowId) {
+        try {
+        if (tx.value > 23) {
+            tx.value = "";
+            alert('Hours value can not greater 23');
+            }
+            CalculateAmount(rowId)
+        }
+        catch (e) {
+
+        }
+    }
+
+    ///////////////////// Usage Minutes Changed //////////////////////////////
+    function ValidateMinutes(tx, rowId) {
+        try {
+            if (tx.value > 59) {
+                tx.value = "";
+                alert('Minutes value can not greater 59');
+            }
+            CalculateAmount(rowId)
+        }
+        catch (e) {
+
+        }
+    }
+
+    function CalculateAmount(rowId) {
+        try {
+
+            var varRate = 0;
+            var varUsageHrs = 0;
+            var varUsageMin = 0;
+            var varUsageHrsRounded = 0;
+            var varMinBilling = 0;
+            var varAmount = 0;
+
+
+            //$(rowId).find("[id='txtRate']").each(function () {
+            //    varRate = $(this).text().trim();
+            //});
+
+            $(rowId).find("input[type='text'][id='txtUsageHrs']").each(function () {
+                varUsageHrs = $(this).val().trim();
+            });
+            $(rowId).find("input[type='text'][id='txtUsageMin']").each(function () {
+                varUsageMin = $(this).val().trim();
+            });
+            //$(rowId).find("[id='txtBillHrs']").each(function () {
+            //    varMinBilling = $(this).text().trim();
+            //});
+
+            if (varUsageHrs == undefined || varUsageHrs.trim()== "")
+            {
+                varUsageHrs = 0;
+            }
+            if (varUsageMin == undefined || varUsageMin.trim()== "")
+            {
+                varUsageMin = 0;
+            }
+
+            varUsageHrsRounded = parseInt(varUsageHrs);
+
+            if ((parseInt(varUsageHrsRounded) == 0 && parseInt(varUsageMin) >= 1) || (parseInt(varUsageHrsRounded) >0 && parseInt(varUsageMin) >=30)) {
+                varUsageHrsRounded = parseInt(varUsageHrsRounded) + 1;
+            }
+
+            //if (parseInt(varMinBilling) > parseInt(varUsageHrsRounded) && parseInt(varUsageHrsRounded)>0) {
+            //    varAmount = parseInt(varMinBilling) * parseFloat(varRate)
+            //}
+            //else {
+            //    varAmount = parseInt(varUsageHrsRounded) * parseFloat(varRate)
+            //}
+
+
+            $(rowId).find("[id='txtRoundHrs']").each(function () {
+                $(this).text(varUsageHrsRounded);
+            });
+            //$(rowId).find("[id='txtAmount']").each(function () {
+            //    $(this).text(parseFloat(varAmount).toFixed(2));
+            //});
+        }
+        catch (e) {
+
+        }
+    }
+
+    function ChangeRowColour(RowId) {
+        try {
+            changeColorVehicle(RowId);
+        }
+        catch (e) {
+
+        }
+    }
+    ///////////////// Vehicle Selection Changed ///////////////////////////////////
+    function BindTrackcategory(RowId,varVehicleId) {
+        try {
+            if (parseInt($("#lstServiceLookup").val()) == 0) {
+                alert("Please Select Track");
+            }
+            else {
+                ColourRowId = RowId;
+                if (parseInt(varVehicleId) != parseInt(VehicleId)) {
+                    if (ServiceCategoryList.length > 1) {
+                        $("input[name='Category']:checked").prop('checked', false);
+                    }
+                    // $("#lstTrackTimeSlot").val(0);
+                    $("#lstTrackTimeSlot").val("-99");
+                    $("#tbodyTrack").html("");
+                    $("#divCardBody").hide();
+                    $("#TrackDate").val("");
+                    $("#Day").val("");
+                }
+                VehicleId = varVehicleId;
+                changeColorVehicle(RowId);
+                BindServiceTimeDetails(VehicleId);
+                if (parseInt($("#StatusPropId").val()) == 40 && parseInt($("#RFQId").val()) == 0 && (parseInt($("#WorkFlowId").val()) == 6 || parseInt($("#WorkFlowId").val()) == 57 || parseInt($("#WorkFlowId").val()) == 29 || parseInt($("#WorkFlowId").val()) == 36 || parseInt($("#WorkFlowId").val()) == 38)) {
+                    $("#TrackDate").attr('disabled', false);
+                    $("#Day").attr('disabled', false);
+                }
+            }
+        }
+        catch (e) {
+
+        }
+    }
+
+    function BindTrackcategoryNew() {
+        try {
+            debugger;
+            varVehicleId = $("#lstVehicleLookup").val();
+            if (parseInt($("#lstServiceLookup").val()) == 0) {
+                alert("Please Select Track");
+            }
+            else {
+                if (parseInt(varVehicleId) != parseInt(VehicleId)) {
+                    if (ServiceCategoryList.length > 1) {
+                        $("input[name='Category']:checked").prop('checked', false);
+                    }
+                    // $("#lstTrackTimeSlot").val(0);
+                    $("#lstTrackTimeSlot").val("-99");
+                    $("#tbodyTrack").html("");
+                    $("#divCardBody").hide();
+                    $("#TrackDate").val("");
+                    $("#Day").val("");
+                }
+                VehicleId = varVehicleId;
+                BindServiceTimeDetails(VehicleId);
+                if (parseInt($("#StatusPropId").val()) == 40 && parseInt($("#RFQId").val()) == 0 && (parseInt($("#WorkFlowId").val()) == 6 || parseInt($("#WorkFlowId").val()) == 57 || parseInt($("#WorkFlowId").val()) == 29 || parseInt($("#WorkFlowId").val()) == 36 || parseInt($("#WorkFlowId").val()) == 38)) {
+                    $("#TrackDate").attr('disabled', false);
+                    $("#Day").attr('disabled', false);
+                }
+            }
+        }
+        catch (e) {
+
+        }
+    }
+
+    ///////////////////////////// Set Button Visibility  //////////////////////////////////////////////////////
+    function SetButtonVisibility() {
+        //try {
+        //    if ($("#StatusPropId").val() != undefined && parseInt($("#StatusPropId").val()) == 40) {
+        //        $("#btnAdd").attr('disabled', false);
+        //    }
+        //    else {
+        //        $("#btnAdd").attr('disabled', true);
+        //    }
+        //}
+        //catch (e) {
+
+        //}
+    }
+
+    ///////////////////////////// Disable Controls  //////////////////////////////////////////////////////
+    function DisableControls() {
+        try {
+            var blnStatus = true;
+            if (parseInt($("#StatusPropId").val()) == 40 && parseInt($("#RFQId").val()) == 0 && (parseInt($("#WorkFlowId").val()) == 6 || parseInt($("#WorkFlowId").val()) == 57 || parseInt($("#WorkFlowId").val()) == 29 || parseInt($("#WorkFlowId").val()) == 36 || parseInt($("#WorkFlowId").val()) == 38)) {
+                blnStatus = false;
+            }
+            $("#lstTrackTimeSlot").attr('disabled', blnStatus);
+        }
+        catch (e) {
+
+        }
+    }
+
+    ///// Generate Row..
+
+     function SetDateMMDDYYYY(dateStr) {
+            debugger;
+            var strDate
+            var Split=dateStr.split("-");
+            var varDD = Split[0];
+            var varMM = Split[1];
+            var varYY = Split[2];
+            var now = new Date(varMM + '-' + varDD + '-' + varYY);
+            var Day = now.getDate()
+            var Month = (now.getMonth() + 1)
+            var Year = now.getFullYear()
+            if (Day < 10) {
+                Day = "0" + Day;
+            }
+            if (Month < 10) {
+                Month = "0" + Month;
+            }
+            strDate = Month + "-" + Day + "-" + Year;
+            return strDate;
+        }
+
+     function GenerateRepeatRowTrack() {
+         try {
+
+                debugger;
+                var varFromDate = $("#FromDate").val().trim();
+                var varToDate = $("#ToDate").val().trim();
+                var varTrackBookingTimeDetailId= $("#hiddenTrackBookingTimeDetailId").val();
+                var varBookingId = $("#DocId").val().trim();
+
+                var Fromdate = new Date(SetDateMMDDYYYY($("#FromDate").val().trim()));
+                var Todate = new Date(SetDateMMDDYYYY($("#ToDate").val().trim()));
+
+                var FromdateVal = new Date(SetDateMMDDYYYY(strFromDate));
+
+
+             var strMSG = "";
+             if (Fromdate <= FromdateVal) {
+                 strMSG = strMSG + 'From Date should be greater than selected date  \n</br>'
+             } else
+             if (varFromDate == "") {
+                 strMSG = strMSG + 'From Date  \n</br>'
+             }
+             else if (varToDate == "") {
+                 strMSG = strMSG + 'To Date  \n</br>'
+             }
+
+                 else
+                     if (Todate < Fromdate) {
+                         strMSG += "<br /> \n From date should not be greater than To date. \n";
+                     }
+
+                if (strMSG != '') {
+                    alert("Please enter data for Mandatory fields  \n</br>" + strMSG);
+                    return false;
+                }
+                else {
+
+                    $("#btnGenerateRepeatRowTrack").hide();
+                    LoaderShow();
+                    var model={ };
+                    model.IntOne = varTrackBookingTimeDetailId;
+                    model.IntTwo = varBookingId;
+                    model.StrOne = varFromDate;
+                    model.StrTwo = varToDate;
+
+                     var data = { 'model': model};
+                     var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+                    $.ajax({
+                        url: '@Url.Action("TrackBookingDetailInsertFrontRepeatRow", "Home")',
+                        type: 'POST',
+                        dataType: 'json',
+                        async: true,
+                        data: dataWithAntiforgeryToken,
+                        success: function (data) {
+                            debugger;
+                            LoaderHide();
+                            if (data.StatusId != "99" && data.StatusId != "-99") {
+
+                                $("#PopupFromDateToDate").modal("hide");
+
+                                TrackBookingDetailList = data.TrackBookingDetailList;
+                                TrackBookingTimeDetailList = data.TrackBookingTimeDetailList;
+                                TrackBookingTimeSummaryList = data.TrackBookingTimeSummaryList;
+                                TrackBookingDetailViewFrontGetByBookingIdTrackGroupIdPopup();
+                                // BindVehicleData(data.TrackBookingDetailList);
+                                BindServiceTimeDetails(VehicleId);
+                                BindCalculationSummary();
+                                //ChangeRowColour(ColourRowId);
+                                debugger;
+                                $("#btnCopy").hide();
+                                $("input[name=copyRow][value='No']").prop("checked",true);
+                            }
+                            $("#btnGenerateRepeatRowTrack").show();
+                            alert(data.Status);
+                        },
+                        error: function (xhr) {
+
+                            $("#btnGenerateRepeatRowTrack").show();
+                            LoaderHide();
+                            alert(xhr.responseText);
+                        }
+                    });
+                }
+            }
+            catch (e) {
+
+                LoaderHide();
+                $("#btnRepeatRow").show();
+                alert(e.message);
+                return false;
+            }
+        }
+
+     function RepeatRowTrack() {
+            debugger
+            if ($("#DocId").val().trim() == "" || $("#DocId").val().trim() == undefined
+                || $("#DocId").val().trim() == null) {
+                alert("Booking Details not found.");
+
+            } else if ($("#hiddenTrackBookingTimeDetailId").val().trim() == ""
+                || $("#hiddenTrackBookingTimeDetailId").val().trim() == null
+                || $("#hiddenTrackBookingTimeDetailId").val().trim() == undefined
+                || $("#hiddenTrackBookingTimeDetailId").val().trim()==0
+               ) {
+                alert("Please select a row from booking details");
+            } else {
+                $("#FromDate").val("");
+                $("#ToDate").val("");
+                $("#PopupFromDateToDate").modal("show");
+            }
+        }
+
+
+    ///////////////////////////// Masking  //////////////////////////////////////////////////////
+    function MaskControls() {
+        try {
+            (function ($) {
+                $(function () {
+                    //$("#AddMoreTR").find("input[type='text'][id='RegistrationNo']").each(function () {
+                    //    $(this).mask('aa-##-$$-9999');
+                    //});
+                    //$("#AddMoreTR").find("input[type='text'][id='VehicleType']").each(function () {
+                    //    $(this).attr('onkeypress', 'return CheckIsAlpha(event,this);');
+                    //});
+                    //$("#tbodyTrack").find("input[type='text'][id='txtUsageHrs']").each(function () {
+                    //    $(this).attr('onkeypress', 'return CheckIsNumeric(event,this);');
+                    //});
+                    //$("#tbodyTrack").find("input[type='text'][id='txtUsageMin']").each(function () {
+                    //    $(this).attr('onkeypress', 'return CheckIsNumeric(event,this);');
+                    //});
+                });
+            })(jQuery);
+        }
+        catch (e) {
+
+        }
+    }
+
+
+    $(document).ready(function () {
+        MaskControls();
+       // SetButtonVisibility();
+        LoadTrackInfo();
+        $("#TrackGroupId").focus();
+        DisableControls();
+        TrackBookingDetailViewFrontGetByBookingIdTrackGroupIdPopup();
+        $("#lstTrackTimeSlot").val("-99");
+        //if ($("#BPId").val() == 98) {
+        //    $("#single").hide();
+        //    $("#multiple").show();
+        //} else {
+        //    $("#multiple").hide();
+        //    $(".single").show();
+        //}
+    });
+
+</script>

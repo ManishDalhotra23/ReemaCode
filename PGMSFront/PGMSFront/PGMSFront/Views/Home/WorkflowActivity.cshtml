@@ -1,0 +1,174 @@
+﻿@model PGMSFront.Models.CommonModel
+@{
+    ViewBag.Title = "Workflow Activity Track";
+    if (Convert.ToString(Session["SessBookingType"]).ToUpper() == "TRACK")
+    {
+        Layout = "~/Views/Shared/_LayoutTrack.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_LayoutLab.cshtml";
+    }
+}
+
+<style>
+    .table > tbody > tr > td {
+        padding: 2px 8px !important;
+        cursor: pointer !important;
+    }
+
+    .card {
+        margin-bottom: 0px !important;
+        margin-top: 25px !important;
+    }
+
+    .bootstrap-select {
+        margin-top: 16px !important;
+    }
+
+    .main-panel > .content {
+        margin-top: 0 !important;
+    }
+
+    .table{
+        margin-bottom: 10px !important;
+    }
+
+    .card .card-body {
+        padding: 0px 5px 5px 5px !important;
+    }
+</style>
+<div class="content">
+    @using (Html.BeginForm(new { @class = "form-horizontal" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="container-fluid">
+            @Html.Partial("~/Views/Home/BookingHeader.cshtml")
+
+            <div class="row">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">
+                            <label class="card-title"> Workflow Activity Track </label> 
+                           
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class=" text-primary">
+                                            <tr>
+                                                <th width="15%" class="text-center">Date Time</th>
+                                                <th width="15%">User</th>
+                                                <th width="20%">WorkFlow</th>
+                                                <th width="15%">Activity</th>
+                                                <th width="10%">Status</th>
+                                                <th width="23%">Remark</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbodyWAT">
+                                          
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <input type="submit" id="btnPrev" name="btnPrevNext" value="Prev" class="btn btn-fill btn-rose btn-sm " />
+                                @*<input type="submit" id="btnNext" name="btnPrevNext" value="Next" class="btn btn-fill btn-rose btn-sm pull-right " />*@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @Html.HiddenFor(m => m.UserId, new { id = "UserId", style = "width:0px;" })
+                @Html.HiddenFor(m => m.UserTypePropId, new { id = "UserTypePropId", style = "width:0px;" })
+                @Html.HiddenFor(m => m.ZZCompanyId, new { id = "ZZCompanyId", style = "width:0px;" })
+                @Html.HiddenFor(m => m.WorkFlowId, new { id = "WorkFlowId", style = "width:0px;" })
+                @Html.HiddenFor(m => m.StatusPropId, new { id = "StatusPropId", style = "width:0px;" })
+                @Html.HiddenFor(m => m.StateId, new { id = "StateId", style = "width:0px;" })
+                @Html.HiddenFor(m => m.BPId, new { id = "BPId", style = "width:0px;" })
+                @Html.HiddenFor(m => m.DocId, new { id = "DocId", style = "width:0px;" })
+                @Html.HiddenFor(m => m.ReportURL, new { id = "ReportURL", style = "width:0px;" })
+                @Html.HiddenFor(m => m.POURL, new { id = "POURL", style = "width:0px;" })
+                @Html.HiddenFor(m => m.RFQId, new { id = "RFQId", style = "width:0px;" })
+            </div>
+        </div>
+    }
+</div>
+
+<script>
+   
+    ///////////////////////////// Load Workflow Activity Info  //////////////////////////////////////////////////////
+    function LoadWorkflowActivityInfo() {
+        try {
+            LoaderShow();
+            var data = {};
+            var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+            $.ajax({
+                url: '@Url.Action("LoadWorkflowActivityInfo", "Home")',
+                type: 'POST',
+                dataType: 'json',
+                async: true,
+                data: dataWithAntiforgeryToken,
+                success: function (data) {
+
+                    LoaderHide();
+                    if (data.StatusId != "99" && data.StatusId != "-99") {                       
+                        BindWATData(data.WorkFlowActivityList);                        
+                    }
+                    else {
+                       // alert(data.Status);
+                    }
+                },
+                error: function (xhr) {
+
+                    LoaderHide();
+                    alert(xhr.responseText);
+                }
+            });
+        }
+        catch (e) {
+
+            LoaderHide();
+            alert(e.message);
+            //  return false;
+        }
+    }
+    
+    ///////////////////////////// Bind Info  //////////////////////////////////////////////////////
+    function BindWATData(data) {
+        try {
+            var gridData = "";                   
+
+            $("#tbodyWAT").html("");
+
+            for (var i = 0; i < data.length; i++) {
+                gridData = gridData + "<tr >";
+
+                gridData = gridData + "<td class='text-center'>" + NullHandle(data[i].DateTime) + "</td>";
+                gridData = gridData + "<td>" + NullHandle(data[i].UserName) + "</td>";
+                gridData = gridData + "<td>" + NullHandle(data[i].WorkFlowName) + "</td>";
+                gridData = gridData + "<td>" + NullHandle(data[i].ActivityName) + "</td>";
+                gridData = gridData + "<td>" + NullHandle(data[i].Status) + "</td>";
+                gridData = gridData + "<td>" + NullHandle(data[i].Remark) + "</td>";
+                               
+                gridData = gridData + "</tr>";
+            }
+
+            $("#tbodyWAT").html(gridData);
+
+
+        }
+        catch (e) {
+
+        }
+    }
+
+    $(document).ready(function () {      
+        LoadWorkflowActivityInfo();
+    });
+
+</script>

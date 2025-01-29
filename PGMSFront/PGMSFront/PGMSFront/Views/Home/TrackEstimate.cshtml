@@ -1,0 +1,737 @@
+﻿@model PGMSFront.Models.CommonModel
+@{
+    ViewBag.Title = "Basic Estimate - TRACK";
+    //if (Convert.ToString(Session["SessBookingType"]).ToUpper() == "TRACK")
+    //{
+    //    Layout = "~/Views/Shared/_LayoutQuickEstimate.cshtml";
+    //}
+    //else
+    //{
+    //    Layout = "~/Views/Shared/_LayoutLab.cshtml";
+    //}
+    Layout = "~/Views/Shared/_LayoutQuickEstimate.cshtml";
+}
+<style>
+    .table > tbody > tr > td {
+        padding: 2px 8px !important;
+        cursor: pointer !important;
+    }
+
+    .card {
+        margin-bottom: 0px !important;
+        margin-top: 25px !important;
+    }
+
+    .bootstrap-select {
+        margin-top: 16px !important;
+    }
+
+    .card .card-body {
+        padding: 0px 5px 5px 5px !important;
+    }
+
+    .main-panel > .content {
+        margin-top: 0 !important;
+    }
+
+    #AddMoreTR {
+        background: lightblue;
+    }
+</style>
+<div class="content">
+    @using (Html.BeginForm(new { @class = "form-horizontal" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="container-fluid">
+            @Html.Partial("~/Views/Home/QuickEstimateHeader.cshtml")
+            <div class="row">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">
+                            @if (Model.StatusPropId == 40 && Model.WorkFlowId == 216)
+                            {
+                                <button type="button" class="btn btn-fill btn-rose btn-sm" onclick="AddMore()" id="btnAdd">Add More</button>
+                            }
+                            <span class="pull-right">
+                                <label class="card-title">Track Count : </label> <label class="card-title" id="lblVehicleCount"></label>
+                            </span>
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead class=" text-primary">
+                                            <tr>
+                                                @*<th width="8%">Sr. No.</th>*@
+                                                <th width="20%">Track <span style="color: red">*</span></th>
+                                                <th width="10%">Type <span style="color: red">*</span></th>
+                                                <th width="15%">Service <span style="color: red">*</span></th>
+                                                <th width="10%" style="text-align: left">Unit</th>
+                                                <th width="10%" style="text-align: right">Billing Qty <span style="color: red">*</span></th>
+                                                <th width="15%" style="text-align: left">Remark</th>
+
+                                                @if (Model.WorkFlowId == 218 && Model.StatusPropId == 40)
+                                                {
+                                                    <th width="10%" style="text-align: right;">Rate</th>
+                                                }
+                                                else
+                                                {
+                                                    <th width="10%" style="text-align: right; display:none">Rate</th>
+                                                }
+                                                @if (Model.WorkFlowId == 216 && Model.StatusPropId == 40)
+                                                {
+                                                    <th width="10%" class="text-center">Action</th>
+                                                }
+                                                </tr>
+                                        </thead>
+                                        <tbody id="tbodyVehicle">
+                                            <tr id="AddMoreTR" style="display: none;">
+                                                @*<td><input type="text" class="form-control" value="" disabled="disabled"></td>*@
+                                                <td>
+                                                    <select class="form-control" id="lstServiceLookup" onchange="LoadTrackInfo()">
+                                                        <option value="0">Select Track *</option>
+                                                        @foreach (var itm in ViewBag.ServiveLookup)
+                                                        {
+                                                            <option value='@itm.Value'>@itm.Text</option>
+                                                        }
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select class="form-control" id="ddlType" onchange="TrackType()">
+                                                        <option value="0">Select Type *</option>
+                                                        <option value="105">N/A</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select class="form-control" id="ddlTrackType" onchange="SetRateUnit()">
+                                                        <option value="0">Select Service *</option>
+                                                        <option value="105">N/A</option>
+                                                    </select>
+                                                </td>
+                                                <td><input id="Unit" disabled="disabled" type="text" style="text-align: left" class="form-control" value=""></td>
+                                                <td><input type="text" class="form-control" value="" id="txtBillingQty" disabled="disabled" style="text-align: right"></td>
+                                                @if (Model.WorkFlowId == 218 && Model.StatusPropId == 40)
+                                                {
+                                                    <td style="text-align: right"><input id="txtRate" disabled="disabled" type="text" style="text-align: right" class="form-control" value=""></td>
+                                                }
+                                                else
+                                                {
+                                                    <td style="text-align: right; display: none"><input id="txtRate" disabled="disabled" type="text" style="text-align: right" class="form-control" value=""></td>
+                                                }
+                                                <td><textarea id="Remark" class="form-control"></textarea></td>
+                                                <td class='td-actions text-center'>
+                                                    <a class='btn btn-info' onclick="return VehicleSave()" id="btnSave"><i class='material-icons'>save</i></a>
+                                                    <a class='btn btn-danger' onclick="AddMoreCancel()"><i class='material-icons'>close</i></a>
+                                                </td>
+                                                <td style='display: none'><input type='hidden' id='hdnUOMPropId' /> </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                @*<input type="submit" id="btnPrev" name="btnPrevNext" value="Prev" class="btn btn-fill btn-rose btn-sm " />
+                    <input type="submit" id="btnNext" name="btnPrevNext" value="Next" style="display:none" class="btn btn-fill btn-rose btn-sm pull-right" />*@
+                            </div>
+                        </div>
+                        <br />
+                        <table Style="width:100%">
+                            <tr>
+                                <td Style="width:10%;text-align:left">
+                                    <input type="submit" id="btnPrev" name="btnPrevNext" value="Prev" class="btn btn-fill btn-rose btn-sm " />
+                                </td>
+                                <td Style="width:80%;text-align:center">
+                                    <label id="msg" style="color: red; padding: 5px; border-radius: 5px;"></label>
+                                </td>
+                                <td Style="width:10%;text-align:right">
+                                    <input type="submit" id="btnNext" name="btnPrevNext" value="Next" style="display:none" class="btn btn-fill btn-rose btn-sm " />
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    @Html.HiddenFor(m => m.EstimateDetailId, new { id = "hiddenEstimateDetailId", style = "width:0px;" })
+                    @Html.HiddenFor(m => m.UserId, new { id = "UserId", style = "width:0px;" })
+                    @Html.HiddenFor(m => m.UserTypePropId, new { id = "UserTypePropId", style = "width:0px;" })
+                    @Html.HiddenFor(m => m.ZZCompanyId, new { id = "ZZCompanyId", style = "width:0px;" })
+                    @Html.HiddenFor(m => m.WorkFlowId, new { id = "WorkFlowId", style = "width:0px;" })
+                    @Html.HiddenFor(m => m.StatusPropId, new { id = "StatusPropId", style = "width:0px;" })
+                    @Html.HiddenFor(m => m.StateId, new { id = "StateId", style = "width:0px;" })
+                    @Html.HiddenFor(m => m.BPId, new { id = "BPId", style = "width:0px;" })
+                    @Html.HiddenFor(m => m.DocId, new { id = "DocId", style = "width:0px;" })
+                    @Html.HiddenFor(m => m.ReportURL, new { id = "ReportURL", style = "width:0px;" })
+                    @Html.HiddenFor(m => m.POURL, new { id = "POURL", style = "width:0px;" })
+                    @Html.HiddenFor(m => m.RFQId, new { id = "RFQId", style = "width:0px;" })
+                </div>
+
+            </div>
+        </div>
+    }
+</div>
+<script>
+    var EstimateDetailId = 0;
+    var BookingList = '';
+
+    function AddMore() {
+        EstimateDetailId = 0;
+        $("#msg").html('** Add your details in the blue row and click on <i class="material-icons">save</i> icon **');
+        $("#AddMoreTR").find("a[id='btnSave']").each(function () {
+            $(this).show();
+        });
+        $("#AddMoreTR").find("select[id='lstServiceLookup']").each(function () {
+            $(this).val(0);
+        });
+        $("#AddMoreTR").find("select[id='ddlType']").each(function () {
+            $(this).val(0);
+        });
+        $("#AddMoreTR").find("select[id='ddlTrackType']").each(function () {
+            $(this).val(0);
+        });
+        $("#AddMoreTR").find("input[type='text'][id='Unit']").each(function () {
+            $(this).val("");
+        });
+        $("#AddMoreTR").find("input[type='text'][id='txtBillingQty']").each(function () {
+            $(this).val("");
+        });
+        $("#AddMoreTR").find("input[type='text'][id='txtRate']").each(function () {
+            $(this).val("");
+        });
+        $("#AddMoreTR").find("textarea[id='Remark']").each(function () {
+            $(this).val("");
+        });
+        $("#AddMoreTR").find("input[type='hidden'][id='hdnUOMPropId']").each(function () {
+            $(this).val("");
+        });
+        $("#AddMoreTR").show();
+        MaskControls();
+        $("#RegistrationNo").focus();
+    }
+
+    function AddMoreCancel() {
+        $("#AddMoreTR").hide();
+        $("#msg").html('');
+    }
+
+    function TrackType() {
+        var ddlType = $("#ddlType").val();
+        var list = jQuery.grep(ServicesList, function (obj) {
+            return obj.CategoryPropId == ddlType;
+        });
+        debugger
+        if (list.length > 0) {
+            $("#ddlTrackType").html("");
+            var gridData = "<option value='0'>Select Track Type *</option>";
+            var selected = '';
+            $("#Unit").val("");
+            $("#txtBillingQty").val("");
+            list.length === 1 ? selected = "selected='selected'" : selected = '';
+            for (var i = 0; i < list.length; i++) {
+                gridData = gridData + "<option value='" + NullHandle(list[i].ServiceId) + "' "+ selected +">" + NullHandle(list[i].ServiceSpecification) + "</option>";
+            }
+            $("#ddlTrackType").html(gridData);
+            list.length === 1 ? SetRateUnit() : '';
+        }
+    }
+
+    ///////////////////////////// Load Vehicle Info  //////////////////////////////////////////////////////
+    function LoadVehicleInfo() {
+        try {
+            LoaderShow();
+            var data = {};
+            var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+            $.ajax({
+                url: '@Url.Action("LoadEstimateInfo", "Home")',
+                type: 'POST',
+                dataType: 'json',
+                async: true,
+                data: dataWithAntiforgeryToken,
+                success: function (data) {
+                    LoaderHide();
+                    if (data.StatusId != "99" && data.StatusId != "-99") {
+                        debugger
+                        if (data.BookingList.length > 0) {
+                            BookingList = jQuery.grep(data.BookingList, function (obj) {
+                                return obj.RefBPId == 12;
+                            });
+                            if (BookingList.length > 0) {
+                                BindVehicleData(BookingList);
+                                $("#btnNext").show();
+                            } else {
+                                $("#btnNext").hide();
+                            }
+                        }
+                    }
+                    else {
+                       // alert(data.Status);
+                    }
+                },
+                error: function (xhr) {
+                    LoaderHide();
+                    alert(xhr.responseText);
+                }
+            });
+        }
+        catch (e) {
+            LoaderHide();
+            alert(e.message);
+            //  return false;
+        }
+    }
+
+    //////////////////////// Vehicle Edit ////////////////////////////////////////////////////////////
+    function VehicleEdit(varEstimateDetailId) {
+        try {
+            $("#msg").html('** Edit your details in the blue row and click on <i class="material-icons">save</i> icon **');
+            EstimateDetailId = 0;
+            if (BookingList.length > 0) {
+                var varVehicle = jQuery.grep(BookingList, function (obj) {
+                    return obj.EstimateDetailId == varEstimateDetailId;
+                });
+                EstimateDetailId = NullHandle(varVehicle[0].EstimateDetailId);
+                $("#AddMoreTR").find("a[id='btnSave']").each(function () {
+                    $(this).show();
+                });
+                $("#AddMoreTR").find("select[id='lstServiceLookup']").each(function () {
+                    $(this).val(NullHandle(varVehicle[0].TrackGroupId));
+                    LoadTrackInfo();
+                });
+                $("#AddMoreTR").find("select[id='ddlType']").each(function () {
+                    $(this).val(NullHandle(varVehicle[0].CategoryId));
+                    TrackType();
+                });
+                $("#AddMoreTR").find("select[id='ddlTrackType']").each(function () {
+                    $(this).val(NullHandle(varVehicle[0].ServiceId));
+                });
+                $("#AddMoreTR").find("input[type='text'][id='Unit']").each(function () {
+                    $(this).val(NullHandle(varVehicle[0].ZZUOM));
+                });
+                $("#AddMoreTR").find("input[type='text'][id='txtBillingQty']").each(function () {
+                    $(this).val(NullHandle(varVehicle[0].BillingQty));
+                });
+                $("#AddMoreTR").find("input[type='text'][id='txtRate']").each(function () {
+                    $(this).val(NullHandle(varVehicle[0].Rate));
+                });
+                $("#AddMoreTR").find("textarea[id='Remark']").each(function () {
+                    $(this).val(NullHandle(varVehicle[0].Remark));
+                });
+                $("#AddMoreTR").find("input[type='hidden'][id='hdnUOMPropId']").each(function () {
+                    $(this).val(NullHandle(varVehicle[0].UOMId));
+                });
+                $("#AddMoreTR").show();
+                MaskControls();
+                $("#lstServiceLookup").focus();
+            }
+        }
+        catch (e) {
+
+        }
+    }
+
+    ///////////////////////////// Vehicle Save  //////////////////////////////////////////////////////
+    function VehicleSave() {
+        try {
+
+            debugger;
+
+            var model = {};
+            var strMSG = '';
+            var varVehicle = jQuery.grep(BookingList, function (obj) {
+                return obj.EstimateDetailId == EstimateDetailId;
+            });
+            var btnSave = "";
+
+            if (parseInt(EstimateDetailId) > 0 && varVehicle != undefined && varVehicle.length > 0) {
+                model = varVehicle[0];
+            }
+            else {
+                model.EstimateDetailId = -1;
+            }
+
+            $("#AddMoreTR").find("a[id='btnSave']").each(function () {
+                btnSave = $(this);
+            });
+
+            $("#AddMoreTR").find("select[id='lstServiceLookup']").each(function () {
+                model.TrackGroupId = $(this).val();
+                if ($(this).val().trim() == 0) {
+                    strMSG = strMSG + 'Track \n</br>'
+                }
+            });
+
+            $("#AddMoreTR").find("select[id='ddlType']").each(function () {
+                model.CategoryId = $(this).val();
+                if ($(this).val().trim() == 0) {
+                    strMSG = strMSG + 'Type \n</br>'
+                }
+            });
+
+            $("#AddMoreTR").find("select[id='ddlTrackType']").each(function () {
+                model.ServiceId = $(this).val();
+                if ($(this).val().trim() == 0) {
+                    strMSG = strMSG + 'Service \n</br>'
+                }
+            });
+
+            $("#AddMoreTR").find("input[type='text'][id='txtBillingQty']").each(function () {
+                model.BillingQty = $(this).val().trim();
+                if ($(this).val().trim() == 0 || $(this).val().trim()=="") {
+                    strMSG = strMSG + 'Billing Qty \n</br>'
+                }
+            });
+
+            $("#AddMoreTR").find("input[type='text'][id='txtRate']").each(function () {
+                model.Rate = $(this).val().trim();
+            });
+
+            $("#AddMoreTR").find("textarea[id='Remark']").each(function () {
+                model.Remark = $(this).val().trim();
+            });
+
+            $("#AddMoreTR").find("input[type='hidden'][id='hdnUOMPropId']").each(function () {
+                model.UOMId = $(this).val();
+            });
+
+            var varWSDuplicate = jQuery.grep(BookingList, function (obj) {
+                return obj.ServiceId == model.ServiceId && obj.EstimateDetailId != EstimateDetailId;
+            });
+
+            if (varWSDuplicate.length > 0) {
+                strMSG = strMSG + 'Service already exist\n</br>'
+            }
+
+            if (strMSG != '') {
+                alert("Please enter data for Mandatory fields  \n</br>" + strMSG);
+                return false;
+            }
+            else {
+                model.RefBPId = 12;
+                model.Amount = model.BillingQty * model.Rate;
+                btnSave.hide();
+                LoaderShow();
+                var data = { 'model': model };
+                debugger
+                var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+                $.ajax({
+                    url: '@Url.Action("EstimateDetailSave", "Home")',
+                    type: 'POST',
+                    dataType: 'json',
+                    async: true,
+                    data: dataWithAntiforgeryToken,
+                    //contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        LoaderHide();
+                        if (data.StatusId != "99" && data.StatusId != "-99") {
+                            $("#msg").html('');
+                            if (data.BookingList.length > 0) {
+                                debugger
+                                BookingList = jQuery.grep(data.BookingList, function (obj) {
+                                    return obj.RefBPId == 12;
+                                });
+                                if (BookingList.length > 0) {
+                                    BindVehicleData(BookingList);
+                                    $("#btnNext").show();
+                                }
+                            }
+                        }
+                        btnSave.show();
+                        alert(data.Status);
+                    },
+                    error: function (xhr) {
+
+                        btnSave.show();
+                        LoaderHide();
+                        alert(xhr.responseText);
+                    }
+                });
+            }
+        }
+        catch (e) {
+            LoaderHide();
+            btnSave.show();
+            alert(e.message);
+            return false;
+        }
+    }
+
+    ///////////////////////////// Delete Info  //////////////////////////////////////////////////////
+    function VehicleDelete(varEstimateDetailId) {
+
+        try {
+            $.confirm({
+                title: 'Confirm Alert!',
+                content: "Are you sure want to delete?",
+                icon: 'fa fa-question',
+                closeIcon: true,
+                animation: 'scale',
+                type: 'orange',
+                escapeKey: 'cancel',
+                buttons: {
+                    MyFunction: {
+                        text: 'OK',
+                        action: function () {
+                            LoaderShow();
+                            var data = { 'intEstimateDetailId': varEstimateDetailId };
+                            var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+                            $.ajax({
+                                url: '@Url.Action("EstimateDetailDelete", "Home")',
+                                type: 'POST',
+                                dataType: 'json',
+                                async: true,
+                                data: dataWithAntiforgeryToken,
+                                success: function (data) {
+                                    LoaderHide();
+                                    debugger
+                                    if (data.StatusId != "99" && data.StatusId != "-99") {
+                                        $("#msg").html('');
+                                        if (data.BookingList.length > 0) {
+                                            debugger
+                                            //BookingList = jQuery.grep(data.BookingList, function (obj) {
+                                            //    return obj.RefBPId == 12;
+                                            //});
+                                            //BindVehicleData(BookingList);
+                                            LoadVehicleInfo();
+                                            $("#btnNext").show();
+                                        }
+                                    }
+                                    alert(data.Status);
+                                },
+                                error: function (xhr) {
+                                    LoaderHide();
+                                    alert(xhr.responseText);
+                                }
+                            });
+
+                        }
+                    },
+                    cancel: function () {
+                    }
+                }
+            });
+
+        }
+        catch (e) {
+
+            LoaderHide();
+            alert(e.message);
+            //  return false;
+        }
+    }
+    ///////////////////////////// Bind Basic Info  //////////////////////////////////////////////////////
+    function BindVehicleData(data) {
+        debugger
+        try {
+            var gridData = "";
+            var StatusPropId = $("#StatusPropId").val();
+            var WorkFlowId = $("#WorkFlowId").val();
+            //var row = $('#tbodyVehicle').find('tr:eq(0)');
+            gridData = "<tr id='AddMoreTR' style='display: none;'>" + $("#AddMoreTR").html() + "</tr>";
+            $("#lblVehicleCount").text(NullHandle(data.length));
+            $("#tbodyVehicle").html("");
+            for (var i = 0; i < data.length; i++) {
+                gridData = gridData + "<tr >";
+                // gridData = gridData + "<td>" + NullHandle(data[i].Sno) + "</td>";
+                gridData = gridData + "<td>" + NullHandle(data[i].ZZTrackGroup) + "</td>";
+                gridData = gridData + "<td>" + NullHandle(data[i].ZZCategory) + "</td>";
+                gridData = gridData + "<td>" + NullHandle(data[i].ZZService) + "</td>";
+                gridData = gridData + "<td style='text-align:left'>" + NullHandle(data[i].ZZUOM) + "</td>";
+                gridData = gridData + "<td style='text-align: right'>" + NullHandle(data[i].BillingQty) + "</td>";
+                if (parseInt($("#WorkFlowId").val()) == 218 && parseInt($("#StatusPropId").val()) == 40) {
+                    gridData = gridData + "<td style='text-align:right;'>" + NullHandle(data[i].Rate) + "</td>";
+                }
+                else {
+                    gridData = gridData + "<td style='text-align:right; display:none'>" + NullHandle(data[i].Rate) + "</td>";
+                }
+                gridData = gridData + "<td>" + NullHandle(data[i].Remark) + "</td>";
+                if (parseInt($("#StatusPropId").val()) == 40 && parseInt($("#WorkFlowId").val()) == 216) {
+                    gridData = gridData + "<td class='td-actions text-center'>";
+                    gridData = gridData + "<a href='#' class='btn btn-info' title='Edit Track : " + NullHandle(data[i].VorC) + "' onclick='return VehicleEdit(" + NullHandle(data[i].EstimateDetailId) + ")' > <i class='material-icons'>edit</i></a>&nbsp;";
+                    gridData = gridData + "<a href='#' class='btn btn-danger' title='Delete Track : " + NullHandle(data[i].VorC) + "' onclick='return VehicleDelete(" + NullHandle(data[i].EstimateDetailId) + ")'><i class='material-icons'>close</i></a>";
+                    gridData = gridData + "</td>";
+                }
+                gridData = gridData + "</tr>";
+            }
+            $("#tbodyVehicle").html(gridData);
+        }
+        catch (e) {
+
+        }
+    }
+
+    ///////////////////////////// Set Button Visibility  //////////////////////////////////////////////////////
+    function SetButtonVisibility() {
+        try {
+            if (parseInt($("#StatusPropId").val()) == 40 && (parseInt($("#WorkFlowId").val()) == 216)) {
+                $("#btnAdd").attr('disabled', false);
+            }
+            else {
+                $("#btnAdd").attr('disabled', true);
+            }
+        }
+        catch (e) {
+
+        }
+    }
+
+
+    ///////////////////////////// Masking  //////////////////////////////////////////////////////
+    function MaskControls() {
+        try {
+            (function ($) {
+                $(function () {
+                    //$("#AddMoreTR").find("input[type='text'][id='RegistrationNo']").each(function () {
+                    //    $(this).mask('aa-##-$$-9999');
+                    //});
+                    //$("#AddMoreTR").find("input[type='text'][id='VehicleType']").each(function () {
+                    //    $(this).attr('onkeypress', 'return CheckIsAlpha(event,this);');
+                    //});
+                    //$("#AddMoreTR").find("input[type='text'][id='VehicleWeight']").each(function () {
+                    //    $(this).attr('onkeypress', 'return CheckIsDecimal(event,this);');
+                    //});
+                });
+            })(jQuery);
+        }
+        catch (e) {
+
+        }
+    }
+
+    var ServicesList = [];
+
+    function LoadTrackInfo() {
+        debugger
+        try {
+            LoaderShow();
+            var varTrackGroupId = $("#lstServiceLookup").val();
+            var data = { 'intTrackGroupId': varTrackGroupId };
+            var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+            $.ajax({
+                url: '@Url.Action("LoadTrackInfo", "Home")',
+                type: 'POST',
+                dataType: 'json',
+                async: false,
+                data: dataWithAntiforgeryToken,
+                success: function (data) {
+                    LoaderHide();
+                    debugger
+                    //if (data.StatusId != "99" && data.StatusId != "-99") {
+                    //    BindServiceCategory(data);
+                    //}
+                    //else {
+                    //    alert(data.Status);
+                    //}
+                    ServicesList = data.ServicesList;
+                    BindServiceCategory(data);
+                },
+                error: function (xhr) {
+                    LoaderHide();
+                    alert(xhr.responseText);
+                }
+            });
+        }
+        catch (e) {
+            LoaderHide();
+            alert(e.message);
+            //  return false;
+        }
+    }
+
+    function BindServiceCategory(data) {
+        try {
+            if (data.ServiceCategoryList.length > 0) {
+                $("#ddlType").html("");
+                $("#ddlTrackType").html("");
+                var gridData1 = "<option value='0'>Select Service *</option>";
+                var gridData = "<option value='0'>Select Type *</option>";
+                $("#Unit").val("");
+                $("#txtBillingQty").val("");
+                var selected = '';
+                data.ServiceCategoryList.length === 1 ? selected = "selected='selected'" : selected = '';
+                for (var i = 0; i < data.ServiceCategoryList.length; i++) {
+                   gridData = gridData + "<option value='" + NullHandle(data.ServiceCategoryList[i].Value) + "' "+ selected +">" + NullHandle(data.ServiceCategoryList[i].Text) + "</option>";
+                }
+                $("#ddlTrackType").html(gridData1);
+                $("#ddlType").html(gridData);
+                data.ServiceCategoryList.length === 1 ? TrackType() : '';
+            }
+        }
+        catch (e) {
+
+        }
+    }
+
+    function SetRateUnit() {
+        try {
+            var varServiceId = $("#ddlTrackType").val();
+            var varTimeSlotId = 0;
+
+            var strMSG = "";
+            if (parseInt(varServiceId) == 0) {
+                alert("Select Type");
+                return false;
+            }
+
+            if (strMSG != '') {
+                alert("Please enter data for Mandatory fields  \n</br>" + strMSG);
+                return false;
+            }
+            else {
+                var varServiceList = [];
+                varServiceList[0] = NullHandle(varServiceId);
+                var data = { 'intlstServiceId': varServiceList, 'intTimeSlotId': parseInt(varTimeSlotId), 'strWED': "" };
+                debugger
+                var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+                LoaderShow();
+                $.ajax({
+                    url: '@Url.Action("BookingStatusGetByServiceIdTimeSlotPropIdWEFDateEstimate", "Home")',
+                    type: 'POST',
+                    dataType: 'json',
+                    async: true,
+                    data: dataWithAntiforgeryToken,
+                   // contentType: "application/json; charset=utf-8",
+                    success: function (dataBokkingStatus) {
+                        LoaderHide();
+                        if (dataBokkingStatus.StatusId != "99" && dataBokkingStatus.StatusId != "-99") {
+                            var varBookingStatusList = dataBokkingStatus.BookingStatusList;
+                            if (varBookingStatusList.length > 0) {
+                                debugger
+                                $("#AddMoreTR").find("input[type='text'][id='Unit']").each(function () {
+                                    $(this).val(NullHandle(varBookingStatusList[0].UOM));
+                                });
+                                $("#AddMoreTR").find("input[type='text'][id='txtBillingQty']").each(function () {
+                                    $(this).val(NullHandle(varBookingStatusList[0].MinBilling));
+                                });
+                                $("#AddMoreTR").find("input[type='text'][id='txtRate']").each(function () {
+                                    $(this).val(NullHandle(varBookingStatusList[0].Rate));
+                                });
+                                $("#AddMoreTR").find("input[type='hidden'][id='hdnUOMPropId']").each(function () {
+                                    $(this).val(NullHandle(varBookingStatusList[0].UOMPropId));
+                                });
+                            }
+                        }
+                        else {
+                            alert(data.Status);
+                        }
+                    },
+                    error: function (xhr) {
+                        LoaderHide();
+                        alert(xhr.responseText);
+                    }
+                });
+            }
+        }
+        catch (e) {
+            LoaderHide();
+            alert(xhr.responseText);
+        }
+    }
+
+    $(document).ready(function () {
+        MaskControls();
+        SetButtonVisibility();
+        LoadVehicleInfo();
+    });
+
+</script>

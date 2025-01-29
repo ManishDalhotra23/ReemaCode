@@ -1,0 +1,167 @@
+﻿@{
+    ViewBag.Title = "Attendee";
+    Layout = "~/Views/Shared/_LayoutTrack.cshtml";
+}
+
+<style>
+    .table > tbody > tr > td {
+        padding: 2px 8px !important;
+        cursor: pointer !important;
+    }
+
+    .card {
+        margin-bottom: 0px !important;
+        margin-top: 25px !important;
+    }
+
+    .bootstrap-select {
+        margin-top: 16px !important;
+    }
+
+    .main-panel > .content {
+        margin-top: 0 !important;
+    }
+</style>
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="card">
+                <div class="card-header card-header-rose card-header-icon">
+                    @*<div class="card-icon">
+                        <i class="material-icons">assignment</i>
+                    </div>*@
+                    <h6 class="card-title" style="margin-top: 5px;">
+                        <strong><span>Date:</span></strong>&nbsp;<span id="BookingDate">@Model.DocDate</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <strong><span>Document Type:</span></strong>&nbsp;<span id="BookingType">@Model.DocType</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <strong><span>Document No.:</span></strong>&nbsp;<span id="BookingNo">@Model.DocNo</span>
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="arrow-steps clearfix">
+                        <div class="step current"><span>Booking</span></div>
+                        <div class="step"><span>PI</span></div>
+                        <div class="step"><span>Approve</span></div>
+                        <div class="step"><span>PO</span></div>
+                        <div class="step"><span>PO Verification</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">
+                        Other Attendees Count: 8
+                        <button type="button" class="btn btn-fill btn-rose btn-sm pull-right" onclick="AddMoreOther()">Add More</button>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class=" text-primary">
+                                <tr>
+                                    <th width="15%">Sr. No.</th>
+                                    <th width="35%">Name</th>
+                                    <th width="35%">Mobile No.</th>
+                                    <th width="15%" class="text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr id="AddMoreOtherTR" style="        display: none;">
+                                    <td><input type="text" class="form-control" value="9"></td>
+                                    <td><input type="text" class="form-control" value=""></td>
+                                    <td><input type="text" class="form-control" value=""></td>
+                                    <td class='td-actions text-center'>
+                                        <button type='button' rel='tooltip' class='btn btn-info' data-original-title='' title=''><i class='material-icons'>save</i></button>
+                                        <button type='button' rel='tooltip' class='btn btn-danger' data-original-title='' title='' onclick="AddMoreOtherCancel()"><i class='material-icons'>close</i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Abhishek</td>
+                                    <td>8102124585</td>
+                                    <td class='td-actions text-center'>
+                                        <button type='button' rel='tooltip' class='btn btn-info' data-original-title='' title=''><i class='material-icons'>edit</i></button>
+                                        <button type='button' rel='tooltip' class='btn btn-danger' data-original-title='' title=''><i class='material-icons'>close</i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Abhishek</td>
+                                    <td>8102124585</td>
+                                    <td class='td-actions text-center'>
+                                        <button type='button' rel='tooltip' class='btn btn-info' data-original-title='' title=''><i class='material-icons'>edit</i></button>
+                                        <button type='button' rel='tooltip' class='btn btn-danger' data-original-title='' title=''><i class='material-icons'>close</i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Abhishek</td>
+                                    <td>8102124585</td>
+                                    <td class='td-actions text-center'>
+                                        <button type='button' rel='tooltip' class='btn btn-info' data-original-title='' title=''><i class='material-icons'>edit</i></button>
+                                        <button type='button' rel='tooltip' class='btn btn-danger' data-original-title='' title=''><i class='material-icons'>close</i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Abhishek</td>
+                                    <td>8102124585</td>
+                                    <td class='td-actions text-center'>
+                                        <button type='button' rel='tooltip' class='btn btn-info' data-original-title='' title=''><i class='material-icons'>edit</i></button>
+                                        <button type='button' rel='tooltip' class='btn btn-danger' data-original-title='' title=''><i class='material-icons'>close</i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>Abhishek</td>
+                                    <td>8102124585</td>
+                                    <td class='td-actions text-center'>
+                                        <button type='button' rel='tooltip' class='btn btn-info' data-original-title='' title=''><i class='material-icons'>edit</i></button>
+                                        <button type='button' rel='tooltip' class='btn btn-danger' data-original-title='' title=''><i class='material-icons'>close</i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>Abhishek</td>
+                                    <td>8102124585</td>
+                                    <td class='td-actions text-center'>
+                                        <button type='button' rel='tooltip' class='btn btn-info' data-original-title='' title=''><i class='material-icons'>edit</i></button>
+                                        <button type='button' rel='tooltip' class='btn btn-danger' data-original-title='' title=''><i class='material-icons'>close</i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td>Abhishek</td>
+                                    <td>8102124585</td>
+                                    <td class='td-actions text-center'>
+                                        <button type='button' rel='tooltip' class='btn btn-info' data-original-title='' title=''><i class='material-icons'>edit</i></button>
+                                        <button type='button' rel='tooltip' class='btn btn-danger' data-original-title='' title=''><i class='material-icons'>close</i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>8</td>
+                                    <td>Abhishek</td>
+                                    <td>8102124585</td>
+                                    <td class='td-actions text-center'>
+                                        <button type='button' rel='tooltip' class='btn btn-info' data-original-title='' title=''><i class='material-icons'>edit</i></button>
+                                        <button type='button' rel='tooltip' class='btn btn-danger' data-original-title='' title=''><i class='material-icons'>close</i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function AddMoreOther() {
+        $("#AddMoreOtherTR").show();
+    }
+
+    function AddMoreOtherCancel() {
+        $("#AddMoreOtherTR").hide();
+    }
+</script>

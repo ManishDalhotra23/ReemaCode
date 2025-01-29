@@ -1,0 +1,277 @@
+﻿@{
+    ViewBag.Title = "Track Detail";
+}
+<style>
+    .card .card-header .card-title {
+        font-weight: 700;
+        margin-bottom: 0px;
+        border-bottom: 1px solid #ddd;
+        padding: 25px 10px 5px 0px;
+        margin: 0;
+        box-shadow: none !important;
+        background: #ffffff;
+    }
+
+    h3, .h3 {
+        margin: 0px 0px 5px !important;
+    }
+
+    .sidebar, #bar, .navbar {
+        display: none;
+    }
+
+    .main-panel {
+        width: 100%;
+    }
+
+        .main-panel > .content {
+            padding: 0px 15px;
+        }
+
+    .head {
+        background: #115a86;
+        color: #FFF;
+        padding: 5px 10px 5px 10px;
+        margin-bottom: 10px;
+        border-radius: 4px;
+        font-weight: bold;
+    }
+</style>
+<input type="hidden" id="HiddenTrackId" />
+<input type="hidden" id="strImgPath" value="@System.Configuration.ConfigurationManager.AppSettings["strImgPath"]" />
+<div class="content">
+    <div class="container-fluid">
+        <div class="home-demo">
+            <div class="head">
+                <a href="#" onclick="return window.history.back();" style="color: #FFF;"><i class="material-icons">arrow_back</i></a>
+                Track Detail
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title"></h4>
+                        </div>
+                        <div class="card-body">
+                            <div id="accordion" role="tablist">
+                                <div class="card-collapse" id="Desc">
+                                    <div class="card-header" role="tab" id="headingOne">
+                                        <h5 class="mb-0">
+                                            <a class="collapsed" data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                Description
+                                                <i class="material-icons">keyboard_arrow_down</i>
+                                            </a>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion" style="">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-12" id="Descriptions">
+                                                    @*Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.*@
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card-collapse" id="Doc">
+                                    <div class="card-header" role="tab" id="headingTwo">
+                                        <h5 class="mb-0">
+                                            <a class="collapsed" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                Documents
+                                                <i class="material-icons">keyboard_arrow_down</i>
+                                            </a>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion" style="">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-12" id="Documents">
+                                                    @*<a href="javascript:void(0)" style="color: #000;"><img src="~/Templates/img/pdfIcon.png">PDF for detail</a><br /><br />
+                                                        <a href="javascript:void(0)" style="color: #000;"><img src="~/Templates/img/pdfIcon.png">PDF for detail</a><br /><br />
+                                                        <a href="javascript:void(0)" style="color: #000;"><img src="~/Templates/img/pdfIcon.png">PDF for detail</a>*@
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="card-collapse" id="Img">
+                                    <div class="card-header" role="tab" id="headingThree">
+                                        <h5 class="mb-0">
+                                            <a data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree" class="">
+                                                Images
+                                                <i class="material-icons">keyboard_arrow_down</i>
+                                            </a>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion" style="">
+                                        <div class="card-body">
+                                            <div class="owl-carousel owl-theme" id="Images">
+                                                @*<div class="item">
+                                                        <img class="img-responsive img-thumbnail" src="~/Templates/Tracks/T4 Gradient Track.jpg" width="300" height="200" />
+                                                    </div>
+                                                    <div class="item">
+                                                        <img class="img-responsive img-thumbnail" src="~/Templates/Tracks/T4 Gradient Track_Side View Top Angle.jpg" width="300" height="200" />
+                                                    </div>
+                                                    <div class="item">
+                                                        <img class="img-responsive img-thumbnail" src="~/Templates/Tracks/T4 Gradient Track_Side View.jpg" width="300" height="200" />
+                                                    </div>
+                                                    <div class="item">
+                                                        <img class="img-responsive img-thumbnail" src="~/Templates/Tracks/T4 Gradient Track_Sky Eye View.jpg" width="300" height="200" />
+                                                    </div>*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var strImgPath = $("#strImgPath").val();
+    var DescriptionsList = [];
+    var DocumentsList = [];
+    var ImagesList = [];
+    $(document).ready(function () {
+        $("#HiddenTrackId").val(sessionStorage.getItem("TrackId"));
+        if ($("#HiddenTrackId").val() < 1) {
+            var url = '../Front/Track/';
+            window.location.href = url;
+        } else {
+            TrackDetailGetByTrackId();
+        }
+    });
+
+    function TrackDetailGetByTrackId() {
+        try {
+            LoaderShow();
+            var data = { 'intTrackGroupId': $("#HiddenTrackId").val() };
+            var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+            $.ajax({
+                url: '@Url.Action("ServiceDetailViewGetByTrackGroupId","Front")',
+                type: 'POST',
+                dataType: 'json',
+                async: true,
+                data: dataWithAntiforgeryToken,
+                success: function (data) {
+                    debugger;
+                    LoaderHide();
+                    if (data.StatusId != "99" && data.StatusId != "-99") {
+                        $(".card-title").text(data.TrackDetail.objdbmlServicesViewForFront[0].ServiceName);
+                        DescriptionsList = data.TrackDetail.objdbmlServicesViewForFront;
+                        DocumentsList = data.TrackDetail.objdbmlServiceDocumentView;
+                        ImagesList = data.TrackDetail.objdbmlServiceImageView;
+                        if (DescriptionsList.length == 0) {
+                            $("#Desc").hide();
+                        } else {
+                            $("#Desc").show();
+                            Description();
+                        }
+
+                        if (DocumentsList.length == 0) {
+                            $("#Doc").hide();
+                        } else {
+                            $("#Doc").show();
+                            Document();
+                        }
+
+                        if (ImagesList.length == 0) {
+                            $("#Img").hide();
+                        } else {
+                            $("#Img").show();
+                            Image();
+                        }
+                    } else {
+                        alert(data.Status);
+                    }
+                },
+                error: function (xhr) {
+                    LoaderHide();
+                    alert(xhr.responseText);
+                }
+            });
+        }
+        catch (e) {
+            LoaderHide();
+            alert(e.message);
+        }
+    }
+
+    function Description() {
+        try {
+            var HTMl = "";
+            $("#Descriptions").empty();
+            $.each(DescriptionsList, function (Index, Object) {
+                HTMl += '<h3>' + Object.ServiceSpecification + '</h3>';
+                HTMl += '<p>' + Object.ServiceDescription + '</p>';
+                HTMl += '<hr/>';
+            });
+            $("#Descriptions").append(HTMl);
+        }catch (e) {
+          alert(e.message);
+      }
+    }
+
+    function Document() {
+        try {
+            var HTMl1 = "";
+            $("#Documents").empty();
+            $.each(DocumentsList, function (Index1, Object1) {
+                if (Object1.DocumentName != null) {
+                    HTMl1 += '<a href="'+ strImgPath + Object1.DocumentName +'" target="_blank" style="color: #000;"><i class="material-icons">picture_as_pdf</i>&nbsp;PDF for detail</a><br />';
+                }
+            });
+            $("#Documents").append(HTMl1);
+        }catch (e) {
+          alert(e.message);
+      }
+    }
+
+    function Image() {
+        try {
+            var HTMl2 = "";
+            //$("#Images").empty();
+            var carousel = $(".owl-carousel");
+            carousel.trigger('destroy.owl.carousel');
+            carousel.find('.owl-stage-outer').children().unwrap();
+            carousel.removeClass("owl-center owl-loaded owl-text-select-on");
+            $( ".owl-prev").html('<i class="fa fa-chevron-left"></i>');
+            $( ".owl-next").html('<i class="fa fa-chevron-right"></i>');
+            $.each(ImagesList, function (Index2, Object2) {
+                HTMl2 += '<div class="item">';
+                if (Object2.ImageName != null) {
+                    HTMl2 += '<img class="img-responsive img-thumbnail" src="'+ strImgPath + Object2.ImageName +'"  width="300" height="200">';
+                }
+                HTMl2 += '</div>';
+            });
+
+            carousel.html(HTMl2);
+            carousel.owlCarousel({
+                    loop: false,
+                    margin: 10,
+                    nav: true,
+                    responsive: {
+                        0: {
+                            items: 1
+                        },
+                        600: {
+                            items: 2
+                        },
+                        1000: {
+                            items: 4
+                        }
+                    }
+                });
+           // $("#Images").append(HTMl2);
+
+        }catch (e) {
+          alert(e.message);
+      }
+    }
+</script>

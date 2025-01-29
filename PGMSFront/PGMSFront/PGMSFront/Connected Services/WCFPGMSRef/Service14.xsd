@@ -1,0 +1,1372 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/WCFServiceTemplate" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="dbmlGeneral">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="IntOne" type="xs:int" />
+      <xs:element minOccurs="0" name="IntThree" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IntTwo" type="xs:int" />
+      <xs:element minOccurs="0" name="StrOne" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StrThree" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StrTwo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="dtFromDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="dtToDate" nillable="true" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="dbmlGeneral" nillable="true" type="tns:dbmlGeneral" />
+  <xs:complexType name="dbmlStatus">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Status" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StatusId" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="dbmlStatus" nillable="true" type="tns:dbmlStatus" />
+  <xs:complexType name="ArrayOfdbmlWorkshopBookingDetailViewFront">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dbmlWorkshopBookingDetailViewFront" nillable="true" type="tns:dbmlWorkshopBookingDetailViewFront" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfdbmlWorkshopBookingDetailViewFront" nillable="true" type="tns:ArrayOfdbmlWorkshopBookingDetailViewFront" />
+  <xs:complexType name="dbmlWorkshopBookingDetailViewFront">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Amount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="AuditId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="BookingDay" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="BookingId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="BookingStatusPropId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="CGSTAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="CGSTRate" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="CreateDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CreateId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Discount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="IGSTAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="IGSTRate" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="POAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="PODate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="PONumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="QuotAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Rate" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="RefServiceBPId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Remark" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SGSTAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="SGSTRate" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ServiceId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Sno" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="TaxAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="TaxableAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="TotalAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="UOMPropId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="UpdateDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UpdateId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="UsageDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UsageHours" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="UsageMinutes" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="WorkshopBookingDetailId" type="xs:int" />
+      <xs:element minOccurs="0" name="ZZBookStatus" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZPODate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZServiceName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZUOM" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZUsageDate" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="dbmlWorkshopBookingDetailViewFront" nillable="true" type="tns:dbmlWorkshopBookingDetailViewFront" />
+  <xs:complexType name="ArrayOfdbmlBookingDetailAddOnServicesViewFront">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dbmlBookingDetailAddOnServicesViewFront" nillable="true" type="tns:dbmlBookingDetailAddOnServicesViewFront" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfdbmlBookingDetailAddOnServicesViewFront" nillable="true" type="tns:ArrayOfdbmlBookingDetailAddOnServicesViewFront" />
+  <xs:complexType name="dbmlBookingDetailAddOnServicesViewFront">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Amount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="AuditId" type="xs:int" />
+      <xs:element minOccurs="0" name="BPId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="BookingAddOnServiceId" type="xs:int" />
+      <xs:element minOccurs="0" name="BookingDay" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="BookingId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="BookingStatusPropId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="CGSTAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="CGSTRate" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Consumption" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="CreateDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CreateId" type="xs:int" />
+      <xs:element minOccurs="0" name="Discount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="IGSTAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="IGSTRate" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="POAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="PODate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="PONumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="QuotAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Rate" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Remark" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SGSTAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="SGSTRate" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ServiceDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ServiceId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="TaxAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="TaxableAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="TotalAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="UOMPropId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="UpdateDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UpdateId" type="xs:int" />
+      <xs:element minOccurs="0" name="ZZBookingStatus" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZMinInDay" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ZZServiceDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZServiceName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZUOM" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="dbmlBookingDetailAddOnServicesViewFront" nillable="true" type="tns:dbmlBookingDetailAddOnServicesViewFront" />
+  <xs:complexType name="ArrayOfdbmlLabBookingDetailViewFront">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dbmlLabBookingDetailViewFront" nillable="true" type="tns:dbmlLabBookingDetailViewFront" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfdbmlLabBookingDetailViewFront" nillable="true" type="tns:ArrayOfdbmlLabBookingDetailViewFront" />
+  <xs:complexType name="dbmlLabBookingDetailViewFront">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Amount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="AuditId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="BookingDay" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="BookingId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="BookingStatusPropId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="CGSTAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="CGSTRate" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="CreateDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CreateId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Discount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="IGSTAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="IGSTRate" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="LabBookingDetailId" type="xs:int" />
+      <xs:element minOccurs="0" name="POAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="PODate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="PONumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="QuotAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Rate" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="RefServiceBPId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Remark" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SGSTAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="SGSTRate" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ServiceId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Sno" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="TaxAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="TaxableAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="TotalAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="UOMPropId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="UpdateDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UpdateId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="UsageDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UsageHours" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="UsageMinutes" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="VehCompId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ZZBookStatus" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZPODate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZService" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZServiceName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZUOM" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZUsageDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZVehComp" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="dbmlLabBookingDetailViewFront" nillable="true" type="tns:dbmlLabBookingDetailViewFront" />
+  <xs:complexType name="ArrayOfdbmlLabServiceDoc">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dbmlLabServiceDoc" nillable="true" type="tns:dbmlLabServiceDoc" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfdbmlLabServiceDoc" nillable="true" type="tns:ArrayOfdbmlLabServiceDoc" />
+  <xs:complexType name="dbmlLabServiceDoc">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CreateDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CreateId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="DocumentName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DocumentPath" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DocumentType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LabBookingDetailId" type="xs:int" />
+      <xs:element minOccurs="0" name="LabServiceDocId" type="xs:int" />
+      <xs:element minOccurs="0" name="ServiceId" type="xs:int" />
+      <xs:element minOccurs="0" name="UpdateDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UpdateId" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="dbmlLabServiceDoc" nillable="true" type="tns:dbmlLabServiceDoc" />
+  <xs:complexType name="ArrayOfdbmlLablinkVorC">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dbmlLablinkVorC" nillable="true" type="tns:dbmlLablinkVorC" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfdbmlLablinkVorC" nillable="true" type="tns:ArrayOfdbmlLablinkVorC" />
+  <xs:complexType name="dbmlLablinkVorC">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ComOptionListId" type="xs:int" />
+      <xs:element minOccurs="0" name="CreateDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CreateId" type="xs:int" />
+      <xs:element minOccurs="0" name="GroupPropId" type="xs:int" />
+      <xs:element minOccurs="0" name="LablinkVorCId" type="xs:int" />
+      <xs:element minOccurs="0" name="ServiceId" type="xs:int" />
+      <xs:element minOccurs="0" name="UpdateDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UpdateId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="dbmlLablinkVorC" nillable="true" type="tns:dbmlLablinkVorC" />
+  <xs:complexType name="ArrayOfdbmlPODetailUpload">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dbmlPODetailUpload" nillable="true" type="tns:dbmlPODetailUpload" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfdbmlPODetailUpload" nillable="true" type="tns:ArrayOfdbmlPODetailUpload" />
+  <xs:complexType name="dbmlPODetailUpload">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="POAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="PODate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="PODocPath" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PONumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="POValidityDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="RowId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ZZPODate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZPOValidityDate" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="dbmlPODetailUpload" nillable="true" type="tns:dbmlPODetailUpload" />
+  <xs:complexType name="ArrayOfdbmlTrackGroupMasterWithImageView">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dbmlTrackGroupMasterWithImageView" nillable="true" type="tns:dbmlTrackGroupMasterWithImageView" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfdbmlTrackGroupMasterWithImageView" nillable="true" type="tns:ArrayOfdbmlTrackGroupMasterWithImageView" />
+  <xs:complexType name="dbmlTrackGroupMasterWithImageView">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CreateDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CreateId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="SrNo" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="TrackCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TrackGroup" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TrackGroupId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="TrackGroupMasterId" type="xs:int" />
+      <xs:element minOccurs="0" name="TrackGroupName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UpdateDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UpdateId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ZZImageName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="dbmlTrackGroupMasterWithImageView" nillable="true" type="tns:dbmlTrackGroupMasterWithImageView" />
+  <xs:complexType name="ArrayOfdbmlServiceDocumentView">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dbmlServiceDocumentView" nillable="true" type="tns:dbmlServiceDocumentView" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfdbmlServiceDocumentView" nillable="true" type="tns:ArrayOfdbmlServiceDocumentView" />
+  <xs:complexType name="dbmlServiceDocumentView">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DocumentDescription" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DocumentName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ServiceDocumentId" type="xs:int" />
+      <xs:element minOccurs="0" name="ServiceId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="TrackGroupId" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="dbmlServiceDocumentView" nillable="true" type="tns:dbmlServiceDocumentView" />
+  <xs:complexType name="ArrayOfdbmlServiceImageView">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dbmlServiceImageView" nillable="true" type="tns:dbmlServiceImageView" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfdbmlServiceImageView" nillable="true" type="tns:ArrayOfdbmlServiceImageView" />
+  <xs:complexType name="dbmlServiceImageView">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ImageDescription" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ImageName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ServiceId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ServiceImageId" type="xs:int" />
+      <xs:element minOccurs="0" name="TrackGroupId" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="dbmlServiceImageView" nillable="true" type="tns:dbmlServiceImageView" />
+  <xs:complexType name="ArrayOfdbmlServicesViewForFront">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dbmlServicesViewForFront" nillable="true" type="tns:dbmlServicesViewForFront" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfdbmlServicesViewForFront" nillable="true" type="tns:ArrayOfdbmlServicesViewForFront" />
+  <xs:complexType name="dbmlServicesViewForFront">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BPId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ServiceDescription" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ServiceGroupMCId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ServiceId" type="xs:int" />
+      <xs:element minOccurs="0" name="ServiceName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ServiceSpecification" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TrackGroup" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TrackGroupId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ZZServiceGroupName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZServiceName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZTrackGroup" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZTrackGroupName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="dbmlServicesViewForFront" nillable="true" type="tns:dbmlServicesViewForFront" />
+  <xs:complexType name="ArrayOfdbmlServiceImageDescriptionView">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dbmlServiceImageDescriptionView" nillable="true" type="tns:dbmlServiceImageDescriptionView" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfdbmlServiceImageDescriptionView" nillable="true" type="tns:ArrayOfdbmlServiceImageDescriptionView" />
+  <xs:complexType name="dbmlServiceImageDescriptionView">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ImageDescription" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ImageName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ServiceId" type="xs:int" />
+      <xs:element minOccurs="0" name="ServiceImageId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ServiceName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TrackGroup" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="dbmlServiceImageDescriptionView" nillable="true" type="tns:dbmlServiceImageDescriptionView" />
+  <xs:complexType name="ArrayOfdbmlServiceDocumentDetailView">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dbmlServiceDocumentDetailView" nillable="true" type="tns:dbmlServiceDocumentDetailView" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfdbmlServiceDocumentDetailView" nillable="true" type="tns:ArrayOfdbmlServiceDocumentDetailView" />
+  <xs:complexType name="dbmlServiceDocumentDetailView">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DocumentDescription" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DocumentName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ServiceDocumentId" type="xs:int" />
+      <xs:element minOccurs="0" name="ServiceId" type="xs:int" />
+      <xs:element minOccurs="0" name="ServiceName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TrackGroup" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="dbmlServiceDocumentDetailView" nillable="true" type="tns:dbmlServiceDocumentDetailView" />
+  <xs:complexType name="ArrayOfdbmlServiceImageDetailView">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dbmlServiceImageDetailView" nillable="true" type="tns:dbmlServiceImageDetailView" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfdbmlServiceImageDetailView" nillable="true" type="tns:ArrayOfdbmlServiceImageDetailView" />
+  <xs:complexType name="dbmlServiceImageDetailView">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ImageDescription" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ImageName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ServiceId" type="xs:int" />
+      <xs:element minOccurs="0" name="ServiceImageId" type="xs:int" />
+      <xs:element minOccurs="0" name="ServiceName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TrackGroup" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="dbmlServiceImageDetailView" nillable="true" type="tns:dbmlServiceImageDetailView" />
+  <xs:complexType name="ArrayOfdbmlNewsHotelsTrainingVideoView">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dbmlNewsHotelsTrainingVideoView" nillable="true" type="tns:dbmlNewsHotelsTrainingVideoView" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfdbmlNewsHotelsTrainingVideoView" nillable="true" type="tns:ArrayOfdbmlNewsHotelsTrainingVideoView" />
+  <xs:complexType name="dbmlNewsHotelsTrainingVideoView">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BPId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MobileNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NewsHotelsTrainingVideoId" type="xs:int" />
+      <xs:element minOccurs="0" name="SrNo" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UploadPath" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Website" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="dbmlNewsHotelsTrainingVideoView" nillable="true" type="tns:dbmlNewsHotelsTrainingVideoView" />
+  <xs:complexType name="ArrayOfdbmlContact">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dbmlContact" nillable="true" type="tns:dbmlContact" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfdbmlContact" nillable="true" type="tns:ArrayOfdbmlContact" />
+  <xs:complexType name="dbmlContact">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AcceptPrivacyPolicy" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="City" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CityId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="CompanyName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ContactKey" type="xs:int" />
+      <xs:element minOccurs="0" name="CountryId" type="xs:int" />
+      <xs:element minOccurs="0" name="Date" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="EmailAddress" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EventInformed" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PhoneNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Remark" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SendMail" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="StateId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Subject" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SubjectPropId" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="dbmlContact" nillable="true" type="tns:dbmlContact" />
+  <xs:complexType name="ArrayOfdbmlEstimateDetailView">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dbmlEstimateDetailView" nillable="true" type="tns:dbmlEstimateDetailView" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfdbmlEstimateDetailView" nillable="true" type="tns:ArrayOfdbmlEstimateDetailView" />
+  <xs:complexType name="dbmlEstimateDetailView">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Amount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="BillingQty" type="xs:decimal" />
+      <xs:element minOccurs="0" name="CategoryId" type="xs:int" />
+      <xs:element minOccurs="0" name="CreateDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CreateId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="EstimateDetailId" type="xs:int" />
+      <xs:element minOccurs="0" name="EstimateId" type="xs:int" />
+      <xs:element minOccurs="0" name="Rate" type="xs:decimal" />
+      <xs:element minOccurs="0" name="RefBPId" type="xs:int" />
+      <xs:element minOccurs="0" name="Remark" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ServiceId" type="xs:int" />
+      <xs:element minOccurs="0" name="TrackGroupId" type="xs:int" />
+      <xs:element minOccurs="0" name="UOMId" type="xs:int" />
+      <xs:element minOccurs="0" name="UpdateDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UpdateId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ZZCategory" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZService" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZTrackGroup" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZUOM" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="dbmlEstimateDetailView" nillable="true" type="tns:dbmlEstimateDetailView" />
+  <xs:complexType name="ArrayOfdbmlEstimateView">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dbmlEstimateView" nillable="true" type="tns:dbmlEstimateView" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfdbmlEstimateView" nillable="true" type="tns:ArrayOfdbmlEstimateView" />
+  <xs:complexType name="dbmlEstimateView">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ApproveDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ApproveId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="BPId" type="xs:int" />
+      <xs:element minOccurs="0" name="ContactPerson" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreateDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CreateId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="CustomerMasterId" type="xs:int" />
+      <xs:element minOccurs="0" name="DepartmentId" type="xs:int" />
+      <xs:element minOccurs="0" name="DocDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DocNo" type="xs:int" />
+      <xs:element minOccurs="0" name="EmailId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EstimateId" type="xs:int" />
+      <xs:element minOccurs="0" name="MobileNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PMEmailId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PMMobileNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Prefix" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Project" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ProjectManager" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Remark" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StatusId" type="xs:int" />
+      <xs:element minOccurs="0" name="TotalAmount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="UpdateDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UpdateId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ZZCreatedBy" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZDocDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZDocNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZStatusPropertyId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ZZStatusWorkflowId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ZZUpdatedBy" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZWorkFlowId" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="dbmlEstimateView" nillable="true" type="tns:dbmlEstimateView" />
+  <xs:complexType name="ArrayOfdbmlEstimateSearchViewFront">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dbmlEstimateSearchViewFront" nillable="true" type="tns:dbmlEstimateSearchViewFront" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfdbmlEstimateSearchViewFront" nillable="true" type="tns:ArrayOfdbmlEstimateSearchViewFront" />
+  <xs:complexType name="dbmlEstimateSearchViewFront">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BPId" type="xs:int" />
+      <xs:element minOccurs="0" name="BookingType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CompanyName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CustomerMasterId" type="xs:int" />
+      <xs:element minOccurs="0" name="Department" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DepartmentId" type="xs:int" />
+      <xs:element minOccurs="0" name="DocDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DocNo" type="xs:int" />
+      <xs:element minOccurs="0" name="EstimateId" type="xs:int" />
+      <xs:element minOccurs="0" name="Project" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ProjectManager" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StatusId" type="xs:int" />
+      <xs:element minOccurs="0" name="WorkFlowId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ZZActivity" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZDocDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZDocNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZStatus" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZWorkFlowColor" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZWorkFlowName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="dbmlEstimateSearchViewFront" nillable="true" type="tns:dbmlEstimateSearchViewFront" />
+  <xs:complexType name="ArrayOfdbmlBookingView">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dbmlBookingView" nillable="true" type="tns:dbmlBookingView" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfdbmlBookingView" nillable="true" type="tns:ArrayOfdbmlBookingView" />
+  <xs:complexType name="dbmlBookingView">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Amount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="AuditId" type="xs:int" />
+      <xs:element minOccurs="0" name="BPId" type="xs:int" />
+      <xs:element minOccurs="0" name="BookingDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="BookingId" type="xs:int" />
+      <xs:element minOccurs="0" name="BookingNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CompanyId" type="xs:int" />
+      <xs:element minOccurs="0" name="ContactPerson" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreateDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CreateId" type="xs:int" />
+      <xs:element minOccurs="0" name="DepartmentId" type="xs:int" />
+      <xs:element minOccurs="0" name="Discount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="DocNo" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="EmailId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsDelete" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsSEZ" type="xs:boolean" />
+      <xs:element minOccurs="0" name="MobileNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NoOfDrivers" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="NoOfOtherPersons" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="NoOfVehicle" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="PMEmailId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PMMobileNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PODate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="PODocPath" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PONumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Project" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ProjectManager" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RFQId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Remark" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StatusPropId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="TabStatusId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="TaxAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="TaxableAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="TotalAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="UpdateDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UpdateId" type="xs:int" />
+      <xs:element minOccurs="0" name="ZZBookingDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZBookingType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZCompany" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZCreatedBy" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZRFQBPId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ZZRFQBookingDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZRFQBookingNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZStatusPropertyId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ZZStatusWorkflowId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ZZSupportDocPath" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZUpdatedBy" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZWorkFlowId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ZZWorkflowRemark" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="dbmlBookingView" nillable="true" type="tns:dbmlBookingView" />
+  <xs:complexType name="ArrayOfdbmlBookingSupportDocument">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dbmlBookingSupportDocument" nillable="true" type="tns:dbmlBookingSupportDocument" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfdbmlBookingSupportDocument" nillable="true" type="tns:ArrayOfdbmlBookingSupportDocument" />
+  <xs:complexType name="dbmlBookingSupportDocument">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BPId" type="xs:int" />
+      <xs:element minOccurs="0" name="BookingSupportDocId" type="xs:int" />
+      <xs:element minOccurs="0" name="DocId" type="xs:int" />
+      <xs:element minOccurs="0" name="DocPath" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UpdateId" type="xs:int" />
+      <xs:element minOccurs="0" name="updatedate" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="dbmlBookingSupportDocument" nillable="true" type="tns:dbmlBookingSupportDocument" />
+  <xs:complexType name="ArrayOfdbmlDailyServiceCount">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dbmlDailyServiceCount" nillable="true" type="tns:dbmlDailyServiceCount" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfdbmlDailyServiceCount" nillable="true" type="tns:ArrayOfdbmlDailyServiceCount" />
+  <xs:complexType name="dbmlDailyServiceCount">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Consumption" type="xs:decimal" />
+      <xs:element minOccurs="0" name="NotificationMail" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ServiceDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ServiceId" type="xs:int" />
+      <xs:element minOccurs="0" name="ServiceName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="dbmlDailyServiceCount" nillable="true" type="tns:dbmlDailyServiceCount" />
+  <xs:complexType name="ArrayOfdbmlVehicleLogs">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dbmlVehicleLogs" nillable="true" type="tns:dbmlVehicleLogs" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfdbmlVehicleLogs" nillable="true" type="tns:ArrayOfdbmlVehicleLogs" />
+  <xs:complexType name="dbmlVehicleLogs">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BookingDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BookingNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CompanyName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Department" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="InDateTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OutDateTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Project" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RFIDNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TrackName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="VehCompName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="VehName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="dbmlVehicleLogs" nillable="true" type="tns:dbmlVehicleLogs" />
+  <xs:complexType name="ArrayOfdbmlBookinglookupforCouponPrint">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dbmlBookinglookupforCouponPrint" nillable="true" type="tns:dbmlBookinglookupforCouponPrint" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfdbmlBookinglookupforCouponPrint" nillable="true" type="tns:ArrayOfdbmlBookinglookupforCouponPrint" />
+  <xs:complexType name="dbmlBookinglookupforCouponPrint">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BPId" type="xs:int" />
+      <xs:element minOccurs="0" name="BookingDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="BookingId" type="xs:int" />
+      <xs:element minOccurs="0" name="BookingNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CompanyId" type="xs:int" />
+      <xs:element minOccurs="0" name="CompanyName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Department" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Project" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZBookingDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZCreatedBy" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="dbmlBookinglookupforCouponPrint" nillable="true" type="tns:dbmlBookinglookupforCouponPrint" />
+  <xs:complexType name="ArrayOfdbmlBookedCouponDetail">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dbmlBookedCouponDetail" nillable="true" type="tns:dbmlBookedCouponDetail" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfdbmlBookedCouponDetail" nillable="true" type="tns:ArrayOfdbmlBookedCouponDetail" />
+  <xs:complexType name="dbmlBookedCouponDetail">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BookingAddOnServiceId" type="xs:int" />
+      <xs:element minOccurs="0" name="BookingId" type="xs:int" />
+      <xs:element minOccurs="0" name="Consumption" type="xs:int" />
+      <xs:element minOccurs="0" name="ServiceDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ServiceName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZServiceDate" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="dbmlBookedCouponDetail" nillable="true" type="tns:dbmlBookedCouponDetail" />
+  <xs:complexType name="ArrayOfdbmlBookingCouponAddLess">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dbmlBookingCouponAddLess" nillable="true" type="tns:dbmlBookingCouponAddLess" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfdbmlBookingCouponAddLess" nillable="true" type="tns:ArrayOfdbmlBookingCouponAddLess" />
+  <xs:complexType name="dbmlBookingCouponAddLess">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ActualQty" type="xs:decimal" />
+      <xs:element minOccurs="0" name="AddQty" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="BookingCouponAddLessId" type="xs:int" />
+      <xs:element minOccurs="0" name="CouponDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CreateDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CreateId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="LessQty" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="RefAddOnDetailId" type="xs:int" />
+      <xs:element minOccurs="0" name="RefBPId" type="xs:int" />
+      <xs:element minOccurs="0" name="RefBookingId" type="xs:int" />
+      <xs:element minOccurs="0" name="RequiredQty" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ServiceId" type="xs:int" />
+      <xs:element minOccurs="0" name="UpdateDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UpdateId" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="dbmlBookingCouponAddLess" nillable="true" type="tns:dbmlBookingCouponAddLess" />
+  <xs:complexType name="ArrayOfdbmlLabServiceView">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dbmlLabServiceView" nillable="true" type="tns:dbmlLabServiceView" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfdbmlLabServiceView" nillable="true" type="tns:ArrayOfdbmlLabServiceView" />
+  <xs:complexType name="dbmlLabServiceView">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DocumentDescription" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DocumentName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ServiceDocumentId" type="xs:int" />
+      <xs:element minOccurs="0" name="ServiceId" type="xs:int" />
+      <xs:element minOccurs="0" name="ServiceName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ServiceSpecification" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="dbmlLabServiceView" nillable="true" type="tns:dbmlLabServiceView" />
+  <xs:complexType name="ArrayOfdbmlUserView">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dbmlUserView" nillable="true" type="tns:dbmlUserView" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfdbmlUserView" nillable="true" type="tns:ArrayOfdbmlUserView" />
+  <xs:complexType name="dbmlUserView">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Active" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreateDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CreateId" type="xs:int" />
+      <xs:element minOccurs="0" name="CustomerDepartmentId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="CustomerMasterId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="DbId" type="xs:int" />
+      <xs:element minOccurs="0" name="EmailId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EmailVerify" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="EndDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="LoginId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MobileNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MobileOTP" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PassWord" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PhoneNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StartDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UpdateDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UpdateId" type="xs:int" />
+      <xs:element minOccurs="0" name="UserCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserId" type="xs:int" />
+      <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserTypePropId" type="xs:int" />
+      <xs:element minOccurs="0" name="ZZAccountId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ZZCompanyName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZDepartment" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZDistrictId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ZZGSTNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZPanNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZServiceBPId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ZZStateId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ZZUserType" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="dbmlUserView" nillable="true" type="tns:dbmlUserView" />
+  <xs:complexType name="ArrayOfdbmlDashBoardWorkFlowViewFront">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dbmlDashBoardWorkFlowViewFront" nillable="true" type="tns:dbmlDashBoardWorkFlowViewFront" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfdbmlDashBoardWorkFlowViewFront" nillable="true" type="tns:ArrayOfdbmlDashBoardWorkFlowViewFront" />
+  <xs:complexType name="dbmlDashBoardWorkFlowViewFront">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BPId" type="xs:int" />
+      <xs:element minOccurs="0" name="Caption" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Counts" type="xs:int" />
+      <xs:element minOccurs="0" name="DashBoardId" type="xs:int" />
+      <xs:element minOccurs="0" name="StatusPropId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="WorkFlowId" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="dbmlDashBoardWorkFlowViewFront" nillable="true" type="tns:dbmlDashBoardWorkFlowViewFront" />
+  <xs:complexType name="ArrayOfdbmlProperty">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dbmlProperty" nillable="true" type="tns:dbmlProperty" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfdbmlProperty" nillable="true" type="tns:ArrayOfdbmlProperty" />
+  <xs:complexType name="dbmlProperty">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Property" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PropertyId" type="xs:int" />
+      <xs:element minOccurs="0" name="PropertyType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PropertyTypeId" type="xs:int" />
+      <xs:element minOccurs="0" name="Sequence" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="UpdateDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UpdateId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="dbmlProperty" nillable="true" type="tns:dbmlProperty" />
+  <xs:complexType name="ArrayOfdbmlOptionList">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dbmlOptionList" nillable="true" type="tns:dbmlOptionList" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfdbmlOptionList" nillable="true" type="tns:ArrayOfdbmlOptionList" />
+  <xs:complexType name="dbmlOptionList">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BPId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="CreateDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CreateId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="OptionDesc" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OptionListId" type="xs:int" />
+      <xs:element minOccurs="0" name="OptionName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PropertyId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Sequence" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="UpdateDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UpdateId" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="dbmlOptionList" nillable="true" type="tns:dbmlOptionList" />
+  <xs:complexType name="ArrayOfdbmlCompanyView">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dbmlCompanyView" nillable="true" type="tns:dbmlCompanyView" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfdbmlCompanyView" nillable="true" type="tns:ArrayOfdbmlCompanyView" />
+  <xs:complexType name="dbmlCompanyView">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AccountId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ApproveId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="CompanyName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ContactPerson" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CountryId" type="xs:int" />
+      <xs:element minOccurs="0" name="CreateDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CreateId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="CustomerMasterId" type="xs:int" />
+      <xs:element minOccurs="0" name="DistrictId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="GSTNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsSEZ" type="xs:boolean" />
+      <xs:element minOccurs="0" name="KnowAboutNatraxOL" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="LocationDepartment" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PANNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PhoneNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PinCode" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Reference" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RegistrationCatagory" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ServiceBPId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="StateId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="TANNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UpdateDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UpdateId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ZZCountry" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZDistrict" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZLoginId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZState" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="dbmlCompanyView" nillable="true" type="tns:dbmlCompanyView" />
+  <xs:complexType name="ArrayOfdbmlCompanyDepartment">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dbmlCompanyDepartment" nillable="true" type="tns:dbmlCompanyDepartment" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfdbmlCompanyDepartment" nillable="true" type="tns:ArrayOfdbmlCompanyDepartment" />
+  <xs:complexType name="dbmlCompanyDepartment">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ApprovedDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ApprovedId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="CompanyDepartmentId" type="xs:int" />
+      <xs:element minOccurs="0" name="ContactPerson" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CountryId" type="xs:int" />
+      <xs:element minOccurs="0" name="CreateDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CreateId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="CustomerMasterId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Department" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DistrictId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Extention" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="GSTNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsSEZ" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Mobile" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PhoneNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Pincode" type="xs:int" />
+      <xs:element minOccurs="0" name="StateId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="UpdateDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UpdateId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ZZAccountId" type="xs:int" />
+      <xs:element minOccurs="0" name="ZZCompanyName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZCountry" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZDistrict" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZState" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="dbmlCompanyDepartment" nillable="true" type="tns:dbmlCompanyDepartment" />
+  <xs:complexType name="ArrayOfdbmlState">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dbmlState" nillable="true" type="tns:dbmlState" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfdbmlState" nillable="true" type="tns:ArrayOfdbmlState" />
+  <xs:complexType name="dbmlState">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ClubedStateId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="State" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StateId" type="xs:int" />
+      <xs:element minOccurs="0" name="UpdateDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UpdateId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="dbmlState" nillable="true" type="tns:dbmlState" />
+  <xs:complexType name="ArrayOfdbmlCountry">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dbmlCountry" nillable="true" type="tns:dbmlCountry" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfdbmlCountry" nillable="true" type="tns:ArrayOfdbmlCountry" />
+  <xs:complexType name="dbmlCountry">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Country" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CountryCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CountryId" type="xs:int" />
+      <xs:element minOccurs="0" name="CreateDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CreateId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="UpdateDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UpdateId" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="dbmlCountry" nillable="true" type="tns:dbmlCountry" />
+  <xs:complexType name="ArrayOfdbmlDistrict">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dbmlDistrict" nillable="true" type="tns:dbmlDistrict" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfdbmlDistrict" nillable="true" type="tns:ArrayOfdbmlDistrict" />
+  <xs:complexType name="dbmlDistrict">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="District" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DistrictId" type="xs:int" />
+      <xs:element minOccurs="0" name="StateId" type="xs:int" />
+      <xs:element minOccurs="0" name="UpdateDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UpdateId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="dbmlDistrict" nillable="true" type="tns:dbmlDistrict" />
+  <xs:complexType name="ArrayOfdbmlCustomerMasterPhoto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dbmlCustomerMasterPhoto" nillable="true" type="tns:dbmlCustomerMasterPhoto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfdbmlCustomerMasterPhoto" nillable="true" type="tns:ArrayOfdbmlCustomerMasterPhoto" />
+  <xs:complexType name="dbmlCustomerMasterPhoto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CreateDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CreateId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="CustomerMasterId" type="xs:int" />
+      <xs:element minOccurs="0" name="ImageName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ImageSerialNo" type="xs:int" />
+      <xs:element minOccurs="0" name="Remark" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="VerifiedBy" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="dbmlCustomerMasterPhoto" nillable="true" type="tns:dbmlCustomerMasterPhoto" />
+  <xs:complexType name="ArrayOfdbmlBookingSearchView">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dbmlBookingSearchView" nillable="true" type="tns:dbmlBookingSearchView" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfdbmlBookingSearchView" nillable="true" type="tns:ArrayOfdbmlBookingSearchView" />
+  <xs:complexType name="dbmlBookingSearchView">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BPId" type="xs:int" />
+      <xs:element minOccurs="0" name="BookingDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="BookingId" type="xs:int" />
+      <xs:element minOccurs="0" name="BookingNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BookingType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CompanyId" type="xs:int" />
+      <xs:element minOccurs="0" name="CompanyName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Department" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DepartmentId" type="xs:int" />
+      <xs:element minOccurs="0" name="DocNo" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Project" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ProjectManager" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StatusPropId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="WorkFlowId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ZZActivity" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZBookingDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZCreatedId" type="xs:int" />
+      <xs:element minOccurs="0" name="ZZStatus" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZWorkFlowColor" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZWorkFlowName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="dbmlBookingSearchView" nillable="true" type="tns:dbmlBookingSearchView" />
+  <xs:complexType name="ArrayOfdbmlBookingQuotationPIDetailView">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dbmlBookingQuotationPIDetailView" nillable="true" type="tns:dbmlBookingQuotationPIDetailView" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfdbmlBookingQuotationPIDetailView" nillable="true" type="tns:ArrayOfdbmlBookingQuotationPIDetailView" />
+  <xs:complexType name="dbmlBookingQuotationPIDetailView">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BookingId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="BookingQuotPIDetId" type="xs:int" />
+      <xs:element minOccurs="0" name="PODate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="PONumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="POTotalAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="POValidityDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Paymentterm" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Remark" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UpdateId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ZZAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ZZBillingGroup" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZBillingHrs" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ZZBillingItem" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZFromDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZPOAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ZZPODate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZPODocPath" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZPOStatusProp" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZPOValidityDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZRate" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ZZRoundOffHrs" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ZZToDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZUOM" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZViewBPId" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="dbmlBookingQuotationPIDetailView" nillable="true" type="tns:dbmlBookingQuotationPIDetailView" />
+  <xs:complexType name="ArrayOfdbmlListOfVehicleComponent">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dbmlListOfVehicleComponent" nillable="true" type="tns:dbmlListOfVehicleComponent" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfdbmlListOfVehicleComponent" nillable="true" type="tns:ArrayOfdbmlListOfVehicleComponent" />
+  <xs:complexType name="dbmlListOfVehicleComponent">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BPId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="CreateDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CreateId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Description1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Description2" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DocId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="GroupId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="GroupName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Sno" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="TypeId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="UpdateDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UpdateId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="VehCompId" type="xs:int" />
+      <xs:element minOccurs="0" name="VorC" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZType" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="dbmlListOfVehicleComponent" nillable="true" type="tns:dbmlListOfVehicleComponent" />
+  <xs:complexType name="ArrayOfdbmlTrackBookingDetail">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dbmlTrackBookingDetail" nillable="true" type="tns:dbmlTrackBookingDetail" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfdbmlTrackBookingDetail" nillable="true" type="tns:ArrayOfdbmlTrackBookingDetail" />
+  <xs:complexType name="dbmlTrackBookingDetail">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Amount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="AuditId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="BillingHrs" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="BillingMinutes" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="BookingId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="BookingStatusPropId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="CGSTAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="CGSTRate" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Category" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CategoryPropId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="CreateDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CreateId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Discount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="FromDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FromDay" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="IGSTAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="IGSTRate" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="POAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="PODate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="PONumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="QuotAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Rate" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="RefServiceBPId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Remark" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SGSTAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="SGSTRate" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ServiceId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Sno" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="TaxAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="TaxableAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="TestDays" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ToDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ToDay" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="TotalAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="TrackBookingDetailId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="TrackGroup" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TrackGroupId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="UOMPropId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="UpdateDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UpdateId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="UsagesHrs" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="UsagesMinute" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="VehicleId" type="xs:int" />
+      <xs:element minOccurs="0" name="VehicleNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="VehicleType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="VehicleTypePropId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ZZFromDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZToDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZUOM" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="dbmlTrackBookingDetail" nillable="true" type="tns:dbmlTrackBookingDetail" />
+  <xs:complexType name="ArrayOfdbmlTrackBookingTimeDetail">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dbmlTrackBookingTimeDetail" nillable="true" type="tns:dbmlTrackBookingTimeDetail" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfdbmlTrackBookingTimeDetail" nillable="true" type="tns:ArrayOfdbmlTrackBookingTimeDetail" />
+  <xs:complexType name="dbmlTrackBookingTimeDetail">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Amount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="AuditId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="BPId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="BillingHrs" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="BookingDay" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="BookingDetailId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="BookingId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="CGSTAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="CGSTRate" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="CreateDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CreateId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Date" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Discount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="GroupId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="IGSTAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="IGSTRate" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Rate" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="RoundOffHrs" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="RoundOffMin" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="SGSTAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="SGSTRate" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ServiceId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="SlotPropId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="SrNo" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="TaxAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="TaxableAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="TotalAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="TotalHours" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="TotalMinutes" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="TrackBookingTimeDetailId" type="xs:int" />
+      <xs:element minOccurs="0" name="UOMId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="UpdateDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UpdateId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="VehicleId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="VehicleNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZCategory" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZCategoryId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ZZDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZServiceSpecification" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZSlot" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZTrackGroup" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZTrackGroupId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ZZUOM" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="dbmlTrackBookingTimeDetail" nillable="true" type="tns:dbmlTrackBookingTimeDetail" />
+  <xs:complexType name="ArrayOfdbmlTrackBookingTimeSummary">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dbmlTrackBookingTimeSummary" nillable="true" type="tns:dbmlTrackBookingTimeSummary" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfdbmlTrackBookingTimeSummary" nillable="true" type="tns:ArrayOfdbmlTrackBookingTimeSummary" />
+  <xs:complexType name="dbmlTrackBookingTimeSummary">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Amount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="AuditId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="BillingHrs" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="BillingItem" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BookingId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="CGSTAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="CGSTRate" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="CreateDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CreateId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Discount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="GroupId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="IGSTAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="IGSTRate" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Rate" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="RoundOffHrs" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="RoundOffMin" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="SGSTAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="SGSTRate" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Specification" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TaxAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="TaxableAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="TotalAmount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="TotalHours" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="TotalMinutes" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="TrackBookingTimeSummaryId" type="xs:int" />
+      <xs:element minOccurs="0" name="UOMId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="UpdateDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UpdateId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="UsageDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="VehicleId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="VehicleNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZDay" type="xs:int" />
+      <xs:element minOccurs="0" name="ZZUOM" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZUsageDate" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="dbmlTrackBookingTimeSummary" nillable="true" type="tns:dbmlTrackBookingTimeSummary" />
+  <xs:complexType name="ArrayOfdbmlServiceDateViewFront">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dbmlServiceDateViewFront" nillable="true" type="tns:dbmlServiceDateViewFront" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfdbmlServiceDateViewFront" nillable="true" type="tns:ArrayOfdbmlServiceDateViewFront" />
+  <xs:complexType name="dbmlServiceDateViewFront">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BookingDay" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="BookingId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="NewDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ServiceDate" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="dbmlServiceDateViewFront" nillable="true" type="tns:dbmlServiceDateViewFront" />
+  <xs:complexType name="ArrayOfdbmlDashBoardDocumentViewFront">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dbmlDashBoardDocumentViewFront" nillable="true" type="tns:dbmlDashBoardDocumentViewFront" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfdbmlDashBoardDocumentViewFront" nillable="true" type="tns:ArrayOfdbmlDashBoardDocumentViewFront" />
+  <xs:complexType name="dbmlDashBoardDocumentViewFront">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BPId" type="xs:int" />
+      <xs:element minOccurs="0" name="BPName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CompanyId" type="xs:int" />
+      <xs:element minOccurs="0" name="CompanyName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Department" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DocDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DocId" type="xs:int" />
+      <xs:element minOccurs="0" name="DocNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DueAmount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="SignBy" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="SignFileName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZStatus" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="dbmlDashBoardDocumentViewFront" nillable="true" type="tns:dbmlDashBoardDocumentViewFront" />
+  <xs:complexType name="ArrayOfdbmlServicesView">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dbmlServicesView" nillable="true" type="tns:dbmlServicesView" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfdbmlServicesView" nillable="true" type="tns:ArrayOfdbmlServicesView" />
+  <xs:complexType name="dbmlServicesView">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BPId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Category" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CategoryPropId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="CreateDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CreateId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="GroupforMinBillingHours" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsActive" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="MinInDay" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="MinTimeSlot" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ServiceDescription" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ServiceGroupMCId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ServiceId" type="xs:int" />
+      <xs:element minOccurs="0" name="ServiceName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ServiceSpecification" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SrNo" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="TrackGroup" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TrackGroupId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="UpdateDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UpdateId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ZZServiceGroupName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZServiceName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZTrackGroup" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZTrackGroupName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="dbmlServicesView" nillable="true" type="tns:dbmlServicesView" />
+  <xs:complexType name="ArrayOfdbmlBookingStatusTimeSlotView">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dbmlBookingStatusTimeSlotView" nillable="true" type="tns:dbmlBookingStatusTimeSlotView" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfdbmlBookingStatusTimeSlotView" nillable="true" type="tns:ArrayOfdbmlBookingStatusTimeSlotView" />
+  <xs:complexType name="dbmlBookingStatusTimeSlotView">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="MinBilling" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="NextMinBilling" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Rate" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ServiceId" type="xs:int" />
+      <xs:element minOccurs="0" name="TaxPercent" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="UOM" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UOMPropId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ZZBookingInADay" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZConfirmedBookinginDay" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZConfirmedBookinginSlot" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZZRate" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ZZSlotInADay" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="dbmlBookingStatusTimeSlotView" nillable="true" type="tns:dbmlBookingStatusTimeSlotView" />
+  <xs:complexType name="ArrayOfdbmlWorkFlowView">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dbmlWorkFlowView" nillable="true" type="tns:dbmlWorkFlowView" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfdbmlWorkFlowView" nillable="true" type="tns:ArrayOfdbmlWorkFlowView" />
+  <xs:complexType name="dbmlWorkFlowView">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BPId" type="xs:int" />
+      <xs:element minOccurs="0" name="CreateDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CreateId" type="xs:int" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Sequence" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="UpdateDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UpdateId" type="xs:int" />
+      <xs:element minOccurs="0" name="WorkFlowColor" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="WorkFlowId" type="xs:int" />
+      <xs:element minOccurs="0" name="WorkFlowName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="WorkFlowTypePropId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ZZWorkFlowType" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="dbmlWorkFlowView" nillable="true" type="tns:dbmlWorkFlowView" />
+  <xs:complexType name="ArrayOfdbmlBookingSubmitEmailNotification">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dbmlBookingSubmitEmailNotification" nillable="true" type="tns:dbmlBookingSubmitEmailNotification" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfdbmlBookingSubmitEmailNotification" nillable="true" type="tns:ArrayOfdbmlBookingSubmitEmailNotification" />
+  <xs:complexType name="dbmlBookingSubmitEmailNotification">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BillingHrs" type="xs:int" />
+      <xs:element minOccurs="0" name="BookingNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CompanyName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ContactPerson" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreatedBy" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Date" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Department" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DocDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FromDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NotUsedInDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RoundOffHrs" type="xs:int" />
+      <xs:element minOccurs="0" name="ServiceDescription" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Srno" type="xs:int" />
+      <xs:element minOccurs="0" name="ToDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UOM" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="VehicleNo" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="dbmlBookingSubmitEmailNotification" nillable="true" type="tns:dbmlBookingSubmitEmailNotification" />
+  <xs:complexType name="ArrayOfdbmlWorkFlowActivityTrackView">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="dbmlWorkFlowActivityTrackView" nillable="true" type="tns:dbmlWorkFlowActivityTrackView" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfdbmlWorkFlowActivityTrackView" nillable="true" type="tns:ArrayOfdbmlWorkFlowActivityTrackView" />
+  <xs:complexType name="dbmlWorkFlowActivityTrackView">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ActivityDesc" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ActivityName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BPId" type="xs:int" />
+      <xs:element minOccurs="0" name="DateTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DocId" type="xs:int" />
+      <xs:element minOccurs="0" name="PriorUserId" type="xs:int" />
+      <xs:element minOccurs="0" name="PriorUserName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Remark" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Status" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UpdateDateTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserId" type="xs:int" />
+      <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="WorkFlowActivityId" type="xs:int" />
+      <xs:element minOccurs="0" name="WorkFlowName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="WorkFlowStatus" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="dbmlWorkFlowActivityTrackView" nillable="true" type="tns:dbmlWorkFlowActivityTrackView" />
+</xs:schema>

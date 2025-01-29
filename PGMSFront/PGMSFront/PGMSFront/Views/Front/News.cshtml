@@ -1,0 +1,91 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+
+    <div class="department_area section_gap" style="min-height: 600px;">
+        <div class="container" id="Bind"></div>
+    </div>
+   
+    <div class="modal fade" id="readMoreModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" style="text-align:center">More News</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <i class="fa fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body" style="text-align: center">
+                    <div id="more"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-fill btn-danger btn-sm" data-dismiss="modal" style="margin-left: 5px; margin-top: 5px;">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<script>
+    var List = [];
+    var strImgPath = $("#strImgPath").val();
+    $(document).ready(function () {
+        GetAll();
+    });
+
+    function Bind() {
+        try {
+            var HTMl = "";
+            $("#Track").empty();
+            $.each(List, function (Index, Object) {
+                HTMl += '<div class="row">';
+                HTMl += '<div class="col-lg-3">';
+                HTMl += '<img class="img-responsive img-thumbnail" src="'+ strImgPath + Object.UploadPath +'" style="width: 250px; height: 150px;" />';
+                HTMl += '</div>';
+                HTMl += '<div class="col-lg-9">';
+                //HTMl += '<h6 style="font-size: 12px; color: #188fff;">News &nbsp;&nbsp;<span style="color: #959595 !important;">News</span></h6>';
+                HTMl += '<h4 style="font-size: 22px; color: #000;">' + Object.Title + '</h4>';
+                HTMl += '<p class="text more textLimit" style="font-size: 14px; color: #000; font-weight: 500; margin-bottom: 9px; min-height: 50px; max-height: 50px;">' + Object.Description + '</p>';
+                HTMl += '<a href="#" class="primary-btn text-uppercase" style="line-height: 35px; padding: 0px 10px;" onclick="readMoreModal(' + Object.NewsHotelsTrainingVideoId + ')">Read More</a>';
+                HTMl += '</div>';
+                HTMl += '</div>';
+                HTMl += '<hr />';
+            });
+            $("#Bind").append(HTMl);
+        }catch (e) {
+          alert(e.message);
+      }
+    }
+
+    function GetAll() {
+        try {
+            var data = { 'intBPId': '148' };
+            var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+            $.ajax({
+                url: '@Url.Action("NewsHotelsTrainingVideoViewGetByBPId","Front")',
+                type: 'POST',
+                dataType: 'json',
+                async: true,
+                data: dataWithAntiforgeryToken,
+                success: function (data) {
+                    if (data.StatusId != "99" && data.StatusId != "-99") {
+                        List = data.NewsHotelsTrainingDetails;
+                        Bind();
+                    } else {
+                        alert(data.Status);
+                    }
+                },
+                error: function (xhr) {
+                    alert(xhr.responseText);
+                }
+            });
+        }
+        catch (e) {
+            alert(e.message);
+        }
+        }
+
+    function readMoreModal(newsId) {
+        const res = List.filter((ele) => newsId === ele.NewsHotelsTrainingVideoId);
+        $("#more").html(res[0].Description);
+        $("#readMoreModal").modal("show");
+    }
+</script>

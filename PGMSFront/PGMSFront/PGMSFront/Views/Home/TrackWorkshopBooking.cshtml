@@ -1,0 +1,1058 @@
+﻿@model PGMSFront.Models.CommonModel
+@{
+    ViewBag.Title = "Workshop / Storage";
+    if (Convert.ToString(Session["SessBookingType"]).ToUpper() == "TRACK")
+    {
+        Layout = "~/Views/Shared/_LayoutTrack.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_LayoutLab.cshtml";
+    }
+}
+
+<style>
+    .table > tbody > tr > td {
+        padding: 2px 8px !important;
+        cursor: pointer !important;
+    }
+
+    .card {
+        margin-bottom: 0px !important;
+        margin-top: 25px !important;
+    }
+
+    .bootstrap-select {
+        margin-top: 16px !important;
+    }
+
+    .main-panel > .content {
+        margin-top: 0 !important;
+    }
+
+    .table {
+        margin-bottom: 10px !important;
+    }
+
+    .card .card-body {
+        padding: 0px 5px 5px 5px !important;
+    }
+
+    #AddMoreTR {
+        background: lightblue;
+    }
+</style>
+<div class="content">
+    @using (Html.BeginForm(new { @class = "form-horizontal" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="container-fluid">
+            @Html.Partial("~/Views/Home/BookingHeader.cshtml")
+
+            <div class="row">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">
+                            @if (Model.StatusPropId == 40 && Model.RFQId == 0 && (Model.WorkFlowId == 6 || Model.WorkFlowId == 57 || Model.WorkFlowId == 29 || Model.WorkFlowId == 36 || Model.WorkFlowId == 38))
+                            {
+                                @*<button type="button" class="btn btn-fill btn-rose btn-sm" onclick="AddMore()" id="btnAdd">Add More</button>*@
+                                <button type="button" class="btn btn-fill btn-rose btn-sm" onclick="Add()">Add More</button>
+                            }
+                            <span class="pull-right">
+                                <label class="card-title"> Workshop / Storage Count : </label> <label class="card-title" id="lblWSCount"></label>
+                            </span>
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class=" text-primary">
+                                            <tr>
+                                                <th width="26%">Description</th>
+                                                <th width="12%" style="text-align: center">Date</th>
+                                                <th width="12%" style="text-align: center">Unit</th>
+                                                @if (Model.WorkFlowId == 57 || Model.WorkFlowId == 58 ||
+                                                    Model.WorkFlowId == 29 || Model.WorkFlowId == 51 ||
+                                                    Model.WorkFlowId == 38 || Model.WorkFlowId == 53 ||
+                                                     Model.WorkFlowId == 6 || Model.WorkFlowId == 8 ||
+                                                     Model.WorkFlowId == 36 || Model.WorkFlowId == 44)
+                                                {
+                                                    <th width="12%" style="text-align: right;display:none">Rate</th>
+                                                }
+                                                else
+                                                {
+                                                    <th width="12%" style="text-align: right">Rate</th>
+                                                    if (Model.WorkFlowId == 59 || Model.WorkFlowId == 52 || Model.WorkFlowId == 54)
+                                                    {
+                                                        <th class="text-right" width="10%">Quot. Amount</th>
+                                                    }
+                                                }
+                                                <th width="26%">Remark</th>
+                                                <th width="12%" class="text-center">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbodyWS">
+                                            <tr id="AddMoreTR" style="display: none;">
+                                                <td>
+                                                    <select class="form-control" id="ServiceType" onchange="SetRateUnit()">
+                                                        <option value="0">-Select-</option>
+                                                        @foreach (var itm in ViewBag.ServiveLookup)
+                                                        {
+                                                            <option value='@itm.Value'>@itm.Text</option>
+                                                        }
+                                                    </select>
+                                                </td>
+                                                <td><input id="Date" type="text" style="text-align: center" onblur="SetRateUnit()" class="form-control datetimepicker" value=""></td>
+                                                <td><input id="Unit" disabled="disabled" type="text" style="text-align: center" class="form-control" value=""></td>
+                                                @if (Model.WorkFlowId == 57 || Model.WorkFlowId == 58 ||
+                                                    Model.WorkFlowId == 29 || Model.WorkFlowId == 51 ||
+                                                    Model.WorkFlowId == 38 || Model.WorkFlowId == 53 ||
+                                                    Model.WorkFlowId == 6 || Model.WorkFlowId == 8 ||
+                                                    Model.WorkFlowId == 36 || Model.WorkFlowId == 44
+                                                    )
+                                                {
+                                                    <td style="display:none"><input id="Rate" disabled="disabled" type="text" style="text-align: right" class="form-control" value=""></td>
+                                                }
+                                                else
+                                                {
+                                                    <td><input id="Rate" disabled="disabled" type="text" style="text-align: right" class="form-control" value=""></td>
+                                                }
+                                                <td><textarea id="Remark" class="form-control"></textarea></td>
+                                                <td class='td-actions text-center'>
+                                                    <button type='button' rel='tooltip' id="btnSave" onclick="return WorkshopBookingSave()" class='btn btn-info' data-original-title='' title=''><i class='material-icons'>save</i></button>
+                                                    <button type='button' rel='tooltip' class='btn btn-danger' data-original-title='' title='' onclick="AddMoreCancel()"><i class='material-icons'>close</i></button>
+                                                </td>
+                                                <td style='display: none'><input type='hidden' id='hdnUOMPropId' /> </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <table Style="width:100%">
+                            <tr>
+                                <td Style="width:10%;text-align:left">
+                                    <input type="submit" id="btnPrev" name="btnPrevNext" value="Prev" class="btn btn-fill btn-rose btn-sm " />
+                                </td>
+                                <td Style="width:80%;text-align:center">
+                                    <label id="msg" style="color: red; padding: 5px; border-radius: 5px;"></label>
+                                </td>
+                                <td Style="width:10%;text-align:right">
+                                    <input type="submit" id="btnNext" name="btnPrevNext" value="Next" class="btn btn-fill btn-rose btn-sm pull-right " />
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                @Html.HiddenFor(m => m.WorkshopBookingDetailId, new { id = "hiddenWorkshopBookingDetailId", style = "width:0px;" })
+                @Html.HiddenFor(m => m.UserId, new { id = "UserId", style = "width:0px;" })
+                @Html.HiddenFor(m => m.UserTypePropId, new { id = "UserTypePropId", style = "width:0px;" })
+                @Html.HiddenFor(m => m.ZZCompanyId, new { id = "ZZCompanyId", style = "width:0px;" })
+                @Html.HiddenFor(m => m.WorkFlowId, new { id = "WorkFlowId", style = "width:0px;" })
+                @Html.HiddenFor(m => m.StatusPropId, new { id = "StatusPropId", style = "width:0px;" })
+                @Html.HiddenFor(m => m.StateId, new { id = "StateId", style = "width:0px;" })
+                @Html.HiddenFor(m => m.BPId, new { id = "BPId", style = "width:0px;" })
+                @Html.HiddenFor(m => m.DocId, new { id = "DocId", style = "width:0px;" })
+                @Html.HiddenFor(m => m.ReportURL, new { id = "ReportURL", style = "width:0px;" })
+                @Html.HiddenFor(m => m.POURL, new { id = "POURL", style = "width:0px;" })
+                @Html.HiddenFor(m => m.RFQId, new { id = "RFQId", style = "width:0px;" })
+            </div>
+        </div>
+    }
+</div>
+
+<div class="modal fade" id="PopupFromDateToDate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title bgTitle">Add More</h4>
+                <button type="button" class="close" aria-hidden="true" onclick="Close()">
+                    <i class="material-icons">clear</i>
+                </button>
+            </div>
+            <div class="modal-body" style="text-align:center">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group" style="text-align: left">
+                            <label>From Date</label>
+                            <input type="text" id="FromDate" class="form-control datetimepicker" placeholder="DD-MM-YYYY">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group" style="text-align: left">
+                            <label>From Date</label>
+                            <input type="text" id="ToDate" class="form-control datetimepicker" placeholder="DD-MM-YYYY">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group" style="text-align: left">
+                            <label>Description</label>
+                            <select class="form-control" id="ServiceTypePOP" onchange="SetRateUnitPOP()">
+                                <option value="0">-Select-</option>
+                                @foreach (var itm in ViewBag.ServiveLookup)
+                                {
+                                    <option value='@itm.Value'>@itm.Text</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group" style="text-align: left">
+                            <label>Unit</label>
+                            <input id="UnitPOP" disabled="disabled" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group" style="text-align: left">
+                            <label>Remark</label>
+                            <textarea id="RemarkPOP" class="form-control" style="height: 50px !important;"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                @*<button type="button" id="btnGenerateRepeatRowWorkShop" class="btn btn-fill btn-rose btn-sm" style="margin-top: 5px;" onclick="GenerateRepeatRowWorkShop()">Save</button>*@
+                <button type="button" id="btnGenerateRepeatRowWorkShop" class="btn btn-fill btn-rose btn-sm" style="margin-top: 5px;" onclick="Save()">Save</button>
+                <button type="button" class="btn btn-fill btn-danger btn-sm" style="margin-left: 5px; margin-top: 5px;" onclick="Close()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var WorkshopBookingDetailId = 0;
+    var WorkshopBookingDetailList = '';
+
+    var ColourRowId = -1;
+    var Holdid = '';
+
+    function AddMore() {
+        WorkshopBookingDetailId = 0;
+        $("#msg").html('** Add your details in the blue row and click on <i class="material-icons">save</i> icon **');
+
+        $("#AddMoreTR").find("button[id='btnSave']").each(function () {
+            $(this).show();
+        });
+        $("#AddMoreTR").find("select[id='ServiceType']").each(function () {
+            $(this).val(0);
+        });
+        $("#AddMoreTR").find("input[type='text'][id='Date']").each(function () {
+            $(this).val("");
+            $('.datetimepicker').datetimepicker({ theme: 'light', timepicker: false, format: 'd-m-Y', scrollMonth: false, scrollInput: false });
+        });
+        $("#AddMoreTR").find("input[type='text'][id='Day']").each(function () {
+            $(this).val("");
+        });
+        $("#AddMoreTR").find("input[type='text'][id='Unit']").each(function () {
+            $(this).val("");
+        });
+        $("#AddMoreTR").find("input[type='text'][id='Rate']").each(function () {
+            $(this).val("");
+        });
+        $("#AddMoreTR").find("textarea[id='Remark']").each(function () {
+            $(this).val("");
+        });
+        $("#AddMoreTR").find("input[type='hidden'][id='hdnUOMPropId']").each(function () {
+            $(this).val("");
+        });
+
+        $("#AddMoreTR").show();
+        MaskControls();
+        $("#ServiceType").focus();
+    }
+
+    function AddMoreCancel() {
+        $("#AddMoreTR").hide();
+        $("#msg").html('');
+    }
+
+    function Add() {
+        $("#PopupFromDateToDate").modal("show");
+    }
+
+    function Close() {
+        $("#PopupFromDateToDate").modal("hide");
+        POPSetDates();
+        $("#ServiceTypePOP").val(0);
+        $("#UnitPOP").val("");
+        $("#RemarkPOP").val("");
+    }
+
+    ///////////////////////////// Load Vehicle Info  //////////////////////////////////////////////////////
+    function LoadWorkshopBookingInfo() {
+        try {
+            LoaderShow();
+            var data = {};
+            var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+            $.ajax({
+                url: '@Url.Action("LoadWorkshopBookingInfo", "Home")',
+                type: 'POST',
+                dataType: 'json',
+                async: true,
+                data: dataWithAntiforgeryToken,
+                success: function (data) {
+
+                    LoaderHide();
+                    if (data.StatusId != "99" && data.StatusId != "-99") {
+                        WorkshopBookingDetailList = data.WorkshopBookingDetailList;
+                        BindWSData(data.WorkshopBookingDetailList);
+                        //if (WorkshopBookingDetailList.length > 0) {
+                        //    $("#btnNext").show();
+                        //}
+                    }
+                    else {
+                       // alert(data.Status);
+                    }
+                },
+                error: function (xhr) {
+
+                    LoaderHide();
+                    alert(xhr.responseText);
+                }
+            });
+        }
+        catch (e) {
+
+            LoaderHide();
+            alert(e.message);
+            //  return false;
+        }
+    }
+
+    //////////////////////// Vehicle Edit ////////////////////////////////////////////////////////////
+    function WorkshopBookingEdit(varWorkshopBookingDetailId) {
+        try {
+            $("#msg").html('** Edit your details in the blue row and click on <i class="material-icons">save</i> icon **');
+            WorkshopBookingDetailId = 0;
+            if (WorkshopBookingDetailList.length > 0) {
+                var varWS = jQuery.grep(WorkshopBookingDetailList, function (obj) {
+                    return obj.WorkshopBookingDetailId == varWorkshopBookingDetailId;
+                });
+
+                WorkshopBookingDetailId = NullHandle(varWS[0].WorkshopBookingDetailId);
+
+                $("#AddMoreTR").find("button[id='btnSave']").each(function () {
+                    $(this).show();
+                });
+                $("#AddMoreTR").find("select[id='ServiceType']").each(function () {
+                    $(this).val(NullHandle(varWS[0].ServiceId));
+                });
+                $("#AddMoreTR").find("input[type='text'][id='Date']").each(function () {
+                    $(this).val(NullHandle(varWS[0].ZZUsageDate));
+                    $('.datetimepicker').datetimepicker({ theme: 'light', timepicker: false, format: 'd-m-Y', scrollMonth: false, scrollInput: false });
+                });
+                $("#AddMoreTR").find("input[type='text'][id='Day']").each(function () {
+                    $(this).val(NullHandle(varWS[0].BookingDay));
+                });
+                $("#AddMoreTR").find("input[type='text'][id='Unit']").each(function () {
+                    $(this).val(NullHandle(varWS[0].ZZUOM));
+                });
+                $("#AddMoreTR").find("input[type='text'][id='Rate']").each(function () {
+                    $(this).val(NullHandle(varWS[0].Rate));
+                });
+                $("#AddMoreTR").find("textarea[id='Remark']").each(function () {
+                    $(this).val(NullHandle(varWS[0].Remark));
+                });
+                $("#AddMoreTR").find("input[type='hidden'][id='hdnUOMPropId']").each(function () {
+                    $(this).val(NullHandle(varWS[0].UOMPropId));
+                });
+
+                $("#AddMoreTR").show();
+                MaskControls();
+                $("#ServiceType").focus();
+            }
+        }
+        catch (e) {
+
+        }
+    }
+
+    ///////////////////////////// Vehicle Save  //////////////////////////////////////////////////////
+    function WorkshopBookingSave() {
+        try {
+            var model = {};
+            var strMSG = '';
+            var varWS = jQuery.grep(WorkshopBookingDetailList, function (obj) {
+                return obj.WorkshopBookingDetailId == WorkshopBookingDetailId;
+            });
+            var btnSave = "";
+
+            if (parseInt(WorkshopBookingDetailId) > 0 && varWS != undefined && varWS.length > 0) {
+                model = varWS[0];
+            }
+            else {
+                model.WorkshopBookingDetailId = -1;
+            }
+
+            $("#AddMoreTR").find("button[id='btnSave']").each(function () {
+                btnSave = $(this);
+            });
+            $("#AddMoreTR").find("select[id='ServiceType']").each(function () {
+                model.ServiceId = $(this).val();
+                if ($(this).val().trim() == "") {
+                    strMSG = strMSG + 'Select Description \n</br>'
+                }
+            });
+            //if (parseInt($("#BPId").val()) == 46 || parseInt($("#BPId").val()) == 91) {
+            //    $("#AddMoreTR").find("input[type='text'][id='Day']").each(function () {
+            //        model.BookingDay = $(this).val().trim();
+            //        if ($(this).val().trim() == "" || parseInt($(this).val().trim()) <= 0) {
+            //            strMSG = strMSG + 'Day \n</br>'
+            //        }
+            //    });
+            //}
+            //else {
+                $("#AddMoreTR").find("input[type='text'][id='Date']").each(function () {
+                    model.ZZUsageDate = $(this).val().trim();
+                    if ($(this).val().trim() == "") {
+                        strMSG = strMSG + 'Select Date \n</br>'
+                    }
+                });
+            //}
+
+            $("#AddMoreTR").find("input[type='hidden'][id='hdnUOMPropId']").each(function () {
+                model.UOMPropId = $(this).val();
+            });
+            $("#AddMoreTR").find("input[type='text'][id='Rate']").each(function () {
+                model.Rate = $(this).val().trim();
+            });
+            $("#AddMoreTR").find("textarea[id='Remark']").each(function () {
+                model.Remark = $(this).val().trim();
+                //if ($(this).val().trim() == "") {
+                //    strMSG = strMSG + 'Remark  \n</br>'
+                //}
+            });
+
+            if (strMSG != '') {
+                alert("Please enter data for Mandatory fields  \n</br>" + strMSG);
+                return false;
+            }
+            else {
+                if (parseInt(model.UOMPropId) == 14) {
+                    if (WorkshopBookingDetailList != null && WorkshopBookingDetailList.length > 0) {
+                        var varWSTmp = "";
+                        //if (parseInt($("#BPId").val()) == 46 || parseInt($("#BPId").val()) == 91) {
+                        //    varWSTmp = jQuery.grep(WorkshopBookingDetailList, function (obj) {
+                        //        return obj.ServiceId == model.ServiceId && obj.BookingDay == model.BookingDay;
+                        //    });
+                        //}
+                        //else {
+                            varWSTmp = jQuery.grep(WorkshopBookingDetailList, function (obj) {
+                                return obj.ServiceId == model.ServiceId && ToDate(obj.ZZUsageDate).getTime() == ToDate(model.ZZUsageDate).getTime();
+                            });
+                       // }
+                        if (varWSTmp != undefined && varWSTmp != null && ((parseInt(model.WorkshopBookingDetailId) == -1 && varWSTmp.length > 0) || (parseInt(model.WorkshopBookingDetailId) > 0 && varWSTmp.length > 1))) {
+                            alert('Services having unit "DAY" not allowed multiple for the same day/date');
+                            return;
+                        }
+                    }
+                }
+
+                btnSave.hide();
+                LoaderShow();
+                var data = {'model': model};
+                var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+                $.ajax({
+                    url: '@Url.Action("WorkshopBookingSave", "Home")',
+                    type: 'POST',
+                    dataType: 'json',
+                    async: true,
+                    data: dataWithAntiforgeryToken,
+                    //contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+
+                        LoaderHide();
+                        if (data.StatusId != "99" && data.StatusId != "-99") {
+                            $("#msg").html('');
+                            WorkshopBookingDetailList = data.WorkshopBookingDetailList;
+                            BindWSData(data.WorkshopBookingDetailList);
+
+                            //if (WorkshopBookingDetailList.length > 0) {
+                            //    $("#btnNext").show();
+                            //}
+                        }
+                        btnSave.show();
+                        alert(data.Status);
+                    },
+                    error: function (xhr) {
+
+                        btnSave.show();
+                        LoaderHide();
+                        alert(xhr.responseText);
+                    }
+                });
+            }
+        }
+        catch (e) {
+            LoaderHide();
+            btnSave.show();
+            alert(e.message);
+            return false;
+        }
+    }
+
+    function Save() {
+        debugger;
+        try {
+            var model = {};
+            var modelDate = {};
+            var strMSG = '';
+
+            modelDate.StrOne = $("input[id='FromDate']").val();
+            modelDate.StrTwo = $("input[id='ToDate']").val();
+            modelDate.IntOne = -1;
+            modelDate.IntTwo = -1;
+
+            model.WorkshopBookingDetailId = -1;
+            model.ServiceId = $("select[id='ServiceTypePOP']").val();
+            model.ZZUsageDate = $("input[id='FromDate']").val();
+            model.UOMPropId = $("input[type='hidden'][id='hdnUOMPropId']").val();
+            model.Rate = $("input[type='text'][id='Rate']").val();
+            model.Remark = $("textarea[id='RemarkPOP']").val();
+            var Fromdate = new Date(SetDateMMDDYYYY(modelDate.StrOne));
+            var Todate = new Date(SetDateMMDDYYYY(modelDate.StrTwo));
+            var FromdateVal = new Date(SetDateMMDDYYYY(strFromDate));
+            var strMSG = "";
+            if (Fromdate <= FromdateVal) {
+                strMSG = strMSG + 'From Date should be greater than selected date. \n</br>'
+            } else if (modelDate.StrOne == "") {
+                strMSG = strMSG + 'From Date is required.  \n</br>'
+            } else if (modelDate.StrTwo == "") {
+                strMSG = strMSG + 'To Date is required. \n</br>'
+            } else if (Todate < Fromdate) {
+                strMSG += "<br /> \n From date should not be greater than To date. \n";
+            }
+            if (model.ServiceId == 0) {
+                strMSG = strMSG + 'Description is required. \n</br>'
+            }
+            debugger
+            if (strMSG != '') {
+                alert("Please enter data for Mandatory fields. \n</br>" + strMSG);
+                return false;
+            }
+            else {
+                if (parseInt(model.UOMPropId) == 14) {
+                    if (WorkshopBookingDetailList != null && WorkshopBookingDetailList.length > 0) {
+                        var varWSTmp = "";
+                            varWSTmp = jQuery.grep(WorkshopBookingDetailList, function (obj) {
+                                return obj.ServiceId == model.ServiceId && ToDate(obj.ZZUsageDate).getTime() == ToDate(model.ZZUsageDate).getTime();
+                            });
+                        if (varWSTmp != undefined && varWSTmp != null && ((parseInt(model.WorkshopBookingDetailId) == -1 && varWSTmp.length > 0) || (parseInt(model.WorkshopBookingDetailId) > 0 && varWSTmp.length > 1))) {
+                            alert('Services having unit "DAY" not allowed multiple for the same day/date');
+                            return;
+                        }
+                    }
+                }
+                LoaderShow();
+                var data = { 'model': model, 'modelDate': modelDate };
+                var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+                $.ajax({
+                    url: '@Url.Action("WorkshopBookingInsert", "Home")',
+                    type: 'POST',
+                    dataType: 'json',
+                    async: true,
+                    data: dataWithAntiforgeryToken,
+                    success: function (data) {
+                        LoaderHide();
+                        if (data.StatusId != "99" && data.StatusId != "-99") {
+                            Close();
+                            WorkshopBookingDetailList = data.WorkshopBookingDetailList;
+                            BindWSData(data.WorkshopBookingDetailList);
+                            if (WorkshopBookingDetailList.length > 0) {
+                                $("#btnNext").show();
+                            }
+                        }
+                        alert(data.Status);
+                    },
+                    error: function (xhr) {
+                        LoaderHide();
+                        alert(xhr.responseText);
+                    }
+                });
+            }
+        }
+        catch (e) {
+            LoaderHide();
+            alert(e.message);
+            return false;
+        }
+    }
+    ///////////////////////////// Delete Info  //////////////////////////////////////////////////////
+    function WorkshopBookingDelete(varWorkshopBookingDetailId) {
+
+        try {
+            $.confirm({
+                title: 'Confirm Alert!',
+                content: "Are you sure want to delete?",
+                icon: 'fa fa-question',
+                closeIcon: true,
+                animation: 'scale',
+                type: 'orange',
+                escapeKey: 'cancel',
+                buttons: {
+                    MyFunction: {
+                        text: 'OK',
+                        action: function () {
+                            LoaderShow();
+                            var data = { 'intWorkshopBookingDetailId': varWorkshopBookingDetailId };
+                            var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+                            $.ajax({
+                                url: '@Url.Action("WorkshopBookingDelete", "Home")',
+                                type: 'POST',
+                                dataType: 'json',
+                                async: true,
+                                data: dataWithAntiforgeryToken,
+                                success: function (data) {
+
+                                    LoaderHide();
+                                    if (data.StatusId != "99" && data.StatusId != "-99") {
+                                        $("#msg").html('');
+                                        WorkshopBookingDetailList = data.WorkshopBookingDetailList;
+                                        BindWSData(data.WorkshopBookingDetailList);
+
+                                        //if (WorkshopBookingDetailList.length > 0) {
+                                        //    $("#btnNext").show();
+                                        //}
+                                        //else {
+                                        //    $("#btnNext").hide();
+                                        //}
+                                    }
+                                    alert(data.Status);
+                                },
+                                error: function (xhr) {
+
+                                    LoaderHide();
+                                    alert(xhr.responseText);
+                                }
+                            });
+
+                        }
+                    },
+                    cancel: function () {
+                    }
+                }
+            });
+
+        }
+        catch (e) {
+
+            LoaderHide();
+            alert(e.message);
+            //  return false;
+        }
+    }
+
+    ///////////////////////////// Bind Info  //////////////////////////////////////////////////////
+    function BindWSData(data) {
+        try {
+            var gridData = "";
+            var StatusPropId = $("#StatusPropId").val();
+            var WorkFlowId = $("#WorkFlowId").val();
+            //var row = $('#tbodyVehicle').find('tr:eq(0)');
+
+            gridData = "<tr id='AddMoreTR' style='display: none;'>" + $("#AddMoreTR").html() + "</tr>";
+
+            $("#lblWSCount").text(NullHandle(data.length));
+
+            $("#tbodyWS").html("");
+
+            for (var i = 0; i < data.length; i++) {
+
+                var indx = i + 1;
+                gridData = gridData + "<tr id='trTrack_" + indx + "'>";
+
+
+                gridData = gridData + "<td>" + NullHandle(data[i].ZZServiceName) + "</td>";
+
+                //if (parseInt($("#BPId").val()) == 46 || parseInt($("#BPId").val()) == 91) {
+                //    gridData = gridData + "<td style='text-align:center'>" + NullHandle(data[i].BookingDay) + "</td>";
+                //}
+                //else {
+                    gridData = gridData + "<td style='text-align:center'>" + NullHandle(data[i].ZZUsageDate) + "</td>";
+                //}
+
+                gridData = gridData + "<td style='text-align:center'>" + NullHandle(data[i].ZZUOM) + "</td>";
+
+                if (parseInt($("#WorkFlowId").val()) == 57 || parseInt($("#WorkFlowId").val()) == 58 ||
+                    parseInt($("#WorkFlowId").val()) == 29 || parseInt($("#WorkFlowId").val()) == 51 ||
+                    parseInt($("#WorkFlowId").val()) == 38 || parseInt($("#WorkFlowId").val()) == 53 ||
+                    parseInt($("#WorkFlowId").val()) == 6 || parseInt($("#WorkFlowId").val()) == 8 ||
+                    parseInt($("#WorkFlowId").val()) == 36 || parseInt($("#WorkFlowId").val()) == 44
+                  ) {
+                    gridData = gridData + "<td style='text-align:right;display:none'>" + NullHandle(data[i].Rate) + "</td>";
+                }
+                else {
+                    if (parseInt($("#WorkFlowId").val()) == 59 || parseInt($("#WorkFlowId").val()) == 52 || parseInt($("#WorkFlowId").val()) == 54) {
+                        gridData = gridData + "<td style='text-align:right'>" + NullHandleFloat(parseFloat(data[i].QuotAmount) / parseFloat(data[i].UsageHours)) + "</td>";
+                        gridData = gridData + "<td class='text-right'>" + NullHandle(data[i].QuotAmount) + "</td>";
+                    }
+                    else {
+                        gridData = gridData + "<td style='text-align:right'>" + NullHandle(data[i].Rate) + "</td>";
+                    }
+                }
+
+                gridData = gridData + "<td>" + NullHandle(data[i].Remark) + "</td>";
+
+                if (parseInt($("#StatusPropId").val()) == 40 && parseInt($("#RFQId").val()) == 0 && (parseInt($("#WorkFlowId").val()) == 6 || parseInt($("#WorkFlowId").val()) == 57 || parseInt($("#WorkFlowId").val()) == 29 || parseInt($("#WorkFlowId").val()) == 36 || parseInt($("#WorkFlowId").val()) == 38)) {
+                    gridData = gridData + "<td class='td-actions text-center'>";
+                    gridData = gridData + "<button type='button' rel='tooltip' class='btn btn-info' title='Edit Workshop : " + NullHandle(data[i].ZZServiceName) + "' onclick='return WorkshopBookingEdit(" + NullHandle(data[i].WorkshopBookingDetailId) + ")' > <i class='material-icons'>edit</i></button>&nbsp;";
+                   // gridData = gridData + "<button type='button' rel='tooltip' class='btn btn-info' title='Copy Workshop Details: " + NullHandle(data[i].ZZServiceName) + "' onclick='return WorkshopBookingDetailCopy(" + NullHandle(data[i].WorkshopBookingDetailId) + ")' > <i class='fa fa-copy'></i></button>&nbsp;";
+                    gridData = gridData + "<button type='button' rel='tooltip' class='btn btn-danger' title='Delete Workshop : " + NullHandle(data[i].ZZServiceName) + "' onclick='return WorkshopBookingDelete(" + NullHandle(data[i].WorkshopBookingDetailId) +")'><i class='material-icons'>close</i></button>";
+                    gridData = gridData +"</td>";
+                }
+                else {
+                    gridData = gridData + "<td class='text - center'></td>";
+                }
+                //gridData = gridData + "<td style='display:none'><input type='hidden' id='hdnUOMPropId' value=" + NullHandle(data[i].UOMPropId) + " /> </td>";
+                gridData = gridData + "</tr>";
+            }
+
+            $("#tbodyWS").html(gridData);
+
+
+        }
+        catch (e) {
+
+        }
+    }
+
+    //////////////////////// Set Rate Unit ////////////////////////////////////////////////////////
+    function SetRateUnit() {
+        try {
+            var varDate = "";
+            varDate = $("#Date").val().trim();
+            var varServiceId = $("#ServiceType").val();
+            var varTimeSlotId = 0;
+            var strMSG = "";
+            if (parseInt(varServiceId) == 0) {
+                alert("Select Description");
+                return false;
+            }
+            if (varDate=="") {
+                return false;
+            }
+            if (strMSG != '') {
+                alert("Please enter data for Mandatory fields  \n</br>" + strMSG);
+                return false;
+            }
+            else {
+                var data = '';
+                var varServiceList = [];
+                varServiceList[0] = NullHandle(varServiceId);
+                var data = { 'intlstServiceId': varServiceList, 'intTimeSlotId': parseInt(varTimeSlotId), 'strWED': varDate };
+                var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+                LoaderShow();
+                $.ajax({
+                    url: '@Url.Action("BookingStatusGetByServiceIdTimeSlotPropIdWEFDate", "Home")',
+                    type: 'POST',
+                    dataType: 'json',
+                    async: true,
+                    data: dataWithAntiforgeryToken,
+                    success: function (dataBokkingStatus) {
+                        LoaderHide();
+                        if (dataBokkingStatus.StatusId != "99" && dataBokkingStatus.StatusId != "-99") {
+                            var varBookingStatusList = dataBokkingStatus.BookingStatusList;
+                            if (varBookingStatusList.length > 0) {
+                                $("#AddMoreTR").find("input[type='text'][id='Unit']").each(function () {
+                                    $(this).val(NullHandle(varBookingStatusList[0].UOM));
+                                });
+                                $("#AddMoreTR").find("input[type='text'][id='Rate']").each(function () {
+                                    $(this).val(NullHandle(varBookingStatusList[0].Rate));
+                                });
+                                $("#AddMoreTR").find("input[type='hidden'][id='hdnUOMPropId']").each(function () {
+                                    $(this).val(NullHandle(varBookingStatusList[0].UOMPropId));
+                                });
+                            }
+                        }
+                        else {
+                            alert(data.Status);
+                        }
+                    },
+                    error: function (xhr) {
+
+                        LoaderHide();
+                        alert(xhr.responseText);
+                    }
+                });
+            }
+        }
+        catch (e) {
+            LoaderHide();
+            alert(xhr.responseText);
+        }
+    }
+
+    function SetRateUnitPOP() {
+        try {
+            var varDate = $("#FromDate").val().trim();
+            var varServiceId = $("#ServiceTypePOP").val();
+            var varTimeSlotId = 0;
+
+            var strMSG = "";
+            if (parseInt(varServiceId) == 0) {
+                alert("Select Description");
+                return false;
+            }
+            if (varDate=="") {
+                return false;
+            }
+            if (strMSG != '') {
+                alert("Please enter data for Mandatory fields  \n</br>" + strMSG);
+                return false;
+            }
+            else {
+                var data = '';
+                var varServiceList = [];
+                varServiceList[0] = NullHandle(varServiceId);
+                var data = { 'intlstServiceId': varServiceList, 'intTimeSlotId': parseInt(varTimeSlotId), 'strWED': varDate };
+                var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+                LoaderShow();
+                $.ajax({
+                    url: '@Url.Action("BookingStatusGetByServiceIdTimeSlotPropIdWEFDate", "Home")',
+                    type: 'POST',
+                    dataType: 'json',
+                    async: true,
+                    data: dataWithAntiforgeryToken,
+                    success: function (dataBokkingStatus) {
+                        LoaderHide();
+                        debugger
+                        if (dataBokkingStatus.StatusId != "99" && dataBokkingStatus.StatusId != "-99") {
+                            var varBookingStatusList = dataBokkingStatus.BookingStatusList;
+                            if (varBookingStatusList.length > 0) {
+                                $("input[type='text'][id='UnitPOP']").val(NullHandle(varBookingStatusList[0].UOM));
+                                $("input[type='text'][id='Rate']").val(NullHandle(varBookingStatusList[0].Rate));
+                                $("input[type='hidden'][id='hdnUOMPropId']").val(NullHandle(varBookingStatusList[0].UOMPropId));
+                            }
+                        }
+                        else {
+                            alert(data.Status);
+                        }
+                    },
+                    error: function (xhr) {
+                        LoaderHide();
+                        alert(xhr.responseText);
+                    }
+                });
+            }
+        }
+        catch (e) {
+            LoaderHide();
+            alert(xhr.responseText);
+        }
+    }
+
+
+    ///////////////////////////// Set Button Visibility  //////////////////////////////////////////////////////
+    function SetButtonVisibility() {
+        try {
+            if (parseInt($("#StatusPropId").val()) == 40 && parseInt($("#RFQId").val()) == 0 && (parseInt($("#WorkFlowId").val()) == 6 || parseInt($("#WorkFlowId").val()) == 57 || parseInt($("#WorkFlowId").val()) == 29 || parseInt($("#WorkFlowId").val()) == 36 || parseInt($("#WorkFlowId").val()) == 38)) {
+                $("#btnAdd").attr('disabled', false);
+            }
+            else {
+                $("#btnAdd").attr('disabled', true);
+            }
+        }
+        catch (e) {
+
+        }
+    }
+
+
+    ///////////////////////////// Masking  //////////////////////////////////////////////////////
+    function MaskControls() {
+        try {
+            (function ($) {
+                $(function () {
+
+                    //$("#AddMoreTR").find("input[type='text'][id='ServiceType']").each(function () {
+                    //    $(this).attr('onkeypress', 'return CheckIsAlpha(event,this);');
+                    //});
+
+                });
+            })(jQuery);
+        }
+        catch (e) {
+
+        }
+    }
+
+    function ToDate(strdate) {
+        var parts = strdate.split("-");
+        if (parts.length < 3) {
+            parts = strdate.split("/");
+        }
+        return new Date(parts[2], parts[1] - 1, parts[0])
+    }
+
+    function WorkshopBookingDetailCopy(WorkshopBookingDetailId) {
+        try {
+            $("#hiddenWorkshopBookingDetailId").val(WorkshopBookingDetailId);
+            $("#PopupFromDateToDate").modal("show");
+        } catch { }
+
+    }
+
+    function RepeatRowWorkshop() {
+        debugger
+        if ($("#DocId").val().trim() == "" || $("#DocId").val().trim() == undefined
+            || $("#DocId").val().trim() == null) {
+            alert("Booking Details not found.");
+
+        } else if ($("#hiddenWorkshopBookingDetailId").val().trim() == ""
+            || $("#hiddenWorkshopBookingDetailId").val().trim() == null
+            || $("#hiddenWorkshopBookingDetailId").val().trim() == undefined
+            || $("#hiddenWorkshopBookingDetailId").val().trim() == 0
+        ) {
+            alert("Please select workshop detail row");
+        } else {
+
+            $("#FromDate").val("");
+            $("#ToDate").val("");
+            $("#PopupFromDateToDate").modal("show");
+        }
+    }
+
+    var strFromDate = "";
+    function SelectRow(varZZDate, RowId, varWorkshopBookingDetailId, varCaption) {
+        try {
+            debugger;
+            strFromDate = varZZDate;
+            $("#hiddenWorkshopBookingDetailId").val(varWorkshopBookingDetailId);
+            $("#txtTrackName").text(varCaption);
+            ColourRowId = RowId;
+            changeColorTrack(RowId);
+        }
+        catch (e) {
+
+        }
+    }
+
+    function SetDateMMDDYYYY(dateStr) {
+        debugger;
+        var strDate
+        var Split = dateStr.split("-");
+        var varDD = Split[0];
+        var varMM = Split[1];
+        var varYY = Split[2];
+        var now = new Date(varMM + '-' + varDD + '-' + varYY);
+        var Day = now.getDate()
+        var Month = (now.getMonth() + 1)
+        var Year = now.getFullYear()
+        if (Day < 10) {
+            Day = "0" + Day;
+        }
+        if (Month < 10) {
+            Month = "0" + Month;
+        }
+        strDate = Month + "-" + Day + "-" + Year;
+        return strDate;
+    }
+
+    function changeColorTrack(id) {
+        debugger
+        $("#trTrack_" + Holdid + "").removeClass('highlighted');
+        $("#trTrack_" + id + "").addClass('highlighted');
+        Holdid = id;
+    }
+
+    function GenerateRepeatRowWorkShop() {
+        try {
+            debugger;
+            var varFromDate = $("#FromDate").val().trim();
+            var varToDate = $("#ToDate").val().trim();
+            var varWorkshopBookingDetailId = $("#hiddenWorkshopBookingDetailId").val();
+            var varBookingId = $("#DocId").val().trim();
+
+            var Fromdate = new Date(SetDateMMDDYYYY($("#FromDate").val().trim()));
+            var Todate = new Date(SetDateMMDDYYYY($("#ToDate").val().trim()));
+
+            var FromdateVal = new Date(SetDateMMDDYYYY(strFromDate));
+            var strMSG = "";
+            if (Fromdate <= FromdateVal) {
+                strMSG = strMSG + 'From Date should be greater than selected date  \n</br>'
+            } else
+                if (varFromDate == "") {
+                    strMSG = strMSG + 'From Date  \n</br>'
+                }
+                else if (varToDate == "") {
+                    strMSG = strMSG + 'To Date  \n</br>'
+                }
+
+                else
+                    if (Todate < Fromdate) {
+                        strMSG += "<br /> \n From date should not be greater than To date. \n";
+                    }
+
+            if (strMSG != '') {
+                alert("Please enter data for Mandatory fields  \n</br>" + strMSG);
+                return false;
+            }
+            else {
+
+                $("#btnGenerateRepeatRowWorkShop").hide();
+                LoaderShow();
+                var model={ };
+                model.IntOne = varWorkshopBookingDetailId;
+                model.IntTwo = varBookingId;
+                model.StrOne = varFromDate;
+                model.StrTwo = varToDate;
+
+                 var data = { 'model': model};
+                 var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+                $.ajax({
+                    url: '@Url.Action("WorkshopBookingDetailInsertFrontRepeatRow", "Home")',
+                    type: 'POST',
+                    dataType: 'json',
+                    async: true,
+                    data: dataWithAntiforgeryToken,
+                    success: function (data) {
+                        debugger;
+                        LoaderHide();
+                        if (data.StatusId != "99" && data.StatusId != "-99") {
+
+                            $("#PopupFromDateToDate").modal("hide");
+
+                            WorkshopBookingDetailList = data.WorkshopBookingDetailList;
+                            BindWSData(data.WorkshopBookingDetailList);
+                        }
+                        $("#btnGenerateRepeatRowWorkShop").show();
+                        alert(data.Status);
+                    },
+                    error: function (xhr) {
+
+                        $("#btnGenerateRepeatRowWorkShop").show();
+                        LoaderHide();
+                        alert(xhr.responseText);
+                    }
+                });
+            }
+        }
+        catch (e) {
+
+            LoaderHide();
+            $("#btnRepeatRow").show();
+            alert(e.message);
+            return false;
+        }
+    }
+
+    function POPSetDates() {
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1;
+        var yyyy = today.getFullYear();
+        if(dd<10){dd='0'+dd} if(mm<10){mm='0'+mm} today = dd+'/'+mm+'/'+yyyy;
+        $("#FromDate").val(today);
+        $("#ToDate").val(today);
+    }
+
+    $(document).ready(function () {
+        MaskControls();
+        SetButtonVisibility();
+        LoadWorkshopBookingInfo();
+        POPSetDates();
+    });
+
+</script>

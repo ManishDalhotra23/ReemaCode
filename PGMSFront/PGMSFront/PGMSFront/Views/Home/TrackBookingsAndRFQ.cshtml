@@ -1,0 +1,416 @@
+﻿@model PGMSFront.Models.CommonModel
+@{
+    /**/
+
+    ViewBag.Title = "Track Booking & RFQ";
+    Layout = "~/Views/Shared/_LayoutTrackBookingAndRFQ.cshtml";
+}
+@Html.HiddenFor(m => m.ReportURL, new { id = "ReportURL", style = "width:0px;" })
+@Html.HiddenFor(m => m.StateId, new { id = "StateId", style = "width:0px;" })
+<style>
+
+    .visible {
+        visibility: visible;
+    }
+
+    .not-visible {
+        visibility: hidden;
+    }
+
+    .card {
+        margin-bottom: 0px !important;
+        margin-top: 25px !important;
+    }
+
+    .bootstrap-select {
+        margin-top: 16px !important;
+    }
+
+    .badge {
+        padding: 2px 2px;
+        font-size: 13px;
+        color: #FFF;
+        background: #000;
+        border-radius: 50%;
+        margin-top: 6px;
+        margin-right: 3px;
+        min-width: 20px;
+    }
+
+    .card-stats .card-header .card-category:not([class*="text-"]) {
+        color: #000;
+        font-size: 18px;
+        font-weight: 400;
+    }
+
+    .card-stats .card-header.card-header-icon, .card-stats .card-header.card-header-text {
+        text-align: left;
+    }
+
+    .card [class*="card-header-"] {
+        margin: 0px 5px 0;
+        padding: 0;
+        position: relative;
+    }
+
+    .card-stats .card-header + .card-footer {
+        margin-top: 8px;
+    }
+
+    .card-stats .card-header .card-category:not([class*="text-"]) {
+        color: #FFF;
+    }
+
+    .card .card-header.card-header-icon .card-title, .card .card-header.card-header-text .card-title {
+        color: #FFF;
+    }
+
+    .card .card-body + .card-footer .stats, .card .card-footer .stats {
+        color: #FFF;
+        line-height: 15px;
+    }
+</style>
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="card">
+                <div class="card-header card-header-rose card-header-icon">
+                    <div class="card-text">
+                        <h4 class="card-title">Track Dashboard</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    @using (Html.BeginForm(new { @class = "form-horizontal" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="row">
+                            <div class="col-lg-3 col-md-4 col-sm-4" style="padding-right: 0px;padding-left: 0px;vertical-align:top">
+                                <div class="card card-stats" style="background: #fb8c00;">
+                                    <div id="divTrackRFQ" style="text-align:left; min-height: 185px;" class="card-header card-header-warning card-header-icon">
+
+                                    </div>
+                                    @*<div class="card-footer">
+                                            <div class="stats">View More <i class="material-icons">arrow_forward</i></div>
+                                        </div>*@
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-sm-4" style="        padding-right: 0px;
+        padding-left: 5px;">
+                                <div class="card card-stats" style="background: #d81b60;">
+                                    <div id="divTrackBooking" style="text-align:left; min-height: 185px;" class="card-header card-header-rose card-header-icon">
+
+                                    </div>
+                                    @*<div class="card-footer">
+                                            <div class="stats">View More <i class="material-icons">arrow_forward</i></div>
+                                        </div>*@
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-sm-4" style="        padding-right: 0px;
+        padding-left: 5px;">
+                                <div class="card card-stats" style="background: #43a047;">
+                                    <div id="divTrackUsage" style="text-align:left; min-height: 185px;" class="card-header card-header-success card-header-icon">
+
+                                    </div>
+                                    @*<div class="card-footer">
+                                            <div class="stats">View More <i class="material-icons">arrow_forward</i></div>
+                                        </div>*@
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-sm-4" style="        padding-right: 0px;
+        padding-left: 5px;">
+                                <div class="card card-stats" style="background: #8e24aa;">
+                                    <div id="divTrackInvoice" style="text-align:left; min-height: 185px;" class="card-header card-header-primary card-header-icon">
+
+                                    </div>
+                                    @*<div class="card-footer">
+                                            <div class="stats">View More <i class="material-icons">arrow_forward</i></div>
+                                        </div>*@
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+                    <hr />
+                    <div id="divDashboard" style="display:none" class="table-responsive">
+                        <label id="lblDashboardCaption" class="form-control"></label>
+                        <table class="table table-striped table-no-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th width="5%">Action</th>
+                                    <th width="15%">Company</th>
+                                    <th width="15%">Department</th>
+                                    <th width="10%">Document Date</th>
+                                    <th width="15%">Document No.</th>
+                                    <th width="25%">Status</th>
+                                    <th id="thDueAmount" width="25%" class="not-visible">Due Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbodyBooking"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+      ///////////////////////////// LoadDashboardInfo  //////////////////////////////////////////////////////
+    function LoadDashboardInfo() {
+        try {
+            LoaderShow();
+
+            var data = {};
+            var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+
+            $.ajax({
+                url: '@Url.Action("LoadDashboardInfo", "Home")',
+                type: 'POST',
+                dataType: 'json',
+                async: true,
+                data: dataWithAntiforgeryToken,
+                success: function (data) {
+
+                    LoaderHide();
+                    if (data.StatusId != "99" && data.StatusId != "-99") {
+                        BindDashboarData(data.DashboardList);
+                    }
+                    else {
+                        alert(data.Status);
+                    }
+                },
+                error: function (xhr) {
+
+                    LoaderHide();
+                    alert(xhr.responseText);
+                }
+            });
+
+        }
+        catch (e) {
+
+            LoaderHide();
+            alert(e.message);
+        }
+        return false;
+    }
+
+    ///////////////////////////// Bind Dashboard Info  //////////////////////////////////////////////////////
+    function BindDashboarData(data) {
+        try {
+
+            var gridData = "";
+
+            ////////////////////////// Track - RFQ /////////////////////////////////////////////
+            var dataList = jQuery.grep(data, function (obj) {
+                return obj.BPId == 46;
+            });
+
+            gridData = "";
+            gridData = gridData +  "<div class='card-icon' style='padding:0px;'> <i class='material-icons'>emoji_transportation</i> </div>";
+            gridData = gridData +  "<p class='card-category'>Track - RFQ</p>";
+            $("#divTrackRFQ").html("");
+            for (var i = 0; i < dataList.length; i++) {
+
+                if (parseInt(dataList[i].Counts) > 0) {
+                    gridData = gridData + "<br/><h7 class='card-title'><a href='#' title='Select " + NullHandle(dataList[i].Caption) + " : " + NullHandle(dataList[i].Counts) + "' onclick = 'DashBoardDocumentGetByBPIdWorkFlowIdStatusPropertyId(" + NullHandle(dataList[i].BPId) + "," + '"' + NullHandle(dataList[i].WorkFlowId) + '"' + "," + '"' + NullHandle(dataList[i].StatusPropId) + '"'+ "," + '"' + NullHandle(dataList[i].DashBoardId) + '"' +  "," + '"Track RFQ - ' + NullHandle(dataList[i].Caption) + '"' + ")'>" + NullHandle(dataList[i].Caption) + "</a>&nbsp;<div class='timeline-badge info pull-right'>" + NullHandle(dataList[i].Counts) + "</div></h7>";
+                }
+                else {
+                    gridData = gridData + "<br/><h7 class='card-title'><a href='#'>" + NullHandle(dataList[i].Caption) + "</a>&nbsp;<div class='timeline-badge info pull-right'>" + NullHandle(dataList[i].Counts) + "</div></h7>";
+                }
+
+            }
+
+            $("#divTrackRFQ").html(gridData);
+
+            ////////////////////////// Track - Booking   /////////////////////////////////////////////
+             dataList = jQuery.grep(data, function (obj) {
+                return obj.BPId == 21;
+            });
+            gridData = "";
+            gridData += "<div class='card-icon' style='padding:0px;'> <i class='material-icons'>emoji_transportation</i> </div>";
+            gridData += "<p class='card-category'>Track - Booking</p>";
+            $("#divTrackBooking").html("");
+            for (var i = 0; i < dataList.length; i++) {
+
+                if (parseInt(dataList[i].Counts) > 0) {
+                    gridData = gridData + "<br/><h7 class='card-title'><a href='#' title='Select " + NullHandle(dataList[i].Caption) + " : " + NullHandle(dataList[i].Counts) + "' onclick = 'DashBoardDocumentGetByBPIdWorkFlowIdStatusPropertyId(" + NullHandle(dataList[i].BPId) + "," + '"' + NullHandle(dataList[i].WorkFlowId) + '"' + "," + '"' + NullHandle(dataList[i].StatusPropId) + '"'+ "," + '"' + NullHandle(dataList[i].DashBoardId) + '"' +  "," + '"Track Booking - ' + NullHandle(dataList[i].Caption) + '"' + ")'>" + NullHandle(dataList[i].Caption) + "</a>&nbsp;<div class='timeline-badge info pull-right'>" + NullHandle(dataList[i].Counts) + "</div></h7>";
+                }
+                else {
+                    gridData = gridData + "<br/><h7 class='card-title'><a href='#'>" + NullHandle(dataList[i].Caption) + "</a>&nbsp;<div class='timeline-badge info pull-right'>" + NullHandle(dataList[i].Counts) + "</div></h7>";
+                }
+            }
+            $("#divTrackBooking").html(gridData);
+
+            //////////////////////////   Track Usages /////////////////////////////////////////////
+             dataList = jQuery.grep(data, function (obj) {
+                return obj.BPId == 24;
+            });
+            gridData = "";
+            gridData += "<div class='card-icon' style='padding:0px;'> <i class='material-icons'>emoji_transportation</i> </div>";
+            gridData += "<p class='card-category'>Track - Usages</p>";
+            $("#divTrackUsage").html("");
+            for (var i = 0; i < dataList.length; i++) {
+
+                if (parseInt(dataList[i].Counts) > 0) {
+                    gridData = gridData + "<br/><h7 class='card-title'><a href='#' title='Select " + NullHandle(dataList[i].Caption) + " : " + NullHandle(dataList[i].Counts) + "' onclick = 'DashBoardDocumentGetByBPIdWorkFlowIdStatusPropertyId(" + NullHandle(dataList[i].BPId) + "," + '"' + NullHandle(dataList[i].WorkFlowId) + '"' + "," + '"' + NullHandle(dataList[i].StatusPropId) + '"' + "," + '"' + NullHandle(dataList[i].DashBoardId) + '"' + "," + '"Track Usages - ' + NullHandle(dataList[i].Caption) + '"' + ")'>" + NullHandle(dataList[i].Caption) + "</a>&nbsp;<div class='timeline-badge info pull-right'>" + NullHandle(dataList[i].Counts) + "</div></h7>";
+                }
+                else {
+                    gridData = gridData + "<br/><h7 class='card-title'><a href='#'>" + NullHandle(dataList[i].Caption) + "</a>&nbsp;<div class='timeline-badge info pull-right'>" + NullHandle(dataList[i].Counts) + "</div></h7>";
+                }
+            }
+            $("#divTrackUsage").html(gridData);
+
+            //////////////////////////  Track Invoicing /////////////////////////////////////////////
+             dataList = jQuery.grep(data, function (obj) {
+                return obj.BPId == 39;
+            });
+            gridData = "";
+            gridData += "<div class='card-icon' style='padding:0px;'> <i class='material-icons'>emoji_transportation</i> </div>";
+            gridData += "<p class='card-category'>Track - Invoicing</p>";
+            $("#divTrackInvoice").html("");
+            for (var i = 0; i < dataList.length; i++) {
+
+                if (parseInt(dataList[i].Counts) > 0) {
+                    gridData = gridData + "<br/><h7 class='card-title'><a href='#' title='Select " + NullHandle(dataList[i].Caption) + " : " + NullHandle(dataList[i].Counts) + "' onclick = 'DashBoardDocumentGetByBPIdWorkFlowIdStatusPropertyId(" + NullHandle(dataList[i].BPId) + "," + '"' + NullHandle(dataList[i].WorkFlowId) + '"' + "," + '"' + NullHandle(dataList[i].StatusPropId) + '"' + "," + '"' + NullHandle(dataList[i].DashBoardId) + '"' + "," + '"Track Invoicing - ' + NullHandle(dataList[i].Caption) + '"' + ")'>" + NullHandle(dataList[i].Caption) + "</a>&nbsp;<div class='timeline-badge info pull-right'>" + NullHandle(dataList[i].Counts) + "</div></h7>";
+                }
+                else {
+                    gridData = gridData + "<br/><h7 class='card-title'><a href='#'>" + NullHandle(dataList[i].Caption) + "</a>&nbsp;<div class='timeline-badge info pull-right'>" + NullHandle(dataList[i].Counts) + "</div></h7>";
+                }
+            }
+            $("#divTrackInvoice").html(gridData);
+
+
+        }
+        catch (e) {
+
+        }
+    }
+
+    ///////////////////////////// Load Booking Info  //////////////////////////////////////////////////////
+    function DashBoardDocumentGetByBPIdWorkFlowIdStatusPropertyId(varBPId,varWFId,varStatusPropId,varDashBoardId,varCaption) {
+        try {
+
+            LoaderShow();
+            var data = { 'intBPId': varBPId, 'strWorkFlowId': varWFId, 'strStatusPropId': varStatusPropId,'intDashBoardId' :varDashBoardId};
+            var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+            $.ajax({
+                url: '@Url.Action("DashBoardDocumentGetByBPIdWorkFlowIdStatusPropertyId", "Home")',
+                type: 'POST',
+                dataType: 'json',
+                async: true,
+                data: dataWithAntiforgeryToken,
+                success: function (data) {
+                    LoaderHide();
+                    if (data.StatusId != "99" && data.StatusId != "-99") {
+                        $("#lblDashboardCaption").text(varCaption);
+                         BindGridData(data.DashBoardDocumentList,varDashBoardId);
+                    }
+                    else {
+                        alert(data.Status);
+                    }
+                },
+                error: function (xhr) {
+
+                    LoaderHide();
+                    alert(xhr.responseText);
+                }
+            });
+        }
+        catch (e) {
+
+            LoaderHide();
+            alert(e.message);
+            //  return false;
+        }
+    }
+
+    function BindGridData(data,intDashboardId=0) {
+
+        try {
+            var gridData = "";
+            $("#divDashboard").show();
+            $("#tbodyBooking").html("");
+
+            if (intDashboardId == 31 || intDashboardId == 32) {
+                $("#thDueAmount").removeClass("not-visible").addClass("visible");
+            } else {
+                $("#thDueAmount").removeClass("visible").addClass("not-visible");
+            }
+
+            for (var i = 0; i < data.length; i++) {
+               gridData = gridData + "<tr style='cursor:pointer;' onclick = 'BookingGetByBookingIdBPId(" + NullHandle(data[i].DocId) + "," + NullHandle(data[i].BPId) + "," + NullHandle(data[i].SignBy) + ")'>";
+
+                gridData = gridData + "<td class='td-actions'>";
+                gridData = gridData + "<button type='button' rel='tooltip' class='btn btn-info' data-original-title='' title='Select Document No. : " + data[i].DocNo + "' onclick = 'BookingGetByBookingIdBPId(" + NullHandle(data[i].DocId) + "," + NullHandle(data[i].BPId) + "," + NullHandle(data[i].SignBy) +")'><i class='material-icons'>trending_up</i></button>";
+
+                gridData = gridData + "</td>";
+
+                gridData = gridData + "<td>" + NullHandle(data[i].CompanyName) + "</td>";
+                gridData = gridData + "<td>" + NullHandle(data[i].Department) + "</td>";
+                gridData = gridData + "<td>" + NullHandle(data[i].DocDate) + "</td>";
+                gridData = gridData + "<td>" + NullHandle(data[i].DocNo) + "</td>";
+                gridData = gridData + "<td>" + NullHandle(data[i].ZZStatus) + "</td>";
+                 if (intDashboardId == 31 || intDashboardId == 32) {
+                     gridData = gridData + "<td>" + NullHandle(data[i].DueAmount) + "</td>";
+                }
+
+                gridData = gridData + "</tr>";
+            }
+
+            $("#tbodyBooking").html(gridData);
+
+
+        }
+        catch (e) {
+
+        }
+    }
+
+
+     function BookingGetByBookingIdBPId(BookingId, BPId,varsignby) {
+        var strReportViewerUrl = $("#ReportURL").val();
+        var strDocId = BookingId;
+        var strBPId = BPId;
+        var strReportName = "";
+         if (BPId == 24 || BPId == 93) {
+             strReportName = "rptUsage";
+             window.open(strReportViewerUrl + "?rptName=" + strReportName + "&DocId=" + strDocId + "&BPId=" + strBPId, '_blank');
+         }
+         else if (BPId == 39 || BPId == 94) {
+             
+            if (varsignby != 0) {
+                var filename = "";
+                filename =  "Invoice_" +  strDocId.toString() + ".pdf";
+                window.open("https://natraxpgmsstorage.blob.core.windows.net/signedinvoice/" + filename)
+            }
+            else {
+                if (parseInt($("#StateId").val()) == 20)//MP
+                {
+                    strReportName = "rptTaxInvoiceGST";
+                }
+                else {
+                    strReportName = "rptTaxInvoiceIGST";
+                }
+                window.open(strReportViewerUrl + "?rptName=" + strReportName + "&DocId=" + strDocId + "&BPId=" + strBPId, '_blank');
+            }
+         } else if (BPId == 192 || BPId == 193)
+         {
+             location.href = "@Url.Action("EstimateViewGetByEstimateId", "Home", new { id = UrlParameter.Optional })" + "?" + "dfs,ktgbdas,hdffg.khdfrhdduihdgtymdmpxjidgndlxcmhdgmdpldjn,dlkchgj,d,.dkjdhhdk,dmdhhnd,dkmdndhnndmdmjmd" + "&" + "intEstimateId=" + BookingId;
+         }
+        else {
+            BookingGetByBookingId(BookingId);
+        }
+    }
+
+    function BookingGetByBookingId(BookingId) {
+        location.href = "@Url.Action("BookingGetByBookingId", "Home", new { id = UrlParameter.Optional })" + "?" + "dfs,ktgbdas,hdffg.khdfrhdduihdgtymdmpxjidgndlxcmhdgmdpldjn,dlkchgj,d,.dkjdhhdk,dmdhhnd,dkmdndhnndmdmjmd" + "&" + "intBookingId=" + BookingId;
+
+    }
+
+
+    $(document).ready(function () {
+        LoadDashboardInfo();
+    });
+
+</script>
+

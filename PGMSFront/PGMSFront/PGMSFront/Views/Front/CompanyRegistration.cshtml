@@ -1,0 +1,926 @@
+﻿@{
+    ViewBag.Title = "Company Registration";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="~/Templates/assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="~/Templates/assets/img/favicon.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>
+        @ViewBag.Title
+    </title>
+    <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+    <link rel="canonical" href="https://www.creative-tim.com/product/material-dashboard-pro" />
+    <meta name="keywords" content="PGMS">
+    <meta name="description" content="PGMS">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <link href="~/Templates/assets/demo/demo.css" rel="stylesheet" />
+    <link href="~/Templates/Alert/jquery-confirm.min.css" rel="stylesheet" />
+    <link href="~/Templates/select2/css/select2.min.css" rel="stylesheet" />
+    <link href="~/Templates/assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
+    <style>
+        .register-page .card-signup {
+            margin-top: 0;
+            margin-bottom: 0;
+            padding: 10px 0px;
+        }
+
+
+        .form-control {
+            height: 30px !important;
+        }
+
+        .off-canvas-sidebar .wrapper-full-page .page-header {
+            padding: 5vh 0 !important;
+        }
+
+        .register-page .card-signup .form-check {
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        .card-signup .form-check {
+            padding-top: 10px;
+        }
+
+        .form-check-label {
+            padding-top: 2px;
+        }
+
+        .select2-container--default .select2-selection--single {
+            background-color: #fff;
+            border: none;
+            border-bottom: 1px solid #aaa;
+            border-radius: 0px;
+        }
+
+        .register-page .card-signup .form-group {
+            margin: 16px 0 0 7px;
+            padding-bottom: 0;
+        }
+
+        .card-signup .card-header {
+            margin-left: 0;
+            margin-right: 0;
+            margin-top: 0px;
+            padding: 0px 0;
+            margin-bottom: 0px;
+            background: #115a86;
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            color: #3c4858;
+            line-height: 28px;
+            font-weight: 400;
+        }
+
+        .select2-container .select2-selection--single .select2-selection__rendered {
+            padding-left: 0px;
+        }
+
+        .select2-results__option {
+            padding: 1px 5px 1px 5px;
+        }
+    </style>
+    <script>
+
+
+
+        function ValidateGST(tx) {
+            if (tx != null && $(tx).val().trim() != "") {
+                var inputvalues = $(tx).val().trim().toUpperCase();
+                var gstinformat = new RegExp('^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$');
+                if (gstinformat.test(inputvalues)) {
+                    $(tx).val(inputvalues);
+                    return true;
+                } else {
+                    alert('Please Enter Valid GSTIN Number');
+                    $(tx).val('');
+                    $(tx).focus();
+                }
+            }
+        }
+
+        function ValidatePAN(tx) {
+            if (tx != null && $(tx).val().trim() != "") {
+                var inputvalues = $(tx).val().trim().toUpperCase();
+                var regex = /[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
+                if (regex.test(inputvalues)) {
+                    $(tx).val(inputvalues);
+                    return true;
+                } else {
+                    alert("Invalid PAN");
+                    $(tx).val('');
+                    $(tx).focus();
+                }
+            }
+        }
+
+        function ValidateTAN(tx) {
+            if (tx != null && $(tx).val().trim() != "") {
+                var inputvalues = $(tx).val().trim().toUpperCase();
+                var regex = /[A-Z]{4}[0-9]{5}[A-Z]{1}$/;
+                if (regex.test(inputvalues)) {
+                    $(tx).val(inputvalues);
+                    return true;
+                } else {
+                    alert("Invalid TAN");
+                    $(tx).val('');
+                    $(tx).focus();
+                }
+            }
+        }
+
+/**/</script>
+</head>
+
+<body class="off-canvas-sidebar">
+    <div class="Loader" id="divLoading" style="        display: none;">
+        <div id="preloading" class="preloading">
+            <img src="@Url.Content("~/Templates/assets/img/load.gif")" style="        width: 100px;">
+        </div>
+        <div id="overlay"></div>
+    </div>
+    <div class="wrapper wrapper-full-page">
+        <div class="page-header register-page header-filter" filter-color="black" style="        background-image: url('../Templates/Tracks/Natrax Overall Track Pics.jpg')">
+            <div class="container">
+                @using (Html.BeginForm(new { @class = "form-horizontal" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="row">
+                        <div class="col-md-7 ml-auto mr-auto">
+                            <div class="card card-signup" id="card-signup-mobile" style="padding: 0px 0px;">
+                                <div class="card-header">
+                                    <div class="row">
+                                        <div class="col-md-6 ml-auto mr-auto" id="logo-mobile">
+                                            <img src="~/Templates/img/logo.png" alt="">
+                                        </div>
+                                        <div class="col-md-6 ml-auto mr-auto">
+                                            <h2 class="card-title text-center" style="font-size: 20px; margin-bottom: 0px; margin-top: 18px; color: #FFF; font-weight: 700;">
+                                                Company Registration
+                                            </h2>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-12 ml-auto">
+                                            <form>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group bmd-form-group">
+                                                            <label for="exampleEmail" class="bmd-label-floating">Company Name *</label>
+                                                            <input type="text" class="form-control" id="txtCompanyName">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group bmd-form-group">
+                                                            <label for="exampleEmail" class="bmd-label-floating">Location/Department *</label>
+                                                            <input type="text" class="form-control" id="txtLocationDepartment">
+                                                        </div>
+                                                    </div>
+                                                    @*</div>
+        <div class="row">*@
+                                                    <div class="col-md-12">
+                                                        <div class="form-group bmd-form-group">
+                                                            <label for="examplePass" class="bmd-label-floating">Address *</label>
+                                                            <textarea class="form-control" id="txtAddress"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    @*</div>
+        <div class="row">*@
+                                                    <div class="col-md-6">
+                                                        <div class="form-group bmd-form-group" style="        height: 30px;">
+                                                            @*<label for="exampleEmail" class="bmd-label-floating">State *</label>*@
+                                                            <select class="form-control" id="ddlCountry" onchange="LoadStateByCountryId()" style="        margin-top: 7px;">
+                                                                <option value="0">Select Country *</option>
+                                                                @foreach (var itm in ViewBag.Country)
+                                                                {
+                                                                    <option value='@itm.Value'>@itm.Text</option>
+                                                                }
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group bmd-form-group" style="        height: 30px;">
+                                                            @*<label for="exampleEmail" class="bmd-label-floating">State *</label>*@
+                                                            <select class="form-control" id="ddlState" onchange="LoadDistictByStateId()" style="        margin-top: 7px;">
+                                                                <option value="0">Select State/Province *</option>
+                                                                @*@foreach (var itm in ViewBag.State)
+                    {
+                        <option value='@itm.StateId'>@itm.State</option>
+                    }*@
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    @*</div>
+        <div class="row">*@
+                                                    <div class="col-md-6">
+                                                        <div class="form-group bmd-form-group" style="        height: 30px;">
+                                                            @*<label for="exampleEmail" class="bmd-label-floating">District *</label>*@
+                                                            <select class="form-control" id="ddlCity" style="margin-top: 7px;">
+                                                                <option value="0">Select District *</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group bmd-form-group">
+                                                            <label for="examplePass" class="bmd-label-floating">Pincode *</label>
+                                                            <input type="text" maxlength="6" class="form-control" id="txtPincode">
+                                                        </div>
+                                                    </div>
+                                                    @*</div>
+        <div class="row">*@
+                                                    <div class="col-md-6 isIndia">
+                                                        <div class="form-group bmd-form-group">
+                                                            <label for="examplePass" class="bmd-label-floating">PAN No. *</label>
+                                                            <input type="text" maxlength="10" onchange="ValidatePAN(this)" class="form-control" id="txtPANNo">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 isIndia">
+                                                        <div class="form-group bmd-form-group">
+                                                            <label for="examplePass" class="bmd-label-floating">
+                                                                GST No. *
+                                                            </label>
+                                                            <input type="text" maxlength="15" onchange="ValidateGST(this)" class="form-control" id="txtGSTNo">
+                                                        </div>
+                                                    </div>
+                                                    @*</div>
+        <div class="row">*@
+                                                    <div class="col-md-6 isIndia">
+                                                        <div class="form-group bmd-form-group">
+                                                            <label for="examplePass" class="bmd-label-floating">TAN No. *</label>
+                                                            <input type="text" maxlength="10" onchange="ValidateTAN(this)" class="form-control" id="txtTANNo">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 isIndia">
+                                                        <div class="form-group bmd-form-group">
+                                                            <label for="examplePass" class="bmd-label-floating">
+                                                                Is SEZ *
+                                                            </label>
+                                                            <div class="form-check">
+                                                                <label class="form-check-label" style="margin-left: 65px !important;">
+                                                                    <input class="form-check-input" type="radio" id="" name="isSez" value="true"> Yes
+                                                                    <span class="circle">
+                                                                        <span class="check"></span>
+                                                                    </span>
+                                                                </label>
+                                                                <label class="form-check-label">
+                                                                    <input class="form-check-input" type="radio" id="" name="isSez" value="false" checked> No
+                                                                    <span class="circle">
+                                                                        <span class="check"></span>
+                                                                    </span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    @*</div>
+        <div class="row">*@
+                                                    <div class="col-md-6">
+                                                        <div class="form-group bmd-form-group">
+                                                            <label for="examplePass" class="bmd-label-floating">User Name *</label>
+                                                            <input type="text" class="form-control" id="txtContactPerson">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group bmd-form-group">
+                                                            <label for="examplePass" class="bmd-label-floating">
+                                                                Login Id
+                                                            </label>
+                                                            <input type="text" class="form-control" id="txtLoginId">
+                                                        </div>
+                                                    </div>
+                                                    @*</div>
+        <div class="row">*@
+                                                    <div class="col-md-6">
+                                                        <div class="form-group bmd-form-group">
+                                                            <label for="examplePass" class="bmd-label-floating">Email *</label>
+                                                            <input type="text" class="form-control" id="txtEMailId">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group bmd-form-group">
+                                                            <label for="examplePass" class="bmd-label-floating">
+                                                                Mobile No. *
+                                                            </label>
+                                                            <input type="text" maxlength="12" class="form-control" id="txtMobileNo">
+                                                        </div>
+                                                    </div>
+                                                    @*</div>
+        <div class="row">*@
+                                                    <div class="col-md-12">
+                                                        <div class="form-group bmd-form-group">
+                                                            <label for="examplePass" class="bmd-label-floating">
+                                                                How did you come to know about NATRAX *
+                                                            </label><br />
+                                                            <div class="form-check">
+                                                                @foreach (var itm in ViewBag.KnowAbout)
+                                                                {
+                                                                    <label class="form-check-label">
+                                                                        <input class="form-check-input" type="radio" id='rdo+@itm.Value' name="rdoKnowAbout" value='@itm.Value'> @itm.Text
+                                                                        <span class="circle">
+                                                                            <span class="check"></span>
+                                                                        </span>
+                                                                    </label>
+                                                                }
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    @*</div>
+        <div class="row">*@
+                                                    <div class="col-md-12">
+                                                        <div class="form-group bmd-form-group">
+                                                            <label for="examplePass" class="bmd-label-floating">
+                                                                References, if any
+                                                            </label>
+                                                            <input type="text" class="form-control" id="txtRef">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group bmd-form-group" style="text-align:center">
+                                                            <label for="examplePass" class="bmd-label-floating"></label>
+                                                            <a id="btnReg" onclick="CompanyRegistrationSave()" class="btn btn-primary btn-round mt-4" style="color: #FFF;text-align:center">Register</a>
+                                                            <label id="lblRegisterMSG" style="color:black;text-align:center"></label>
+                                                            <a href="@Url.Action("Index", "Home")" id="btnCancel" class="btn btn-primary btn-round mt-4" style="color: #FFF;text-align:center">Cancel</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+        </div>
+    </div>
+    <!--   Core JS Files   -->
+    <script src="~/Templates/assets/js/core/jquery.min.js"></script>
+    <script src="~/Templates/assets/js/core/popper.min.js"></script>
+    <script src="~/Templates/assets/js/core/bootstrap-material-design.min.js"></script>
+    <script src="~/Templates/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+    <!--  Google Maps Plugin    -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2Yno10-YTnLjjn_Vtk0V8cdcY5lC4plU"></script>
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!-- Chartist JS -->
+    <script src="~/Templates/assets/js/plugins/chartist.min.js"></script>
+    <!--  Notifications Plugin    -->
+    <script src="~/Templates/assets/js/plugins/bootstrap-notify.js"></script>
+    <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="~/Templates/assets/js/material-dashboard.min.js?v=2.1.2" type="text/javascript"></script>
+    <!-- Material Dashboard DEMO methods, don't include it in your project! -->
+    <script src="~/Templates/assets/demo/demo.js"></script>
+    <script src="~/Templates/assets/js/plugins/bootstrap-selectpicker.js"></script>
+    <!-- Sharrre libray -->
+    <script src="~/Templates/assets/demo/jquery.sharrre.js"></script>
+    <script src="~/Templates/Alert/jquery-confirm.min.js"></script>
+    <script src="~/Templates/select2/js/select2.min.js"></script>
+    @Scripts.Render("~/bundles/MyScripts")
+    <script>
+        function LoaderShow() {
+            //waitingDialog.show('', {
+            //    dialogSize: 'sm', progressType: 'warning'
+            //});
+            $(".Loader").show();
+        }
+
+        function LoaderHide() {
+            //waitingDialog.hide();
+            $(".Loader").hide();
+        }
+
+
+        //document.onreadystatechange = function () {
+        //    if (document.readyState !== "complete") {
+        //        $(".ntx-loader").show();
+        //    } else {
+        //        $(".ntx-loader").hide();
+        //    }
+        //};
+    var lstState = [];
+        $(document).ready(function () {
+
+        lstState = @Html.Raw(Json.Encode(@ViewBag.State));
+
+            $(".select2").select2();
+            $().ready(function () {
+                //$('.datetimepicker').datetimepicker({ theme: 'light', timepicker: false, format: 'd-m-Y', scrollMonth: false, scrollInput: false });
+                ////$('.timepicker').datetimepicker({ theme: 'dark', datepicker: false, format: 'H:i', scrollMonth: false, scrollInput: false, maxDate: new Date() });
+                //$(".datetimepicker").attr("placeholder", "DD-MM-YYYY");
+                //$(".datetimepicker").mask("99-99-9999");
+                //$(".timepicker").mask("99:99");
+                //$(".timepicker").attr("placeholder", "HH:MM");
+                $sidebar = $('.sidebar');
+
+                $sidebar_img_container = $sidebar.find('.sidebar-background');
+
+                $full_page = $('.full-page');
+
+                $sidebar_responsive = $('body > .navbar-collapse');
+
+                window_width = $(window).width();
+
+                fixed_plugin_open = $('.sidebar .sidebar-wrapper .nav li.active a p').html();
+
+                if (window_width > 767 && fixed_plugin_open == 'Dashboard') {
+                    if ($('.fixed-plugin .dropdown').hasClass('show-dropdown')) {
+                        $('.fixed-plugin .dropdown').addClass('open');
+                    }
+
+                }
+
+                $('.fixed-plugin a').click(function (event) {
+                    // Alex if we click on switch, stop propagation of the event, so the dropdown will not be hide, otherwise we set the  section active
+                    if ($(this).hasClass('switch-trigger')) {
+                        if (event.stopPropagation) {
+                            event.stopPropagation();
+                        } else if (window.event) {
+                            window.event.cancelBubble = true;
+                        }
+                    }
+                });
+
+                $('.fixed-plugin .active-color span').click(function () {
+                    $full_page_background = $('.full-page-background');
+
+                    $(this).siblings().removeClass('active');
+                    $(this).addClass('active');
+
+                    var new_color = $(this).data('color');
+
+                    if ($sidebar.length != 0) {
+                        $sidebar.attr('data-color', new_color);
+                    }
+
+                    if ($full_page.length != 0) {
+                        $full_page.attr('filter-color', new_color);
+                    }
+
+                    if ($sidebar_responsive.length != 0) {
+                        $sidebar_responsive.attr('data-color', new_color);
+                    }
+                });
+
+                $('.fixed-plugin .background-color .badge').click(function () {
+                    $(this).siblings().removeClass('active');
+                    $(this).addClass('active');
+
+                    var new_color = $(this).data('background-color');
+
+                    if ($sidebar.length != 0) {
+                        $sidebar.attr('data-background-color', new_color);
+                    }
+                });
+
+                $('.fixed-plugin .img-holder').click(function () {
+                    $full_page_background = $('.full-page-background');
+
+                    $(this).parent('li').siblings().removeClass('active');
+                    $(this).parent('li').addClass('active');
+
+
+                    var new_image = $(this).find("img").attr('src');
+
+                    if ($sidebar_img_container.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
+                        $sidebar_img_container.fadeOut('fast', function () {
+                            $sidebar_img_container.css('background-image', 'url("' + new_image + '")');
+                            $sidebar_img_container.fadeIn('fast');
+                        });
+                    }
+
+                    if ($full_page_background.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
+                        var new_image_full_page = $('.fixed-plugin li.active .img-holder').find('img').data('src');
+
+                        $full_page_background.fadeOut('fast', function () {
+                            $full_page_background.css('background-image', 'url("' + new_image_full_page + '")');
+                            $full_page_background.fadeIn('fast');
+                        });
+                    }
+
+                    if ($('.switch-sidebar-image input:checked').length == 0) {
+                        var new_image = $('.fixed-plugin li.active .img-holder').find("img").attr('src');
+                        var new_image_full_page = $('.fixed-plugin li.active .img-holder').find('img').data('src');
+
+                        $sidebar_img_container.css('background-image', 'url("' + new_image + '")');
+                        $full_page_background.css('background-image', 'url("' + new_image_full_page + '")');
+                    }
+
+                    if ($sidebar_responsive.length != 0) {
+                        $sidebar_responsive.css('background-image', 'url("' + new_image + '")');
+                    }
+                });
+
+                $('.switch-sidebar-image input').change(function () {
+                    $full_page_background = $('.full-page-background');
+
+                    $input = $(this);
+
+                    if ($input.is(':checked')) {
+                        if ($sidebar_img_container.length != 0) {
+                            $sidebar_img_container.fadeIn('fast');
+                            $sidebar.attr('data-image', '#');
+                        }
+
+                        if ($full_page_background.length != 0) {
+                            $full_page_background.fadeIn('fast');
+                            $full_page.attr('data-image', '#');
+                        }
+
+                        background_image = true;
+                    } else {
+                        if ($sidebar_img_container.length != 0) {
+                            $sidebar.removeAttr('data-image');
+                            $sidebar_img_container.fadeOut('fast');
+                        }
+
+                        if ($full_page_background.length != 0) {
+                            $full_page.removeAttr('data-image', '#');
+                            $full_page_background.fadeOut('fast');
+                        }
+
+                        background_image = false;
+                    }
+                });
+
+                $('.switch-sidebar-mini input').change(function () {
+                    $body = $('body');
+
+                    $input = $(this);
+
+                    if (md.misc.sidebar_mini_active == true) {
+                        $('body').removeClass('sidebar-mini');
+                        md.misc.sidebar_mini_active = false;
+
+                        $('.sidebar .side bar-wrapper, .main-panel').perfectScrollbar();
+
+                    } else {
+
+                        $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar('destroy');
+
+                        setTimeout(function () {
+                            $('body').addClass('sidebar-mini');
+
+                            md.misc.sidebar_mini_active = true;
+                        }, 300);
+                    }
+
+                    // we simulate the window Resize so the charts will get updated in realtime.
+                    var simulateWindowResize = setInterval(function () {
+                        window.dispatchEvent(new Event('resize'));
+                    }, 180);
+
+                    // we stop the simulation of Window Resize after the animations are completed
+                    setTimeout(function () {
+                        clearInterval(simulateWindowResize);
+                    }, 1000);
+
+                });
+            });
+        });
+        $('#nav-item').removeAttr('data-toggle');
+    </script>
+</body>
+</html>
+<script>
+    var countryId = 0;
+    function LoadStateByCountryId() {
+        try {
+            debugger;
+            var CountryId = $("#ddlCountry").val();
+            if (parseInt(CountryId) <= 0) {
+                alert("Please Select Country");
+            }
+            else {
+                countryId = CountryId;
+                if (countryId === "1") {
+                    $(".isIndia").show();
+                } else {
+                    $(".isIndia").hide();
+                }
+                LoaderShow();
+                $("#ddlState").html("");
+                $("#ddlCity").html("<option value='0'>Select District *</option>");
+                var data = { 'intCountryId': CountryId };
+                var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+                $.ajax({
+                    url: '@Url.Action("LoadStateByCountryId", "Front")',
+                    type: 'POST',
+                    dataType: 'json',
+                    async: true,
+                    data: dataWithAntiforgeryToken,
+                    success: function (data) {
+                        LoaderHide();
+                        debugger;
+                        if (data.StatusId != "99" && data.StatusId != "-99") {
+                            lstState = data.StateList;
+                            var gridData = "<option value='0'>Select State/Province *</option>";
+                            for (var i = 0; i < data.StateList.length; i++) {
+                                gridData = gridData + "<option value='" + NullHandle(data.StateList[i].StateId) + "'>" + NullHandle(data.StateList[i].State) + "</option>";
+                            }
+                            $("#ddlState").html(gridData);
+                            $(".select2").select2();
+                        }
+                        else {
+                            alert(data.Status);
+                        }
+                    },
+                    error: function (xhr) {
+                        LoaderHide();
+                        alert(xhr.responseText);
+                    }
+                });
+            }
+        }
+        catch (e) {
+
+            LoaderHide();
+            alert(e.message);
+        }
+    }
+
+    ///////////////////////////// Load District Info  //////////////////////////////////////////////////////
+    function LoadDistictByStateId() {
+        try {
+            var StateId = $("#ddlState").val();
+            if (parseInt(StateId) <= 0) {
+                alert("Please Select State");
+            }
+            else {
+                LoaderShow();
+                $("#ddlCity").html("");
+                var data = { 'intStateId': StateId };
+                var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+                $.ajax({
+                    url: '@Url.Action("LoadDistictByStateId", "Home")',
+                    type: 'POST',
+                    dataType: 'json',
+                    async: true,
+                    data: dataWithAntiforgeryToken,
+                    success: function (data) {
+                        LoaderHide();
+                        if (data.StatusId != "99" && data.StatusId != "-99") {
+                            var gridData = "<option value='0'>Select District *</option>";
+                            for (var i = 0; i < data.DistrictList.length; i++) {
+                                gridData = gridData + "<option value='" + NullHandle(data.DistrictList[i].DistrictId) + "'>" + NullHandle(data.DistrictList[i].District) + "</option>";
+                            }
+
+                            $("#ddlCity").html(gridData);
+                            $(".select2").select2();
+                        }
+                        else {
+                            alert(data.Status);
+                        }
+                    },
+                    error: function (xhr) {
+
+                        LoaderHide();
+                        alert(xhr.responseText);
+                    }
+                });
+            }
+        }
+        catch (e) {
+
+            LoaderHide();
+            alert(e.message);
+        }
+    }
+
+     ///////////////////////////// Check LoginId  //////////////////////////////////////////////////////
+    function CheckLoginIdAvailability() {
+        var varrtFlag = 0;
+        try {
+
+            if ($("#txtLoginId").val().trim() == "") {
+                alert("Please enter your Login Id");
+            }
+            else {
+                LoaderShow();
+                var data = { 'strLoginId': $("#txtLoginId").val().trim()};
+                var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+                $.ajax({
+                    url: '@Url.Action("CheckLoginIdAvailability", "Front")',
+                    type: 'POST',
+                    dataType: 'json',
+                    async: false,
+                    data: dataWithAntiforgeryToken,
+                    success: function (data) {
+                        LoaderHide();
+                        if (data.StatusId != "99" && data.StatusId != "-99") {
+                            varrtFlag = 1;
+                        }
+                        else {
+                            //$("#txtLoginId").val("");
+                            alert(data.Status);
+                        }
+                    },
+                    error: function (xhr) {
+
+                        LoaderHide();
+                        alert(xhr.responseText);
+                    }
+                });
+            }
+        }
+        catch (e) {
+
+            LoaderHide();
+            alert(e.message);
+            }
+        return varrtFlag;
+    }
+
+    ///////////////////////////// Registration Save  //////////////////////////////////////////////////////
+    function CompanyRegistrationSave() {
+        try {
+            var strMSG = '';
+
+            var varCity = $("#ddlCity").val();
+            if ($("#txtCompanyName").val().trim() == "") {
+                strMSG = strMSG + 'Company Name \n</br>'
+            }
+            if ($("#txtLocationDepartment").val().trim() == "") {
+                strMSG = strMSG + 'Location Department \n</br>'
+            }
+            if ($("#txtAddress").val().trim() == "") {
+                strMSG = strMSG + 'Address \n</br>'
+            }
+            if ($("#txtPincode").val().trim() == "") {
+                    strMSG = strMSG + 'Pincode \n</br>'
+                }
+            if (countryId === "1") {
+                if ($("#txtPANNo").val().trim() == "") {
+                    strMSG = strMSG + 'PAN No. \n</br>'
+                }
+
+                if ($("#txtGSTNo").val().trim() == "") {
+                    strMSG = strMSG + 'GST No. \n</br>'
+                }
+
+                if ($("#txtTANNo").val().trim() == "") {
+                    strMSG = strMSG + 'TAN No. \n</br>'
+                }
+
+                if ($("input[name='isSez']:checked").val() == undefined || $("input[name='isSez']:checked").val() == "") {
+                    strMSG = strMSG + 'Sez \n</br>'
+                }
+            }
+            
+            if ($("#ddlCountry").val() == null || $("#ddlState").val() == undefined || parseInt($("#ddlState").val()) == 0) {
+                strMSG = strMSG + 'Country \n</br>'
+            }
+            if ($("#ddlState").val() == null || $("#ddlState").val() == undefined || parseInt($("#ddlState").val()) == 0) {
+                strMSG = strMSG + 'State \n</br>'
+            } else {
+
+                if ($("#txtGSTNo").val() != '' && $("#txtGSTNo").val() != undefined && $("#txtGSTNo").val() != null) {
+                    debugger;
+                    var strSplit = $("#txtGSTNo").val();
+                    var res = strSplit.substring(0, 2);
+
+                    var lstStateFilter = $.grep(lstState, function (obj) {
+                        return obj.StateId == $("#ddlState").val();
+                    })
+                    if (lstStateFilter != null && lstStateFilter != undefined && lstStateFilter.length > 0) {
+                        if (lstStateFilter[0].GSTCode != undefined && lstStateFilter[0].GSTCode != null)
+                            if (res != lstStateFilter[0].GSTCode) {
+                                strMSG = strMSG + 'Invalid GST No. \n</br>'
+                            }
+                    }
+                }
+
+            }
+
+
+            if (varCity == null || varCity==undefined || parseInt(varCity) == 0) {
+                strMSG = strMSG + 'District \n</br>'
+            }
+            if ($("#txtContactPerson").val().trim() == "") {
+                strMSG = strMSG + 'User Name \n</br>'
+            }
+            if ($("#txtLoginId").val().trim() == "") {
+                strMSG = strMSG + 'Login Id \n</br>'
+            }
+            if ($("#txtEMailId").val().trim() == "") {
+                strMSG = strMSG + 'EMail \n</br>'
+            }
+            if ($("#txtMobileNo").val().trim() == "") {
+                strMSG = strMSG + 'Mobile No. \n</br>'
+            }
+            if ($("input[name='rdoKnowAbout']:checked").val() == undefined || $("input[name='rdoKnowAbout']:checked").val() == "") {
+                strMSG = strMSG + 'Know about NATRAX \n</br>'
+            }
+            if ($("input[name='rdoKnowAbout']:checked").val() == 35 && $("#txtRef").val().trim() == "") {
+                strMSG = strMSG + 'References \n</br>'
+            }
+            if (strMSG != '') {
+                alert("Please enter data for Mandatory fields  \n</br>" + strMSG);
+                return false;
+            }
+            else if (CheckLoginIdAvailability()==1) {
+                var model = {};
+                model.CustomerMasterId = -1;
+                model.CompanyName = $("#txtCompanyName").val().trim();
+                model.LocationDepartment = $("#txtLocationDepartment").val().trim();
+                model.CountryId = $("#ddlCountry").val().trim();
+                model.StateId = $("#ddlState").val().trim();
+                model.Address = $("#txtAddress").val();
+                model.DistrictId = varCity;
+                model.PinCode = $("#txtPincode").val().trim();
+                model.Email = $("#txtEMailId").val().trim();
+                model.ContactPerson=$("#txtContactPerson").val().trim();
+                model.PhoneNo = $("#txtMobileNo").val().trim();
+                model.GSTNo = $("#txtGSTNo").val().trim();
+                model.PANNo = $("#txtPANNo").val().trim();
+                model.TANNo = $("#txtTANNo").val().trim();
+                model.IsSEZ = $("input[name='isSez']:checked").val();
+                model.Reference = $("#txtRef").val().trim();
+                model.KnowAboutNatraxOL = $("input[name='rdoKnowAbout']:checked").val();
+                model.ZZLoginId = $("#txtLoginId").val().trim();
+                debugger;
+                $("#btnReg").hide();
+                LoaderShow();
+                var data = {'model': model};
+                var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+                $.ajax({
+                    url: '@Url.Action("CompanyRegistrationSave", "Front")',
+                    type: 'POST',
+                    dataType: 'json',
+                    async: true,
+                    data: dataWithAntiforgeryToken,
+                    //contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                       LoaderHide();
+                        if (data.StatusId != "99" && data.StatusId != "-99") {
+                            $("#btnReg").hide();
+                            $("#btnCancel").text("BACK");
+                            $("#lblRegisterMSG").text(data.Status);
+                            alert(data.Status);
+                        }
+                        else {
+                            $("#btnReg").show();
+                            alert(data.Status);
+                        }
+                       // $("#btnReg").show();
+
+                    },
+                    error: function (xhr) {
+
+                        $("#btnReg").show();
+                        LoaderHide();
+                        alert(xhr.responseText);
+                    }
+                });
+
+            }
+        }
+        catch (e) {
+
+            LoaderHide();
+            $("#btnReg").show();
+            alert(e.message);
+            return false;
+        }
+    }
+
+
+
+    ///////////////////////////// Masking  //////////////////////////////////////////////////////
+    function MaskControls() {
+        try {
+            (function ($) {
+                $(function () {
+                    $("#txtCompanyName").attr('onkeypress', 'return CheckIsAlphaNumeric(event,this);');
+                    $("#txtGSTNo").attr('onkeypress', 'return CheckIsAlphaNumeric(event,this);');
+                    $("#txtPANNo").attr('onkeypress', 'return CheckIsAlphaNumeric(event,this);');
+                    $("#txtContactPerson").attr('onkeypress', 'return CheckIsAlphaNumeric(event,this);');
+                    $("#txtEMailId").IsEmailOnly();
+                    $("#txtPincode").attr('onkeypress', 'return CheckIsNumeric(event,this);');
+                    $("#txtMobileNo").attr('onkeypress', 'return CheckIsNumeric(event,this);');
+                    $("#txtTANNo").attr('onkeypress', 'return CheckIsAlphaNumeric(event,this);');
+                });
+            })(jQuery);
+        }
+        catch (e) {
+
+        }
+    }
+
+
+    $(document).ready(function () {
+        MaskControls();
+        $("#txtCompanyName").focus();
+    });
+
+</script>

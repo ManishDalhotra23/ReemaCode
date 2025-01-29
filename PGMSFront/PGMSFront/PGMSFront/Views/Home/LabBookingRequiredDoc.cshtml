@@ -1,0 +1,148 @@
+﻿@model PGMSFront.Models.LabModel
+@{
+    Layout = "~/Views/Shared/_LayoutLab.cshtml";
+    ViewBag.Title = "Lab Required Doc";
+}
+<style>
+    .card {
+        margin-bottom: 0px !important;
+        margin-top: 25px !important;
+    }
+
+    .bootstrap-select {
+        margin-top: 16px !important;
+    }
+</style>
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="card">
+                <div class="card-header card-header-rose card-header-icon">
+                    <div class="card-text">
+                        <h4 class="card-title">Lab Booking Document</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group" style="margin-bottom : 15px;">
+                                <label>Services</label>
+                                @Html.DropDownListFor(x => x.ServiceId, ViewBag.Services as SelectList, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group" style="margin-bottom : 15px;">
+                                <label>Facility</label>
+                                <select id="ddlFacility" class="form-control">
+                                    <option value="0">Select Facility</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group" style="margin: 0 !important;">
+                                <label for="exampleEmail" class="bmd-label-floating">&nbsp;</label><br />
+                                <button type="button" class="btn btn-fill btn-rose btn-sm" id="btnSubmit" onclick="return showLabDocs()">Get Data</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="doctable"></div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#ServiceId").trigger('change');
+    });
+
+    $("#ServiceId").on('change', function () {
+        
+        var pserviceName = $("#ServiceId option:selected").text();
+          $.ajax({
+                url: '@Url.Action("GetFacilities", "Home")',
+                type: 'GET',
+                dataType: 'json',
+                async: false,
+              data: { serviceName: pserviceName },
+              success: function (data) {
+                  if (data.StatusId != 99) {
+                      LoaderHide();
+                      var gridData = "<option value='0'>Select Facility</option>";
+                      for (var i = 0; i < data.FacilityList.length; i++) {
+                          gridData = gridData + "<option value='" + NullHandle(data.FacilityList[i].ServiceId) + "'>" + NullHandle(data.FacilityList[i].ServiceSpecification) + "</option>";
+                      }
+                      $("#ddlFacility").html(gridData);
+                  }
+                  else {
+                      alert(Response.Status);
+                  }
+              },
+              error: function (xhr) {
+                  LoaderHide();
+                  alert(xhr.message);
+              }
+         });
+    });
+
+    function showLabDocs() {
+        var pserviceName = $("#ServiceId option:selected").text();
+        var facilityName = $("#ddlFacility option:selected").text();
+          $.ajax({
+                url: '@Url.Action("LabBookingDoc", "Home")',
+                type: 'GET',
+                dataType: 'html',
+                async: false,
+              data: { serviceName: pserviceName, facilityName: facilityName },
+              success: function (Response) {
+                  if (Response.StatusId != 99) {
+                      LoaderHide();
+                      $("#doctable").html(Response);
+                  }
+                  else {
+                      alert(Response.Status);
+                  }
+              },
+              error: function (xhr) {
+
+                  LoaderHide();
+                  alert(xhr.message);
+              }
+         });
+    }
+
+     function DownloadLabForm(documentName) {
+        try {
+            $.ajax({
+                url: '@Url.Action("DownloadLabForm", "Home")',
+                type: 'GET',
+                dataType: 'json',
+                async: true,
+                data: { DocumentName: documentName},
+                    success: function (data) {
+                        LoaderHide();
+                        if (data.StatusId != "99" && data.StatusId != "-99") {
+
+                            alert("ok");
+                        }
+                        else {
+                            alert(data.Status);
+                        }
+                    },
+                    error: function (xhr) {
+
+                        LoaderHide();
+                        alert(xhr.responseText);
+                    }
+                });
+
+        }
+        catch (e) {
+
+            LoaderHide();
+            alert(e.message);
+        }
+    }
+</script>
+

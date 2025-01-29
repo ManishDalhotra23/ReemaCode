@@ -1,0 +1,183 @@
+﻿@model PGMSFront.Models.CommonModel
+@{   
+    ViewBag.Title = "Track Booking against RFQ - Regular";
+    Layout = "~/Views/Shared/_LayoutTrackBookingAndRFQ.cshtml";
+}
+<style>
+    .card {
+        margin-bottom: 0px !important;
+        margin-top: 25px !important;
+    }
+
+    .bootstrap-select {
+        margin-top: 16px !important;
+    }
+</style>
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="card">
+                <div class="card-header card-header-rose card-header-icon">
+                    <div class="card-text">
+                        <h4 class="card-title">Track Booking against RFQ - Regular</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    @using (Html.BeginForm(new { @class = "form-horizontal" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group" style="height: 70px;">
+                                    <label for="exampleEmail" class="bmd-label-floating">Department *</label>
+                                    <select class="form-control" id="DepartmentId" style="margin-top: 34px;">
+                                        @foreach (var itm in ViewBag.CompanyDepartment)
+                                        {
+                                            <option value='@itm.Value'>@itm.Text</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                           
+                            <div class="col-md-3">
+                                <div class="form-group" style="margin: 0 !important;">
+                                    <label for="exampleEmail" class="bmd-label-floating">&nbsp;</label><br />
+                                    <button type="button" class="btn btn-fill btn-rose btn-sm" id="btnSubmit" onclick="return LoadBookingInfo()">Get Data</button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <hr />
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th width="3%">Action</th>
+                                    @*<th width="5%">#</th>*@
+
+                                    <th width="20%">Department</th>
+                                    <th width="12%">Date</th>
+                                    <th width="15%">Booking No.</th>
+                                    <th width="30%">Booking Status</th>
+                                    <th width="15%">Project Manager</th>
+
+                                </tr>
+                            </thead>
+                            <tbody id="tbodyBooking"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var BookingList = '';
+    
+    ///////////////////////////// Load Basic Info  //////////////////////////////////////////////////////
+    function LoadBookingInfo() {
+        try {
+            if ($("#DepartmentId").val() != undefined && parseInt($("#DepartmentId").val()) != 0) {
+                LoaderShow();
+                var data = { 'intDepartmentId': $("#DepartmentId").val(), 'intBookingTypeId': 46, 'intStatusPropId': 38 };
+                var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+                $.ajax({
+                    url: '@Url.Action("RFQBookingSearchViewGetByDepartmentBookinStatus", "Home")',
+                    type: 'POST',
+                    dataType: 'json',
+                    async: true,
+                    data: dataWithAntiforgeryToken,
+                    success: function (data) {
+                        LoaderHide();
+                        if (data.StatusId != "99" && data.StatusId != "-99") {
+                            BookingList = data.BookingList;
+                            BindGridData(data.BookingList);
+                        }
+                        else {
+                            alert(data.Status);
+                        }
+                    },
+                    error: function (xhr) {
+
+                        LoaderHide();
+                        alert(xhr.responseText);
+                    }
+                });
+            }
+        }
+        catch (e) {
+
+            LoaderHide();
+            alert(e.message);
+            //  return false;
+        }
+    }
+
+    function BindGridData(data) {
+
+        try {
+            var gridData = "";
+
+            $("#tbodyBooking").html("");
+
+            for (var i = 0; i < data.length; i++) {
+                gridData = gridData + "<tr style='cursor:pointer;' onclick = 'RFQBookingDetailInsert(" + NullHandle(data[i].BookingId) + "," + NullHandle(data[i].BPId) + " )'>";
+
+                gridData = gridData + "<td class='td-actions'>";
+                gridData = gridData + "<button type='button' rel='tooltip' class='btn btn-info' data-original-title='' title='Select Booking No : " + data[i].BookingNo + "' onclick = 'RFQBookingDetailInsert(" + NullHandle(data[i].BookingId) + "," + NullHandle(data[i].BPId) + " )'><i class='material-icons'>trending_up</i></button>";
+                gridData = gridData + "</td>";
+                               
+                gridData = gridData + "<td>" + NullHandle(data[i].Department) + "</td>";
+                gridData = gridData + "<td>" + NullHandle(data[i].ZZBookingDate) + "</td>";
+                gridData = gridData + "<td>" + NullHandle(data[i].BookingNo) + "</td>";
+                gridData = gridData + "<td>" + NullHandle(data[i].ZZStatus) + "</td>";
+                gridData = gridData + "<td>" + NullHandle(data[i].ProjectManager) + "</td>";
+
+
+                gridData = gridData + "</tr>";
+            }
+
+            $("#tbodyBooking").html(gridData);
+
+
+        }
+        catch (e) {
+
+        }
+    }
+
+    function RFQBookingDetailInsert(RFQBookingId, RFQBPId) {
+        try {
+            $.confirm({
+                title: 'Confirm Alert!',
+                content: 'New Booking will be Auto-created against this RFQ and only Vehicle information and Testing Dates can be modified.<br>Do you want to continue ?',
+                icon: 'fa fa-question',
+                closeIcon: true,
+                animation: 'scale',
+                type: 'orange',
+                escapeKey: 'cancel',
+                buttons: {
+                    MyFunction: {
+                        text: 'OK',
+                        action: function () {
+                            location.href = "@Url.Action("RFQBookingDetailInsert", "Home", new { id = UrlParameter.Optional })" + "?" + "dfs,ktgbdas,hdffg.khdfrhdduihdgtymdmpxjidgndlxcmhdgmdpldjn,dlkchgj,d,.dkjdhhdk,dmdhhnd,dkmdndhnndmdmjmd" + "&intRFQBookingId=" + RFQBookingId + "&intRFQBPId=" + RFQBPId + "&intBPId=21";
+                        }
+                    },
+                    cancel: function () {
+                    }
+                }
+            });
+
+        }
+        catch (e) {            
+            alert(e.message);
+            //  return false;
+        }
+    }
+
+    $(document).ready(function () {  
+        LoadBookingInfo();
+        $("#DepartmentId").focus();
+    });
+
+</script>

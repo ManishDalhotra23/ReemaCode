@@ -1,0 +1,283 @@
+﻿@model PGMSFront.Models.LoginModel
+@{
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+<section class="home_banner_area">
+    <div class="banner_inner">
+        <div class="container" id="contSection" style="margin-top: 55px;">
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div class="banner_content">
+                        <div class="welcome-txt">
+                            <h2>Welcome to NATRAX</h2>
+                            <p>National Automotive Test Tracks</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 ">
+                    <div class="banner_content">
+                        <div class="login-box">
+                            <h4>Customer Login</h4>
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+                                <div class="form-group bmd-form-group is-filled">
+                                    <label for="exampleEmail" class="bmd-label-floating">Login Id</label>
+                                    @*<input type="text" class="form-control" placeholder="Enter User Name" id="LoginId">*@
+                                    @Html.TextBoxFor(m => m.LoginId, new { @id = "LoginId", @class = "form-control", @PlaceHolder = "Login Id" })
+                                </div>
+                                <div class="form-group bmd-form-group is-filled">
+                                    <label for="examplePass" class="bmd-label-floating">Password</label>
+                                    @*<input type="password" class="form-control" placeholder="Enter Password" id="Password">*@
+                                    @Html.TextBoxFor(m => m.Password, new { @id = "Password", @type = "password", @class = "form-control", @PlaceHolder = "Password" })
+                                </div>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="checkbox" value=""> Remember Me
+                                        <span class="form-check-sign">
+                                            <span class="check"></span>
+                                        </span>
+                                    </label>
+                                    <div class="pull-right"><label><a href="@Url.Action("ForgotPassword", "Home")" class="link">Forgot Password</a></label></div>
+                                </div>
+
+                                <div class="form-group bmd-form-group">
+                                    @* <a href="@Url.Action("Dashboard", "Home")" id="myButton" class="btn btn-fill btn-rose">Login</a>*@
+                                    <input type="submit" id="myButton" value="Login" class="btn btn-fill btn-rose" onclick="return validate()" />
+                                </div>
+
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        Not a Member?
+                                    </label>
+                                    <div class="pull-right"><label><a href="@Url.Action("CompanyRegistration", "Front")" class="link">Register Company </a></label></div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="department_area section_gap">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <div class="dpmt_courses">
+                    <div class="row">
+                        <!-- single course -->
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-12 text-center mt-100">
+                            <div class="single_department">
+                                <div class="dpmt_icon">
+                                    <img src="~/Templates/img/dpmt/icon1.png" alt="">
+                                </div>
+                                <h4>Homologation Services</h4>
+                            </div>
+                        </div>
+                        <!-- single course -->
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-12 text-center">
+                            <div class="single_department">
+                                <div class="dpmt_icon">
+                                    <img src="~/Templates/img/dpmt/icon2.png" alt="">
+                                </div>
+                                <h4>Homologation CVE</h4>
+                            </div>
+                        </div>
+                        <!-- single course -->
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-12 text-center mt-100">
+                            <div class="single_department">
+                                <div class="dpmt_icon">
+                                    <img src="~/Templates/img/dpmt/icon3.png" alt="">
+                                </div>
+                                <h4>Proving Ground Services</h4>
+                            </div>
+                        </div>
+                        <!-- single course -->
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-12 text-center">
+                            <div class="single_department">
+                                <div class="dpmt_icon">
+                                    <img src="~/Templates/img/dpmt/icon4.png" alt="">
+                                </div>
+                                <h4>Costing</h4>
+                            </div>
+                        </div>
+                        <!-- single course -->
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-12 text-center mt--100">
+                            <div class="single_department">
+                                <div class="dpmt_icon">
+                                    <img src="~/Templates/img/dpmt/icon5.png" alt="">
+                                </div>
+                                <h4>Tracking</h4>
+                            </div>
+                        </div>
+                        <!-- single course -->
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-12 text-center">
+                            <div class="single_department">
+                                <div class="dpmt_icon">
+                                    <img src="~/Templates/img/dpmt/icon6.png" alt="">
+                                </div>
+                                <h4>Test Facilities</h4>
+                            </div>
+                        </div>
+                        <!-- single course -->
+                        <div class="offset-lg-4 col-lg-4 col-md-4 col-sm-6 col-12 text-center mt--100">
+                            <div class="single_department">
+                                <div class="dpmt_icon">
+                                    <img src="~/Templates/img/dpmt/icon7.png" alt="">
+                                </div>
+                                <h4>Logistical Support</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="offset-lg-1 col-lg-5">
+                <div class="dpmt_right">
+                    <h1>About NATRAX</h1>
+                    <p>NATRAX is one of the state-of-the-art automotive testing and certification center under NATRiP, a flagship project of the Ministry of Heavy Industries, Govt of India planned under the Automotive Mission Plan launched by Government of India. </p>
+                    <p>It is located near the vibrant industrial township of Pithampur. (Dist. Dhar), which is 50km from the commercial capital of Madhya Pradesh i.e. Indore, situated on NH-3 By-Pass Road (Indore – Mumbai). The center has been developed in approx. 3,000 acres of land. </p>
+                    @*<a href="#" class="primary-btn text-uppercase">View More</a>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="eMailResendModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                @*<h4 class="modal-title" style="text-align:center">eMail Resend</h4>*@
+                @*<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <i class="material-icons">clear</i>
+                    </button>*@
+            </div>
+            <div class="modal-body" style="        text-align: center">
+                <label style="        color: black;
+        text-align: center">@ViewData["MSG"]</label>
+        <br />
+        <br />
+        <button type="button" class="btn btn-fill btn-danger btn-sm" id="btnOk" data-dismiss="modal" style="        margin-left: 5px;
+        margin-top: 5px;
+        text-align: center">
+            OK
+        </button>
+        <button type="button" class="btn btn-fill btn-danger btn-sm" id="btnResend" onclick="ResendVerifyLink()" style="        margin-left: 5px;
+        margin-top: 5px;
+        text-align: center">
+            RESEND
+        </button>
+    </div>
+    @*<div class="modal-footer" >
+            <button type="button" class="btn btn-fill btn-danger btn-sm" data-dismiss="modal" style="margin-left: 5px; margin-top: 5px;">Close</button>
+        </div>*@
+
+</div>
+</div>
+</div>
+
+<script>
+        document.onreadystatechange = function () {
+            if (document.readyState !== "complete") {
+                $(".ntx-loader").show();
+            } else {
+                $(".ntx-loader").hide();
+            }
+        };
+
+        function validate() {
+            try {
+                var strMSG = '';
+                //alert("Due to urgent data migration activity, portal boschrewards.in and boschserviceportal.com and all mobile applications will remain closed till further update.");
+                //return false;
+
+                if (document.getElementById("LoginId").value == "") {
+                    strMSG = strMSG + 'Login Id \n</br>'
+                }
+                if (document.getElementById("Password").value == "") {
+                    strMSG = strMSG + 'Password \n</br>'
+                }
+
+                if (strMSG != '') {
+                    alert("Please enter data for Mandatory fields  \n</br>" + strMSG);
+                    return false;
+                }
+
+                var key = CryptoJS.enc.Utf8.parse('A51f7e2h2j58r2d5');
+                var iv = CryptoJS.enc.Utf8.parse('A51f7e2h2j58r2d5');
+
+                var encryptedpassword = CryptoJS.AES.encrypt(CryptoJS.enc.Utf8.parse($('#Password').val().trim()), key,
+
+                    { keySize: 128 / 8, iv: iv, mode: CryptoJS.mode.CBC, padding: CryptoJS.pad.Pkcs7 });
+
+                $('#Password').val(encryptedpassword);
+
+
+                $("#myButton").hide();
+                return true;
+            }
+            catch (e) {
+                alert(e.message);
+                return false;
+            }
+        }
+
+        ///////////////////////////// ResendVerifyLink  //////////////////////////////////////////////////////
+        function ResendVerifyLink() {
+        try {
+
+            $("#btnResend").hide();
+                LoaderShow();
+                var data = {};
+                var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+                $.ajax({
+                    url: '@Url.Action("ResendVerifyLink", "Home")',
+                    type: 'POST',
+                    dataType: 'json',
+                    async: true,
+                    data: dataWithAntiforgeryToken,
+                    //contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        $("#btnResend").show();
+                        LoaderHide();
+                        if (data.StatusId != "99" && data.StatusId != "-99") {
+                            $("#btnOk").click();
+                        }
+                        alert(data.Status);
+                    },
+                    error: function (xhr) {
+                        $("#btnResend").show();
+                        LoaderHide();
+                        alert(xhr.responseText);
+                    }
+                });
+
+        }
+        catch (e) {
+            $("#btnResend").show();
+            LoaderHide();
+            alert(e.message);
+            return false;
+        }
+    }
+</script>
+
+
+@if (!string.IsNullOrEmpty(ViewData["MSG"] + "") && Convert.ToInt32(ViewData["Resend"]) == 0)
+{
+    <div>
+        <script>
+                alert('@ViewData["MSG"]');
+        </script>
+    </div>
+}
+else if (Convert.ToInt32(ViewData["Resend"]) == 1)
+{
+    <script>
+        $("#eMailResendModal").modal("show");
+    </script>
+}

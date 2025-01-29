@@ -1,0 +1,141 @@
+﻿@{
+    ViewBag.Title = "Hotels";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+
+    .main-panel > .content {
+        padding: 0px 15px !important;
+    }
+
+    h3 {
+        margin: 0px 0 0px !important;
+    }
+
+    .textLimit {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 5; /* number of lines to show */
+        -webkit-box-orient: vertical;
+        font-size: 13px;
+    }
+</style>
+<input type="hidden" id="strImgPath" value="@System.Configuration.ConfigurationManager.AppSettings["strImgPath"]" />
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card ">
+                    <div class="card-header card-header-rose card-header-icon">
+                        <h4 class="card-title">Hotels</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row" id="Bind"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="readMoreModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" style="text-align:center">Hotels</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="fa fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" style="text-align: center">
+                <div id="more"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-fill btn-danger btn-sm" data-dismiss="modal" style="margin-left: 5px; margin-top: 5px;">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var List = [];
+    var strImgPath = $("#strImgPath").val();
+    $(document).ready(function () {
+        GetAll();
+    });
+
+    function Bind() {
+        try {
+            var HTMl = "";
+            $("#Track").empty();
+            $.each(List, function (Index, Object) {
+                debugger
+                HTMl += '<div class="col-md-6">';
+                HTMl += '<div class="card card-product" data-count="4">';
+                HTMl += '<div class="card-header card-header-image" data-header-animation="false">';
+                HTMl += '<a href="#pablo"><img class="img" src="'+ strImgPath + Object.UploadPath +'"></a>';
+                HTMl += '</div>';
+                HTMl += '<div class="card-body" style="min-height: 228px;">';
+                HTMl += '<h4 class="card-title">';
+                HTMl += '<a href="#pablo">'+ Object.Title +'</a>';
+                HTMl += '</h4>';
+                HTMl += '<div class="card-description textLimit">'+ Object.Description;
+                HTMl += '</div>';
+                HTMl += '<a href="#" class="btn btn-fill btn-rose btn-sm pull-right" style="padding: 0px 5px 0 5px; line-height: 30px; float: right;" onclick="readMoreModal(' + Object.NewsHotelsTrainingVideoId + ')">View More</a>';
+                HTMl += '</div>';
+                HTMl += '<div class="card-footer">';
+                HTMl += '<div class="stats">';
+                HTMl += '<p class="card-category" style="text-align: left !important;">';
+                HTMl += '<i class="material-icons">laptop</i> <a href="'+Object.Website+'" target="_blank">'+Object.Website+'</a><br />';
+                HTMl += '<i class="material-icons">call</i> '+Object.MobileNo+'<br />';
+                HTMl += '<i class="material-icons">place</i> '+Object.Address;
+                HTMl += '</p>';
+                HTMl += '</div>';
+                HTMl += '</div>';
+                HTMl += '</div>';
+                HTMl += '</div>';
+            });
+            $("#Bind").append(HTMl);
+        }catch (e) {
+          alert(e.message);
+      }
+    }
+
+    function GetAll() {
+        try {
+            LoaderShow();
+            var data = { 'intBPId': '149' };
+            var dataWithAntiforgeryToken = $.extend(data, { "__RequestVerificationToken": $("input[name=__RequestVerificationToken]").val() });
+            $.ajax({
+                url: '@Url.Action("NewsHotelsTrainingVideoViewGetByBPId","Front")',
+                type: 'POST',
+                dataType: 'json',
+                async: true,
+                data: dataWithAntiforgeryToken,
+                success: function (data) {
+                    LoaderHide();
+                    if (data.StatusId != "99" && data.StatusId != "-99") {
+                        List = data.NewsHotelsTrainingDetails;
+                         debugger;
+                        Bind();
+                    } else {
+                        alert(data.Status);
+                    }
+                },
+                error: function (xhr) {
+                    LoaderHide();
+                    alert(xhr.responseText);
+                }
+            });
+        }
+        catch (e) {
+            LoaderHide();
+            alert(e.message);
+        }
+    }
+
+    function readMoreModal(id) {
+        const res = List.filter((ele) => id === ele.NewsHotelsTrainingVideoId);
+        $("#more").html(res[0].Description);
+        $("#readMoreModal").modal("show");
+    }
+</script>
