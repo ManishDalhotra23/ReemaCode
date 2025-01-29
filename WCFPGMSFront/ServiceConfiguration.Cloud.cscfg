@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceConfiguration serviceName="WCFBOSCHAzure" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="4" osVersion="*" schemaVersion="2015-04.2.6">
+  <Role name="WCFServiceWebRole1">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=partsimages;AccountKey=oDco4OHMZ1H2I4raYNYpRwflJ95a7GwfhYd+P+N1mPQwcLdV7byvbZ0P4bTG2M0H9rjZH2/lexIRH5/vBtxHEg==" />
+    </ConfigurationSettings>
+  </Role>
+</ServiceConfiguration>

@@ -1,0 +1,690 @@
+D:\Projects\WCFPGMS\WCFPGMS\bin\Debug\ServiceConfiguration.cscfg
+D:\Projects\WCFPGMS\WCFPGMS\bin\Debug\ServiceDefinition.csdef
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\CommonServiceLocator.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\de\Microsoft.Data.Edm.resources.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\de\Microsoft.Data.OData.resources.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\de\Microsoft.Data.Services.Client.resources.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\de\System.Spatial.resources.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\es\Microsoft.Data.Edm.resources.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\es\Microsoft.Data.OData.resources.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\es\Microsoft.Data.Services.Client.resources.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\es\System.Spatial.resources.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\fr\Microsoft.Data.Edm.resources.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\fr\Microsoft.Data.OData.resources.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\fr\Microsoft.Data.Services.Client.resources.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\fr\System.Spatial.resources.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\it\Microsoft.Data.Edm.resources.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\it\Microsoft.Data.OData.resources.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\it\Microsoft.Data.Services.Client.resources.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\it\System.Spatial.resources.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\ja\Microsoft.Data.Edm.resources.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\ja\Microsoft.Data.OData.resources.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\ja\Microsoft.Data.Services.Client.resources.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\ja\System.Spatial.resources.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\ko\Microsoft.Data.Edm.resources.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\ko\Microsoft.Data.OData.resources.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\ko\Microsoft.Data.Services.Client.resources.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\ko\System.Spatial.resources.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\Microsoft.CSharp.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Data.Edm.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Data.Edm.xml
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Data.OData.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Data.OData.xml
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Data.Services.Client.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Data.Services.Client.xml
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Practices.EnterpriseLibrary.Common.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Practices.EnterpriseLibrary.Data.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Practices.EnterpriseLibrary.Security.Cryptography.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Practices.ServiceLocation.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Practices.Unity.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Practices.Unity.Interception.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Practices.Unity.Interception.pdb
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Practices.Unity.pdb
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\Microsoft.WindowsAzure.Configuration.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\Microsoft.WindowsAzure.Configuration.xml
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\Microsoft.WindowsAzure.Diagnostics.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\Microsoft.WindowsAzure.ServiceRuntime.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\Microsoft.WindowsAzure.Storage.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\Microsoft.WindowsAzure.Storage.xml
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\MonAgentListener.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\Newtonsoft.Json.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\Newtonsoft.Json.xml
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\ru\Microsoft.Data.Edm.resources.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\ru\Microsoft.Data.OData.resources.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\ru\Microsoft.Data.Services.Client.resources.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\ru\System.Spatial.resources.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\System.Configuration.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\System.Core.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\System.Data.DataSetExtensions.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\System.Data.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\System.Data.Linq.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\System.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\System.Drawing.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\System.EnterpriseServices.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\System.Runtime.CompilerServices.Unsafe.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\System.Runtime.CompilerServices.Unsafe.xml
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\System.Runtime.Remoting.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\System.Runtime.Serialization.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\System.ServiceModel.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\System.ServiceModel.Web.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\System.Spatial.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\System.Spatial.xml
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\System.Threading.Tasks.Extensions.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\System.Threading.Tasks.Extensions.xml
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\System.Web.ApplicationServices.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\System.Web.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\System.Web.DynamicData.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\System.Web.Entity.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\System.Web.Extensions.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\System.Web.Services.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\System.Xml.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\System.Xml.Linq.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\Unity.Abstractions.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\Unity.Abstractions.pdb
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\Unity.Container.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\Unity.Container.pdb
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\Unity.Interception.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\Unity.Interception.pdb
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\WCFServiceWebRole1.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\WCFServiceWebRole1.dll.config
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\WCFServiceWebRole1.pdb
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\WindowsAzureEventSource.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\WindowsAzureTelemetryEvents.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\zh-Hans\Microsoft.Data.Edm.resources.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\zh-Hans\Microsoft.Data.OData.resources.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\zh-Hans\Microsoft.Data.Services.Client.resources.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\zh-Hans\System.Spatial.resources.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\zh-Hant\Microsoft.Data.Edm.resources.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\zh-Hant\Microsoft.Data.OData.resources.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\zh-Hant\Microsoft.Data.Services.Client.resources.dll
+D:\Projects\WCFPGMS\WCFPGMS\obj\Debug\WCFServiceWebRole1\bin\zh-Hant\System.Spatial.resources.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\bin\Debug\ServiceConfiguration.cscfg
+D:\Projects\WCFPGMSFront\WCFPGMSFront\bin\Debug\ServiceDefinition.csdef
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\CommonServiceLocator.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\de\Microsoft.Data.Edm.resources.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\de\Microsoft.Data.OData.resources.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\de\Microsoft.Data.Services.Client.resources.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\de\System.Spatial.resources.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\es\Microsoft.Data.Edm.resources.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\es\Microsoft.Data.OData.resources.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\es\Microsoft.Data.Services.Client.resources.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\es\System.Spatial.resources.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\fr\Microsoft.Data.Edm.resources.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\fr\Microsoft.Data.OData.resources.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\fr\Microsoft.Data.Services.Client.resources.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\fr\System.Spatial.resources.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\it\Microsoft.Data.Edm.resources.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\it\Microsoft.Data.OData.resources.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\it\Microsoft.Data.Services.Client.resources.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\it\System.Spatial.resources.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ja\Microsoft.Data.Edm.resources.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ja\Microsoft.Data.OData.resources.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ja\Microsoft.Data.Services.Client.resources.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ja\System.Spatial.resources.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ko\Microsoft.Data.Edm.resources.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ko\Microsoft.Data.OData.resources.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ko\Microsoft.Data.Services.Client.resources.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ko\System.Spatial.resources.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.CSharp.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Data.Edm.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Data.Edm.xml
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Data.OData.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Data.OData.xml
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Data.Services.Client.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Data.Services.Client.xml
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Practices.EnterpriseLibrary.Common.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Practices.EnterpriseLibrary.Data.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Practices.EnterpriseLibrary.Security.Cryptography.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Practices.ServiceLocation.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Practices.Unity.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Practices.Unity.Interception.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Practices.Unity.Interception.pdb
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Practices.Unity.pdb
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.WindowsAzure.Configuration.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.WindowsAzure.Configuration.xml
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.WindowsAzure.Diagnostics.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.WindowsAzure.ServiceRuntime.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.WindowsAzure.Storage.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.WindowsAzure.Storage.xml
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\MonAgentListener.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Newtonsoft.Json.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Newtonsoft.Json.xml
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ru\Microsoft.Data.Edm.resources.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ru\Microsoft.Data.OData.resources.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ru\Microsoft.Data.Services.Client.resources.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ru\System.Spatial.resources.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Configuration.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Core.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Data.DataSetExtensions.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Data.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Data.Linq.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Drawing.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.EnterpriseServices.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Runtime.CompilerServices.Unsafe.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Runtime.CompilerServices.Unsafe.xml
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Runtime.Remoting.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Runtime.Serialization.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.ServiceModel.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.ServiceModel.Web.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Spatial.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Spatial.xml
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Threading.Tasks.Extensions.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Threading.Tasks.Extensions.xml
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Web.ApplicationServices.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Web.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Web.DynamicData.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Web.Entity.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Web.Extensions.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Web.Services.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Xml.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Xml.Linq.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Unity.Abstractions.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Unity.Abstractions.pdb
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Unity.Container.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Unity.Container.pdb
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Unity.Interception.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Unity.Interception.pdb
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\WCFServiceWebRole1.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\WCFServiceWebRole1.dll.config
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\WCFServiceWebRole1.pdb
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\WindowsAzureEventSource.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\WindowsAzureTelemetryEvents.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\zh-Hans\Microsoft.Data.Edm.resources.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\zh-Hans\Microsoft.Data.OData.resources.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\zh-Hans\Microsoft.Data.Services.Client.resources.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\zh-Hans\System.Spatial.resources.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\zh-Hant\Microsoft.Data.Edm.resources.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\zh-Hant\Microsoft.Data.OData.resources.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\zh-Hant\Microsoft.Data.Services.Client.resources.dll
+D:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\zh-Hant\System.Spatial.resources.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\bin\Debug\ServiceConfiguration.cscfg
+C:\Projects\WCFPGMSFront\WCFPGMSFront\bin\Debug\ServiceDefinition.csdef
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\CommonServiceLocator.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\de\Microsoft.Data.Edm.resources.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\de\Microsoft.Data.OData.resources.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\de\Microsoft.Data.Services.Client.resources.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\de\System.Spatial.resources.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\es\Microsoft.Data.Edm.resources.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\es\Microsoft.Data.OData.resources.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\es\Microsoft.Data.Services.Client.resources.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\es\System.Spatial.resources.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\fr\Microsoft.Data.Edm.resources.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\fr\Microsoft.Data.OData.resources.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\fr\Microsoft.Data.Services.Client.resources.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\fr\System.Spatial.resources.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\it\Microsoft.Data.Edm.resources.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\it\Microsoft.Data.OData.resources.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\it\Microsoft.Data.Services.Client.resources.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\it\System.Spatial.resources.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ja\Microsoft.Data.Edm.resources.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ja\Microsoft.Data.OData.resources.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ja\Microsoft.Data.Services.Client.resources.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ja\System.Spatial.resources.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ko\Microsoft.Data.Edm.resources.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ko\Microsoft.Data.OData.resources.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ko\Microsoft.Data.Services.Client.resources.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ko\System.Spatial.resources.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.CSharp.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Data.Edm.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Data.Edm.xml
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Data.OData.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Data.OData.xml
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Data.Services.Client.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Data.Services.Client.xml
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Practices.EnterpriseLibrary.Common.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Practices.EnterpriseLibrary.Data.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Practices.EnterpriseLibrary.Security.Cryptography.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Practices.ServiceLocation.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Practices.Unity.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Practices.Unity.Interception.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.WindowsAzure.Configuration.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.WindowsAzure.Configuration.xml
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.WindowsAzure.Diagnostics.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.WindowsAzure.ServiceRuntime.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.WindowsAzure.Storage.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.WindowsAzure.Storage.xml
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\MonAgentListener.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Newtonsoft.Json.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Newtonsoft.Json.xml
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ru\Microsoft.Data.Edm.resources.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ru\Microsoft.Data.OData.resources.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ru\Microsoft.Data.Services.Client.resources.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ru\System.Spatial.resources.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Configuration.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Core.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Data.DataSetExtensions.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Data.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Data.Linq.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Drawing.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.EnterpriseServices.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Runtime.CompilerServices.Unsafe.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Runtime.CompilerServices.Unsafe.xml
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Runtime.Remoting.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Runtime.Serialization.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.ServiceModel.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.ServiceModel.Web.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Spatial.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Spatial.xml
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Threading.Tasks.Extensions.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Threading.Tasks.Extensions.xml
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Web.ApplicationServices.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Web.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Web.DynamicData.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Web.Entity.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Web.Extensions.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Web.Services.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Xml.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Xml.Linq.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Unity.Abstractions.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Unity.Abstractions.pdb
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Unity.Container.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Unity.Container.pdb
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Unity.Interception.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Unity.Interception.pdb
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\WCFServiceWebRole1.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\WCFServiceWebRole1.dll.config
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\WCFServiceWebRole1.pdb
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\WindowsAzureEventSource.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\WindowsAzureTelemetryEvents.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\zh-Hans\Microsoft.Data.Edm.resources.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\zh-Hans\Microsoft.Data.OData.resources.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\zh-Hans\Microsoft.Data.Services.Client.resources.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\zh-Hans\System.Spatial.resources.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\zh-Hant\Microsoft.Data.Edm.resources.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\zh-Hant\Microsoft.Data.OData.resources.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\zh-Hant\Microsoft.Data.Services.Client.resources.dll
+C:\Projects\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\zh-Hant\System.Spatial.resources.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\bin\Debug\ServiceConfiguration.cscfg
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\bin\Debug\ServiceDefinition.csdef
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\CommonServiceLocator.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\de\Microsoft.Data.Edm.resources.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\de\Microsoft.Data.OData.resources.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\de\Microsoft.Data.Services.Client.resources.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\de\System.Spatial.resources.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\es\Microsoft.Data.Edm.resources.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\es\Microsoft.Data.OData.resources.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\es\Microsoft.Data.Services.Client.resources.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\es\System.Spatial.resources.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\fr\Microsoft.Data.Edm.resources.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\fr\Microsoft.Data.OData.resources.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\fr\Microsoft.Data.Services.Client.resources.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\fr\System.Spatial.resources.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\it\Microsoft.Data.Edm.resources.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\it\Microsoft.Data.OData.resources.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\it\Microsoft.Data.Services.Client.resources.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\it\System.Spatial.resources.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ja\Microsoft.Data.Edm.resources.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ja\Microsoft.Data.OData.resources.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ja\Microsoft.Data.Services.Client.resources.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ja\System.Spatial.resources.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ko\Microsoft.Data.Edm.resources.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ko\Microsoft.Data.OData.resources.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ko\Microsoft.Data.Services.Client.resources.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ko\System.Spatial.resources.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.CSharp.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Data.Edm.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Data.Edm.xml
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Data.OData.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Data.OData.xml
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Data.Services.Client.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Data.Services.Client.xml
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Practices.EnterpriseLibrary.Common.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Practices.EnterpriseLibrary.Data.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Practices.EnterpriseLibrary.Security.Cryptography.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Practices.ServiceLocation.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Practices.Unity.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Practices.Unity.Interception.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.WindowsAzure.Configuration.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.WindowsAzure.Configuration.xml
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.WindowsAzure.Diagnostics.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.WindowsAzure.ServiceRuntime.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.WindowsAzure.Storage.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.WindowsAzure.Storage.xml
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\MonAgentListener.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Newtonsoft.Json.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Newtonsoft.Json.xml
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ru\Microsoft.Data.Edm.resources.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ru\Microsoft.Data.OData.resources.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ru\Microsoft.Data.Services.Client.resources.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ru\System.Spatial.resources.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Configuration.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Core.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Data.DataSetExtensions.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Data.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Data.Linq.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Drawing.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.EnterpriseServices.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Runtime.CompilerServices.Unsafe.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Runtime.CompilerServices.Unsafe.xml
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Runtime.Remoting.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Runtime.Serialization.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.ServiceModel.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.ServiceModel.Web.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Spatial.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Spatial.xml
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Threading.Tasks.Extensions.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Threading.Tasks.Extensions.xml
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Web.ApplicationServices.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Web.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Web.DynamicData.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Web.Entity.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Web.Extensions.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Web.Services.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Xml.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Xml.Linq.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Unity.Abstractions.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Unity.Abstractions.pdb
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Unity.Container.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Unity.Container.pdb
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Unity.Interception.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Unity.Interception.pdb
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\WCFServiceWebRole1.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\WCFServiceWebRole1.dll.config
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\WCFServiceWebRole1.pdb
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\WindowsAzureEventSource.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\WindowsAzureTelemetryEvents.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\zh-Hans\Microsoft.Data.Edm.resources.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\zh-Hans\Microsoft.Data.OData.resources.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\zh-Hans\Microsoft.Data.Services.Client.resources.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\zh-Hans\System.Spatial.resources.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\zh-Hant\Microsoft.Data.Edm.resources.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\zh-Hant\Microsoft.Data.OData.resources.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\zh-Hant\Microsoft.Data.Services.Client.resources.dll
+C:\irfan\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\zh-Hant\System.Spatial.resources.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\bin\Debug\ServiceConfiguration.cscfg
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\bin\Debug\ServiceDefinition.csdef
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\CommonServiceLocator.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\de\Microsoft.Data.Edm.resources.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\de\Microsoft.Data.OData.resources.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\de\Microsoft.Data.Services.Client.resources.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\de\System.Spatial.resources.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\es\Microsoft.Data.Edm.resources.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\es\Microsoft.Data.OData.resources.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\es\Microsoft.Data.Services.Client.resources.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\es\System.Spatial.resources.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\fr\Microsoft.Data.Edm.resources.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\fr\Microsoft.Data.OData.resources.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\fr\Microsoft.Data.Services.Client.resources.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\fr\System.Spatial.resources.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\it\Microsoft.Data.Edm.resources.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\it\Microsoft.Data.OData.resources.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\it\Microsoft.Data.Services.Client.resources.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\it\System.Spatial.resources.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ja\Microsoft.Data.Edm.resources.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ja\Microsoft.Data.OData.resources.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ja\Microsoft.Data.Services.Client.resources.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ja\System.Spatial.resources.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ko\Microsoft.Data.Edm.resources.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ko\Microsoft.Data.OData.resources.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ko\Microsoft.Data.Services.Client.resources.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ko\System.Spatial.resources.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.CSharp.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Data.Edm.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Data.Edm.xml
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Data.OData.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Data.OData.xml
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Data.Services.Client.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Data.Services.Client.xml
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Practices.EnterpriseLibrary.Common.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Practices.EnterpriseLibrary.Data.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Practices.EnterpriseLibrary.Security.Cryptography.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Practices.ServiceLocation.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Practices.Unity.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Practices.Unity.Interception.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.WindowsAzure.Configuration.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.WindowsAzure.Configuration.xml
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.WindowsAzure.Diagnostics.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.WindowsAzure.ServiceRuntime.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.WindowsAzure.Storage.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.WindowsAzure.Storage.xml
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\MonAgentListener.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Newtonsoft.Json.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Newtonsoft.Json.xml
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ru\Microsoft.Data.Edm.resources.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ru\Microsoft.Data.OData.resources.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ru\Microsoft.Data.Services.Client.resources.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ru\System.Spatial.resources.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Configuration.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Core.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Data.DataSetExtensions.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Data.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Data.Linq.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Drawing.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.EnterpriseServices.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Runtime.CompilerServices.Unsafe.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Runtime.CompilerServices.Unsafe.xml
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Runtime.Remoting.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Runtime.Serialization.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.ServiceModel.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.ServiceModel.Web.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Spatial.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Spatial.xml
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Threading.Tasks.Extensions.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Threading.Tasks.Extensions.xml
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Web.ApplicationServices.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Web.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Web.DynamicData.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Web.Entity.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Web.Extensions.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Web.Services.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Xml.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Xml.Linq.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Unity.Abstractions.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Unity.Abstractions.pdb
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Unity.Container.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Unity.Container.pdb
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Unity.Interception.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Unity.Interception.pdb
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\WCFServiceWebRole1.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\WCFServiceWebRole1.dll.config
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\WCFServiceWebRole1.pdb
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\WindowsAzureEventSource.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\WindowsAzureTelemetryEvents.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\zh-Hans\Microsoft.Data.Edm.resources.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\zh-Hans\Microsoft.Data.OData.resources.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\zh-Hans\Microsoft.Data.Services.Client.resources.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\zh-Hans\System.Spatial.resources.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\zh-Hant\Microsoft.Data.Edm.resources.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\zh-Hant\Microsoft.Data.OData.resources.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\zh-Hant\Microsoft.Data.Services.Client.resources.dll
+D:\NATRAX\2023-04-19\Source Code\PGMS 2023-04-18\Front\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\zh-Hant\System.Spatial.resources.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\bin\Debug\ServiceConfiguration.cscfg
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\bin\Debug\ServiceDefinition.csdef
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\CommonServiceLocator.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\de\Microsoft.Data.Edm.resources.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\de\Microsoft.Data.OData.resources.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\de\Microsoft.Data.Services.Client.resources.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\de\System.Spatial.resources.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\es\Microsoft.Data.Edm.resources.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\es\Microsoft.Data.OData.resources.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\es\Microsoft.Data.Services.Client.resources.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\es\System.Spatial.resources.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\fr\Microsoft.Data.Edm.resources.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\fr\Microsoft.Data.OData.resources.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\fr\Microsoft.Data.Services.Client.resources.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\fr\System.Spatial.resources.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\it\Microsoft.Data.Edm.resources.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\it\Microsoft.Data.OData.resources.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\it\Microsoft.Data.Services.Client.resources.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\it\System.Spatial.resources.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ja\Microsoft.Data.Edm.resources.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ja\Microsoft.Data.OData.resources.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ja\Microsoft.Data.Services.Client.resources.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ja\System.Spatial.resources.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ko\Microsoft.Data.Edm.resources.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ko\Microsoft.Data.OData.resources.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ko\Microsoft.Data.Services.Client.resources.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ko\System.Spatial.resources.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.CSharp.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Data.Edm.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Data.Edm.xml
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Data.OData.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Data.OData.xml
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Data.Services.Client.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Data.Services.Client.xml
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Practices.EnterpriseLibrary.Common.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Practices.EnterpriseLibrary.Data.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Practices.EnterpriseLibrary.Security.Cryptography.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Practices.ServiceLocation.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Practices.Unity.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Practices.Unity.Interception.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.WindowsAzure.Configuration.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.WindowsAzure.Configuration.xml
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.WindowsAzure.Diagnostics.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.WindowsAzure.ServiceRuntime.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.WindowsAzure.Storage.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.WindowsAzure.Storage.xml
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\MonAgentListener.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Newtonsoft.Json.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Newtonsoft.Json.xml
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ru\Microsoft.Data.Edm.resources.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ru\Microsoft.Data.OData.resources.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ru\Microsoft.Data.Services.Client.resources.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ru\System.Spatial.resources.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Configuration.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Core.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Data.DataSetExtensions.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Data.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Data.Linq.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Drawing.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.EnterpriseServices.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Runtime.Remoting.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Runtime.Serialization.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.ServiceModel.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.ServiceModel.Web.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Spatial.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Spatial.xml
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Threading.Tasks.Extensions.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Threading.Tasks.Extensions.xml
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Web.ApplicationServices.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Web.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Web.DynamicData.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Web.Entity.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Web.Extensions.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Web.Services.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Xml.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Xml.Linq.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Unity.Abstractions.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Unity.Abstractions.pdb
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Unity.Container.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Unity.Container.pdb
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Unity.Interception.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Unity.Interception.pdb
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\WCFServiceWebRole1.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\WCFServiceWebRole1.dll.config
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\WCFServiceWebRole1.pdb
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\WindowsAzureEventSource.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\WindowsAzureTelemetryEvents.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\zh-Hans\Microsoft.Data.Edm.resources.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\zh-Hans\Microsoft.Data.OData.resources.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\zh-Hans\Microsoft.Data.Services.Client.resources.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\zh-Hans\System.Spatial.resources.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\zh-Hant\Microsoft.Data.Edm.resources.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\zh-Hant\Microsoft.Data.OData.resources.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\zh-Hant\Microsoft.Data.Services.Client.resources.dll
+C:\Users\reema\Desktop\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\zh-Hant\System.Spatial.resources.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\bin\Debug\ServiceConfiguration.cscfg
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\bin\Debug\ServiceDefinition.csdef
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\CommonServiceLocator.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\de\Microsoft.Data.Edm.resources.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\de\Microsoft.Data.OData.resources.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\de\Microsoft.Data.Services.Client.resources.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\de\System.Spatial.resources.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\es\Microsoft.Data.Edm.resources.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\es\Microsoft.Data.OData.resources.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\es\Microsoft.Data.Services.Client.resources.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\es\System.Spatial.resources.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\fr\Microsoft.Data.Edm.resources.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\fr\Microsoft.Data.OData.resources.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\fr\Microsoft.Data.Services.Client.resources.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\fr\System.Spatial.resources.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\it\Microsoft.Data.Edm.resources.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\it\Microsoft.Data.OData.resources.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\it\Microsoft.Data.Services.Client.resources.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\it\System.Spatial.resources.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ja\Microsoft.Data.Edm.resources.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ja\Microsoft.Data.OData.resources.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ja\Microsoft.Data.Services.Client.resources.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ja\System.Spatial.resources.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ko\Microsoft.Data.Edm.resources.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ko\Microsoft.Data.OData.resources.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ko\Microsoft.Data.Services.Client.resources.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ko\System.Spatial.resources.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.CSharp.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Data.Edm.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Data.Edm.xml
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Data.OData.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Data.OData.xml
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Data.Services.Client.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Data.Services.Client.xml
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Practices.EnterpriseLibrary.Common.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Practices.EnterpriseLibrary.Data.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Practices.EnterpriseLibrary.Security.Cryptography.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Practices.ServiceLocation.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Practices.Unity.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.Practices.Unity.Interception.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.WindowsAzure.Configuration.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.WindowsAzure.Configuration.xml
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.WindowsAzure.Diagnostics.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.WindowsAzure.ServiceRuntime.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.WindowsAzure.Storage.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Microsoft.WindowsAzure.Storage.xml
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\MonAgentListener.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Newtonsoft.Json.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Newtonsoft.Json.xml
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ru\Microsoft.Data.Edm.resources.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ru\Microsoft.Data.OData.resources.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ru\Microsoft.Data.Services.Client.resources.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\ru\System.Spatial.resources.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Configuration.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Core.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Data.DataSetExtensions.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Data.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Data.Linq.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Drawing.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.EnterpriseServices.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Runtime.Remoting.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Runtime.Serialization.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.ServiceModel.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.ServiceModel.Web.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Spatial.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Spatial.xml
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Threading.Tasks.Extensions.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Threading.Tasks.Extensions.xml
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Web.ApplicationServices.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Web.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Web.DynamicData.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Web.Entity.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Web.Extensions.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Web.Services.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Xml.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\System.Xml.Linq.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Unity.Abstractions.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Unity.Abstractions.pdb
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Unity.Container.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Unity.Container.pdb
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Unity.Interception.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\Unity.Interception.pdb
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\WCFServiceWebRole1.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\WCFServiceWebRole1.dll.config
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\WCFServiceWebRole1.pdb
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\WindowsAzureEventSource.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\WindowsAzureTelemetryEvents.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\zh-Hans\Microsoft.Data.Edm.resources.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\zh-Hans\Microsoft.Data.OData.resources.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\zh-Hans\Microsoft.Data.Services.Client.resources.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\zh-Hans\System.Spatial.resources.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\zh-Hant\Microsoft.Data.Edm.resources.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\zh-Hant\Microsoft.Data.OData.resources.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\zh-Hant\Microsoft.Data.Services.Client.resources.dll
+C:\Users\manishd\source\PGMS Final Code 29May2024\FRONT\WCFPGMSFront\WCFPGMSFront\WCFPGMSFront\obj\Debug\WCFServiceWebRole1\bin\zh-Hant\System.Spatial.resources.dll
