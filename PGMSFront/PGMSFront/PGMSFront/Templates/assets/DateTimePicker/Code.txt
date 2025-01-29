@@ -1,0 +1,4 @@
+$('.DateClass').datetimepicker({ theme: 'light', timepicker: false, format: 'd-m-Y', scrollMonth: false, scrollInput: false, maxDate: new Date() });
+
+
+$(".DateClass").attr("placeholder", "DD-MM-YYYY");
