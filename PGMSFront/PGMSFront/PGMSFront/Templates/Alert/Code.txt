@@ -1,0 +1,74 @@
+function alert(msg) {
+            $.confirm({
+                title: 'Alert!',
+                content: msg,
+                icon: 'fa fa-warning',
+                closeIcon: false,
+                animation: 'scale',
+                type: 'red',
+                buttons: {
+                    deleteUser: {
+                        text: 'Ok',
+                        action: function () {
+                            //$.alert('Deleted the user!');
+                        }
+                    }
+                }
+            });
+        }
+
+
+
+
+
+
+
+
+function alertConfirm(msg) {
+            $.confirm({
+                title: 'Confirm Alert!',
+                content: msg,
+                icon: 'fa fa-question',
+                closeIcon: true,
+                animation: 'scale',
+                type: 'orange',
+                escapeKey: 'cancel',
+                buttons: {
+                    MyFunction: {
+                        text: 'OK',
+                        action: function () {
+                        }
+                    },
+                    cancel: function () {
+                    }
+                }
+            });
+        }
+
+
+
+
+
+
+function alertSuccess(msg) {
+            $.confirm({
+                title: 'Alert!',
+                content: msg,
+                icon: 'fa fa-check',
+                closeIcon: true,
+                animation: 'zoom',
+                animationBounce: 2,
+                closeAnimation: 'scale',
+                type: 'green',
+                autoClose: 'MyFunction|3000',
+                escapeKey: 'MyFunction',
+                buttons: {
+                    MyFunction: {
+                        text: 'Ok',
+                        action: function () {
+                            //$.alert('Deleted the user!');
+                        }
+                    }
+                }
+            });
+        }
